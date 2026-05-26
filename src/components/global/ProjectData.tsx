@@ -172,7 +172,7 @@ export const projects: Project[] = [
     id: "9",
     title: "connect - Merging Fine Arts and Fabrication",
     slug: "/work/9",
-    medium: "CNC · Soldering · Illustrator",
+    medium: "CNC · SOLDERING · ILLUSTRATOR",
     year: "2023",
     shortDescription:
       "A single word — connect — translated from pen to vector to engraved oak and LED. An exercise in carrying one idea across four mediums.",
