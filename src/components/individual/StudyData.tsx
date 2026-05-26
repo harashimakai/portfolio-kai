@@ -11,7 +11,6 @@ import pmo_home2 from "../../assets/case-studies/putmeon/home2.png";
 import pmo_home3 from "../../assets/case-studies/putmeon/home3.png";
 import pmo_library from "../../assets/case-studies/putmeon/Library.png";
 import pmo_onboarding from "../../assets/case-studies/putmeon/onboarding.png";
-import pmo_demo from "../../assets/case-studies/putmeon/demo.mov";
 import pmo_cover from "../../assets/case-studies/putmeon/cover.png";
 import pmo_gradient from "../../assets/case-studies/putmeon/gradient.png";
 import pmo_logo from "../../assets/case-studies/putmeon/putmeonl.png";
