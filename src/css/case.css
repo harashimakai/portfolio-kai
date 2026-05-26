@@ -1,0 +1,121 @@
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background-color: var(--cs-bg);
+    position: relative;
+    overflow: hidden;
+    border: 10px solid var(--cs-bg-soft);
+}
+
+.card-left {
+    background-color: var(--cs-bg-panel);
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-left img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-right {
+    padding: var(--space-section) var(--space-section);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--cs-bg);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 36px;
+}
+
+.card-tag {
+    font-family: var(--cs-font-secondary);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    padding: 8px var(--space-xs);
+    border: 1.5px solid var(--cs-surface);
+    color: var(--cs-surface);
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+}
+
+.card-subtitle {
+    font-family: var(--cs-font-secondary);
+    font-size: var(--text-label);
+    letter-spacing: 0.18em;
+    color: var(--cs-text-muted);
+}
+
+.card-subheading {
+    font-family: var(--cs-font-secondary);
+    font-size: 16px;
+    line-height: var(--leading-body);
+    color: var(--cs-text);
+    margin-top: var(--space-sm);
+    letter-spacing: 0.01em;
+}
+
+.card-desc {
+    font-family: var(--cs-font-primary);
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+    color: var(--cs-text);
+    margin: 32px 0 0;
+    max-width: 540px;
+}
+
+.card-desc .card-desc-bold {
+    color: var(--cs-accent);
+}
+
+.card-buttons {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-top: var(--space-md);
+}
+
+.card-buttons button {
+    background-color: var(--cs-accent);
+    padding: 14px 28px;
+    width: fit-content;
+    border: none;
+    border-radius: var(--radius-pill);
+    transition: background-color var(--ease-theme);
+    cursor: pointer;
+}
+
+.card-buttons button h1 {
+    font-family: var(--cs-font-secondary);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cs-bg);
+    transition: color var(--ease-theme);
+    letter-spacing: 0.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.card-buttons button:hover {
+    background-color: var(--cs-accent-soft);
+    color: var(--ink);
+    transition: background-color var(--ease-hover);
+}
+
+.card-buttons h2 {
+    font-family: var(--cs-font-secondary);
+    letter-spacing: 0.18em;
+    color: var(--cs-text-muted);
+}

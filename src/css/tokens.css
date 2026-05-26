@@ -1,0 +1,109 @@
+/* ─── Static palette ────────────────────────────────────────────────────── */
+
+:root {
+    --gold:  #d3ba88;
+    --gray:  #767d73;
+    --white: #f7f7f8;
+}
+
+/* ─── Fonts ─────────────────────────────────────────────────────────────── */
+
+:root {
+    --font-serif: "the-seasons", "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
+    --font-sans:  "Inter Tight", "Inter", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* ─── Type scale ────────────────────────────────────────────────────────── */
+
+:root {
+    --text-xs:      10px;   /* tiny label */
+    --text-label:   11px;   /* nav, buttons, caps labels */
+    --text-sm:      15px;   /* item subtitles */
+    --text-base:    18px;   /* body paragraphs */
+    --text-xl:      22px;   /* item titles */
+    --text-hero:    64px;   /* mission heading */
+    --text-display: 88px;   /* work splash heading */
+}
+
+/* ─── Tracking (letter-spacing) ─────────────────────────────────────────── */
+
+:root {
+    --tracking-label: 0.22em;   /* nav/button caps labels */
+}
+
+/* ─── Leading (line-height) ─────────────────────────────────────────────── */
+
+:root {
+    --leading-tight: 1.1;
+    --leading-snug:  1.2;
+    --leading-body:  1.55;
+    --leading-loose: 1.75;
+}
+
+/* ─── Spacing ────────────────────────────────────────────────────────────── */
+
+:root {
+    --page-gutter:   96px;  /* horizontal page padding, used site-wide */
+    --space-section: 64px;  /* inter-section gaps */
+    --space-gap:     56px;  /* standard row/column gaps */
+    --space-md:      40px;
+    --space-sm:      24px;
+    --space-xs:      16px;
+}
+
+/* ─── Motion ─────────────────────────────────────────────────────────────── */
+
+:root {
+    --ease-theme: 0.9s ease-in-out;  /* mode-switch color transitions */
+    --ease-hover: 0.5s ease-in-out;  /* interactive hover transitions */
+}
+
+/* ─── Shape ──────────────────────────────────────────────────────────────── */
+
+:root {
+    --radius-pill: 100vw;
+}
+
+/* ─── Theme — light ─────────────────────────────────────────────────────── */
+
+.lightmode {
+    --color-border:  rgba(12,46,8,0.20);
+    --color-overlay: rgba(12,46,8,0.06);
+    --hairline: rgba(12,46,8,0.35);
+
+    --bg:               #f8f7f1;
+    --color-surface:    #fdfcf6;
+    --muted:            #7a7f76;
+    --accent:           #226a14;
+    --ink:              #0c2e08;
+    --shadow:           rgb(0,0,0,0.05);
+    --color-bg-inverse: color-mix(in srgb, black 40%, var(--ink) 60%);
+    --logo-light-opacity: 100;
+    --logo-dark-opacity:  0;
+    --selection: var(--ink);
+
+    transition: background-color var(--ease-theme);
+    background-color: var(--bg);
+}
+
+/* ─── Theme — dark ──────────────────────────────────────────────────────── */
+
+.darkmode {
+    --color-border:  rgba(234,227,214,0.22);
+    --color-overlay: rgba(234,227,214,0.06);
+    --hairline: rgba(234,227,214,0.4);
+
+    --bg:               #1f2520;
+    --color-surface:    #262c25;
+    --muted:            #8a8d83;
+    --accent:           #d3ba88;
+    --ink:              #eae3d6;
+    --shadow:           rgb(0,0,0,0.15);
+    --color-bg-inverse: #161915;
+    --logo-light-opacity: 0;
+    --logo-dark-opacity:  100;
+    --selection: var(--gold);
+
+    transition: background-color var(--ease-theme);
+    background-color: var(--bg);
+}

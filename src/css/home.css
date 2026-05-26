@@ -1,0 +1,140 @@
+/* HOME GALLERY */
+
+.case-content {
+    display: flex;
+    flex-direction: column;
+    padding: 32px var(--page-gutter) var(--space-gap);
+    gap: var(--space-sm);
+}
+
+.grid-content {
+    padding: var(--space-gap) var(--page-gutter) var(--page-gutter);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-gap);
+}
+
+@media screen and (min-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: var(--space-section);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-section);
+    }
+}
+
+
+/* MISSION */
+
+.mission-content {
+    padding: 100px var(--page-gutter) 80px;
+}
+
+.mission-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--page-gutter);
+    align-items: start;
+}
+
+.mission-intro {
+    margin: 0;
+    font-size: var(--text-hero);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.015em;
+}
+
+.mission-intro a {
+    text-decoration-line: underline;
+    text-decoration-thickness: 8%;
+    text-underline-offset: 15.5%;
+}
+
+.mission-stats {
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 520px;
+}
+
+.mission-stat-row {
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+}
+
+.mission-stat-row h2 {
+    min-width: 90px;
+    flex-shrink: 0;
+    font-weight: 400;
+    font-size: var(--text-xs);
+    letter-spacing: 0.24em;
+}
+
+.mission-desc {
+    margin: 0;
+    font-size: var(--text-base);
+}
+
+.action-buttons {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+    margin-top: var(--space-md);
+}
+
+.action-buttons button {
+    padding: var(--space-xs) 32px;
+    width: fit-content;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    background-color: var(--ink);
+    border: none;
+    transition: background-color var(--ease-theme);
+}
+
+.action-buttons .btn-secondary {
+    border: 1px solid var(--ink);
+    background-color: transparent;
+    transition: border var(--ease-theme);
+}
+
+.action-buttons button h2 {
+    font-size: var(--text-label);
+    font-weight: 500;
+    color: var(--bg);
+    transition: color var(--ease-theme);
+    letter-spacing: 0.24em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.action-buttons .btn-secondary h2 {
+    color: var(--ink);
+    transition: color var(--ease-theme);
+}
+
+.action-buttons button:hover:not(.btn-secondary) {
+    background-color: var(--accent);
+    transition: background-color var(--ease-hover);
+}
+
+.action-buttons .btn-secondary:hover {
+    border: 1px solid var(--accent);
+    transition: border var(--ease-hover);
+}
+
+.action-buttons .btn-secondary:hover h2 {
+    color: var(--accent);
+    transition: color var(--ease-hover);
+}

@@ -1,0 +1,109 @@
+/* WORK MOSAIC */
+
+.mosaic-content {
+    padding: 32px var(--page-gutter) var(--page-gutter);
+}
+
+.mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+    row-gap: var(--space-gap);
+}
+
+
+/* SPLASH */
+
+.splash-strong {
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    font-weight: 700;
+    transition: color var(--ease-theme);
+}
+
+.splash-heading-container {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 14px;
+}
+
+.splash-heading-content {
+    padding: var(--space-gap) var(--page-gutter);
+}
+
+.splash-info-container {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 14px;
+}
+
+.splash-intro {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    color: var(--ink);
+}
+
+.splash-sub {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0;
+    max-width: 720px;
+    line-height: 1.45;
+}
+
+.splash-sub a:hover {
+    color: var(--muted);
+}
+
+.splash-heading-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-section);
+}
+
+.splash-heading-filters {
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: var(--space-md);
+}
+
+.filter-buttons button {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    line-height: 1.4;
+    font-size: var(--text-label);
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    padding: 8px var(--space-xs);
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+    transition: color var(--ease-hover), border-color var(--ease-hover);
+}
+
+.filter-buttons button.filter-active {
+    border-color: var(--ink);
+    color: var(--ink);
+    transition: color var(--ease-theme), border-color var(--ease-theme);
+}
+
+.filter-buttons button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transition: color var(--ease-hover), border-color var(--ease-hover);
+}
