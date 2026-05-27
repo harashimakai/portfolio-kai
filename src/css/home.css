@@ -50,7 +50,9 @@
   font-weight: 400;
   line-height: var(--leading-tight);
   letter-spacing: -0.015em;
-  transition: font-size var(--ease-hover);
+  transition:
+    color var(--ease-hover),
+    font-size var(--ease-hover);
 }
 
 .mission-intro a {
