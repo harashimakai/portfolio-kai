@@ -47,7 +47,7 @@
   margin: 0 0 10px;
   color: var(--ink);
   transition:
-    color var(--ease-hover),
+    color var(--ease-theme),
     font-size var(--ease-hover);
 }
 
@@ -96,8 +96,8 @@
   background: none;
   cursor: pointer;
   transition:
-    color var(--ease-hover),
-    border-color var(--ease-hover);
+    color var(--ease-theme),
+    border-color var(--ease-theme);
 }
 
 .filter-buttons button.filter-active {

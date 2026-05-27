@@ -51,7 +51,7 @@
   line-height: var(--leading-tight);
   letter-spacing: -0.015em;
   transition:
-    color var(--ease-hover),
+    color var(--ease-theme),
     font-size var(--ease-hover);
 }
 
