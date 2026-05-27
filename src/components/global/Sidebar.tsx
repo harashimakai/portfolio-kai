@@ -58,6 +58,10 @@ export default function Sidebar({
             label="WORK"
           />
           <NavButton
+            to="/art"
+            label="ART"
+          />
+          <NavButton
             to="/about"
             label="ABOUT"
           />

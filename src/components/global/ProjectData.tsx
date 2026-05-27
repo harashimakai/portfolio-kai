@@ -1,20 +1,13 @@
-import thesisCover from "../../assets/project-covers/thesis-poster-final.webp";
-import ashokanCover from "../../assets/project-covers/ashokan-reservoir.webp";
-import icelandCover from "../../assets/project-covers/iceland.webp";
-import icelandFullCover from "../../assets/full-images/iceland.webp";
-import backyard1Cover from "../../assets/project-covers/backyard-1.webp";
-import backyard2Cover from "../../assets/project-covers/backyard-2.webp";
-import backyard3Cover from "../../assets/project-covers/backyard-3.webp";
-import notebooks1Cover from "../../assets/project-covers/notebook-comission-closeup.webp";
-import ledSignCover from "../../assets/project-covers/led-sign.webp";
+import thesisCover from "../../assets/full-images/thesis-poster-final.webp";
+import ashokanCover from "../../assets/full-images/ashokan-reservoir.webp";
+import icelandCover from "../../assets/full-images/iceland.webp";
+import backyard1Cover from "../../assets/full-images/backyard-1.webp";
+import backyard2Cover from "../../assets/full-images/backyard-2.webp";
+import backyard3Cover from "../../assets/full-images/backyard-3.webp";
+import notebooks1Cover from "../../assets/full-images/notebook-comission-closeup.webp";
+import ledSignCover from "../../assets/full-images/led-sign.webp";
 
 import thesisExpanded from "../../assets/full-images/thesis-poster-flat.webp";
-import ashokanExpanded from "../../assets/full-images/ashokan-reservoir.webp";
-import backyard1Expanded from "../../assets/full-images/backyard-1.webp";
-import backyard2Expanded from "../../assets/full-images/backyard-2.webp";
-import backyard3Expanded from "../../assets/full-images/backyard-3.webp";
-import notebooks1Expanded from "../../assets/full-images/notebook-comission-closeup.webp";
-import ledSignExpanded from "../../assets/full-images/led-sign.webp";
 
 export interface Project {
   id: string;
@@ -26,7 +19,7 @@ export interface Project {
   fullDescription?: string;
   thumbnailUrl: string;
   mosaicThumbnailUrl?: string;
-  expandedUrl: string;
+  expandedUrl?: string;
   imagePos?: string;
   grid: string;
   mainFont: string;
@@ -57,6 +50,7 @@ export const projects: Project[] = [
     category: "DESIGN",
     onHome: true,
     onWork: true,
+    imagePos: "center 30%",
   },
   {
     id: "2",
@@ -67,7 +61,6 @@ export const projects: Project[] = [
     shortDescription:
       "A monochromatic stdy of the Hudson River Valley landscape. Restraint of palette as a study in texture and value.",
     thumbnailUrl: ashokanCover,
-    expandedUrl: ashokanExpanded,
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
@@ -75,6 +68,7 @@ export const projects: Project[] = [
     category: "PAINTING",
     onHome: true,
     onWork: true,
+    imagePos: "center 60%",
   },
   {
     id: "3",
@@ -85,8 +79,6 @@ export const projects: Project[] = [
     shortDescription:
       "A white house holds its ground against primordial wind and sstone — composition as unmoving defiance.",
     thumbnailUrl: icelandCover,
-    mosaicThumbnailUrl: icelandFullCover,
-    expandedUrl: icelandFullCover,
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
@@ -95,6 +87,7 @@ export const projects: Project[] = [
     category: "PAINTING",
     onHome: true,
     onWork: true,
+    imagePos: "center 35%",
   },
   {
     id: "4",
@@ -105,7 +98,7 @@ export const projects: Project[] = [
     shortDescription:
       "A triptych study in texture, light, and composition. The first in a series drawn from photos of overlooked nature.",
     thumbnailUrl: backyard1Cover,
-    expandedUrl: backyard1Expanded,
+    imagePos: "center 55%",
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
@@ -123,7 +116,6 @@ export const projects: Project[] = [
     shortDescription:
       "Inspired by Rembrandt's baroque style: loose, gestural brushwork becomes depth and detail upon stepping back.",
     thumbnailUrl: backyard2Cover,
-    expandedUrl: backyard2Expanded,
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
@@ -131,6 +123,7 @@ export const projects: Project[] = [
     category: "PAINTING",
     onHome: true,
     onWork: true,
+    imagePos: "center 100%",
   },
   {
     id: "6",
@@ -141,7 +134,6 @@ export const projects: Project[] = [
     shortDescription:
       "Beauty at a minute scale. Most landscapes look to coastlines or mountain ranges, but small, meditative moments can be found everywhere—even right below our feet.",
     thumbnailUrl: backyard3Cover,
-    expandedUrl: backyard3Expanded,
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
@@ -149,6 +141,7 @@ export const projects: Project[] = [
     category: "PAINTING",
     onHome: true,
     onWork: true,
+    imagePos: "center 70%",
   },
   {
     id: "7",
@@ -159,7 +152,6 @@ export const projects: Project[] = [
     shortDescription:
       "A study in flourishes, composition, and use of white space as restraint.",
     thumbnailUrl: notebooks1Cover,
-    expandedUrl: notebooks1Expanded,
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
@@ -167,6 +159,7 @@ export const projects: Project[] = [
     category: "CALLIGRAPHY",
     onHome: false,
     onWork: true,
+    imagePos: "center 70%",
   },
   {
     id: "9",
@@ -177,7 +170,6 @@ export const projects: Project[] = [
     shortDescription:
       "A single word — connect — translated from pen to vector to engraved oak and LED. An exercise in carrying one idea across four mediums.",
     thumbnailUrl: ledSignCover,
-    expandedUrl: ledSignExpanded,
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
@@ -185,6 +177,7 @@ export const projects: Project[] = [
     category: "FABRICATION",
     onHome: false,
     onWork: true,
+    imagePos: "center 60%",
   },
 ];
 

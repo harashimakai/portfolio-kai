@@ -31,7 +31,6 @@ export default function ProjectGrid({
             style={isMosaic ? { gridColumn: project.grid } : undefined}
             variants={children}
             transition={{ ease: "easeOut" }}
-            whileHover={{ scale: 1.05 }}
           >
             <ItemCard
               item={project}

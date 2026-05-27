@@ -24,7 +24,7 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1190px) {
   .project-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-section);
@@ -50,6 +50,7 @@
   font-weight: 400;
   line-height: var(--leading-tight);
   letter-spacing: -0.015em;
+  transition: font-size var(--ease-hover);
 }
 
 .mission-intro a {
@@ -83,6 +84,31 @@
 .mission-desc {
   margin: 0;
   font-size: var(--text-base);
+}
+
+@media (max-width: 1189px) {
+  .mission-content {
+    padding: 72px var(--page-gutter) 64px;
+  }
+  .mission-intro {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mission-content {
+    padding: 48px var(--page-gutter) 40px;
+  }
+  .mission-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .mission-intro {
+    font-size: 36px;
+  }
+  .mission-stats {
+    margin-top: 28px;
+  }
 }
 
 .action-buttons {

@@ -6,7 +6,7 @@ import "../../css/case.css";
 import { Study } from "./StudyData";
 
 interface LogoProps {
-  height: number;
+  width: number;
   style?: object;
   itemUrl: string;
   title: string;
@@ -35,7 +35,7 @@ export default function CaseStudyCard({ item }: Props) {
           <h2 className="card-subtitle">{item.sub}</h2>
         </div>
         <BrandLogo
-          height={item.logoHeight}
+          width={item.logoWidth}
           itemUrl={item.logoUrl}
           title={item.title}
         />
@@ -60,12 +60,13 @@ export default function CaseStudyCard({ item }: Props) {
   );
 }
 
-function BrandLogo({ height = 80, style = {}, itemUrl, title }: LogoProps) {
+function BrandLogo({ width = 80, style = {}, itemUrl, title }: LogoProps) {
   return (
     <img
+      className="card-logo"
       src={itemUrl}
       alt={title}
-      style={{ height, width: "fit-content", display: "block", ...style }}
+      style={{ width, height: "auto", display: "block", ...style }}
     />
   );
 }

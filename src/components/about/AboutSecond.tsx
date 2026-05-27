@@ -65,7 +65,7 @@ export default function AboutSecond() {
   return (
     <>
       <SectionDiv
-        left="// 03 — TECHNICAL TOOLKIT"
+        left="// 03 — CREDENTIALS"
         right="EXPERIENCE & SKILLS"
       ></SectionDiv>
       <section className="about-content-secondary">
@@ -81,7 +81,7 @@ export default function AboutSecond() {
               variants={children_custom}
               custom={0}
             >
-              Toolkit
+              Repertoire
             </motion.h1>
             <div className="about-skills">
               {TOOLS.map((g, i) => (

@@ -45,9 +45,16 @@
 /* ─── Spacing ────────────────────────────────────────────────────────────── */
 
 :root {
-  --page-gutter: 96px; /* horizontal page padding, used site-wide */
-  --space-section: 64px; /* inter-section gaps */
-  --space-gap: 56px; /* standard row/column gaps */
+  --gutter: clamp(20px, 6vw, 96px);
+  --hero: clamp(30px, 5.5vw, 64px);
+  --gap: clamp(24px, 4vw, 56px);
+  --page-gutter: clamp(
+    20px,
+    6vw,
+    96px
+  ); /* horizontal page padding, site-wide */
+  --space-section: clamp(30px, 5.5vw, 64px); /* inter-section gaps */
+  --space-gap: clamp(24px, 4vw, 56px); /* standard row/column gaps */
   --space-md: 40px;
   --space-sm: 24px;
   --space-xs: 16px;

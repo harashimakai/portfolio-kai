@@ -23,11 +23,7 @@ export default function ItemCard({
       >
         <img
           loading="lazy"
-          src={
-            mosaic && item.mosaicThumbnailUrl
-              ? item.mosaicThumbnailUrl
-              : item.thumbnailUrl
-          }
+          src={item.thumbnailUrl}
           alt={item.title}
           style={
             item.imagePos

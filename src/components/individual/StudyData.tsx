@@ -47,7 +47,7 @@ export interface Study {
   theme: StudyTheme;
   thumbnailUrl: string;
   logoUrl: string;
-  logoHeight: number;
+  logoWidth: number;
   subheading: string;
   desc: ReactNode;
   slug: string;
@@ -80,7 +80,7 @@ export const putmeon: Study = {
   theme: putmeonTheme,
   thumbnailUrl: pmo_cover,
   logoUrl: pmo_logo,
-  logoHeight: 88,
+  logoWidth: 470,
   subheading: "a social music discovery platform / case study",
   desc: (
     <>
@@ -102,7 +102,7 @@ export const cuaptsllm: Study = {
   theme: putmeonTheme,
   thumbnailUrl: pmo_cover,
   logoUrl: pmo_logo,
-  logoHeight: 88,
+  logoWidth: 470,
   subheading: "a social music discovery platform / case study",
   desc: (
     <>
