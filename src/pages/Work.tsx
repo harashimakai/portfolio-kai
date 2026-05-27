@@ -40,7 +40,10 @@ export default function Work({ setSideOpen }: Props) {
           <>Designing end-to-end, from lo-fi sketches to developer handoff.</>
         }
       />
-      <SectionDiv left="2026" right="UX & PRODUCT" />
+      <SectionDiv
+        left="2026"
+        right="UX & PRODUCT"
+      />
       <section className="case-content">
         <motion.div
           initial="hidden"

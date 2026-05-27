@@ -7,7 +7,12 @@ interface Props {
   mosaic?: boolean;
 }
 
-export default function ItemCard({ item, index, total, mosaic = false }: Props) {
+export default function ItemCard({
+  item,
+  index,
+  total,
+  mosaic = false,
+}: Props) {
   const num = String(index + 1).padStart(2, "0");
   const totalStr = String(total).padStart(2, "0");
   return (
@@ -18,7 +23,11 @@ export default function ItemCard({ item, index, total, mosaic = false }: Props) 
       >
         <img
           loading="lazy"
-          src={mosaic && item.mosaicThumbnailUrl ? item.mosaicThumbnailUrl : item.thumbnailUrl}
+          src={
+            mosaic && item.mosaicThumbnailUrl
+              ? item.mosaicThumbnailUrl
+              : item.thumbnailUrl
+          }
           alt={item.title}
           style={
             item.imagePos
@@ -31,7 +40,9 @@ export default function ItemCard({ item, index, total, mosaic = false }: Props) 
       </div>
 
       <div className="item-meta">
-        <h2>{num} / {totalStr}</h2>
+        <h2>
+          {num} / {totalStr}
+        </h2>
         <h2>
           {item.medium} · {item.year}
         </h2>

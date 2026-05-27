@@ -28,25 +28,46 @@ function App() {
 
   return (
     <div className={darkMode ? "darkmode" : "lightmode"}>
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navbar
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+      />
       <Sidebar
         darkMode={darkMode}
         setDarkMode={setDarkMode}
         sideOpen={sideOpen}
       />
       <div className="menu-container">
-        <MenuButton sideOpen={sideOpen} setSideOpen={setSideOpen} />
+        <MenuButton
+          sideOpen={sideOpen}
+          setSideOpen={setSideOpen}
+        />
       </div>
       <Routes>
-        <Route path="/" element={<Home setSideOpen={setSideOpen} />} />
-        <Route path="/work" element={<Work setSideOpen={setSideOpen} />} />
-        <Route path="/art" element={<Art setSideOpen={setSideOpen} />} />
-        <Route path="/about" element={<About setSideOpen={setSideOpen} />} />
+        <Route
+          path="/"
+          element={<Home setSideOpen={setSideOpen} />}
+        />
+        <Route
+          path="/work"
+          element={<Work setSideOpen={setSideOpen} />}
+        />
+        <Route
+          path="/art"
+          element={<Art setSideOpen={setSideOpen} />}
+        />
+        <Route
+          path="/about"
+          element={<About setSideOpen={setSideOpen} />}
+        />
         <Route
           path="/comingsoon"
           element={<ComingSoon setSideOpen={setSideOpen} />}
         />
-        <Route path="*" element={<NotFound setSideOpen={setSideOpen} />} />
+        <Route
+          path="*"
+          element={<NotFound setSideOpen={setSideOpen} />}
+        />
       </Routes>
       <Socials></Socials>
     </div>

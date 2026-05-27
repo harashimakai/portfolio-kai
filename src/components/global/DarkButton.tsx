@@ -9,7 +9,10 @@ export default function DarkButton({ darkMode, setDarkMode }: Props) {
       <div className="underline-hover">
         <h1>{darkMode ? "◑ LIGHT" : "◐ DARK"}</h1>
       </div>
-      <button id="mode-switch" onClick={() => setDarkMode(!darkMode)}></button>
+      <button
+        id="mode-switch"
+        onClick={() => setDarkMode(!darkMode)}
+      ></button>
     </div>
   );
 }

@@ -7,7 +7,10 @@ interface Props {
 
 export default function SectionDiv({ left, right, strong, id }: Props) {
   return (
-    <div id={id} className="divider">
+    <div
+      id={id}
+      className="divider"
+    >
       <div
         className={
           strong ? "divider-container divider-strong" : "divider-container"

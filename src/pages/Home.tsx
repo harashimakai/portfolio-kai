@@ -29,7 +29,10 @@ export default function Home({ setSideOpen }: Props) {
       <section className="case-content">
         <CaseStudyCard item={putmeon} />
       </section>
-      <SectionDiv left="// 02 — SELECTED WORK" right="09 WORKS · 2022—2026" />
+      <SectionDiv
+        left="// 02 — SELECTED WORK"
+        right="09 WORKS · 2022—2026"
+      />
       <ProjectGrid />
     </>
   );

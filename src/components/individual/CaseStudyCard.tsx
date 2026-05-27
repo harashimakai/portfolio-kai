@@ -23,7 +23,11 @@ export default function CaseStudyCard({ item }: Props) {
       style={item.theme as React.CSSProperties}
     >
       <div className="card-left">
-        <img loading="lazy" src={item.thumbnailUrl} alt={item.title} />
+        <img
+          loading="lazy"
+          src={item.thumbnailUrl}
+          alt={item.title}
+        />
       </div>
       <div className="card-right">
         <div className="card-header">

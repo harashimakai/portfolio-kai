@@ -45,7 +45,10 @@ export default function Art({ setSideOpen }: Props) {
         activeFilter={activeFilter}
         onFilterChange={setActiveFilter}
       />
-      <SectionDiv left="2022 — 2026" right="FINE ARTS" />
+      <SectionDiv
+        left="2022 — 2026"
+        right="FINE ARTS"
+      />
       <ProjectGrid
         key={activeFilter}
         projects={filteredProjects}

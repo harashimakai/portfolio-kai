@@ -13,7 +13,11 @@ export default function MenuButton({ sideOpen, setSideOpen }: Props) {
       initial={"false"}
       animate={sideOpen ? "open" : "closed"}
     >
-      <svg width="30" height="30" viewBox="0 0 22.5 16">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 22.5 16"
+      >
         <motion.path
           className="menu-path"
           variants={{

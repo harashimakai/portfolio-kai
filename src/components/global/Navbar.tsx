@@ -19,8 +19,16 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
       <div className="navbar-brand">
         <Link to="/">
           <div className="navbar-logos">
-            <img src={monogram} alt="Logo" className="monogram m-light" />
-            <img src={monograml} alt="Logo" className="monogram m-dark" />
+            <img
+              src={monogram}
+              alt="Logo"
+              className="monogram m-light"
+            />
+            <img
+              src={monograml}
+              alt="Logo"
+              className="monogram m-dark"
+            />
             <img
               src={monogramla}
               alt="Logo"
@@ -39,13 +47,28 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
       </div>
       <div className="navbar-controls">
         <div className="navbar-nav">
-          <NavButton to="/" label="HOME" />
-          <NavButton to="/work" label="WORK" />
-          <NavButton to="/art" label="ART" />
-          <NavButton to="/about" label="ABOUT" />
+          <NavButton
+            to="/"
+            label="HOME"
+          />
+          <NavButton
+            to="/work"
+            label="WORK"
+          />
+          <NavButton
+            to="/art"
+            label="ART"
+          />
+          <NavButton
+            to="/about"
+            label="ABOUT"
+          />
         </div>
         <div className="navbar-line" />
-        <DarkButton darkMode={darkMode} setDarkMode={setDarkMode} />
+        <DarkButton
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        />
       </div>
     </nav>
   );

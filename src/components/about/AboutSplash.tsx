@@ -222,7 +222,10 @@ export default function AboutSplash() {
 
   return (
     <>
-      <SectionDiv left="// 04 — MARGINALIA" right="FROM THE READING LIST" />
+      <SectionDiv
+        left="// 04 — MARGINALIA"
+        right="FROM THE READING LIST"
+      />
       <div className="about-quote-container">
         <div className="about-quote-stage">
           {/* All quotes share the same grid cell; the container sizes to the tallest. */}
@@ -251,7 +254,10 @@ export default function AboutSplash() {
                 }
               >
                 {quote.node ?? quote.text}
-                <div className="quote-attr" style={{ marginTop: "20px" }}>
+                <div
+                  className="quote-attr"
+                  style={{ marginTop: "20px" }}
+                >
                   — {quote.author}
                 </div>
               </motion.blockquote>

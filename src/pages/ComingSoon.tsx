@@ -24,7 +24,10 @@ export default function ComingSoon({ setSideOpen }: Props) {
 
   return (
     <section className="missing-content">
-      <SectionDiv left="// 00 — COMING SOON" right="UNDER COMPOSITION" />
+      <SectionDiv
+        left="// 00 — COMING SOON"
+        right="UNDER COMPOSITION"
+      />
       <motion.div
         className="missing-container"
         variants={container_trigger}
@@ -39,8 +42,16 @@ export default function ComingSoon({ setSideOpen }: Props) {
               custom={0}
               className="centerpiece-logos"
             >
-              <img src={monogram} alt="Logo" className="monogram m-light" />
-              <img src={monograml} alt="Logo" className="monogram m-dark" />
+              <img
+                src={monogram}
+                alt="Logo"
+                className="monogram m-light"
+              />
+              <img
+                src={monograml}
+                alt="Logo"
+                className="monogram m-dark"
+              />
             </motion.div>
             <motion.h2
               variants={children_custom}

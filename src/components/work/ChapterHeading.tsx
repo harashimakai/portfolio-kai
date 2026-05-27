@@ -32,10 +32,16 @@ export default function ChapterHeading({
       viewport={{ once: true }}
     >
       <div className="splash-heading-container">
-        <motion.h2 variants={children_custom} custom={0}>
+        <motion.h2
+          variants={children_custom}
+          custom={0}
+        >
           <span className="splash-strong">{chapter}</span>
         </motion.h2>
-        <motion.h2 variants={children_custom} custom={0.15}>
+        <motion.h2
+          variants={children_custom}
+          custom={0.15}
+        >
           {subtitle}
         </motion.h2>
       </div>

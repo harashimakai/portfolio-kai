@@ -24,8 +24,15 @@ export default function About({ setSideOpen }: Props) {
   return (
     <>
       <section className="about-content">
-        <motion.div variants={container_m} initial="hidden" animate="visible">
-          <motion.h2 variants={children_custom} custom={0}>
+        <motion.div
+          variants={container_m}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h2
+            variants={children_custom}
+            custom={0}
+          >
             // 01 — ABOUT
           </motion.h2>
           <motion.h1

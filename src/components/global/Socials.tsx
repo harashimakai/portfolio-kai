@@ -43,7 +43,10 @@ export default function Socials() {
           <motion.a variants={children}>Github →</motion.a>
         </motion.div>
       </motion.div>
-      <motion.div className="social-bottom" variants={children}>
+      <motion.div
+        className="social-bottom"
+        variants={children}
+      >
         <h2>© KAI HARASHIMA — MMXXVI</h2>
         <h2>PORTFOLIO II · No. 02 / 02</h2>
         <button

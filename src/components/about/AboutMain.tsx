@@ -7,7 +7,10 @@ import SectionDiv from "../global/SectionDiv";
 export default function AboutMain() {
   return (
     <>
-      <SectionDiv left="// 02 — BIO" right="NOW & THEN"></SectionDiv>
+      <SectionDiv
+        left="// 02 — BIO"
+        right="NOW & THEN"
+      ></SectionDiv>
       <motion.section
         className="about-body"
         variants={container_trigger}
@@ -15,7 +18,10 @@ export default function AboutMain() {
         animate="visible"
       >
         <div className="about-text-block">
-          <motion.p variants={children_custom} custom={0.4}>
+          <motion.p
+            variants={children_custom}
+            custom={0.4}
+          >
             I’ve always felt like I stand at a crossroads. I’m analytical and
             detail-oriented. But I’m also creative, and my eye for design has
             constantly pushed me toward clarity and experimentation in my work.
@@ -29,7 +35,10 @@ export default function AboutMain() {
             style={{ margin: "24px 0 24px" }}
           >
             Right now I’m exploring UI/UX at{" "}
-            <a target="_blank" href="https://new.cornelldti.org/">
+            <a
+              target="_blank"
+              href="https://new.cornelldti.org/"
+            >
               Cornell DTI
             </a>
             . Before that, a summer at Weill Cornell Medical College led me into
@@ -59,9 +68,15 @@ export default function AboutMain() {
             on another. I’m also a huge foodie.
           </motion.p>
         </div>
-        <motion.div variants={children_custom} custom={0.4}>
+        <motion.div
+          variants={children_custom}
+          custom={0.4}
+        >
           <div className="about-image">
-            <img src={profile} alt="Kai Harashima" />
+            <img
+              src={profile}
+              alt="Kai Harashima"
+            />
           </div>
           <div className="about-bottom-desc">
             <span>PORTRAIT</span>

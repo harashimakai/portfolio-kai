@@ -29,8 +29,16 @@ export default function Sidebar({
           exit="hidden"
         >
           <div className="navbar-logos">
-            <img src={monogram} alt="Logo" className="monogram m-light" />
-            <img src={monograml} alt="Logo" className="monogram m-dark" />
+            <img
+              src={monogram}
+              alt="Logo"
+              className="monogram m-light"
+            />
+            <img
+              src={monograml}
+              alt="Logo"
+              className="monogram m-dark"
+            />
           </div>
 
           <p className="sidebar-mission">
@@ -41,11 +49,23 @@ export default function Sidebar({
             computer science and product design.
           </p>
 
-          <NavButton to="/" label="HOME" />
-          <NavButton to="/work" label="WORK" />
-          <NavButton to="/about" label="ABOUT" />
+          <NavButton
+            to="/"
+            label="HOME"
+          />
+          <NavButton
+            to="/work"
+            label="WORK"
+          />
+          <NavButton
+            to="/about"
+            label="ABOUT"
+          />
           <hr />
-          <DarkButton darkMode={darkMode} setDarkMode={setDarkMode} />
+          <DarkButton
+            darkMode={darkMode}
+            setDarkMode={setDarkMode}
+          />
         </motion.div>
       ) : null}
     </AnimatePresence>

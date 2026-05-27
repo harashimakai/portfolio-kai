@@ -12,7 +12,10 @@ export default function Mission() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <motion.h2 variants={children_custom} custom={0}>
+        <motion.h2
+          variants={children_custom}
+          custom={0}
+        >
           // 01 — INTRODUCTION
         </motion.h2>
         <div className="mission-body">
@@ -22,7 +25,10 @@ export default function Mission() {
             custom={0.15}
           >
             Hi. I'm Kai, a student at&nbsp;
-            <a target="_blank" href="https://www.cs.cornell.edu/">
+            <a
+              target="_blank"
+              href="https://www.cs.cornell.edu/"
+            >
               Cornell University
             </a>{" "}
             focused on the intersection of{" "}
@@ -42,7 +48,10 @@ export default function Mission() {
             >
               <h2>NOW</h2>
               <p className="mission-desc">
-                <a target="_blank" href="https://new.cornelldti.org/">
+                <a
+                  target="_blank"
+                  href="https://new.cornelldti.org/"
+                >
                   Cornell DTI
                 </a>
                 , Ithaca NY

@@ -77,7 +77,10 @@ export default function AboutSecond() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.h1 variants={children_custom} custom={0}>
+            <motion.h1
+              variants={children_custom}
+              custom={0}
+            >
               Toolkit
             </motion.h1>
             <div className="about-skills">
@@ -128,7 +131,10 @@ export default function AboutSecond() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.h1 variants={children_custom} custom={0}>
+            <motion.h1
+              variants={children_custom}
+              custom={0}
+            >
               <span className="alternative_c">Experiences</span>
             </motion.h1>
             <div className="about-experiences">
