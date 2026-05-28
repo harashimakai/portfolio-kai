@@ -161,6 +161,12 @@ hr {
   transition: background-color var(--ease-theme);
 }
 
+@media (max-width: 767px) {
+  .divider-strong {
+    margin-bottom: 0;
+  }
+}
+
 .underline-hover::after {
   content: "";
   position: absolute;
@@ -168,24 +174,27 @@ hr {
   height: 0.12rem;
   bottom: -0.3rem;
   left: 0;
-  background-color: var(--accent);
+  background-color: var(--ink);
   transform: scaleX(0);
   transition:
     transform 0.25s ease-out,
     background-color var(--ease-theme);
-  transform-origin: bottom right;
+  transform-origin: right;
+}
+
+.nav-link.nav-link-active::after,
+.underline-hover:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .underline-hover:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+  background-color: var(--accent) !important;
+  transition:
+    transform 0.25s ease-out,
+    background-color var(--ease-hover);
 }
 
-@media (max-width: 767px) {
-  .divider-strong {
-    margin-bottom: 0;
-  }
-}
 /* NAVBAR */
 
 .navbar {
@@ -319,13 +328,6 @@ hr {
     text-decoration-color var(--ease-hover);
 }
 
-.nav-link-active {
-  text-decoration: underline;
-  text-decoration-color: var(--ink);
-  text-decoration-thickness: 0.1rem;
-  text-underline-offset: 0.3rem;
-}
-
 .sidebar-mission {
   margin-left: 55px;
   margin-right: max(20%, calc(20rem - 40vw));
@@ -384,7 +386,11 @@ hr {
 .dark-mode-button:hover .underline-hover::after {
   margin-left: 7.209px;
   transform: scaleX(0.85);
-  transform-origin: bottom left;
+  transform-origin: left;
+  background-color: var(--accent);
+  transition:
+    transform 0.25s ease-out,
+    background-color var(--ease-hover);
 }
 
 .menu-button {
@@ -465,20 +471,6 @@ footer.social-container {
   margin: 0 auto;
 }
 
-@media (max-width: 1189px) {
-  .social-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
-  }
-}
-
-@media (max-width: 767px) {
-  .social-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-}
-
 .social-box h1 {
   font-weight: 500;
   font-size: var(--text-label);
@@ -486,6 +478,7 @@ footer.social-container {
   line-height: 1.4;
   letter-spacing: 2.64px;
   margin-bottom: 20px;
+  transition: margin-bottom var(--ease-hover);
 }
 
 .social-box p {
@@ -494,6 +487,7 @@ footer.social-container {
   font-size: 19px;
   line-height: var(--leading-loose);
   color: var(--white);
+  transition: font-size var(--ease-hover);
 }
 
 .social-box a {
@@ -503,6 +497,9 @@ footer.social-container {
   font-size: 19px;
   line-height: var(--leading-loose);
   color: var(--gold);
+  transition:
+    color var(--ease-theme),
+    font-size var(--ease-hover);
 }
 
 .social-box a:hover {
@@ -543,6 +540,29 @@ footer.social-container {
 .social-bottom .back-to-top:hover {
   color: var(--gold);
   transition: color var(--ease-hover);
+}
+
+@media (max-width: 1189px) {
+  .social-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 767px) {
+  .social-box h1 {
+    margin-bottom: 8px;
+  }
+  .social-box p {
+    font-size: var(--text-sm);
+  }
+  .social-box a {
+    font-size: var(--text-sm);
+  }
+  .social-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 
 /* PROJECT CARD (shared between Home and Work pages) */
