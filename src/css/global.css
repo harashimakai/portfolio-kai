@@ -209,10 +209,11 @@ hr {
 
   background-color: var(--bg);
   transition:
+    padding var(--ease-hover),
     background-color var(--ease-theme),
     border-color var(--ease-theme);
-  /*background: color-mix(in srgb, var(--bg) 85%, transparent);
-  backdrop-filter: blur(14px) saturate(140%);*/
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
 }
 
 .sidebar {
@@ -384,17 +385,19 @@ hr {
 }
 
 .dark-mode-button:hover .underline-hover::after {
-  margin-left: 7.209px;
-  transform: scaleX(0.85);
+  margin-left: var(--mode-margin);
+  transform: scaleX(var(--mode-scale));
   transform-origin: left;
   background-color: var(--accent);
   transition:
+    margin-left 0.25s ease-out,
     transform 0.25s ease-out,
     background-color var(--ease-hover);
 }
 
 .menu-button {
   position: fixed;
+  transform: scaleX(0);
   top: 21.25px;
   left: 5%;
   max-width: fit-content;
@@ -404,6 +407,9 @@ hr {
   border: none;
   border-radius: 50%;
   z-index: 1004;
+  transition:
+    transform 0.25s ease-out,
+    top var(--ease-hover);
 }
 
 .menu-path {
@@ -418,12 +424,25 @@ hr {
   transition: stroke var(--ease-hover);
 }
 
+@media (max-width: 767px) {
+  .navbar {
+    padding: 20px var(--page-gutter);
+  }
+  .menu-button {
+    top: 19.535px;
+  }
+}
+
 @media (max-width: 1190px) {
   .sidebar .nav-link {
     display: block;
     margin-left: 55px;
     margin-bottom: 20px;
     width: fit-content;
+  }
+  .menu-path {
+    transform: scaleX(1);
+    transform-origin: left;
   }
   .sidebar .dark-mode-button {
     display: flex;
@@ -565,7 +584,7 @@ footer.social-container {
   }
 }
 
-/* PROJECT CARD (shared between Home and Work pages) */
+/* ─── Project Card - Work & Home ─────────────────────────────────────────── */
 
 .item-image {
   display: flex;

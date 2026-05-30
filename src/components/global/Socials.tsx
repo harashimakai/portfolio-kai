@@ -1,9 +1,16 @@
 import { motion } from "motion/react";
 import { container_s, children } from "./AnimationConsts";
 
-export default function Socials() {
+export default function Socials({
+  caseStudy = false,
+}: {
+  caseStudy?: boolean;
+}) {
   return (
-    <footer className="social-container">
+    <footer
+      className="social-container"
+      style={caseStudy ? { backgroundColor: "#222225" } : undefined}
+    >
       <motion.div
         className="social-grid"
         variants={container_s}
@@ -40,7 +47,13 @@ export default function Socials() {
           >
             LinkedIn →
           </motion.a>
-          <motion.a variants={children}>Github →</motion.a>
+          <motion.a
+            target="_blank"
+            href="https://github.com/harashimakai"
+            variants={children}
+          >
+            Github →
+          </motion.a>
         </motion.div>
       </motion.div>
       <motion.div

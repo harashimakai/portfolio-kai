@@ -1,4 +1,4 @@
-/* WORK MOSAIC */
+/* ─── Work Mosaic ────────────────────────────────────────────────────────── */
 
 .mosaic-content {
   padding: 32px var(--page-gutter) var(--page-gutter);
@@ -11,7 +11,7 @@
   row-gap: var(--space-gap);
 }
 
-/* SPLASH */
+/* ─── Splash ─────────────────────────────────────────────────────────────── */
 
 .splash-strong {
   letter-spacing: 0.32em;

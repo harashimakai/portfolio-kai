@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -15,12 +15,15 @@ import Socials from "./components/global/Socials";
 import ComingSoon from "./pages/ComingSoon";
 import Art from "./pages/Art";
 import NotFound from "./pages/NotFound";
+import PutMeOn from "./components/individual/put-me-on/PutMeOn";
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     return localStorage.getItem("theme") === "dark";
   });
   const [sideOpen, setSideOpen] = useState(false);
+  const location = useLocation();
+  const caseStudy = location.pathname === "/putmeon";
 
   useEffect(() => {
     localStorage.setItem("theme", darkMode ? "dark" : "light");
@@ -28,21 +31,27 @@ function App() {
 
   return (
     <div className={darkMode ? "darkmode" : "lightmode"}>
-      <Navbar
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-      />
-      <Sidebar
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-        sideOpen={sideOpen}
-      />
-      <div className="menu-container">
-        <MenuButton
-          sideOpen={sideOpen}
-          setSideOpen={setSideOpen}
+      {!caseStudy && (
+        <Navbar
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
         />
-      </div>
+      )}
+      {!caseStudy && (
+        <Sidebar
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+          sideOpen={sideOpen}
+        />
+      )}
+      {!caseStudy && (
+        <div className="menu-container">
+          <MenuButton
+            sideOpen={sideOpen}
+            setSideOpen={setSideOpen}
+          />
+        </div>
+      )}
       <Routes>
         <Route
           path="/"
@@ -65,11 +74,15 @@ function App() {
           element={<ComingSoon setSideOpen={setSideOpen} />}
         />
         <Route
+          path="/putmeon"
+          element={<PutMeOn />}
+        />
+        <Route
           path="*"
           element={<NotFound setSideOpen={setSideOpen} />}
         />
       </Routes>
-      <Socials></Socials>
+      <Socials caseStudy={caseStudy} />
     </div>
   );
 }

@@ -45,16 +45,9 @@
 /* ─── Spacing ────────────────────────────────────────────────────────────── */
 
 :root {
-  --gutter: clamp(20px, 6vw, 96px);
-  --hero: clamp(30px, 5.5vw, 64px);
-  --gap: clamp(24px, 4vw, 56px);
-  --page-gutter: clamp(
-    20px,
-    6vw,
-    96px
-  ); /* horizontal page padding, site-wide */
-  --space-section: clamp(30px, 5.5vw, 64px); /* inter-section gaps */
-  --space-gap: clamp(24px, 4vw, 56px); /* standard row/column gaps */
+  --page-gutter: clamp(20px, 6vw, 96px);
+  --space-section: clamp(30px, 5.5vw, 64px);
+  --space-gap: clamp(24px, 4vw, 56px);
   --space-md: 40px;
   --space-sm: 24px;
   --space-xs: 16px;
@@ -93,6 +86,9 @@
 
   transition: background-color var(--ease-theme);
   background-color: var(--bg);
+
+  --mode-margin: 5.72px;
+  --mode-scale: 0.9099;
 }
 
 /* ─── Theme — dark ──────────────────────────────────────────────────────── */
@@ -115,4 +111,7 @@
 
   transition: background-color var(--ease-theme);
   background-color: var(--bg);
+
+  --mode-margin: 0px;
+  --mode-scale: 1;
 }

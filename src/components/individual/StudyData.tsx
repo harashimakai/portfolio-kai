@@ -3,17 +3,9 @@ import pmo_brainstorming from "../../assets/case-studies/putmeon/brainstorming.j
 import pmo_wire1 from "../../assets/case-studies/putmeon/wireframe1.jpg";
 import pmo_wire2 from "../../assets/case-studies/putmeon/wireframe2.jpg";
 import pmo_wire3 from "../../assets/case-studies/putmeon/wireframe3.jpg";
-import pmo_account1 from "../../assets/case-studies/putmeon/account1.png";
-import pmo_account2 from "../../assets/case-studies/putmeon/account2.png";
-import pmo_account3 from "../../assets/case-studies/putmeon/account3.png";
-import pmo_home1 from "../../assets/case-studies/putmeon/home1.png";
-import pmo_home2 from "../../assets/case-studies/putmeon/home2.png";
-import pmo_home3 from "../../assets/case-studies/putmeon/home3.png";
-import pmo_library from "../../assets/case-studies/putmeon/Library.png";
-import pmo_onboarding from "../../assets/case-studies/putmeon/onboarding.png";
 import pmo_cover from "../../assets/case-studies/putmeon/cover.png";
-import pmo_gradient from "../../assets/case-studies/putmeon/gradient.png";
 import pmo_logo from "../../assets/case-studies/putmeon/putmeonl.png";
+import pmo_logo_alt from "../../assets/case-studies/putmeon/putmeon.png";
 
 export type StudyTheme = {
   // Fonts
@@ -43,14 +35,21 @@ export type StudyTheme = {
 export interface Study {
   id: string;
   title: string;
-  sub: string;
+  date: string;
+  dateSpecific: string;
+  context: string;
+  role: string;
+  tools: string;
+  scope: string;
+  timeline: string;
   theme: StudyTheme;
   thumbnailUrl: string;
   logoUrl: string;
+  altLogoUrl?: string;
   logoWidth: number;
   subheading: string;
   desc: ReactNode;
-  slug: string;
+  slug?: string;
   sectionNum: string;
 }
 
@@ -62,7 +61,7 @@ const putmeonTheme: StudyTheme = {
   "--cs-bg-soft": "#27272a",
   "--cs-bg-panel": "#222225",
   "--cs-surface": "#f4efe7",
-  "--cs-surface-soft": "#e8e0cd",
+  "--cs-surface-soft": "#ede5d4",
   "--cs-text": "#f5ebd9",
   "--cs-text-muted": "#7a7a78",
   "--cs-text-alt": "#1a1a1c",
@@ -72,47 +71,47 @@ const putmeonTheme: StudyTheme = {
   "--cs-rule": "rgba(245,235,217,0.18)",
   "--cs-rule-alt": "rgba(26,26,28,0.18)",
 };
+/*
+  cream: "#f1ebdc",
+  creamSoft: "#e8e0cd",
+  ink: "#1a1a1c",
+  inkSoft: "#27272a",
+  inkPanel: "#222225",
+  textOnDark: "#f5ebd9",
+  textOnDarkMuted: "#7a7a78",
+  textOnCream: "#1a1a1c",
+  textOnCreamMuted: "#737065",
+  amber: "#d97c2a",
+  amberSoft: "#e8a766",
+  rule: "rgba(245,235,217,0.18)",
+  ruleCream: "rgba(26,26,28,0.18)",
+  */
 
 export const putmeon: Study = {
   id: "01",
   title: "Put Me On",
-  sub: "UI/UX · FEB 2026 · SOLO",
+  date: "FEB 2026",
+  dateSpecific: "02/05/2026",
+  context: "SOLO",
+  role: "UX Designer (Solo)",
+  tools: "Figma",
+  scope: "UX Research, Visual Design, Prototyping",
+  timeline: "2 Weeks",
   theme: putmeonTheme,
   thumbnailUrl: pmo_cover,
   logoUrl: pmo_logo,
+  altLogoUrl: pmo_logo_alt,
   logoWidth: 470,
   subheading: "a social music discovery platform / case study",
   desc: (
     <>
       Help users{" "}
-      <span className="card-desc-bold">escape repetitive listening</span> habits
-      and <span className="card-desc-bold">discover new music</span> through
+      <span className="case-accent">escape repetitive listening</span> habits
+      and <span className="case-accent">discover new music</span> through
       friends and fellow music lovers. From problem framing through user
       research, lo-fi wireframes and hi-fi prototypes in Figma.
     </>
   ),
-  slug: "/case/1",
-  sectionNum: "5",
-};
-
-export const cuaptsllm: Study = {
-  id: "02",
-  title: "CUApts AI/LLM Search Feature",
-  sub: "UI/UX · MAY 2026 · CORNELL DTI - APTS",
-  theme: putmeonTheme,
-  thumbnailUrl: pmo_cover,
-  logoUrl: pmo_logo,
-  logoWidth: 470,
-  subheading: "a social music discovery platform / case study",
-  desc: (
-    <>
-      Help users{" "}
-      <span className="card-desc-bold">escape repetitive listening</span> habits
-      and <span className="card-desc-bold">discover new music</span> thorugh
-      friends and fellow music lovers. From problem framing through user
-      research, lo-fi wireframes and hi-fi prototypes in Figma.
-    </>
-  ),
-  slug: "/case/2",
+  slug: "/putmeon",
   sectionNum: "5",
 };

@@ -32,7 +32,9 @@ export default function CaseStudyCard({ item }: Props) {
       <div className="card-right">
         <div className="card-header">
           <h2 className="card-tag">CASE STUDY</h2>
-          <h2 className="card-subtitle">{item.sub}</h2>
+          <h2 className="meta-text">
+            UI/UX · {item.date} · {item.context}
+          </h2>
         </div>
         <BrandLogo
           width={item.logoWidth}
@@ -44,14 +46,14 @@ export default function CaseStudyCard({ item }: Props) {
 
         <div className="card-buttons">
           <Link
-            to={"/comingsoon"}
+            to={item.slug || "/comingsoon"}
             style={{ display: "inline-block", width: "fit-content" }}
           >
             <motion.button whileHover={{ scale: 1.05 }}>
               <h1>READ CASE STUDY →</h1>
             </motion.button>
           </Link>
-          <h2>
+          <h2 className="meta-text">
             {item.sectionNum} SECTIONS · CASE STUDY {item.id}
           </h2>
         </div>
@@ -63,7 +65,7 @@ export default function CaseStudyCard({ item }: Props) {
 function BrandLogo({ width = 80, style = {}, itemUrl, title }: LogoProps) {
   return (
     <img
-      className="card-logo"
+      className="case-logo card-logo"
       src={itemUrl}
       alt={title}
       style={{ width, height: "auto", display: "block", ...style }}
