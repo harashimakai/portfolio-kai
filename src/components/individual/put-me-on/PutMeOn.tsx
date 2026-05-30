@@ -13,7 +13,7 @@ import pmo_home3 from "../../../assets/case-studies/putmeon/home3.png";
 import pmo_account1 from "../../../assets/case-studies/putmeon/account1.png";
 import pmo_account2 from "../../../assets/case-studies/putmeon/account2.png";
 import pmo_account3 from "../../../assets/case-studies/putmeon/account3.png";
-import pmo_library from "../../../assets/case-studies/putmeon/Library.png";
+import pmo_library from "../../../assets/case-studies/putmeon/library.png";
 import pmo_onboarding from "../../../assets/case-studies/putmeon/onboarding.png";
 import CaseDouble from "./CaseDouble";
 import CaseList from "./CaseList";
