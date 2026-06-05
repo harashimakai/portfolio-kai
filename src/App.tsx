@@ -23,7 +23,7 @@ function App() {
   });
   const [sideOpen, setSideOpen] = useState(false);
   const location = useLocation();
-  const caseStudy = location.pathname === "/putmeon";
+  const isPutMeOn = location.pathname === "/putmeon";
 
   useEffect(() => {
     localStorage.setItem("theme", darkMode ? "dark" : "light");
@@ -31,20 +31,20 @@ function App() {
 
   return (
     <div className={darkMode ? "darkmode" : "lightmode"}>
-      {!caseStudy && (
+      {!isPutMeOn && (
         <Navbar
           darkMode={darkMode}
           setDarkMode={setDarkMode}
         />
       )}
-      {!caseStudy && (
+      {!isPutMeOn && (
         <Sidebar
           darkMode={darkMode}
           setDarkMode={setDarkMode}
           sideOpen={sideOpen}
         />
       )}
-      {!caseStudy && (
+      {!isPutMeOn && (
         <div className="menu-container">
           <MenuButton
             sideOpen={sideOpen}
@@ -82,7 +82,7 @@ function App() {
           element={<NotFound setSideOpen={setSideOpen} />}
         />
       </Routes>
-      <Socials caseStudy={caseStudy} />
+      <Socials></Socials>
     </div>
   );
 }

@@ -27,8 +27,10 @@ export interface Project {
   letterSpacing: string;
   height?: string;
   category: string;
+  skills: string;
   onHome: boolean;
   onWork: boolean;
+  extra?: boolean;
 }
 
 export const projects: Project[] = [
@@ -43,11 +45,12 @@ export const projects: Project[] = [
       "A series of posters translating PhD-level cancer biology—oncogenes, immune evasion, checkpoint inhibition—into visual language. Hand-drawn prototypes refined in Adobe Illustrator over the course of a year.",
     thumbnailUrl: thesisCover,
     expandedUrl: thesisExpanded,
-    grid: "span 8",
+    grid: "span 4",
     mainFont: "32px",
     secondFont: "17px",
     letterSpacing: "-0.16px",
     category: "DESIGN",
+    skills: "ILLUSTRATOR · SCIENCE COMMUNICATION",
     onHome: true,
     onWork: true,
     imagePos: "center 30%",
@@ -59,13 +62,14 @@ export const projects: Project[] = [
     medium: "OIL ON CANVAS",
     year: "2022",
     shortDescription:
-      "A monochromatic stdy of the Hudson River Valley landscape. Restraint of palette as a study in texture and value.",
+      "A monochromatic study of the Hudson River Valley landscape. Restraint of palette as a study in texture and value.",
     thumbnailUrl: ashokanCover,
     grid: "span 4",
     mainFont: "22px",
     secondFont: "15px",
     letterSpacing: "-0.11px",
     category: "PAINTING",
+    skills: "MONOCHROMATICISM · LANDSCAPE",
     onHome: true,
     onWork: true,
     imagePos: "center 60%",
@@ -77,7 +81,7 @@ export const projects: Project[] = [
     medium: "OIL ON CANVAS",
     year: "2024",
     shortDescription:
-      "A white house holds its ground against primordial wind and sstone — composition as unmoving defiance.",
+      "A white house holds its ground against primordial wind and stone — composition as unmoving defiance.",
     thumbnailUrl: icelandCover,
     grid: "span 4",
     mainFont: "22px",
@@ -85,6 +89,7 @@ export const projects: Project[] = [
     letterSpacing: "-0.11px",
     height: "fit-content",
     category: "PAINTING",
+    skills: "IMPRESSIONISM · LANDSCAPE",
     onHome: true,
     onWork: true,
     imagePos: "center 35%",
@@ -104,6 +109,7 @@ export const projects: Project[] = [
     secondFont: "15px",
     letterSpacing: "-0.11px",
     category: "PAINTING",
+    skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
     onWork: true,
   },
@@ -121,6 +127,7 @@ export const projects: Project[] = [
     secondFont: "15px",
     letterSpacing: "-0.11px",
     category: "PAINTING",
+    skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
     onWork: true,
     imagePos: "center 100%",
@@ -139,9 +146,11 @@ export const projects: Project[] = [
     secondFont: "15px",
     letterSpacing: "-0.11px",
     category: "PAINTING",
+    skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
     onWork: true,
     imagePos: "center 70%",
+    extra: true,
   },
   {
     id: "7",
@@ -157,6 +166,7 @@ export const projects: Project[] = [
     secondFont: "15px",
     letterSpacing: "-0.11px",
     category: "CALLIGRAPHY",
+    skills: "HAND LETTERING · FLOURISHES",
     onHome: false,
     onWork: true,
     imagePos: "center 70%",
@@ -165,7 +175,7 @@ export const projects: Project[] = [
     id: "9",
     title: "connect - Merging Fine Arts and Fabrication",
     slug: "/work/9",
-    medium: "CNC · SOLDERING · ILLUSTRATOR",
+    medium: "FABRICATION",
     year: "2023",
     shortDescription:
       "A single word — connect — translated from pen to vector to engraved oak and LED. An exercise in carrying one idea across four mediums.",
@@ -175,6 +185,7 @@ export const projects: Project[] = [
     secondFont: "15px",
     letterSpacing: "-0.11px",
     category: "FABRICATION",
+    skills: "CNC · SOLDERING · ILLUSTRATOR",
     onHome: false,
     onWork: true,
     imagePos: "center 60%",
@@ -183,10 +194,10 @@ export const projects: Project[] = [
 
 // Display order for each context
 export const homeOrder = ["1", "2", "3", "4", "5", "6"];
-export const mosaicOrder = ["1", "3", "4", "5", "6", "2", "7", "9"];
+export const mosaicOrder = ["3", "1", "2", "4", "5", "6", "7", "9"];
 export const workOrder = ["4", "5", "6", "1", "3", "2", "7", "9"];
 
-const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+export const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
 
 export const homeProjects = homeOrder.map((id) => byId[id]);
 export const mosaicProjects = mosaicOrder.map((id) => byId[id]);

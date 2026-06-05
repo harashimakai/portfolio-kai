@@ -24,7 +24,7 @@ export default function Mission() {
             variants={children_custom}
             custom={0.15}
           >
-            Hi. I'm Kai, a student at&nbsp;
+            Hi. I’m Kai, a student at&nbsp;
             <a
               target="_blank"
               href="https://www.cs.cornell.edu/"

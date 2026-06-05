@@ -25,18 +25,18 @@ export default function ChapterHeading({
   return (
     <motion.section
       id={id}
-      className="splash-heading-content"
+      className="chapter-header"
       variants={container_trigger}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <div className="splash-heading-container">
+      <div className="chapter-label-row">
         <motion.h2
           variants={children_custom}
           custom={0}
         >
-          <span className="splash-strong">{chapter}</span>
+          <span className="chapter-label">{chapter}</span>
         </motion.h2>
         <motion.h2
           variants={children_custom}
@@ -45,10 +45,10 @@ export default function ChapterHeading({
           {subtitle}
         </motion.h2>
       </div>
-      <div className={filters ? "splash-heading-body" : undefined}>
+      <div className={filters ? "chapter-body" : undefined}>
         <div>
           <motion.h1
-            className="splash-intro"
+            className="chapter-title"
             variants={children_custom}
             custom={0.3}
           >
@@ -56,7 +56,7 @@ export default function ChapterHeading({
           </motion.h1>
           {sub && (
             <motion.h1
-              className="splash-sub"
+              className="chapter-subtitle"
               variants={children_custom}
               custom={0.45}
             >
@@ -65,7 +65,7 @@ export default function ChapterHeading({
           )}
         </div>
         {filters && (
-          <div className="filter-buttons splash-heading-filters">
+          <div className="filter-buttons chapter-filters">
             {filters.map((filter, i) => (
               <motion.button
                 key={filter}
@@ -73,6 +73,7 @@ export default function ChapterHeading({
                 variants={children_custom}
                 custom={0.3 + i * 0.2}
                 className={activeFilter === filter ? "filter-active" : ""}
+                data-label={filter}
                 onClick={() => onFilterChange?.(filter)}
               >
                 {filter}

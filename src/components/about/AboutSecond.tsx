@@ -110,7 +110,7 @@ export default function AboutSecond() {
               {EDUCATION.map((e, i) => (
                 <motion.div
                   key={e.school}
-                  className="about-education-list"
+                  className="about-education-entry"
                   variants={children_custom}
                   custom={i * 0.2 + 1.2}
                 >

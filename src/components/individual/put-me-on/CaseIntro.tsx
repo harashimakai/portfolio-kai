@@ -1,4 +1,6 @@
+import { motion } from "motion/react";
 import CasePill from "./CasePill";
+import { children_custom, container_m } from "../../global/AnimationConsts";
 
 interface Props {
   pill?: string;
@@ -20,12 +22,23 @@ export default function CaseBand({
   columnBody,
 }: Props) {
   return (
-    <div className={column ? "case-double-content" : undefined}>
-      <div>
+    <motion.div
+      variants={container_m}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      className={column ? "case-double-content" : undefined}
+    >
+      <motion.div
+        variants={children_custom}
+        custom={0}
+      >
         {pill && (
           <CasePill color={dark ? undefined : "var(--cs-bg)"}> {pill}</CasePill>
         )}
-        <h1
+        <motion.h1
+          variants={children_custom}
+          custom={0.15}
           className={
             dark
               ? sub
@@ -41,10 +54,14 @@ export default function CaseBand({
           }
         >
           {title}
-        </h1>
-      </div>
+        </motion.h1>
+      </motion.div>
       {columnBody && (
-        <div className="case-section-container">
+        <motion.div
+          variants={children_custom}
+          custom={0.3}
+          className="case-section-container"
+        >
           <p
             className={
               dark
@@ -54,8 +71,8 @@ export default function CaseBand({
           >
             {columnBody}
           </p>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { sidebar } from "./AnimationConsts";
 
@@ -18,6 +19,11 @@ export default function Sidebar({
   setDarkMode,
   sideOpen,
 }: SidebarProps) {
+  useEffect(() => {
+    document.body.style.overflow = sideOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [sideOpen]);
+
   return (
     <AnimatePresence initial={false}>
       {sideOpen ? (

@@ -34,8 +34,8 @@ export default function CaseIterations({
             />
           </div>
           <figcaption className="case-iteration-caption">
-            <span className="meta-text">{leftText[idx]}</span>
-            <span className="meta-text">{rightText[idx]}</span>
+            <span className="case-meta-text">{leftText[idx]}</span>
+            <span className="case-meta-text">{rightText[idx]}</span>
           </figcaption>
         </figure>
       ))}

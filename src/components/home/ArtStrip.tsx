@@ -2,20 +2,14 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { container_s, children } from "../global/AnimationConsts";
 import { homeProjects, Project } from "../global/ProjectData";
-import ItemCard from "../global/ItemCard";
 import PageView from "../work/PageView";
 import "../../css/home.css";
 
 interface Props {
   projects?: Project[];
-  variant?: "home" | "mosaic";
 }
 
-export default function ProjectGrid({
-  projects = homeProjects,
-  variant = "home",
-}: Props) {
-  const isMosaic = variant === "mosaic";
+export default function ArtStrip({ projects = homeProjects }: Props) {
   const [selected, setSelected] = useState<{ id: string; index: number } | null>(null);
 
   useEffect(() => {
@@ -25,9 +19,9 @@ export default function ProjectGrid({
 
   return (
     <>
-      <section className={isMosaic ? "mosaic-content" : "grid-content"}>
+      <section className="grid-content">
         <motion.div
-          className={isMosaic ? "mosaic-grid" : "project-grid"}
+          className="art-strip"
           variants={container_s}
           initial="hidden"
           whileInView="visible"
@@ -36,17 +30,24 @@ export default function ProjectGrid({
           {projects.map((project, index) => (
             <motion.article
               key={project.id}
-              className="item-card"
-              style={isMosaic ? { gridColumn: project.grid } : undefined}
+              className={
+                project.extra
+                  ? "art-cell-container art-cell-extra"
+                  : "art-cell-container"
+              }
               variants={children}
               transition={{ ease: "easeOut" }}
               onClick={() => setSelected({ id: project.id, index: index + 1 })}
             >
-              <ItemCard
-                item={project}
-                index={index}
-                total={projects.length}
-                mosaic={isMosaic}
+              <img
+                loading="lazy"
+                src={project.thumbnailUrl}
+                alt={project.title}
+                style={
+                  project.imagePos
+                    ? { objectPosition: project.imagePos }
+                    : undefined
+                }
               />
             </motion.article>
           ))}

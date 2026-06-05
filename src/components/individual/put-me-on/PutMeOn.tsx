@@ -20,6 +20,8 @@ import CaseList from "./CaseList";
 import CaseIterations from "./CaseIterations";
 import CaseStack from "./CaseStack";
 import CaseAccordion from "./CaseAccordion";
+import { motion } from "motion/react";
+import { children_custom, container_m } from "../../global/AnimationConsts";
 
 interface LogoProps {
   width: number;
@@ -137,45 +139,110 @@ export default function PutMeOn() {
     <div style={putmeon.theme as React.CSSProperties}>
       <nav className="case-nav">
         <button
-          className="case-nav-link meta-text"
+          className="case-nav-link case-meta-text"
           onClick={() => history.back()}
         >
           ← BACK TO PORTFOLIO
         </button>
-        <span className="meta-text">CASE STUDY · {putmeon.id} OF 01</span>
-        <span className="meta-text">KAI HARASHIMA · UX · {putmeon.date}</span>
+        <span className="case-meta-text case-nav-meta">
+          CASE STUDY · {putmeon.id} OF 01
+        </span>
+        <span className="case-meta-text case-nav-meta">
+          KAI HARASHIMA · UX · {putmeon.date}
+        </span>
       </nav>
-      <section
+      <motion.section
         className="case-hero"
+        variants={container_m}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
         style={{
           background: `url(${backgroundCover}) no-repeat top center / 100% 65%, var(--cs-surface)`,
         }}
       >
-        <div className="case-hero-meta">
+        <motion.div
+          variants={children_custom}
+          custom={0}
+          className="case-hero-meta"
+        >
           <span>{putmeon.dateSpecific}</span>
           <span>Kai Harashima — UX Designer</span>
-        </div>
+        </motion.div>
         <div className="case-hero-content">
-          <div>
+          <motion.div
+            variants={children_custom}
+            custom={0.15}
+          >
             <BrandLogo
               width={747}
               itemUrl={putmeon.altLogoUrl || putmeon.logoUrl}
               title={putmeon.title}
             />
-            <p className="case-hero-subtitle">{putmeon.subheading}</p>
-          </div>
+            <motion.p
+              variants={children_custom}
+              custom={0.3}
+              className="case-hero-subtitle"
+            >
+              {putmeon.subheading}
+            </motion.p>
+          </motion.div>
           <div className="case-hero-info">
-            <span className="case-hero-info-label">ROLE</span>
-            <span>{putmeon.role}</span>
-            <span className="case-hero-info-label">TOOLS</span>
-            <span>{putmeon.tools}</span>
-            <span className="case-hero-info-label">SCOPE</span>
-            <span>{putmeon.scope}</span>
-            <span className="case-hero-info-label">TIMELINE</span>
-            <span>{putmeon.timeline}</span>
+            <motion.span
+              variants={children_custom}
+              custom={0.45}
+              className="case-hero-info-label"
+            >
+              ROLE
+            </motion.span>
+            <motion.span
+              variants={children_custom}
+              custom={0.45}
+            >
+              {putmeon.role}
+            </motion.span>
+            <motion.span
+              variants={children_custom}
+              custom={0.6}
+              className="case-hero-info-label"
+            >
+              TOOLS
+            </motion.span>
+            <motion.span
+              variants={children_custom}
+              custom={0.6}
+            >
+              {putmeon.tools}
+            </motion.span>
+            <motion.span
+              variants={children_custom}
+              custom={0.75}
+              className="case-hero-info-label"
+            >
+              SCOPE
+            </motion.span>
+            <motion.span
+              variants={children_custom}
+              custom={0.75}
+            >
+              {putmeon.scope}
+            </motion.span>
+            <motion.span
+              variants={children_custom}
+              custom={0.9}
+              className="case-hero-info-label"
+            >
+              TIMELINE
+            </motion.span>
+            <motion.span
+              variants={children_custom}
+              custom={0.9}
+            >
+              {putmeon.timeline}
+            </motion.span>
           </div>
         </div>
-      </section>
+      </motion.section>
       <CaseBand
         num={putmeon.id}
         name="Problem & Context"
@@ -223,8 +290,9 @@ export default function PutMeOn() {
           pill="USER GOALS"
           title={
             <>
-              Two kinds of listener, one{" "}
-              <span className="case-accent">shared appetite</span>.
+              I identified two distinct{" "}
+              <span className="case-accent">user bases</span>, and the goals
+              they share.
             </>
           }
         />
@@ -236,16 +304,26 @@ export default function PutMeOn() {
         />
         <CaseIntro
           pill="PAIN POINTS"
-          title={<>What users actually said.</>}
+          title={<>What do people actually want?</>}
           sub={true}
         />
-        <div className="case-triad-quotes">
+        <motion.div
+          variants={container_m}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.8 }}
+          className="case-triad-quotes"
+        >
           {quotes.map((q, i) => (
-            <blockquote key={i}>
+            <motion.blockquote
+              variants={children_custom}
+              custom={0 + i * 0.3}
+              key={i}
+            >
               <p>"{q}"</p>
-            </blockquote>
+            </motion.blockquote>
           ))}
-        </div>
+        </motion.div>
       </CaseBand>
 
       <CaseBand
@@ -257,7 +335,7 @@ export default function PutMeOn() {
         <CaseIntro
           title={
             <>
-              Hand-drawn <span className="case-accent">first</span>.
+              Visualizing the <span className="case-accent">idea</span>.
             </>
           }
           dark={true}
@@ -293,8 +371,7 @@ export default function PutMeOn() {
         <CaseIntro
           title={
             <>
-              Adding a <span className="case-accent">record player</span>,<br />
-              killing the canvas.
+              Taking my idea to <span className="case-accent">Figma</span>.
             </>
           }
         />
@@ -340,7 +417,7 @@ export default function PutMeOn() {
         />
         <CaseIntro
           pill="LIBRARY / ONBOARDING + LIVE"
-          title={<>The rest of the app, in use.</>}
+          title={<>The finishing touches.</>}
           sub={true}
         />
         <CaseIterations
@@ -378,9 +455,9 @@ export default function PutMeOn() {
           indices={["T1", "T2", "T3"]}
           bullets={takeawayBullets}
           descriptions={[
-            "Picked up auto-layout, components, and variants from scratch — and learned how a tidy file keeps iteration fast.",
-            "Practiced framing a problem, defending each decision, and telling the story end to end.",
-            "Listening to real frustrations reshaped the product more than any feature idea I started with.",
+            "Picked up Figma in two weeks — going from using squares instead of frames to fully animated components, relying on advice from mentors and YouTube tutorials.",
+            "Learned everything about case studies. Navigated brainstorming, user research, and iterations while learning how to create lo-fi and hi-fi prototypes.",
+            "I realized that design is about much more than how aesthetically pleasing something looks. Every aspect of a product must have intention and care behind it to truly improve users' lives.",
           ]}
           dark
         />
@@ -389,13 +466,13 @@ export default function PutMeOn() {
   );
 }
 
-function BrandLogo({ width = 80, style = {}, itemUrl, title }: LogoProps) {
+function BrandLogo({ style = {}, itemUrl, title }: LogoProps) {
   return (
     <img
-      className="card-logo"
+      className="case-logo"
       src={itemUrl}
       alt={title}
-      style={{ width, height: "auto", display: "block", ...style }}
+      style={{ display: "block", ...style }}
     />
   );
 }

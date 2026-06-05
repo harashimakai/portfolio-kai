@@ -34,7 +34,7 @@ export default function CaseAccordion({
             }}
           >
             <div
-              className="case-accordion-focus"
+              className="case-accordion-bar"
               style={{ transform: on ? "scaleY(1)" : "scaleY(0)" }}
             />
             <span
@@ -74,9 +74,9 @@ export default function CaseAccordion({
                 {b}
               </div>
               <div
-                className="case-accordion-desc"
+                className="case-accordion-body"
                 style={{
-                  maxHeight: on ? 120 : 0,
+                  maxHeight: on ? 240 : 0,
                   opacity: on ? 1 : 0,
                   marginTop: on ? 18 : 0,
                 }}

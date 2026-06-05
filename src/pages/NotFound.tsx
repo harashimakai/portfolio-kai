@@ -23,10 +23,11 @@ export default function NotFound({ setSideOpen }: Props) {
   }, []);
 
   return (
-    <section className="missing-content">
+    <section className="mission-content">
       <SectionDiv
         left="// 00 — 404"
         right="NO RECORD"
+        fullWidth={true}
       />
       <motion.div
         className="missing-container"

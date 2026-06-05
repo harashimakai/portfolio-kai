@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+import { children_custom, container_m } from "../../global/AnimationConsts";
 import CaseList from "./CaseList";
 import CasePill from "./CasePill";
 
@@ -36,37 +38,103 @@ export default function CaseDouble({
       style={{ gap: 56 }}
     >
       <div>
-        <div className="case-wire-container">
+        <motion.div
+          variants={children_custom}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="case-wire-container"
+        >
           <img
             src={image1}
             alt="Lo-Fi Prototype"
             className="case-wire-image"
           />
-          <div className="case-wire-label">{image1Label}</div>
-        </div>
-        <CasePill>{pillText1}</CasePill>
-        <h1 className="case-section-small-subheading case-light">
-          {columnHeading1}
-        </h1>
-        <div className="case-section-meta case-accent">{columnSubheading1}</div>
-        <CaseList bullets={columnBullets1} />
+          <div className="case-wire-caption">{image1Label}</div>
+        </motion.div>
+        <motion.div
+          variants={children_custom}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <CasePill>{pillText1}</CasePill>
+        </motion.div>
+        <motion.div
+          variants={container_m}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <motion.h1
+            variants={children_custom}
+            custom={0.15}
+            className="case-section-small-subheading case-light"
+          >
+            {columnHeading1}
+          </motion.h1>
+          <motion.div
+            variants={children_custom}
+            custom={0.3}
+            className="case-section-meta case-accent"
+          >
+            {columnSubheading1}
+          </motion.div>
+        </motion.div>
+        <CaseList
+          bullets={columnBullets1}
+          time={0.45}
+        />
       </div>
 
       <div>
-        <div className="case-wire-container">
+        <motion.div
+          variants={children_custom}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="case-wire-container"
+        >
           <img
             src={image2}
             alt="Lo-Fi Prototype"
             className="case-wire-image"
           />
-          <div className="case-wire-label">{image2Label}</div>
-        </div>
-        <CasePill>{pillText2}</CasePill>
-        <h1 className="case-section-small-subheading case-light">
-          {columnHeading2}
-        </h1>
-        <div className="case-section-meta case-accent">{columnSubheading2}</div>
-        <CaseList bullets={columnBullets2} />
+          <div className="case-wire-caption">{image2Label}</div>
+        </motion.div>
+        <motion.div
+          variants={children_custom}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <CasePill>{pillText2}</CasePill>
+        </motion.div>
+        <motion.div
+          variants={container_m}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <motion.h1
+            variants={children_custom}
+            custom={0.15}
+            className="case-section-small-subheading case-light"
+          >
+            {columnHeading2}
+          </motion.h1>
+          <motion.div
+            variants={children_custom}
+            custom={0.3}
+            className="case-section-meta case-accent"
+          >
+            {columnSubheading2}
+          </motion.div>
+        </motion.div>
+        <CaseList
+          bullets={columnBullets2}
+          time={0.45}
+        />
       </div>
     </div>
   );

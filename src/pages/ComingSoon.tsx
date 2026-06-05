@@ -23,10 +23,11 @@ export default function ComingSoon({ setSideOpen }: Props) {
   }, []);
 
   return (
-    <section className="missing-content">
+    <section className="mission-content">
       <SectionDiv
         left="// 00 — COMING SOON"
         right="UNDER COMPOSITION"
+        fullWidth={true}
       />
       <motion.div
         className="missing-container"

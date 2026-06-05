@@ -8,6 +8,7 @@ import ProjectGrid from "../components/home/ProjectGrid";
 import CaseStudyCard from "../components/individual/CaseStudyCard";
 
 import { putmeon } from "../components/individual/StudyData";
+import ArtStrip from "../components/home/ArtStrip";
 interface Props {
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -22,18 +23,17 @@ export default function Home({ setSideOpen }: Props) {
     <>
       <Mission />
       <SectionDiv
-        left="// FEATURED CASE STUDY"
+        left="// 02 — FEATURED CASE STUDY"
         right="UX · FEB 2026"
-        strong={true}
       />
       <section className="case-content">
         <CaseStudyCard item={putmeon} />
       </section>
       <SectionDiv
-        left="// 02 — SELECTED WORK"
+        left="// 03 — SELECTED WORK"
         right="09 WORKS · 2022—2026"
       />
-      <ProjectGrid />
+      <ArtStrip />
     </>
   );
 }

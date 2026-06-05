@@ -255,7 +255,7 @@ export default function AboutSplash() {
               >
                 {quote.node ?? quote.text}
                 <div
-                  className="quote-attr"
+                  className="about-quote-attr"
                   style={{ marginTop: "20px" }}
                 >
                   — {quote.author}

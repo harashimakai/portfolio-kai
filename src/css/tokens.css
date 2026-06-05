@@ -45,7 +45,8 @@
 /* ─── Spacing ────────────────────────────────────────────────────────────── */
 
 :root {
-  --page-gutter: clamp(20px, 6vw, 96px);
+  --page-gutter: clamp(20px, calc(15.9vw - 37.3px), 192px);
+  /* largest+smallest views equivalent to: calc(clamp(20px, 6vw, 96px)*2)     */
   --space-section: clamp(30px, 5.5vw, 64px);
   --space-gap: clamp(24px, 4vw, 56px);
   --space-md: 40px;

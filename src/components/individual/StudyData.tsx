@@ -71,21 +71,6 @@ const putmeonTheme: StudyTheme = {
   "--cs-rule": "rgba(245,235,217,0.18)",
   "--cs-rule-alt": "rgba(26,26,28,0.18)",
 };
-/*
-  cream: "#f1ebdc",
-  creamSoft: "#e8e0cd",
-  ink: "#1a1a1c",
-  inkSoft: "#27272a",
-  inkPanel: "#222225",
-  textOnDark: "#f5ebd9",
-  textOnDarkMuted: "#7a7a78",
-  textOnCream: "#1a1a1c",
-  textOnCreamMuted: "#737065",
-  amber: "#d97c2a",
-  amberSoft: "#e8a766",
-  rule: "rgba(245,235,217,0.18)",
-  ruleCream: "rgba(26,26,28,0.18)",
-  */
 
 export const putmeon: Study = {
   id: "01",

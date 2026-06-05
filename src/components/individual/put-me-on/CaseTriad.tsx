@@ -1,4 +1,6 @@
+import { motion } from "motion/react";
 import CaseList from "./CaseList";
+import { children_custom, container_m } from "../../global/AnimationConsts";
 
 interface Props {
   list: object[];
@@ -14,9 +16,17 @@ export default function CaseTriad({
   dark = false,
 }: Props) {
   return (
-    <div className="case-triad-cards">
+    <motion.div
+      variants={container_m}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      className="case-triad-cards"
+    >
       {list.map((card, index) => (
-        <div
+        <motion.div
+          variants={children_custom}
+          custom={index * 0.3}
           className={dark ? "case-triad-card-dark" : "case-triad-card-light"}
           key={index}
         >
@@ -27,9 +37,10 @@ export default function CaseTriad({
             bullets={
               card[elemTitle as keyof typeof card] as unknown as string[]
             }
+            time={index * 0.45}
           />
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

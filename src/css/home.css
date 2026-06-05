@@ -1,3 +1,5 @@
+/* ─── Case Studies List ──────────────────────────────────────────────────── */
+
 .case-content {
   display: flex;
   flex-direction: column;
@@ -5,8 +7,55 @@
   gap: var(--space-sm);
 }
 
+/* ─── ART CELL ───────────────────────────────────────────────────────────── */
+
+.art-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xs);
+  transition: gap var(--ease-hover);
+}
+
+.art-cell-extra {
+  display: revert;
+}
+
+.art-cell-container {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+.art-cell-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.art-cell-container:hover img {
+  transform: scale(1.07);
+}
+
+@media (min-width: 768px) {
+  .art-strip {
+    gap: var(--space-xs);
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .art-cell-extra {
+    display: none;
+  }
+}
+
+@media (min-width: 1190px) {
+  .art-strip {
+    gap: var(--space-sm);
+  }
+}
+
+/* ─── Project Grid ───────────────────────────────────────────────────────── */
+
 .grid-content {
-  padding: var(--space-gap) var(--page-gutter) var(--page-gutter);
+  padding: var(--space-gap) var(--page-gutter) var(--space-section);
 }
 
 .project-grid {
@@ -15,24 +64,25 @@
   gap: var(--space-gap);
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
     column-gap: var(--space-section);
   }
 }
 
-@media screen and (min-width: 1190px) {
+@media (min-width: 1190px) {
   .project-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-section);
   }
 }
 
-/* MISSION */
+/* ─── Mission ────────────────────────────────────────────────────────────── */
 
 .mission-content {
   padding: 100px var(--page-gutter) 80px;
+  transition: padding-top var(--ease-hover);
 }
 
 .mission-container {
@@ -86,6 +136,62 @@
   font-size: var(--text-base);
 }
 
+/* ─── Action Buttons ─────────────────────────────────────────────────────── */
+
+.action-buttons {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  margin-top: var(--space-md);
+}
+
+.action-buttons button {
+  padding: var(--space-xs) 32px;
+  width: fit-content;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  background-color: var(--ink);
+  border: none;
+  transition: background-color var(--ease-theme);
+}
+
+.action-buttons .btn-secondary {
+  border: 1px solid var(--ink);
+  background-color: transparent;
+  transition: border-color var(--ease-theme);
+}
+
+.action-buttons button h2 {
+  font-size: var(--text-label);
+  font-weight: 500;
+  color: var(--bg);
+  transition: color var(--ease-theme);
+  letter-spacing: 0.24em;
+  margin: 0;
+}
+
+.action-buttons .btn-secondary h2 {
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.action-buttons button:hover:not(.btn-secondary) {
+  background-color: var(--accent);
+  transition: background-color var(--ease-hover);
+}
+
+.action-buttons .btn-secondary:hover {
+  border-color: var(--accent);
+  transition: border-color var(--ease-hover);
+}
+
+.action-buttons .btn-secondary:hover h2 {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
 @media (max-width: 1189px) {
   .mission-content {
     padding: 72px var(--page-gutter) 64px;
@@ -109,57 +215,4 @@
   .mission-stats {
     margin-top: 28px;
   }
-}
-
-.action-buttons {
-  display: flex;
-  gap: var(--space-xs);
-  align-items: center;
-  margin-top: var(--space-md);
-}
-
-.action-buttons button {
-  padding: var(--space-xs) 32px;
-  width: fit-content;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  background-color: var(--ink);
-  border: none;
-  transition: background-color var(--ease-theme);
-}
-
-.action-buttons .btn-secondary {
-  border: 1px solid var(--ink);
-  background-color: transparent;
-  transition: border var(--ease-theme);
-}
-
-.action-buttons button h2 {
-  font-size: var(--text-label);
-  font-weight: 500;
-  color: var(--bg);
-  transition: color var(--ease-theme);
-  letter-spacing: 0.24em;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.action-buttons .btn-secondary h2 {
-  color: var(--ink);
-  transition: color var(--ease-theme);
-}
-
-.action-buttons button:hover:not(.btn-secondary) {
-  background-color: var(--accent);
-  transition: background-color var(--ease-hover);
-}
-
-.action-buttons .btn-secondary:hover {
-  border: 1px solid var(--accent);
-  transition: border var(--ease-hover);
-}
-
-.action-buttons .btn-secondary:hover h2 {
-  color: var(--accent);
-  transition: color var(--ease-hover);
 }

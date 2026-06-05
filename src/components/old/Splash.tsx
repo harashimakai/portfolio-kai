@@ -25,7 +25,7 @@ export default function WorkSplash({ activeFilter, onFilterChange }: Props) {
         viewport={{ once: true }}
       >
         <motion.div className="splash-body" variants={children}>
-          <p className="splash-intro">
+          <p className="chapter-title">
             <span className="italic">Across</span> mediums.
           </p>
         </motion.div>
