@@ -319,17 +319,13 @@ hr {
   letter-spacing: var(--tracking-label);
   color: var(--ink);
   font-weight: 500;
-  transition:
-    color var(--ease-theme),
-    text-decoration-color var(--ease-theme);
+  transition: color var(--ease-theme);
   text-decoration: none;
 }
 
 .nav-link:hover {
   color: var(--accent);
-  transition:
-    color var(--ease-hover),
-    text-decoration-color var(--ease-hover);
+  transition: color var(--ease-hover);
 }
 
 /* ─── Sidebar ────────────────────────────────────────────────────────────── */

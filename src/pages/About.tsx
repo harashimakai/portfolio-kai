@@ -10,6 +10,7 @@ import "../css/about.css";
 import AboutMain from "../components/about/AboutMain";
 import AboutSecond from "../components/about/AboutSecond";
 import AboutSplash from "../components/about/AboutSplash";
+import AboutStatus from "../components/about/AboutStatus";
 
 interface Props {
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,11 +45,13 @@ export default function About({ setSideOpen }: Props) {
           </motion.h1>
         </motion.div>
       </section>
-      <AboutMain></AboutMain>
+      <AboutMain />
 
-      <AboutSecond></AboutSecond>
+      <AboutSecond />
 
-      <AboutSplash></AboutSplash>
+      <AboutStatus />
+
+      <AboutSplash />
     </>
   );
 }
