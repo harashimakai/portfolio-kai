@@ -82,7 +82,7 @@ function App() {
           element={<NotFound setSideOpen={setSideOpen} />}
         />
       </Routes>
-      <Socials></Socials>
+      <Socials caseStudy={isPutMeOn} />
     </div>
   );
 }

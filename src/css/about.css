@@ -13,6 +13,7 @@
   letter-spacing: -0.025em;
   color: var(--ink);
   margin-top: 18px;
+  margin-right: 36px;
   margin-bottom: 0;
   transition:
     color var(--ease-theme),
@@ -229,7 +230,7 @@
 
 .about-status {
   display: flex;
-  gap: 24px;
+  justify-content: space-between;
   align-items: baseline;
   transition: gap var(--ease-hover);
 }
@@ -254,6 +255,7 @@
 
 .about-status-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 22px;
   align-items: baseline;
   transition: gap var(--ease-hover);
@@ -287,7 +289,7 @@
   }
   .about-status {
     flex-direction: column;
-    gap: 10px;
+    gap: 18px;
     align-items: flex-start;
   }
   .about-status-text {
@@ -357,6 +359,9 @@
     grid-template-columns: 1fr;
     gap: 56px;
   }
+  .about-text-block p {
+    max-width: initial;
+  }
   .about-quote {
     font-size: 32px;
   }
@@ -368,6 +373,7 @@
   }
   .about-hero {
     font-size: 48px;
+    margin-left: 0;
   }
   .about-body {
     padding: var(--space-xs) var(--page-gutter) var(--space-md);

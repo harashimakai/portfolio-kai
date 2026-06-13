@@ -40,7 +40,7 @@ const EXPERIENCES = [
     role: "UI/UX Designer",
   },
   {
-    date: "JUN 2025 — AUG 2025",
+    date: "JUN — AUG 2025, 2026",
     title: "Pine Island Wilderness Camp",
     role: "Sailing Instructor and Counselor",
   },

@@ -63,6 +63,7 @@
 
 .card-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 14px;
   margin-bottom: 36px;
@@ -100,6 +101,7 @@
 
 .card-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 14px;
   align-items: center;
   margin-top: var(--space-md);

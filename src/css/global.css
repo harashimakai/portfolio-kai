@@ -6,6 +6,7 @@
 
 :root {
   overscroll-behavior-y: none;
+  font-variant-emoji: text;
 }
 
 ::selection {
@@ -558,6 +559,7 @@ footer.social-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .social-bottom h2,

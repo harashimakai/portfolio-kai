@@ -36,20 +36,48 @@ export default function About({ setSideOpen }: Props) {
           >
             // 01 — ABOUT
           </motion.h2>
-          <motion.h1
-            className="about-hero"
-            variants={children_custom}
-            custom={0.15}
-          >
-            KAI H<span className="alternative_c">A</span>RASHIMA
-          </motion.h1>
+          <div className="about-status">
+            <motion.h1
+              className="about-hero"
+              variants={children_custom}
+              custom={0.15}
+            >
+              KAI H<span className="alternative_c">A</span>RASHIMA
+            </motion.h1>
+            <div className="about-status-links">
+              <motion.a
+                className="underline-hover"
+                target="_blank"
+                variants={children_custom}
+                custom={0.3}
+              >
+                RÉSUMÉ ↗
+              </motion.a>
+              <motion.a
+                className="underline-hover"
+                target="_blank"
+                variants={children_custom}
+                custom={0.45}
+              >
+                EMAIL ↗
+              </motion.a>
+              <motion.a
+                className="underline-hover"
+                target="_blank"
+                href="https://www.linkedin.com/in/kai-harashima-109164364"
+                variants={children_custom}
+                custom={0.6}
+              >
+                LINKEDIN ↗
+              </motion.a>
+            </div>
+          </div>
         </motion.div>
       </section>
+
       <AboutMain />
 
       <AboutSecond />
-
-      <AboutStatus />
 
       <AboutSplash />
     </>
