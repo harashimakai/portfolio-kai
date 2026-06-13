@@ -223,7 +223,7 @@ export default function AboutSplash() {
   return (
     <>
       <SectionDiv
-        left="// 05 — MARGINALIA"
+        left="// 04 — MARGINALIA"
         right="FROM THE READING LIST"
       />
       <div className="about-quote-container">
