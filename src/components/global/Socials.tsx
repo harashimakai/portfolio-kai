@@ -66,7 +66,7 @@ export default function Socials({
           className="back-to-top"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          ↑ BACK TO TOP
+          {"\u2191\uFE0E"} BACK TO TOP
         </button>
       </motion.div>
     </footer>

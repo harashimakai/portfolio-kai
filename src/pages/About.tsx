@@ -51,7 +51,7 @@ export default function About({ setSideOpen }: Props) {
                 variants={children_custom}
                 custom={0.3}
               >
-                RÉSUMÉ ↗
+                RÉSUMÉ {"\u2197\uFE0E"}
               </motion.a>
               <motion.a
                 className="underline-hover"
@@ -60,7 +60,7 @@ export default function About({ setSideOpen }: Props) {
                 variants={children_custom}
                 custom={0.45}
               >
-                EMAIL ↗
+                EMAIL {"\u2197\uFE0E"}
               </motion.a>
               <motion.a
                 className="underline-hover"
@@ -69,7 +69,7 @@ export default function About({ setSideOpen }: Props) {
                 variants={children_custom}
                 custom={0.6}
               >
-                LINKEDIN ↗
+                LINKEDIN {"\u2197\uFE0E"}
               </motion.a>
             </div>
           </div>

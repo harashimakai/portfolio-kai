@@ -21,7 +21,9 @@ export default function Sidebar({
 }: SidebarProps) {
   useEffect(() => {
     document.body.style.overflow = sideOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [sideOpen]);
 
   return (
@@ -49,10 +51,9 @@ export default function Sidebar({
 
           <p className="sidebar-mission">
             Studying the intersection of{" "}
-            <span className="italic alternative_b">creative design</span>{" "}
-            principles and{" "}
-            <span className="italic alternative_b">technical skill</span> in
-            computer science and product design.
+            <span className="alternative_b">creative design</span> principles
+            and <span className="alternative_b">technical skill</span> in
+            computer science and UI/UX.
           </p>
 
           <NavButton

@@ -385,6 +385,10 @@ hr {
   width: fit-content;
 }
 
+.sidebar .theme-toggle:hover .underline-hover::after {
+  margin-left: 0;
+}
+
 .theme-toggle button {
   position: absolute;
   width: 100%;
