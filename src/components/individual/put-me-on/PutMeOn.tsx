@@ -376,8 +376,8 @@ export default function PutMeOn() {
           }
         />
         <CaseIntro
-          pill="HOME PAGE: ITERATIONS"
-          title={<>Home Page: Iterations</>}
+          pill="ITERATIVE PROCESS"
+          title={<>The Home Page</>}
           sub={true}
           column={true}
           columnBody={
@@ -396,8 +396,8 @@ export default function PutMeOn() {
           files={home_iter}
         />
         <CaseIntro
-          pill="ABOUT PAGE: ITERATIONS"
-          title={<>About Page: Iterations</>}
+          pill="ITERATIVE PROCESS"
+          title={<>The About Page</>}
           sub={true}
           column={true}
           columnBody={

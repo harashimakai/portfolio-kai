@@ -622,10 +622,6 @@ footer.social-container {
   transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.item-card:hover .item-image img {
-  transform: scale(1.07);
-}
-
 .item-meta {
   display: flex;
   justify-content: space-between;
@@ -653,16 +649,6 @@ footer.social-container {
   line-height: var(--leading-body);
   color: var(--ink);
   margin: 0;
-}
-
-.item-card:hover p {
-  transition: color var(--ease-hover);
-  color: var(--accent);
-}
-
-.item-card:hover h1 {
-  transition: color var(--ease-hover);
-  color: var(--accent);
 }
 
 /* ─── 404 / Coming Soon ──────────────────────────────────────────────────── */

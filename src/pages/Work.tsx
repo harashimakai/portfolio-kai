@@ -7,6 +7,7 @@ import "../css/work.css";
 import ProjectGrid from "../components/home/ProjectGrid";
 import SectionDiv from "../components/global/SectionDiv";
 import CaseStudyCard from "../components/individual/CaseStudyCard";
+
 import { putmeon } from "../components/individual/StudyData";
 import { projects } from "../components/global/ProjectData";
 import ChapterHeading from "../components/work/ChapterHeading";
@@ -29,20 +30,15 @@ export default function Work({ setSideOpen }: Props) {
       <ChapterHeading
         id="case-studies"
         chapter="CASE STUDIES"
-        subtitle="VOL. I · FIGMA · I STUDY"
-        intro={
-          <>
-            An <span className="italic alternative_b">exploration</span> into
-            how user research shapes design.
-          </>
-        }
+        subtitle="UX/UI · FIGMA · I STUDY"
+        intro={<>An exploration into how user research shapes design.</>}
         sub={
           <>Designing end-to-end, from lo-fi sketches to developer handoff.</>
         }
       />
       <SectionDiv
         left="2026"
-        right="UX & PRODUCT"
+        right=""
       />
       <section className="case-content">
         <motion.div

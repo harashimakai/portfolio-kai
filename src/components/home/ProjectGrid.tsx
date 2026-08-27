@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { container_s, children } from "../global/AnimationConsts";
 import { homeProjects, Project } from "../global/ProjectData";
 import ItemCard from "../global/ItemCard";
-import PageView from "../work/PageView";
 import "../../css/home.css";
 
 interface Props {
@@ -16,52 +14,33 @@ export default function ProjectGrid({
   variant = "home",
 }: Props) {
   const isMosaic = variant === "mosaic";
-  const [selected, setSelected] = useState<{ id: string; index: number } | null>(null);
-
-  useEffect(() => {
-    document.body.style.overflow = selected ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [selected]);
 
   return (
-    <>
-      <section className={isMosaic ? "mosaic-content" : "grid-content"}>
-        <motion.div
-          className={isMosaic ? "mosaic-grid" : "project-grid"}
-          variants={container_s}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {projects.map((project, index) => (
-            <motion.article
-              key={project.id}
-              className="item-card"
-              style={isMosaic ? { gridColumn: project.grid } : undefined}
-              variants={children}
-              transition={{ ease: "easeOut" }}
-              onClick={() => setSelected({ id: project.id, index: index + 1 })}
-            >
-              <ItemCard
-                item={project}
-                index={index}
-                total={projects.length}
-                mosaic={isMosaic}
-              />
-            </motion.article>
-          ))}
-        </motion.div>
-      </section>
-
-      {selected && (
-        <div className="page-view-overlay">
-          <PageView
-            id={selected.id}
-            plateNum={selected.index}
-            onClose={() => setSelected(null)}
-          />
-        </div>
-      )}
-    </>
+    <section className={isMosaic ? "mosaic-content" : "grid-content"}>
+      <motion.div
+        className={isMosaic ? "mosaic-grid" : "project-grid"}
+        variants={container_s}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        {projects.map((project, index) => (
+          <motion.article
+            key={project.id}
+            className="item-card"
+            style={isMosaic ? { gridColumn: project.grid } : undefined}
+            variants={children}
+            transition={{ ease: "easeOut" }}
+          >
+            <ItemCard
+              item={project}
+              index={index}
+              total={projects.length}
+              mosaic={isMosaic}
+            />
+          </motion.article>
+        ))}
+      </motion.div>
+    </section>
   );
 }

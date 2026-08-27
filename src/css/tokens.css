@@ -84,6 +84,7 @@
   --logo-light-opacity: 100;
   --logo-dark-opacity: 0;
   --selection: var(--ink);
+  --special-hover: #407537;
 
   transition: background-color var(--ease-theme);
   background-color: var(--bg);
@@ -109,6 +110,7 @@
   --logo-light-opacity: 0;
   --logo-dark-opacity: 100;
   --selection: var(--gold);
+  --special-hover: #d3ba88;
 
   transition: background-color var(--ease-theme);
   background-color: var(--bg);

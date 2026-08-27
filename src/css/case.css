@@ -24,140 +24,6 @@
   transition: width var(--ease-hover);
 }
 
-/* ─── Case Card ──────────────────────────────────────────────────────────── */
-
-.card-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  background-color: var(--cs-bg);
-  position: relative;
-  overflow: hidden;
-  border: 10px solid var(--cs-bg-soft);
-}
-
-.card-left {
-  background-color: var(--cs-bg-panel);
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-left img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.card-right {
-  padding: var(--space-section);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: var(--cs-bg);
-  min-width: 0;
-}
-
-.card-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 36px;
-}
-
-.card-tag {
-  font-family: var(--cs-font-secondary);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  padding: 8px var(--space-xs);
-  border: 1.5px solid var(--cs-surface);
-  color: var(--cs-surface);
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-}
-
-.card-subheading {
-  font-family: var(--cs-font-secondary);
-  font-size: 16px;
-  line-height: var(--leading-body);
-  color: var(--cs-text);
-  margin-top: var(--space-sm);
-  letter-spacing: 0.01em;
-}
-
-.card-desc {
-  font-family: var(--cs-font-primary);
-  font-weight: 400;
-  font-size: var(--text-base);
-  line-height: var(--leading-body);
-  color: var(--cs-text);
-  margin: 32px 0 0;
-  max-width: 540px;
-}
-
-.card-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  align-items: center;
-  margin-top: var(--space-md);
-}
-
-.card-buttons button {
-  background-color: var(--cs-accent);
-  padding: 14px 28px;
-  width: fit-content;
-  border: none;
-  border-radius: var(--radius-pill);
-  transition: background-color var(--ease-theme);
-  cursor: pointer;
-}
-
-.card-buttons button h1 {
-  font-family: var(--cs-font-secondary);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--cs-text-alt);
-  transition: color var(--ease-theme);
-  letter-spacing: 0.2em;
-  margin: 0;
-}
-
-.card-buttons button:hover {
-  background-color: var(--cs-accent-soft);
-  transition: background-color var(--ease-hover);
-}
-
-@media (max-width: 1189px) {
-  .card-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 767px) {
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .card-buttons {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .case-content {
-    padding-bottom: 36px;
-  }
-  .card-left {
-    min-height: 320px;
-  }
-  .card-logo {
-    width: 342px !important;
-  }
-}
-
 /* ─── Case Page Nav ──────────────────────────────────────────────────────── */
 
 .case-nav {
@@ -751,4 +617,71 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 600;
+}
+
+/* new case study card styling */
+/* ─── Project card (Home & Work grids) ───────────────────────────────────── */
+
+.case-card {
+  text-decoration: none;
+}
+
+.card-image {
+  display: flex;
+  margin-bottom: 6px;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.card-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.card-image img:hover {
+  transform: scale(1.07);
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.card-meta h2 {
+  font-size: var(--text-xs);
+  letter-spacing: 0.24em;
+  color: var(--muted);
+  transition: color var(--ease-theme);
+}
+
+.card-text {
+  margin: 0;
+}
+
+.card-title {
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  margin: 0 16px 0 0;
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.card-excerpt {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  color: var(--ink);
+  transition: color var(--ease-theme);
+  margin: 0;
+}
+
+.case-card:hover .card-title,
+.case-card:hover .card-excerpt {
+  transition: color var(--ease-hover);
+  color: var(--accent);
 }

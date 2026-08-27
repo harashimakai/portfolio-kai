@@ -24,20 +24,14 @@ export default function Mission() {
             variants={children_custom}
             custom={0.15}
           >
-            Hi. I’m Kai, a student at&nbsp;
-            <a
-              target="_blank"
-              href="https://www.cs.cornell.edu/"
-            >
-              Cornell University
-            </a>{" "}
-            focused on the intersection of{" "}
-            <span className="italic">
+            Hi. I’m Kai, a product designer at Cornell University focused on the
+            intersection of{" "}
+            <span className="">
               <span className="alternative_b">creative desi</span>gn
             </span>{" "}
             principles and{" "}
-            <span className="italic alternative_b">technical skill</span> in
-            computer science and UI/UX.
+            <span className="alternative_b">technical skill</span> in computer
+            science and UI/UX.
           </motion.p>
 
           <div className="mission-stats">

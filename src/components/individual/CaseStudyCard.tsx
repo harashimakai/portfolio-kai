@@ -16,49 +16,30 @@ interface Props {
   item: Study;
 }
 
-export default function CaseStudyCard({ item }: Props) {
+export default function CaseStudyCardNew({ item }: Props) {
   return (
-    <article
-      className="card-container"
-      style={item.theme as React.CSSProperties}
+    <Link
+      to={item.slug || "/comingsoon"}
+      className="case-card"
     >
-      <div className="card-left">
+      <div className="card-image">
         <img
           loading="lazy"
           src={item.thumbnailUrl}
           alt={item.title}
         />
       </div>
-      <div className="card-right">
-        <div className="card-header">
-          <h2 className="card-tag">CASE STUDY</h2>
-          <h2 className="case-meta-text">
-            UI/UX · {item.date} · {item.context}
-          </h2>
-        </div>
-        <BrandLogo
-          width={item.logoWidth}
-          itemUrl={item.logoUrl}
-          title={item.title}
-        />
-        <p className="card-subheading">{item.subheading}</p>
-        <p className="card-desc">{item.desc}</p>
 
-        <div className="card-buttons">
-          <Link
-            to={item.slug || "/comingsoon"}
-            style={{ display: "inline-block", width: "fit-content" }}
-          >
-            <motion.button whileHover={{ scale: 1.05 }}>
-              <h1>READ CASE STUDY →</h1>
-            </motion.button>
-          </Link>
-          <h2 className="case-meta-text">
-            {item.sectionNum} SECTIONS · CASE STUDY {item.id}
-          </h2>
-        </div>
+      <div className="card-meta">
+        <p className="card-text">
+          <span className="card-title">{item.title}</span>
+          <span className="card-excerpt">{item.subheading}</span>
+        </p>
+        <h2>
+          {item.context} · {item.date}
+        </h2>
       </div>
-    </article>
+    </Link>
   );
 }
 

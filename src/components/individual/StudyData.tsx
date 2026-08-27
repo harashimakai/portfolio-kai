@@ -3,7 +3,7 @@ import pmo_brainstorming from "../../assets/case-studies/putmeon/brainstorming.j
 import pmo_wire1 from "../../assets/case-studies/putmeon/wireframe1.jpg";
 import pmo_wire2 from "../../assets/case-studies/putmeon/wireframe2.jpg";
 import pmo_wire3 from "../../assets/case-studies/putmeon/wireframe3.jpg";
-import pmo_cover from "../../assets/case-studies/putmeon/cover.png";
+import pmo_cover from "../../assets/case-studies/putmeon/covernew.png";
 import pmo_logo from "../../assets/case-studies/putmeon/putmeonl.png";
 import pmo_logo_alt from "../../assets/case-studies/putmeon/putmeon.png";
 
@@ -77,7 +77,7 @@ export const putmeon: Study = {
   title: "Put Me On",
   date: "FEB 2026",
   dateSpecific: "02/05/2026",
-  context: "SOLO",
+  context: "INDEPENDENT",
   role: "UX Designer (Solo)",
   tools: "Figma",
   scope: "UX Research, Visual Design, Prototyping",

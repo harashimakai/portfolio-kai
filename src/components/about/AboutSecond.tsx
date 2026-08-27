@@ -17,7 +17,15 @@ const TOOLS = [
     group: "FINE ARTS",
     items: ["OIL PAINT", "CALLIGRAPHY", "CNC", "SOLDERING", "LASER ENGRAVING"],
   },
-  { group: "BIOLOGY", items: ["WET LAB", "IMMUNOLOGY", "CANCER BIOLOGY"] },
+  {
+    group: "BIOLOGY",
+    items: [
+      "WILDERNESS FIRST RESPONDER",
+      "WET LAB",
+      "IMMUNOLOGY",
+      "CANCER BIOLOGY",
+    ],
+  },
 ];
 
 const EDUCATION = [
@@ -35,14 +43,14 @@ const EDUCATION = [
 
 const EXPERIENCES = [
   {
-    date: "FEB 2025 — PRESENT",
+    date: "FEB 2026 — PRESENT",
     title: "Digital Tech & Innovation @ Cornell",
     role: "UI/UX Designer",
   },
   {
     date: "JUN — AUG 2025, 2026",
     title: "Pine Island Wilderness Camp",
-    role: "Sailing Instructor and Counselor",
+    role: "Sailing Instructor and Trip Leader",
   },
   {
     date: "JAN 2024 — AUG 2024",

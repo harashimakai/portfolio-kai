@@ -32,10 +32,6 @@
   transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.art-cell-container:hover img {
-  transform: scale(1.07);
-}
-
 @media (min-width: 768px) {
   .art-strip {
     gap: var(--space-xs);
@@ -94,7 +90,7 @@
 
 .mission-intro {
   margin: 0;
-  font-size: var(--text-hero);
+  font-size: 54px;
   font-weight: 400;
   line-height: var(--leading-tight);
   letter-spacing: -0.015em;
@@ -176,7 +172,7 @@
 }
 
 .action-buttons button:hover:not(.btn-secondary) {
-  background-color: var(--accent);
+  background-color: var(--special-hover);
   transition: background-color var(--ease-hover);
 }
 
@@ -197,7 +193,7 @@
     padding: 72px var(--page-gutter) 64px;
   }
   .mission-intro {
-    font-size: 48px;
+    font-size: 38px;
   }
 }
 
@@ -210,7 +206,7 @@
     gap: 24px;
   }
   .mission-intro {
-    font-size: 36px;
+    font-size: 26px;
   }
   .mission-stats {
     margin-top: 28px;

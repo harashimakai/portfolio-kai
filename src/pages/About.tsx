@@ -10,7 +10,6 @@ import "../css/about.css";
 import AboutMain from "../components/about/AboutMain";
 import AboutSecond from "../components/about/AboutSecond";
 import AboutSplash from "../components/about/AboutSplash";
-import AboutStatus from "../components/about/AboutStatus";
 
 interface Props {
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -48,6 +47,7 @@ export default function About({ setSideOpen }: Props) {
               <motion.a
                 className="underline-hover"
                 target="_blank"
+                href="https://drive.google.com/file/d/11wb1SoarL96mU4PIX8ObmXxljO8bAm7y/view?usp=sharing"
                 variants={children_custom}
                 custom={0.3}
               >
@@ -56,6 +56,7 @@ export default function About({ setSideOpen }: Props) {
               <motion.a
                 className="underline-hover"
                 target="_blank"
+                href="mailto:harashimakai@gmail.com"
                 variants={children_custom}
                 custom={0.45}
               >

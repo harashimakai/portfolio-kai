@@ -6,7 +6,6 @@ import "../css/work.css";
 
 import ProjectGrid from "../components/home/ProjectGrid";
 import SectionDiv from "../components/global/SectionDiv";
-import CaseStudyCard from "../components/individual/CaseStudyCard";
 import { putmeon } from "../components/individual/StudyData";
 import { projects } from "../components/global/ProjectData";
 import ChapterHeading from "../components/work/ChapterHeading";
@@ -35,12 +34,8 @@ export default function Art({ setSideOpen }: Props) {
       <ChapterHeading
         id="selected-works"
         chapter="THE PORTFOLIO"
-        subtitle={`VOL. II · FINE ARTS · VIII WORKS`}
-        intro={
-          <>
-            <span className="italic">Across</span> mediums.
-          </>
-        }
+        subtitle={`FINE ARTS · VIII WORKS`}
+        intro={<>Across mediums.</>}
         filters={["ALL", "PAINTING", "DESIGN", "CALLIGRAPHY", "FABRICATION"]}
         activeFilter={activeFilter}
         onFilterChange={setActiveFilter}
