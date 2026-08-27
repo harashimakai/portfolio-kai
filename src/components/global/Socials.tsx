@@ -38,21 +38,21 @@ export default function Socials({
             href="https://www.instagram.com/kaiharashima/"
             variants={children}
           >
-            Instagram &nbsp;<span className="sans">↗</span>
+            Instagram &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
           </motion.a>
           <motion.a
             target="_blank"
             href="https://www.linkedin.com/in/kai-harashima-109164364"
             variants={children}
           >
-            LinkedIn &nbsp;<span className="sans">↗</span>
+            LinkedIn &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
           </motion.a>
           <motion.a
             target="_blank"
             href="https://github.com/harashimakai"
             variants={children}
           >
-            Github &nbsp;<span className="sans">↗</span>
+            Github &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
           </motion.a>
         </motion.div>
       </motion.div>
