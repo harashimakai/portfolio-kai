@@ -629,6 +629,7 @@
 .card-image {
   display: flex;
   margin-bottom: 6px;
+  transition: margin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
   aspect-ratio: 16/9;
   overflow: hidden;
 }
@@ -659,6 +660,8 @@
 }
 
 .card-text {
+  display: flex;
+  align-items: baseline;
   margin: 0;
 }
 
@@ -684,4 +687,14 @@
 .case-card:hover .card-excerpt {
   transition: color var(--ease-hover);
   color: var(--accent);
+}
+
+@media (max-width: 767px) {
+  .card-text {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .card-image {
+    margin-bottom: 12px;
+  }
 }

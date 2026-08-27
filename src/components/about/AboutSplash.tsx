@@ -3,10 +3,6 @@ import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import SectionDiv from "../global/SectionDiv";
 
-// Interleaved so no two adjacent quotes share the same author.
-// Order: McCarthy · Doerr · Diaz · McCarthy · Doerr · Diaz · McCarthy · Doerr · Diaz · McCarthy · Doerr · Dumas · McCarthy · Coelho · Owens
-//
-// `text` is the plain string fallback. Add `node` to render styled <span> elements.
 type Quote = { text: string; node?: ReactNode; author: string };
 
 const QUOTES: Quote[] = [
