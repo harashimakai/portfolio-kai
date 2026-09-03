@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { container_m, children, children_custom } from "./AnimationConsts";
+import { container_m } from "./AnimationConsts";
 
 const lineVariants = {
   hidden: { scaleX: 0 },
@@ -10,20 +10,12 @@ const lineVariants = {
 };
 
 interface Props {
-  left: string;
-  right: string;
   strong?: boolean;
   fullWidth?: boolean;
   id?: string;
 }
 
-export default function SectionDiv({
-  left,
-  right,
-  strong,
-  fullWidth,
-  id,
-}: Props) {
+export default function SectionDiv({ strong, fullWidth, id }: Props) {
   return (
     <div
       id={id}
@@ -38,29 +30,11 @@ export default function SectionDiv({
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <motion.h2
-          className={
-            strong ? "divider-text-strong divider-left" : "divider-left"
-          }
-          variants={children_custom}
-          custom={0}
-        >
-          {left}
-        </motion.h2>
         <motion.div
           className="divider-line"
           variants={lineVariants}
           style={{ originX: 0 }}
         />
-        <motion.h2
-          className={
-            strong ? "divider-text-strong divider-right" : "divider-right"
-          }
-          variants={children_custom}
-          custom={0.65}
-        >
-          {right}
-        </motion.h2>
       </motion.div>
     </div>
   );

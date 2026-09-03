@@ -49,11 +49,9 @@ export default function Sidebar({
             />
           </div>
 
-          <p className="sidebar-mission">
-            Studying the intersection of{" "}
-            <span className="alternative_b">creative design</span> principles
-            and <span className="alternative_b">technical skill</span> in
-            computer science and UI/UX.
+          <p className="sidebar-mission body-lg">
+            Studying the intersection of creative design principles and
+            technical skill in computer science and UI/UX.
           </p>
 
           <NavButton

@@ -1,15 +1,109 @@
-/* ─── Case Studies List ──────────────────────────────────────────────────── */
+/* ─── Mission ────────────────────────────────────────────────────────────── */
 
-.case-content {
+.mission-content {
+  padding: 100px var(--page-gutter) 80px;
+  transition: padding-top var(--ease-hover);
+}
+
+.mission-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--page-gutter);
+  align-items: start;
+}
+
+.mission-intro {
+  margin: 0;
+}
+
+.mission-intro a {
+  text-decoration-line: underline;
+  text-decoration-thickness: 8%;
+  text-underline-offset: 15.5%;
+}
+
+.mission-stats {
+  margin-top: 44px;
   display: flex;
   flex-direction: column;
-  padding: 32px var(--page-gutter) var(--space-gap);
+  gap: 8px;
+  max-width: 520px;
+}
+
+.mission-stat-row {
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+}
+
+.mission-stat-row h3 {
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+.mission-desc {
+  margin: 0;
+}
+
+/* ─── Action Buttons ─────────────────────────────────────────────────────── */
+
+.action-buttons {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  margin-top: var(--space-md);
+}
+
+.action-buttons button {
+  padding: var(--space-xs) 32px;
+  width: fit-content;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  background-color: var(--ink);
+  border: none;
+  transition: background-color var(--ease-theme);
+}
+
+.action-buttons .btn-secondary {
+  border: 1px solid var(--ink);
+  background-color: transparent;
+  transition: border-color var(--ease-theme);
+}
+
+.action-buttons button h3 {
+  color: var(--bg);
+}
+
+.action-buttons .btn-secondary h3 {
+  color: var(--ink);
+}
+
+.action-buttons button:hover:not(.btn-secondary) {
+  background-color: var(--special-hover);
+  transition: background-color var(--ease-hover);
+}
+
+.action-buttons .btn-secondary:hover {
+  border-color: var(--accent);
+  transition: border-color var(--ease-hover);
+}
+
+.action-buttons .btn-secondary:hover h3 {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}
+
+.home-case-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--page-gutter) var(--space-xs);
   gap: var(--space-sm);
 }
 
 /* ─── ART CELL ───────────────────────────────────────────────────────────── */
 
 .art-strip {
+  margin: var(--space-md) 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-xs);
@@ -48,152 +142,11 @@
   }
 }
 
-/* ─── Project Grid ───────────────────────────────────────────────────────── */
-
-.grid-content {
-  padding: var(--space-gap) var(--page-gutter) var(--space-section);
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-gap);
-}
-
-@media (min-width: 768px) {
-  .project-grid {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: var(--space-section);
-  }
-}
-
-@media (min-width: 1190px) {
-  .project-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-section);
-  }
-}
-
-/* ─── Mission ────────────────────────────────────────────────────────────── */
-
-.mission-content {
-  padding: 100px var(--page-gutter) 80px;
-  transition: padding-top var(--ease-hover);
-}
-
-.mission-container {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--page-gutter);
-  align-items: start;
-}
-
-.mission-intro {
-  margin: 0;
-  font-size: 54px;
-  font-weight: 400;
-  line-height: var(--leading-tight);
-  letter-spacing: -0.015em;
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
-}
-
-.mission-intro a {
-  text-decoration-line: underline;
-  text-decoration-thickness: 8%;
-  text-underline-offset: 15.5%;
-}
-
-.mission-stats {
-  margin-top: 44px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-width: 520px;
-}
-
-.mission-stat-row {
-  display: flex;
-  gap: 24px;
-  align-items: baseline;
-}
-
-.mission-stat-row h2 {
-  min-width: 90px;
-  flex-shrink: 0;
-  font-weight: 400;
-  font-size: var(--text-xs);
-  letter-spacing: 0.24em;
-}
-
-.mission-desc {
-  margin: 0;
-  font-size: var(--text-base);
-}
-
-/* ─── Action Buttons ─────────────────────────────────────────────────────── */
-
-.action-buttons {
-  display: flex;
-  gap: var(--space-xs);
-  align-items: center;
-  margin-top: var(--space-md);
-}
-
-.action-buttons button {
-  padding: var(--space-xs) 32px;
-  width: fit-content;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  background-color: var(--ink);
-  border: none;
-  transition: background-color var(--ease-theme);
-}
-
-.action-buttons .btn-secondary {
-  border: 1px solid var(--ink);
-  background-color: transparent;
-  transition: border-color var(--ease-theme);
-}
-
-.action-buttons button h2 {
-  font-size: var(--text-label);
-  font-weight: 500;
-  color: var(--bg);
-  transition: color var(--ease-theme);
-  letter-spacing: 0.24em;
-  margin: 0;
-}
-
-.action-buttons .btn-secondary h2 {
-  color: var(--ink);
-  transition: color var(--ease-theme);
-}
-
-.action-buttons button:hover:not(.btn-secondary) {
-  background-color: var(--special-hover);
-  transition: background-color var(--ease-hover);
-}
-
-.action-buttons .btn-secondary:hover {
-  border-color: var(--accent);
-  transition: border-color var(--ease-hover);
-}
-
-.action-buttons .btn-secondary:hover h2 {
-  color: var(--accent);
-  transition: color var(--ease-hover);
-}
-
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 1189px) {
   .mission-content {
     padding: 72px var(--page-gutter) 64px;
-  }
-  .mission-intro {
-    font-size: 38px;
   }
 }
 
@@ -204,9 +157,6 @@
   .mission-container {
     grid-template-columns: 1fr;
     gap: 24px;
-  }
-  .mission-intro {
-    font-size: 26px;
   }
   .mission-stats {
     margin-top: 28px;

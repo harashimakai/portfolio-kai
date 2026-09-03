@@ -24,11 +24,7 @@ export default function ComingSoon({ setSideOpen }: Props) {
 
   return (
     <section className="mission-content">
-      <SectionDiv
-        left="// 00 — COMING SOON"
-        right="UNDER COMPOSITION"
-        fullWidth={true}
-      />
+      <SectionDiv fullWidth={true} />
       <motion.div
         className="missing-container"
         variants={container_trigger}
@@ -54,7 +50,7 @@ export default function ComingSoon({ setSideOpen }: Props) {
                 className="monogram m-dark"
               />
             </motion.div>
-            <motion.h2
+            <motion.h3
               variants={children_custom}
               custom={0.25}
               className="centerpiece-desc"
@@ -64,13 +60,13 @@ export default function ComingSoon({ setSideOpen }: Props) {
               WESTCHESTER · ITHACA
               <br />
               ESTAB. MMXXVI
-            </motion.h2>
+            </motion.h3>
           </div>
           <div>
             <motion.p
               variants={children_custom}
               custom={0.5}
-              className="missing-header"
+              className="missing-header display"
             >
               A new edition of this page is under{" "}
               <span className="italic accent alternative_b">composition</span>.
@@ -78,7 +74,7 @@ export default function ComingSoon({ setSideOpen }: Props) {
             <motion.p
               variants={children_custom}
               custom={0.75}
-              className="missing-body"
+              className="missing-body body-lg"
             >
               This page is currently being prepared for a later volume of the
               portfolio. Return to the index and check back later.
@@ -94,7 +90,7 @@ export default function ComingSoon({ setSideOpen }: Props) {
                     className="btn-secondary"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <h2>RETURN HOME →</h2>
+                    <h3>RETURN HOME →</h3>
                   </motion.button>
                 </Link>
               </motion.div>

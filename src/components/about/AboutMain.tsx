@@ -7,10 +7,7 @@ import SectionDiv from "../global/SectionDiv";
 export default function AboutMain() {
   return (
     <>
-      <SectionDiv
-        left="// 02 — BIO"
-        right="NOW & THEN"
-      ></SectionDiv>
+      <SectionDiv />
       <motion.section
         className="about-body"
         variants={container_trigger}
@@ -19,6 +16,7 @@ export default function AboutMain() {
       >
         <div className="about-text-block">
           <motion.p
+            className="body-lg"
             variants={children_custom}
             custom={0.4}
           >
@@ -30,6 +28,7 @@ export default function AboutMain() {
             actually where my work thrives.
           </motion.p>
           <motion.p
+            className="body-lg"
             variants={children_custom}
             custom={0.6}
             style={{ margin: "24px 0 24px" }}
@@ -49,6 +48,7 @@ export default function AboutMain() {
           </motion.p>
           <hr />
           <motion.p
+            className="body-lg"
             variants={children_custom}
             custom={0.8}
             style={{ margin: "24px 0 0" }}
@@ -58,6 +58,7 @@ export default function AboutMain() {
             React. This site is my first front-end project.
           </motion.p>
           <motion.p
+            className="body-lg"
             variants={children_custom}
             custom={1.0}
             style={{ margin: "24px 0 0" }}
@@ -78,8 +79,8 @@ export default function AboutMain() {
             />
           </div>
           <div className="about-image-caption">
-            <span>PORTRAIT</span>
-            <span>WESTCHESTER, NY · 2025</span>
+            <h3>PORTRAIT</h3>
+            <h3>WESTCHESTER, NY · 2025</h3>
           </div>
         </motion.div>
       </motion.section>

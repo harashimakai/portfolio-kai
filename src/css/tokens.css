@@ -15,31 +15,67 @@
   --font-sans: "Inter Tight", "Inter", "Helvetica Neue", Helvetica, sans-serif;
 }
 
-/* ─── Type scale ────────────────────────────────────────────────────────── */
+/* ─── Type scale — labels & body ────────────────────────────────────────── */
 
 :root {
-  --text-xs: 10px; /* tiny label */
-  --text-label: 11px; /* nav, buttons, caps labels */
-  --text-sm: 15px; /* item subtitles */
-  --text-base: 18px; /* body paragraphs */
-  --text-xl: 22px; /* item titles */
-  --text-hero: 64px; /* mission heading */
-  --text-display: 88px; /* work splash heading */
+  --text-xs: 10px; /* h3 — micro label */
+  --text-label: 11px; /* h2 — nav, buttons, caps labels */
+  --text-sm: 15px; /* .body-xs — card excerpts */
+  --text-md: 17px; /* .body-sm — compact entries */
+  --text-base: 18px; /* p — body paragraphs */
+  --text-lg: 20px; /* .body-lg — lead paragraphs */
+  --text-xl: 22px; /* .entry-title — card & entry titles */
+  --text-hero: 64px; /* case-study section heading */
+}
+
+/* ─── Type scale — serif display ────────────────────────────────────────── */
+/* One ladder per tier. The breakpoint steps live here and nowhere else, so
+   no component ever redeclares a display size.                              */
+
+:root {
+  --text-display: 96px; /* .display — page hero */
+  --text-lead: 54px; /* .lead — hero statement */
+  --text-title: 48px; /* h1 — section heading */
+  --text-quote: 40px; /* .quote — pull quote */
+}
+
+@media (max-width: 1189px) {
+  :root {
+    --text-display: 64px;
+    --text-lead: 38px;
+    --text-quote: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --text-display: 48px;
+    --text-lead: 26px;
+    --text-title: 36px;
+    --text-quote: 24px;
+  }
 }
 
 /* ─── Tracking (letter-spacing) ─────────────────────────────────────────── */
 
 :root {
-  --tracking-label: 0.22em; /* nav/button caps labels */
+  --tracking-display: -0.025em; /* .display */
+  --tracking-lead: -0.015em; /* .lead */
+  --tracking-title: -0.01em; /* h1 */
+  --tracking-label: 0.22em; /* h2 */
+  --tracking-label-tight: 0.24em; /* h3 */
 }
 
 /* ─── Leading (line-height) ─────────────────────────────────────────────── */
 
 :root {
-  --leading-tight: 1.1;
-  --leading-snug: 1.2;
-  --leading-body: 1.55;
-  --leading-loose: 1.75;
+  --leading-display: 0.95; /* .display */
+  --leading-tight: 1.05; /* h1 */
+  --leading-snug: 1.2; /* .lead, .entry-title */
+  --leading-quote: 1.25; /* .quote */
+  --leading-relaxed: 1.4; /* h2, h3, .body-sm */
+  --leading-body: 1.55; /* p, .body-xs */
+  --leading-loose: 1.65; /* .body-lg */
 }
 
 /* ─── Spacing ────────────────────────────────────────────────────────────── */
@@ -88,9 +124,6 @@
 
   transition: background-color var(--ease-theme);
   background-color: var(--bg);
-
-  --mode-margin: 5.72px;
-  --mode-scale: 0.9099;
 }
 
 /* ─── Theme — dark ──────────────────────────────────────────────────────── */
@@ -114,7 +147,4 @@
 
   transition: background-color var(--ease-theme);
   background-color: var(--bg);
-
-  --mode-margin: 0px;
-  --mode-scale: 1;
 }

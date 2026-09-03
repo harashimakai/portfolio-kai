@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import SectionDiv from "../global/SectionDiv";
+import { BLUR_IN, BLUR_NONE } from "../global/AnimationConsts";
+
+const INTERVAL = 6000;
 
 type Quote = { text: string; node?: ReactNode; author: string };
 
@@ -181,23 +184,34 @@ const QUOTES: Quote[] = [
 ];
 
 export default function AboutSplash() {
-  const [state, setState] = useState({ index: 0, prev: -1 });
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setState((s) => ({
-        prev: s.index,
-        index: (s.index + 1) % QUOTES.length,
-      }));
-    }, 6000);
-    return () => clearInterval(timer);
+  // `dir` keeps the outgoing quote leaving the way the incoming one arrives,
+  // so stepping backwards through the dots reads as backwards.
+  const [state, setState] = useState({ index: 0, prev: -1, dir: 1 });
+
+  const go = useCallback((next: number) => {
+    setState((s) =>
+      next === s.index
+        ? s
+        : { index: next, prev: s.index, dir: next > s.index ? 1 : -1 },
+    );
   }, []);
+
+  // Keyed on the current index, so choosing a quote restarts the dwell rather
+  // than inheriting whatever was left of the previous one.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setState((s) => ({
+        index: (s.index + 1) % QUOTES.length,
+        prev: s.index,
+        dir: 1,
+      }));
+    }, INTERVAL);
+    return () => clearTimeout(timer);
+  }, [state.index]);
 
   return (
     <>
-      <SectionDiv
-        left="// 04 — MARGINALIA"
-        right="FROM THE READING LIST"
-      />
+      <SectionDiv />
       <div className="about-quote-container">
         <div className="about-quote-stage">
           {/* All quotes share the same grid cell; the container sizes to the tallest. */}
@@ -205,36 +219,50 @@ export default function AboutSplash() {
             className="about-quote-overlay"
             style={{ display: "grid", alignItems: "center" }}
           >
-            {QUOTES.map((quote, i) => (
-              <motion.blockquote
-                key={i}
-                className="about-quote"
-                style={{
-                  gridArea: "1 / 1",
-                  userSelect: i === state.index ? "auto" : "none",
-                  pointerEvents: i === state.index ? "auto" : "none",
-                }}
-                initial={false}
-                animate={{
-                  opacity: i === state.index ? 1 : 0,
-                  y: i === state.index ? 0 : i === state.prev ? -20 : 20,
-                }}
-                transition={
-                  i === state.index
-                    ? { duration: 0.4, ease: "easeInOut", delay: 0.4 }
-                    : { duration: 0.4, ease: "easeInOut" }
-                }
-              >
-                {quote.node ?? quote.text}
-                <div
-                  className="about-quote-attr"
-                  style={{ marginTop: "20px" }}
+            {QUOTES.map((quote, i) => {
+              const active = i === state.index;
+              const leaving = i === state.prev;
+              return (
+                <motion.blockquote
+                  key={i}
+                  className="about-quote quote"
+                  style={{
+                    gridArea: "1 / 1",
+                    userSelect: active ? "auto" : "none",
+                    pointerEvents: active ? "auto" : "none",
+                  }}
+                  initial={false}
+                  animate={{
+                    opacity: active ? 1 : 0,
+                    y: active ? 0 : (leaving ? -20 : 20) * state.dir,
+                    filter: active ? BLUR_NONE : BLUR_IN,
+                  }}
+                  transition={
+                    active
+                      ? { duration: 0.4, ease: "easeInOut", delay: 0.4 }
+                      : { duration: 0.4, ease: "easeInOut" }
+                  }
+                  aria-hidden={!active}
                 >
-                  — {quote.author}
-                </div>
-              </motion.blockquote>
-            ))}
+                  {quote.node ?? quote.text}
+                  <h3 className="about-quote-attr">— {quote.author}</h3>
+                </motion.blockquote>
+              );
+            })}
           </div>
+        </div>
+        <div className="about-quote-dots">
+          {QUOTES.map((quote, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => go(i)}
+              aria-current={i === state.index}
+              aria-label={`Quote ${i + 1} of ${QUOTES.length} — ${quote.author}`}
+            >
+              <span />
+            </button>
+          ))}
         </div>
       </div>
     </>

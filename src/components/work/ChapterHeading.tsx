@@ -4,7 +4,6 @@ import { children_custom, container_trigger } from "../global/AnimationConsts";
 interface Props {
   id?: string;
   chapter: string;
-  subtitle: string;
   intro: React.ReactNode;
   sub?: React.ReactNode;
   filters?: readonly string[];
@@ -15,7 +14,6 @@ interface Props {
 export default function ChapterHeading({
   id,
   chapter,
-  subtitle,
   intro,
   sub,
   filters,
@@ -34,15 +32,9 @@ export default function ChapterHeading({
       <div className="chapter-label-row">
         <motion.h2
           variants={children_custom}
-          custom={0}
+          custom={0.1}
         >
-          <span className="chapter-label">{chapter}</span>
-        </motion.h2>
-        <motion.h2
-          variants={children_custom}
-          custom={0.15}
-        >
-          {subtitle}
+          <span>{chapter}</span>
         </motion.h2>
       </div>
       <div className={filters ? "chapter-body" : undefined}>
@@ -50,19 +42,10 @@ export default function ChapterHeading({
           <motion.h1
             className="chapter-title"
             variants={children_custom}
-            custom={0.3}
+            custom={0.2}
           >
             {intro}
           </motion.h1>
-          {sub && (
-            <motion.h1
-              className="chapter-subtitle"
-              variants={children_custom}
-              custom={0.45}
-            >
-              {sub}
-            </motion.h1>
-          )}
         </div>
         {filters && (
           <div className="filter-buttons chapter-filters">
@@ -71,12 +54,12 @@ export default function ChapterHeading({
                 key={filter}
                 type="button"
                 variants={children_custom}
-                custom={0.3 + i * 0.2}
+                custom={0.1 + i * 0.1}
                 className={activeFilter === filter ? "filter-active" : ""}
                 data-label={filter}
                 onClick={() => onFilterChange?.(filter)}
               >
-                {filter}
+                <h2>{filter}</h2>
               </motion.button>
             ))}
           </div>

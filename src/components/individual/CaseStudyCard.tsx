@@ -32,12 +32,12 @@ export default function CaseStudyCardNew({ item }: Props) {
 
       <div className="card-meta">
         <p className="card-text">
-          <span className="card-title">{item.title}</span>
-          <span className="card-excerpt">{item.subheading}</span>
+          <span className="card-title entry-title">{item.title}</span>
+          <span className="card-excerpt body-xs">{item.subheading}</span>
         </p>
-        <h2>
+        <h3>
           {item.context} · {item.date}
-        </h2>
+        </h3>
       </div>
     </Link>
   );

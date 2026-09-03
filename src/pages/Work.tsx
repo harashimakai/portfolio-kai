@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
-import { mosaicProjects, workProjects } from "../components/global/ProjectData";
 import "../css/work.css";
 
 import ProjectGrid from "../components/home/ProjectGrid";
@@ -30,23 +29,19 @@ export default function Work({ setSideOpen }: Props) {
       <ChapterHeading
         id="case-studies"
         chapter="CASE STUDIES"
-        subtitle="UX/UI · FIGMA · I STUDY"
         intro={<>An exploration into how user research shapes design.</>}
         sub={
           <>Designing end-to-end, from lo-fi sketches to developer handoff.</>
         }
       />
-      <SectionDiv
-        left="2026"
-        right=""
-      />
+      <SectionDiv />
       <section className="case-content">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={children_custom}
-          custom={0.6}
+          custom={0.3}
         >
           <CaseStudyCard item={putmeon} />
         </motion.div>

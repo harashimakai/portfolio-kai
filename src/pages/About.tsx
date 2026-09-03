@@ -33,11 +33,11 @@ export default function About({ setSideOpen }: Props) {
             variants={children_custom}
             custom={0}
           >
-            // 01 — ABOUT
+            ABOUT ME
           </motion.h2>
           <div className="about-status">
             <motion.h1
-              className="about-hero"
+              className="about-hero display"
               variants={children_custom}
               custom={0.15}
             >
@@ -45,31 +45,28 @@ export default function About({ setSideOpen }: Props) {
             </motion.h1>
             <div className="about-status-links">
               <motion.a
-                className="underline-hover"
                 target="_blank"
                 href="https://drive.google.com/file/d/11wb1SoarL96mU4PIX8ObmXxljO8bAm7y/view?usp=sharing"
                 variants={children_custom}
                 custom={0.3}
               >
-                RÉSUMÉ {"\u2197\uFE0E"}
+                <h2 className="underline-hover">RÉSUMÉ {"\u2197\uFE0E"}</h2>
               </motion.a>
               <motion.a
-                className="underline-hover"
                 target="_blank"
                 href="mailto:harashimakai@gmail.com"
                 variants={children_custom}
                 custom={0.45}
               >
-                EMAIL {"\u2197\uFE0E"}
+                <h2 className="underline-hover">EMAIL {"\u2197\uFE0E"}</h2>
               </motion.a>
               <motion.a
-                className="underline-hover"
                 target="_blank"
                 href="https://www.linkedin.com/in/kai-harashima-109164364"
                 variants={children_custom}
                 custom={0.6}
               >
-                LINKEDIN {"\u2197\uFE0E"}
+                <h2 className="underline-hover">LINKEDIN {"\u2197\uFE0E"}</h2>
               </motion.a>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { motion } from "motion/react";
 
 import "../css/home.css";
 
@@ -9,6 +10,8 @@ import CaseStudyCard from "../components/individual/CaseStudyCard";
 
 import { putmeon } from "../components/individual/StudyData";
 import ArtStrip from "../components/home/ArtStrip";
+import { children_custom } from "../components/global/AnimationConsts";
+
 interface Props {
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -22,17 +25,18 @@ export default function Home({ setSideOpen }: Props) {
   return (
     <>
       <Mission />
-      <SectionDiv
-        left="// 02 — FEATURED CASE STUDY"
-        right="UX · FEB 2026"
-      />
-      <section className="case-content">
-        <CaseStudyCard item={putmeon} />
+      <section className="home-case-content">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={children_custom}
+          custom={0.1}
+        >
+          <CaseStudyCard item={putmeon} />
+        </motion.div>
       </section>
-      <SectionDiv
-        left="// 03 — SELECTED WORK"
-        right="09 WORKS · 2022—2026"
-      />
+      <SectionDiv />
       <ArtStrip />
     </>
   );

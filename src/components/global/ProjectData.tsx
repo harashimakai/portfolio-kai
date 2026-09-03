@@ -18,14 +18,9 @@ export interface Project {
   shortDescription: string;
   fullDescription?: string;
   thumbnailUrl: string;
-  mosaicThumbnailUrl?: string;
   expandedUrl?: string;
   imagePos?: string;
-  grid: string;
-  mainFont: string;
-  secondFont: string;
-  letterSpacing: string;
-  height?: string;
+  heightPercent?: number;
   category: string;
   skills: string;
   onHome: boolean;
@@ -45,10 +40,6 @@ export const projects: Project[] = [
       "A series of posters translating PhD-level cancer biology—oncogenes, immune evasion, checkpoint inhibition—into visual language. Hand-drawn prototypes refined in Adobe Illustrator over the course of a year.",
     thumbnailUrl: thesisCover,
     expandedUrl: thesisExpanded,
-    grid: "span 4",
-    mainFont: "32px",
-    secondFont: "17px",
-    letterSpacing: "-0.16px",
     category: "DESIGN",
     skills: "ILLUSTRATOR · SCIENCE COMMUNICATION",
     onHome: true,
@@ -64,10 +55,6 @@ export const projects: Project[] = [
     shortDescription:
       "A monochromatic study of the Hudson River Valley landscape. Restraint of palette as a study in texture and value.",
     thumbnailUrl: ashokanCover,
-    grid: "span 4",
-    mainFont: "22px",
-    secondFont: "15px",
-    letterSpacing: "-0.11px",
     category: "PAINTING",
     skills: "MONOCHROMATICISM · LANDSCAPE",
     onHome: true,
@@ -83,11 +70,7 @@ export const projects: Project[] = [
     shortDescription:
       "A white house holds its ground against primordial wind and stone — composition as unmoving defiance.",
     thumbnailUrl: icelandCover,
-    grid: "span 4",
-    mainFont: "22px",
-    secondFont: "15px",
-    letterSpacing: "-0.11px",
-    height: "fit-content",
+    heightPercent: 100,
     category: "PAINTING",
     skills: "IMPRESSIONISM · LANDSCAPE",
     onHome: true,
@@ -104,10 +87,6 @@ export const projects: Project[] = [
       "A triptych study in texture, light, and composition. The first in a series drawn from photos of overlooked nature.",
     thumbnailUrl: backyard1Cover,
     imagePos: "center 55%",
-    grid: "span 4",
-    mainFont: "22px",
-    secondFont: "15px",
-    letterSpacing: "-0.11px",
     category: "PAINTING",
     skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
@@ -122,10 +101,6 @@ export const projects: Project[] = [
     shortDescription:
       "Inspired by Rembrandt's baroque style: loose, gestural brushwork becomes depth and detail upon stepping back.",
     thumbnailUrl: backyard2Cover,
-    grid: "span 4",
-    mainFont: "22px",
-    secondFont: "15px",
-    letterSpacing: "-0.11px",
     category: "PAINTING",
     skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
@@ -141,10 +116,6 @@ export const projects: Project[] = [
     shortDescription:
       "Beauty at a minute scale. Most landscapes look to coastlines or mountain ranges, but small, meditative moments can be found everywhere—even right below our feet.",
     thumbnailUrl: backyard3Cover,
-    grid: "span 4",
-    mainFont: "22px",
-    secondFont: "15px",
-    letterSpacing: "-0.11px",
     category: "PAINTING",
     skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
@@ -161,10 +132,6 @@ export const projects: Project[] = [
     shortDescription:
       "A study in flourishes, composition, and use of white space as restraint.",
     thumbnailUrl: notebooks1Cover,
-    grid: "span 4",
-    mainFont: "22px",
-    secondFont: "15px",
-    letterSpacing: "-0.11px",
     category: "CALLIGRAPHY",
     skills: "HAND LETTERING · FLOURISHES",
     onHome: false,
@@ -180,10 +147,6 @@ export const projects: Project[] = [
     shortDescription:
       "A single word — connect — translated from pen to vector to engraved oak and LED. An exercise in carrying one idea across four mediums.",
     thumbnailUrl: ledSignCover,
-    grid: "span 4",
-    mainFont: "22px",
-    secondFont: "15px",
-    letterSpacing: "-0.11px",
     category: "FABRICATION",
     skills: "CNC · SOLDERING · ILLUSTRATOR",
     onHome: false,
@@ -194,11 +157,9 @@ export const projects: Project[] = [
 
 // Display order for each context
 export const homeOrder = ["1", "2", "3", "4", "5", "6"];
-export const mosaicOrder = ["3", "1", "2", "4", "5", "6", "7", "9"];
-export const workOrder = ["4", "5", "6", "1", "3", "2", "7", "9"];
+export const expandedOrder = ["4", "5", "6", "3", "1", "2", "7", "9"];
 
 export const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
 
 export const homeProjects = homeOrder.map((id) => byId[id]);
-export const mosaicProjects = mosaicOrder.map((id) => byId[id]);
-export const workProjects = workOrder.map((id) => byId[id]);
+export const expandedProjects = expandedOrder.map((id) => byId[id]);

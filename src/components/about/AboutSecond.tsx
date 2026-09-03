@@ -72,10 +72,7 @@ const EXPERIENCES = [
 export default function AboutSecond() {
   return (
     <>
-      <SectionDiv
-        left="// 03 — CREDENTIALS"
-        right="EXPERIENCE & SKILLS"
-      ></SectionDiv>
+      <SectionDiv />
       <section className="about-content-secondary">
         <div className="about-body-secondary">
           <motion.div
@@ -124,9 +121,9 @@ export default function AboutSecond() {
                 >
                   <span className="about-education-star">✦</span>
                   <div>
-                    <div className="about-education-name">{e.school}</div>
-                    <div className="about-education-program">{e.program}</div>
-                    <div className="about-education-year">{e.year}</div>
+                    <div className="about-education-name entry-title">{e.school}</div>
+                    <div className="about-education-program body-sm">{e.program}</div>
+                    <h2 className="about-education-year">{e.year}</h2>
                   </div>
                 </motion.div>
               ))}
@@ -153,9 +150,9 @@ export default function AboutSecond() {
                   variants={children_custom}
                   custom={i * 0.25 + 0.25}
                 >
-                  <div className="about-experiences-date">{x.date}</div>
-                  <div className="about-experiences-title">{x.title}</div>
-                  <div className="about-experiences-role">{x.role}</div>
+                  <h2 className="about-experiences-date">{x.date}</h2>
+                  <div className="about-experiences-title entry-title">{x.title}</div>
+                  <div className="about-experiences-role body-sm">{x.role}</div>
                 </motion.div>
               ))}
             </div>

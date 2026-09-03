@@ -24,11 +24,7 @@ export default function NotFound({ setSideOpen }: Props) {
 
   return (
     <section className="mission-content">
-      <SectionDiv
-        left="// 00 — 404"
-        right="NO RECORD"
-        fullWidth={true}
-      />
+      <SectionDiv fullWidth={true} />
       <motion.div
         className="missing-container"
         variants={container_trigger}
@@ -54,7 +50,7 @@ export default function NotFound({ setSideOpen }: Props) {
                 className="monogram m-dark"
               />
             </motion.div>
-            <motion.h2
+            <motion.h3
               variants={children_custom}
               custom={0.25}
               className="centerpiece-desc"
@@ -64,20 +60,20 @@ export default function NotFound({ setSideOpen }: Props) {
               WESTCHESTER · ITHACA
               <br />
               ESTAB. MMXXVI
-            </motion.h2>
+            </motion.h3>
           </div>
           <div>
             <motion.p
               variants={children_custom}
               custom={0.5}
-              className="missing-header"
+              className="missing-header display"
             >
               <span className="italic accent">404</span> — Page not found.
             </motion.p>
             <motion.p
               variants={children_custom}
               custom={0.75}
-              className="missing-body"
+              className="missing-body body-lg"
             >
               No record of this page in the index. It may have moved or been
               retired.
@@ -93,7 +89,7 @@ export default function NotFound({ setSideOpen }: Props) {
                     className="btn-secondary"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <h2>RETURN HOME →</h2>
+                    <h3>RETURN HOME →</h3>
                   </motion.button>
                 </Link>
               </motion.div>

@@ -19,21 +19,44 @@ export default function Socials({
         viewport={{ once: true, amount: 0.4 }}
       >
         <motion.div className="social-box social-box-aside">
-          <motion.h1 variants={children}>// ASIDE</motion.h1>
-          <motion.p variants={children}>
+          <motion.h2 variants={children}>ASIDE</motion.h2>
+          <motion.p
+            className="body-lg"
+            variants={children}
+          >
             Set in The Seasons and Inter Tight. Built in React, designed in
             Figma.
           </motion.p>
         </motion.div>
         <motion.div className="social-box">
-          <motion.h1 variants={children}>GET IN TOUCH</motion.h1>
-          <motion.p variants={children}>Westchester, NY</motion.p>
-          <motion.p variants={children}>kh862@cornell.edu</motion.p>
-          <motion.p variants={children}>harashimakai@gmail.com</motion.p>
+          <motion.h2 variants={children}>GET IN TOUCH</motion.h2>
+          <motion.p
+            className="body-lg"
+            variants={children}
+          >Westchester, NY</motion.p>
+          <motion.a
+            className="body-lg"
+            target="_blank"
+            href="mailto:kh862@cornell.edu"
+            variants={children}
+          >
+            kh862@cornell.edu &nbsp;
+            <span className="sans">{"\u2197\uFE0E"}</span>
+          </motion.a>
+          <motion.a
+            className="body-lg"
+            target="_blank"
+            href="mailto:harashimakai@gmail.com"
+            variants={children}
+          >
+            harashimakai@gmail.com &nbsp;
+            <span className="sans">{"\u2197\uFE0E"}</span>
+          </motion.a>
         </motion.div>
         <motion.div className="social-box">
-          <motion.h1 variants={children}>ELSEWHERE</motion.h1>
+          <motion.h2 variants={children}>ELSEWHERE</motion.h2>
           <motion.a
+            className="body-lg"
             target="_blank"
             href="https://www.instagram.com/kaiharashima/"
             variants={children}
@@ -41,6 +64,7 @@ export default function Socials({
             Instagram &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
           </motion.a>
           <motion.a
+            className="body-lg"
             target="_blank"
             href="https://www.linkedin.com/in/kai-harashima-109164364"
             variants={children}
@@ -48,6 +72,7 @@ export default function Socials({
             LinkedIn &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
           </motion.a>
           <motion.a
+            className="body-lg"
             target="_blank"
             href="https://github.com/harashimakai"
             variants={children}
@@ -60,13 +85,13 @@ export default function Socials({
         className="social-bottom"
         variants={children}
       >
-        <h2>© KAI HARASHIMA — MMXXVI</h2>
-        <h2>PORTFOLIO II · No. 02 / 02</h2>
+        <h2>© KAI HARASHIMA · MMXXVI</h2>
+        <h2>DESIGN PORTFOLIO · No. 02 / 02</h2>
         <button
           className="back-to-top"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          {"\u2191\uFE0E"} BACK TO TOP
+          <h2>{"\u2191\uFE0E"} BACK TO TOP</h2>
         </button>
       </motion.div>
     </footer>

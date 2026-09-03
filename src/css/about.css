@@ -4,20 +4,56 @@
   padding: 80px var(--page-gutter) 32px;
 }
 
+/* ─── Current Status ─────────────────────────────────────────────────────── */
+
+.about-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  transition: gap var(--ease-hover);
+}
+
+.about-status-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  align-items: baseline;
+  transition: gap var(--ease-hover);
+}
+
+.about-status-links a h2 {
+  position: relative;
+  color: var(--ink);
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.about-status-links a h2:hover {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}
+
+@media (max-width: 767px) {
+  .about-status {
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .about-status-links {
+    flex-wrap: wrap;
+    gap: 16px 22px;
+  }
+}
+
 /* ─── Hero ───────────────────────────────────────────────────────────────── */
 
 .about-hero {
-  font-family: var(--font-serif);
-  font-size: 96px;
-  line-height: 0.92;
-  letter-spacing: -0.025em;
-  color: var(--ink);
   margin-top: 18px;
   margin-right: 36px;
   margin-bottom: 0;
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
 }
 
 /* ─── Main Body ──────────────────────────────────────────────────────────── */
@@ -30,15 +66,17 @@
   align-items: start;
 }
 
-.about-text-block p {
-  font-size: 20px;
-  line-height: 1.65;
-  margin: 0;
+.about-text-block {
   max-width: 500px;
+}
+
+.about-text-block p {
+  margin: 0;
 }
 
 .about-text-block hr {
   margin: 24px 0;
+  width: 100%;
 }
 
 .about-image {
@@ -55,11 +93,6 @@
   margin-top: 14px;
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  letter-spacing: 0.22em;
-  color: var(--muted);
-  transition: color var(--ease-theme);
 }
 
 /* ─── Secondary Section ──────────────────────────────────────────────────── */
@@ -76,14 +109,7 @@
 }
 
 .about-secondary-block h1 {
-  font-family: var(--font-serif);
-  font-size: 44px;
-  line-height: 1;
-  letter-spacing: -0.01em;
   margin: 0 0 28px;
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
 }
 
 /* ─── Shared Entry Styles ────────────────────────────────────────────────── */
@@ -91,29 +117,13 @@
 .about-skill-group,
 .about-education-year,
 .about-experiences-date {
-  font-family: var(--font-sans);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
   color: var(--accent);
-  transition: color var(--ease-theme);
   font-weight: 600;
-}
-
-.about-education-name,
-.about-experiences-title {
-  font-family: var(--font-serif);
-  font-size: var(--text-xl);
-  color: var(--ink);
-  transition: color var(--ease-theme);
 }
 
 .about-education-program,
 .about-experiences-role {
-  font-family: var(--font-serif);
-  font-size: 17px;
   color: var(--muted);
-  transition: color var(--ease-theme);
-  line-height: 1.4;
   margin-top: 4px;
 }
 
@@ -141,14 +151,10 @@
   border-radius: var(--radius-pill);
   border: 1px solid var(--hairline);
   background-color: transparent;
+  transition: border-color var(--ease-theme);
+}
+.toolpill h3 {
   color: var(--ink);
-  transition:
-    color var(--ease-theme),
-    border-color var(--ease-theme);
-  font-family: var(--font-sans);
-  font-size: var(--text-label);
-  letter-spacing: 0.16em;
-  font-weight: 500;
 }
 
 /* ─── Education ──────────────────────────────────────────────────────────── */
@@ -174,10 +180,6 @@
   line-height: 1;
 }
 
-.about-education-name {
-  line-height: 1.2;
-}
-
 .about-education-year {
   margin-top: 6px;
 }
@@ -192,6 +194,7 @@
 .about-experiences-item {
   padding: 24px 0;
   border-bottom: 1px solid var(--color-border);
+  transition: border-bottom var(--ease-theme);
 }
 
 .about-experiences-item:first-child {
@@ -207,99 +210,6 @@
   margin-bottom: 8px;
 }
 
-.about-experiences-title {
-  font-weight: 500;
-  line-height: 1.25;
-}
-
-/* ─── Current Status ─────────────────────────────────────────────────────── */
-
-.about-content-status {
-  margin-top: 8px;
-  padding: 32px var(--page-gutter) 48px;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-  transition:
-    gap var(--ease-hover),
-    padding-top var(--ease-hover),
-    padding-bottom var(--ease-hover);
-}
-
-.about-status {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  transition: gap var(--ease-hover);
-}
-
-.about-status-label {
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  letter-spacing: 0.3em;
-  color: var(--accent);
-  font-weight: 700;
-  transition: color var(--ease-theme);
-}
-
-.about-status-text {
-  font-family: var(--font-serif);
-  font-size: 28px;
-  color: var(--ink);
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
-}
-
-.about-status-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  align-items: baseline;
-  transition: gap var(--ease-hover);
-}
-
-.about-status-links a {
-  position: relative;
-  font-family: var(--font-sans);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  font-weight: 500;
-  color: var(--ink);
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  transition: color var(--ease-theme);
-  text-decoration: none;
-}
-
-.about-status-links a:hover {
-  color: var(--accent);
-  transition: color var(--ease-hover);
-}
-
-@media (max-width: 767px) {
-  .about-content-status {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 28px;
-    padding: 28px var(--page-gutter) 40px;
-  }
-  .about-status {
-    flex-direction: column;
-    gap: 18px;
-    align-items: flex-start;
-  }
-  .about-status-text {
-    font-size: var(--text-xl);
-  }
-  .about-status-links {
-    flex-wrap: wrap;
-    gap: 16px 22px;
-  }
-}
 /* ─── Quote Carousel ─────────────────────────────────────────────────────── */
 
 .about-quote-container {
@@ -319,13 +229,6 @@
 }
 
 .about-quote {
-  font-family: var(--font-serif);
-  font-size: 40px;
-  line-height: 1.25;
-  color: var(--ink);
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
   text-align: center;
   max-width: 1000px;
   margin: var(--space-gap) auto var(--space-xs);
@@ -334,12 +237,51 @@
 
 .about-quote-attr {
   text-align: center;
-  font-family: var(--font-sans);
-  font-size: var(--text-label);
-  letter-spacing: 0.24em;
-  color: var(--muted);
-  transition: color var(--ease-theme);
   margin-top: 20px;
+}
+
+.about-quote-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+.about-quote-dots button {
+  display: grid;
+  place-items: center;
+  padding: 8px 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.about-quote-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background-color: var(--muted);
+  opacity: 0.35;
+  transition:
+    opacity var(--ease-hover),
+    background-color var(--ease-theme);
+}
+
+.about-quote-dots button:hover span {
+  background-color: var(--accent);
+  opacity: 1;
+  transition:
+    opacity var(--ease-hover),
+    background-color var(--ease-hover);
+}
+
+.about-quote-dots button[aria-current="true"] {
+  cursor: default;
+}
+
+.about-quote-dots button[aria-current="true"] span {
+  background-color: var(--ink);
+  opacity: 1;
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
@@ -347,9 +289,6 @@
 @media (max-width: 1189px) {
   .about-content {
     padding: 64px var(--page-gutter) 24px;
-  }
-  .about-hero {
-    font-size: var(--text-hero);
   }
   .about-body {
     grid-template-columns: 1fr;
@@ -359,21 +298,14 @@
     grid-template-columns: 1fr;
     gap: 56px;
   }
-  .about-text-block p {
+  .about-text-block {
     max-width: initial;
-  }
-  .about-quote {
-    font-size: 32px;
   }
 }
 
 @media (max-width: 767px) {
   .about-content {
     padding: 36px var(--page-gutter);
-  }
-  .about-hero {
-    font-size: 48px;
-    margin-left: 0;
   }
   .about-body {
     padding: var(--space-xs) var(--page-gutter) var(--space-md);
@@ -384,11 +316,5 @@
   }
   .about-body-secondary {
     gap: var(--space-md);
-  }
-  .about-secondary-block h1 {
-    font-size: 36px;
-  }
-  .about-quote {
-    font-size: 24px;
   }
 }

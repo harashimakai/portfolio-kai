@@ -3,5 +3,9 @@ interface Props {
 }
 
 export default function ToolPill({ children }: Props) {
-  return <span className="toolpill">{children}</span>;
+  return (
+    <span className="toolpill">
+      <h3>{children}</h3>
+    </span>
+  );
 }

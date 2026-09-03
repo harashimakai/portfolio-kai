@@ -14,33 +14,28 @@ export default function Mission() {
       >
         <motion.h2
           variants={children_custom}
-          custom={0}
+          custom={0.1}
         >
-          // 01 — INTRODUCTION
+          INTRODUCTION
         </motion.h2>
         <div className="mission-body">
           <motion.p
-            className="mission-intro"
+            className="mission-intro lead"
             variants={children_custom}
-            custom={0.15}
+            custom={0.1}
           >
-            Hi. I’m Kai, a product designer at Cornell University focused on the
-            intersection of{" "}
-            <span className="">
-              <span className="alternative_b">creative desi</span>gn
-            </span>{" "}
-            principles and{" "}
-            <span className="alternative_b">technical skill</span> in computer
-            science and UI/UX.
+            Hi! I’m Kai, a product designer at Cornell University focused on the
+            intersection of creative design principles and technical skill in
+            computer science.
           </motion.p>
 
           <div className="mission-stats">
             <motion.div
               className="mission-stat-row"
               variants={children_custom}
-              custom={0.35}
+              custom={0.2}
             >
-              <h2>NOW</h2>
+              <h3>NOW</h3>
               <p className="mission-desc">
                 <a
                   target="_blank"
@@ -54,38 +49,43 @@ export default function Mission() {
             <motion.div
               className="mission-stat-row"
               variants={children_custom}
-              custom={0.5}
+              custom={0.3}
             >
-              <h2>STUDYING</h2>
-              <p className="mission-desc">Computer Science · Product Design</p>
+              <h3>STUDYING</h3>
+              <p className="mission-desc">Computer Science</p>
             </motion.div>
             <motion.div
               className="mission-stat-row"
               variants={children_custom}
-              custom={0.65}
+              custom={0.4}
             >
-              <h2>INDEX</h2>
-              <p className="mission-desc">
-                08 selected artworks, 01 case study
-              </p>
+              <h3>EMAIL</h3>
+              <a
+                className="mission-desc"
+                target="_blank"
+                href="mailto:kh862@cornell.edu"
+              >
+                kh862@cornell.edu &nbsp;
+                <span className="sans">{"\u2197\uFE0E"}</span>
+              </a>
             </motion.div>
           </div>
 
           <div className="action-buttons">
             <motion.div
               variants={children_custom}
-              custom={0.85}
+              custom={0.5}
               style={{ display: "inline-block", width: "fit-content" }}
             >
               <Link to="/work">
                 <motion.button whileHover={{ scale: 1.05 }}>
-                  <h2>CASE STUDIES →</h2>
+                  <h3>CASE STUDIES →</h3>
                 </motion.button>
               </Link>
             </motion.div>
             <motion.div
               variants={children_custom}
-              custom={1.0}
+              custom={0.6}
               style={{ display: "inline-block", width: "fit-content" }}
             >
               <Link to="/about">
@@ -93,7 +93,7 @@ export default function Mission() {
                   className="btn-secondary"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <h2>ABOUT</h2>
+                  <h3>ABOUT</h3>
                 </motion.button>
               </Link>
             </motion.div>

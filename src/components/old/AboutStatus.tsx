@@ -6,10 +6,7 @@ import SectionDiv from "../global/SectionDiv";
 export default function AboutStatus() {
   return (
     <>
-      <SectionDiv
-        left="// 04 — STATUS"
-        right="WHAT AM I DOING NOW?"
-      />
+      <SectionDiv />
       <motion.div
         className="about-content-status"
         variants={container_trigger}

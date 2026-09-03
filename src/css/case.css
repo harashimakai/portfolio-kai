@@ -623,12 +623,14 @@
 /* ─── Project card (Home & Work grids) ───────────────────────────────────── */
 
 .case-card {
+  display: block;
   text-decoration: none;
+  margin-bottom: var(--space-section);
 }
 
 .card-image {
   display: flex;
-  margin-bottom: 6px;
+  margin-bottom: 16px;
   transition: margin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
   aspect-ratio: 16/9;
   overflow: hidden;
@@ -641,7 +643,7 @@
   transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.card-image img:hover {
+.case-card:hover .card-image img {
   transform: scale(1.07);
 }
 
@@ -649,14 +651,6 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 6px;
-}
-
-.card-meta h2 {
-  font-size: var(--text-xs);
-  letter-spacing: 0.24em;
-  color: var(--muted);
-  transition: color var(--ease-theme);
 }
 
 .card-text {
@@ -666,20 +660,10 @@
 }
 
 .card-title {
-  font-weight: 500;
-  font-size: var(--text-xl);
-  line-height: var(--leading-snug);
-  margin: 0 16px 0 0;
-  color: var(--ink);
-  transition: color var(--ease-theme);
+  margin: 0 32px 0 0;
 }
 
 .card-excerpt {
-  font-size: var(--text-sm);
-  font-weight: 400;
-  line-height: var(--leading-body);
-  color: var(--ink);
-  transition: color var(--ease-theme);
   margin: 0;
 }
 

@@ -6,19 +6,13 @@ import "../../css/home.css";
 
 interface Props {
   projects?: Project[];
-  variant?: "home" | "mosaic";
 }
 
-export default function ProjectGrid({
-  projects = homeProjects,
-  variant = "home",
-}: Props) {
-  const isMosaic = variant === "mosaic";
-
+export default function ProjectGrid({ projects = homeProjects }: Props) {
   return (
-    <section className={isMosaic ? "mosaic-content" : "grid-content"}>
+    <section className="grid-content">
       <motion.div
-        className={isMosaic ? "mosaic-grid" : "project-grid"}
+        className="project-grid"
         variants={container_s}
         initial="hidden"
         whileInView="visible"
@@ -28,16 +22,10 @@ export default function ProjectGrid({
           <motion.article
             key={project.id}
             className="item-card"
-            style={isMosaic ? { gridColumn: project.grid } : undefined}
             variants={children}
             transition={{ ease: "easeOut" }}
           >
-            <ItemCard
-              item={project}
-              index={index}
-              total={projects.length}
-              mosaic={isMosaic}
-            />
+            <ItemCard item={project} index={index} total={projects.length} />
           </motion.article>
         ))}
       </motion.div>

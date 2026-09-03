@@ -1,15 +1,3 @@
-/* ─── Mosaic Grid ────────────────────────────────────────────────────────── */
-
-.mosaic-content {
-  padding: 32px var(--page-gutter) var(--space-section);
-}
-
-.mosaic-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: var(--space-gap) 32px;
-}
-
 /* ─── Chapter Heading ────────────────────────────────────────────────────── */
 
 .chapter-header {
@@ -23,13 +11,6 @@
   margin-bottom: 14px;
 }
 
-.chapter-label {
-  letter-spacing: 0.32em;
-  color: var(--accent);
-  font-weight: 700;
-  transition: color var(--ease-theme);
-}
-
 .chapter-body {
   display: flex;
   justify-content: space-between;
@@ -38,29 +19,7 @@
 }
 
 .chapter-title {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  margin: 0 0 10px;
-  color: var(--ink);
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
-}
-
-.chapter-subtitle {
-  font-family: var(--font-serif);
-  font-size: var(--text-base);
-  color: var(--muted);
   margin: 0;
-  max-width: 720px;
-  line-height: 1.45;
-}
-
-.chapter-subtitle a:hover {
-  color: var(--muted);
 }
 
 /* ─── Filter Buttons ─────────────────────────────────────────────────────── */
@@ -74,65 +33,43 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top: var(--space-md);
+  margin-top: var(--space-xs);
 }
 
 .filter-buttons button {
-  position: relative;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  line-height: 1.4;
-  font-size: var(--text-label);
-  letter-spacing: 0.16em;
-  color: var(--muted);
   padding: 8px var(--space-xs);
+  width: fit-content;
   border-radius: var(--radius-pill);
-  border: 1px solid transparent;
-  background: none;
   cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: border-color var(--ease-hover);
+}
+
+.filter-buttons button.filter-active {
+  cursor: default;
+  border-color: var(--ink) !important;
+  transition: border-color var(--ease-theme);
+}
+
+.filter-buttons button.filter-active h2 {
+  color: var(--ink) !important;
   transition: color var(--ease-theme);
 }
 
-.filter-buttons button::before {
-  content: attr(data-label);
-  position: absolute;
-  inset: -1px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px var(--space-xs);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius-pill);
+.filter-buttons button:hover {
+  border-color: var(--accent);
+  transition: border-color var(--ease-hover);
+}
+
+.filter-buttons button:hover h2 {
   color: var(--accent);
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 0.25s ease-in-out,
-    color var(--ease-theme),
-    border-color var(--ease-theme);
-}
-
-.filter-buttons button:hover::before,
-.filter-buttons button.filter-active::before {
-  opacity: 1;
-}
-
-.filter-buttons button.filter-active::before {
-  color: var(--ink);
-  border-color: var(--ink);
+  transition: color var(--ease-hover);
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 1189px) {
-  .mosaic-grid {
-    grid-template-columns: 1fr;
-    column-gap: var(--space-gap);
-  }
-  .mosaic-grid > * {
-    grid-column: 1 / -1 !important;
-  }
   .chapter-body {
     flex-direction: column;
     align-items: stretch;
@@ -148,11 +85,41 @@
   .chapter-header {
     padding-top: 36px;
   }
-  .chapter-title {
-    font-size: 36px;
-  }
   .filter-buttons {
     margin-top: var(--space-sm);
     flex-wrap: wrap;
+  }
+}
+
+.case-content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-section) var(--page-gutter) var(--space-xs);
+  gap: var(--space-sm);
+}
+
+/* ─── Project Grid ───────────────────────────────────────────────────────── */
+
+.grid-content {
+  padding: var(--space-gap) var(--page-gutter) var(--space-section);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-gap);
+}
+
+@media (min-width: 768px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-section);
+  }
+}
+
+@media (min-width: 1190px) {
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-section);
   }
 }

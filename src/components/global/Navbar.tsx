@@ -41,9 +41,6 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
             />
           </div>
         </Link>
-        <h2 className="navbar-title">
-          KAI HARASHIMA · SELECTED WORKS IN DESIGN & OTHER MEDIUMS
-        </h2>
       </div>
       <div className="navbar-controls">
         <div className="navbar-nav">
@@ -64,7 +61,6 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
             label="ABOUT"
           />
         </div>
-        <div className="navbar-line" />
         <DarkButton
           darkMode={darkMode}
           setDarkMode={setDarkMode}

@@ -60,28 +60,31 @@ p {
   font-family: var(--font-serif);
   font-weight: 400;
   font-style: normal;
-  font-size: 1.8em;
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
   color: var(--ink);
   transition: color var(--ease-theme);
 }
 
 h1 {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-weight: 400;
-  letter-spacing: 0.1rem;
   font-style: normal;
-  font-size: 1.8em;
+  font-size: var(--text-title);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-title);
   color: var(--ink);
+  margin: 0;
   transition:
     color var(--ease-theme),
-    text-decoration-color var(--ease-theme);
+    font-size var(--ease-hover);
 }
 
 h2 {
   font-family: var(--font-sans);
   font-weight: 500;
-  letter-spacing: 0.24em;
-  line-height: 1.4;
+  letter-spacing: var(--tracking-label);
+  line-height: var(--leading-relaxed);
   font-style: normal;
   font-size: var(--text-label);
   color: var(--muted);
@@ -89,6 +92,93 @@ h2 {
     color var(--ease-theme),
     text-decoration-color var(--ease-theme);
   margin: 0;
+}
+
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label-tight);
+  line-height: var(--leading-relaxed);
+  font-style: normal;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  transition:
+    color var(--ease-theme),
+    text-decoration-color var(--ease-theme);
+  margin: 0;
+}
+
+/* ─── Serif display tiers ────────────────────────────────────────────────── */
+/* Size comes from the ladder in tokens.css; every other metric is fixed here
+   so a tier is never restyled at the point of use.                          */
+
+.display,
+.lead,
+.quote,
+.entry-title,
+.body-lg,
+.body-sm,
+.body-xs {
+  font-family: var(--font-serif);
+  font-style: normal;
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.display,
+.lead,
+.quote {
+  font-weight: 400;
+  margin: 0;
+  transition:
+    color var(--ease-theme),
+    font-size var(--ease-hover);
+}
+
+.display {
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+.lead {
+  font-size: var(--text-lead);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-lead);
+}
+
+.quote {
+  font-size: var(--text-quote);
+  line-height: var(--leading-quote);
+}
+
+/* ─── Serif body tiers ───────────────────────────────────────────────────── */
+
+.entry-title {
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+}
+
+.body-lg,
+.body-sm,
+.body-xs {
+  font-weight: 400;
+}
+
+.body-lg {
+  font-size: var(--text-lg);
+  line-height: var(--leading-loose);
+}
+
+.body-sm {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+}
+
+.body-xs {
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
 }
 
 hr {
@@ -145,35 +235,10 @@ hr {
   gap: var(--space-xs);
 }
 
-.divider-left,
-.divider-right {
-  font-weight: 400;
-  font-size: var(--text-xs);
-}
-
-.divider-left {
-  letter-spacing: 0.2em;
-}
-.divider-right {
-  letter-spacing: 0.24em;
-}
-
 .divider-strong {
   margin-bottom: 28px;
   border-bottom: 1px solid var(--ink);
   transition: border-color var(--ease-theme);
-}
-
-.divider-text-strong.divider-left {
-  color: var(--accent);
-  font-weight: 700;
-  letter-spacing: 0.32em;
-  margin-bottom: 14px;
-  transition: color var(--ease-theme);
-}
-
-.divider-text-strong.divider-right {
-  letter-spacing: 0.24em;
 }
 
 .divider-line {
@@ -195,8 +260,8 @@ hr {
   content: "";
   position: absolute;
   width: 100%;
-  height: 0.1rem;
-  bottom: -0.3rem;
+  height: 0.09rem;
+  bottom: -0.2rem;
   left: 0;
   background-color: var(--ink);
   transform: scaleX(0);
@@ -245,12 +310,6 @@ hr {
   align-items: center;
 }
 
-.navbar-title {
-  display: none;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-}
-
 .navbar-logos {
   display: grid;
   place-items: center;
@@ -294,13 +353,6 @@ hr {
   opacity: min(100, var(--logo-dark-opacity));
 }
 
-.navbar-line {
-  display: none;
-  height: 18px;
-  border-left: 1px solid var(--color-border);
-  transition: border-left var(--ease-theme);
-}
-
 .navbar-controls {
   display: flex;
   align-items: center;
@@ -315,16 +367,14 @@ hr {
 .nav-link {
   display: none;
   position: relative;
-  font-family: var(--font-sans);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  color: var(--ink);
-  font-weight: 500;
-  transition: color var(--ease-theme);
   text-decoration: none;
 }
 
-.nav-link:hover {
+.nav-link h2 {
+  color: var(--ink);
+}
+
+.nav-link h2:hover {
   color: var(--accent);
   transition: color var(--ease-hover);
 }
@@ -360,8 +410,6 @@ hr {
   margin-right: max(20%, calc(20rem - 40vw));
   margin-top: 0;
   margin-bottom: 55px;
-  font-size: 1.2em;
-  letter-spacing: 0.1rem;
 }
 
 .sidebar hr {
@@ -372,11 +420,11 @@ hr {
 /* ─── Theme toggle button ────────────────────────────────────────────────── */
 
 .theme-toggle {
+  margin-left: 16px;
   justify-content: right;
   align-items: center;
   display: none;
   position: relative;
-  width: 65px;
   z-index: 5;
 }
 
@@ -398,33 +446,16 @@ hr {
   border: none;
 }
 
-.theme-toggle h1 {
+.theme-toggle h2 {
   display: block;
   position: relative;
-  font-family: var(--font-sans);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  color: var(--muted);
-  margin: 0;
-  transition: color var(--ease-theme);
 }
 
-.theme-toggle:hover h1 {
+.theme-toggle:hover h2 {
   color: var(--accent);
   transition:
     color var(--ease-hover),
     text-decoration-color var(--ease-hover);
-}
-
-.theme-toggle:hover .underline-hover::after {
-  margin-left: var(--mode-margin);
-  transform: scaleX(var(--mode-scale));
-  transform-origin: left;
-  background-color: var(--accent);
-  transition:
-    margin-left 0.25s ease-out,
-    transform 0.25s ease-out,
-    background-color var(--ease-hover);
 }
 
 /* ─── Hamburger menu button ──────────────────────────────────────────────── */
@@ -460,16 +491,7 @@ hr {
 
 /* ─── Navbar / sidebar responsive breakpoints ────────────────────────────── */
 
-@media (max-width: 767px) {
-  .navbar {
-    padding: 20px var(--page-gutter);
-  }
-  .menu-button {
-    top: 19.535px;
-  }
-}
-
-@media (max-width: 1335px) {
+@media (max-width: 500px) {
   .sidebar .nav-link {
     display: block;
     margin-left: 55px;
@@ -481,10 +503,14 @@ hr {
   }
   .navbar {
     justify-content: center;
+    padding: 20px var(--page-gutter);
+  }
+  .menu-button {
+    top: 19.535px;
   }
 }
 
-@media (min-width: 1336px) {
+@media (min-width: 501px) {
   .navbar-title {
     display: block;
   }
@@ -521,19 +547,13 @@ footer.social-container {
   margin: 0 auto;
 }
 
-.social-box h1 {
-  font-weight: 500;
-  font-size: var(--text-label);
+.social-box h2 {
   color: var(--gold);
-  line-height: 1.4;
-  letter-spacing: 0.24em;
   margin-bottom: 20px;
 }
 
 .social-box p,
 .social-box a {
-  font-size: 19px;
-  line-height: var(--leading-loose);
   margin: 0;
 }
 
@@ -566,25 +586,14 @@ footer.social-container {
   gap: 10px;
 }
 
-.social-bottom h2,
 .social-bottom .back-to-top {
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  color: var(--muted);
-  transition: color var(--ease-theme);
-}
-
-.social-bottom .back-to-top {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  line-height: 1.4;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
 }
 
-.social-bottom .back-to-top:hover {
+.social-bottom .back-to-top h2:hover {
   color: var(--gold);
   transition: color var(--ease-hover);
 }
@@ -597,7 +606,7 @@ footer.social-container {
 }
 
 @media (max-width: 767px) {
-  .social-box h1 {
+  .social-box h2 {
     margin-bottom: 8px;
   }
   .social-box p,
@@ -633,25 +642,11 @@ footer.social-container {
   margin-bottom: 6px;
 }
 
-.item-meta h2 {
-  font-size: var(--text-xs);
-  letter-spacing: 0.24em;
-  color: var(--muted);
-}
-
 .item-title {
-  font-weight: 500;
-  font-size: var(--text-xl);
-  line-height: var(--leading-snug);
   margin: 8px 0 6px;
-  color: var(--ink);
 }
 
 .item-excerpt {
-  font-size: var(--text-sm);
-  font-weight: 400;
-  line-height: var(--leading-body);
-  color: var(--ink);
   margin: 0;
 }
 
@@ -697,25 +692,14 @@ footer.social-container {
 }
 
 .centerpiece-desc {
-  font-size: var(--text-xs);
-  letter-spacing: 0.32em;
   line-height: 1.8;
 }
 
 .missing-header {
-  font-size: 92px;
-  line-height: 1;
-  letter-spacing: -0.025em;
-  margin: 0;
   text-wrap: balance;
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
 }
 
 .missing-body {
-  font-size: var(--text-xl);
-  line-height: 1.55;
   margin: 32px 0 0;
   max-width: 560px;
   transition:
@@ -735,9 +719,6 @@ footer.social-container {
     align-items: center;
     gap: 40px;
   }
-  .missing-header {
-    font-size: var(--text-hero);
-  }
 }
 
 @media (max-width: 767px) {
@@ -747,9 +728,6 @@ footer.social-container {
   .centerpiece-logos {
     width: 88px;
     height: 80px;
-  }
-  .missing-header {
-    font-size: 40px;
   }
   .missing-body {
     font-size: var(--text-base);

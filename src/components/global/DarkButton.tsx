@@ -6,13 +6,11 @@ interface Props {
 export default function DarkButton({ darkMode, setDarkMode }: Props) {
   return (
     <div className="theme-toggle">
-      <div className="underline-hover">
-        <h1>{darkMode ? "◑ LIGHT" : "◐ DARK"}</h1>
-      </div>
+      <h2>{darkMode ? "◑" : "◐"}</h2>
       <button
         id="mode-switch"
         onClick={() => setDarkMode(!darkMode)}
-      ></button>
+      />
     </div>
   );
 }

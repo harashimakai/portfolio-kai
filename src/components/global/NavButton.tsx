@@ -15,7 +15,7 @@ export default function NavButton({ to, label }: Props) {
           : "nav-link underline-hover"
       }
     >
-      {label}
+      <h2>{label}</h2>
     </NavLink>
   );
 }
