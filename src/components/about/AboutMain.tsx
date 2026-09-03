@@ -78,10 +78,6 @@ export default function AboutMain() {
               alt="Kai Harashima"
             />
           </div>
-          <div className="about-image-caption">
-            <h3>PORTRAIT</h3>
-            <h3>WESTCHESTER, NY · 2025</h3>
-          </div>
         </motion.div>
       </motion.section>
     </>

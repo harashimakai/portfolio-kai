@@ -29,7 +29,7 @@ export default function Work({ setSideOpen }: Props) {
       <ChapterHeading
         id="case-studies"
         chapter="CASE STUDIES"
-        intro={<>An exploration into how user research shapes design.</>}
+        intro={<>Exploring how user research shapes design.</>}
         sub={
           <>Designing end-to-end, from lo-fi sketches to developer handoff.</>
         }

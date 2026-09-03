@@ -23,7 +23,7 @@ export default function ChapterHeading({
   return (
     <motion.section
       id={id}
-      className="chapter-header"
+      className="chapter-header alternative_c"
       variants={container_trigger}
       initial="hidden"
       whileInView="visible"

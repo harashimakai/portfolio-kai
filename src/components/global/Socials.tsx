@@ -33,7 +33,9 @@ export default function Socials({
           <motion.p
             className="body-lg"
             variants={children}
-          >Westchester, NY</motion.p>
+          >
+            Westchester, NY
+          </motion.p>
           <motion.a
             className="body-lg"
             target="_blank"
@@ -85,7 +87,7 @@ export default function Socials({
         className="social-bottom"
         variants={children}
       >
-        <h2>© KAI HARASHIMA · MMXXVI</h2>
+        <h2>© KAI HARASHIMA &nbsp;✦&nbsp; MMXXVI</h2>
         <h2>DESIGN PORTFOLIO · No. 02 / 02</h2>
         <button
           className="back-to-top"
