@@ -97,6 +97,6 @@ export const putmeon: Study = {
       research, lo-fi wireframes and hi-fi prototypes in Figma.
     </>
   ),
-  slug: "/putmeon",
+  slug: "https://docs.google.com/presentation/d/1v_gYYZ8Sod_Tbi3bIb-v4mOVW3ZxZpnTiNmOvHA4oZw/edit?usp=sharing",
   sectionNum: "5",
 };
