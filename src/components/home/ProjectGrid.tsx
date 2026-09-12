@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { container_s, children } from "../global/AnimationConsts";
+import { children, children_custom } from "../global/AnimationConsts";
 import { homeProjects, Project } from "../global/ProjectData";
 import ItemCard from "../global/ItemCard";
 import "../../css/home.css";
@@ -11,22 +11,26 @@ interface Props {
 export default function ProjectGrid({ projects = homeProjects }: Props) {
   return (
     <section className="grid-content">
+      {/* The grid resolves as a single block rather than card by card. */}
       <motion.div
         className="project-grid"
-        variants={container_s}
+        variants={children_custom}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true }}
+        custom={0.3}
       >
         {projects.map((project, index) => (
-          <motion.article
+          <article
             key={project.id}
             className="item-card"
-            variants={children}
-            transition={{ ease: "easeOut" }}
           >
-            <ItemCard item={project} index={index} total={projects.length} />
-          </motion.article>
+            <ItemCard
+              item={project}
+              index={index}
+              total={projects.length}
+            />
+          </article>
         ))}
       </motion.div>
     </section>
