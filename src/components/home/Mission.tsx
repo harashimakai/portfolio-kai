@@ -12,65 +12,56 @@ export default function Mission() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <motion.h2
-          variants={children_custom}
-          custom={0.1}
-        >
-          INTRODUCTION
-        </motion.h2>
         <div className="mission-body">
           <motion.p
             className="mission-intro lead"
             variants={children_custom}
             custom={0.1}
           >
-            Hi! I’m Kai, a product designer at Cornell University focused on the
-            intersection of creative design principles and technical skill in
-            computer science.
+            I’m Kai, a product designer at Cornell using computer science to
+            sharpen design thinking.
           </motion.p>
-
-          <div className="mission-stats">
-            <motion.div
-              className="mission-stat-row"
-              variants={children_custom}
-              custom={0.2}
-            >
-              <h3>NOW</h3>
-              <p className="mission-desc">
-                <a
-                  target="_blank"
-                  href="https://new.cornelldti.org/"
-                >
-                  Cornell DTI
-                </a>
-                , Ithaca NY
-              </p>
-            </motion.div>
-            <motion.div
-              className="mission-stat-row"
-              variants={children_custom}
-              custom={0.3}
-            >
-              <h3>STUDYING</h3>
-              <p className="mission-desc">Computer Science</p>
-            </motion.div>
-            <motion.div
-              className="mission-stat-row"
-              variants={children_custom}
-              custom={0.4}
-            >
-              <h3>EMAIL</h3>
+        </div>
+        <div className="mission-stats">
+          <motion.div
+            className="mission-stat-row"
+            variants={children_custom}
+            custom={0.2}
+          >
+            <h3>NOW</h3>
+            <p className="mission-desc">
               <a
-                className="mission-desc"
                 target="_blank"
-                href="mailto:kh862@cornell.edu"
+                href="https://new.cornelldti.org/"
               >
-                kh862@cornell.edu &nbsp;
-                <span className="sans">{"\u2197\uFE0E"}</span>
+                Cornell DTI
               </a>
-            </motion.div>
-          </div>
-
+              , Ithaca NY
+            </p>
+          </motion.div>
+          <motion.div
+            className="mission-stat-row"
+            variants={children_custom}
+            custom={0.3}
+          >
+            <h3>STUDYING</h3>
+            <p className="mission-desc">Computer Science</p>
+          </motion.div>
+          <motion.div
+            className="mission-stat-row"
+            variants={children_custom}
+            custom={0.4}
+          >
+            <h3>EMAIL</h3>
+            <a
+              className="mission-desc"
+              target="_blank"
+              href="mailto:kh862@cornell.edu"
+            >
+              kh862@cornell.edu &nbsp;
+              <span className="sans">{"\u2197\uFE0E"}</span>
+            </a>
+          </motion.div>
           <div className="action-buttons">
             <motion.div
               variants={children_custom}

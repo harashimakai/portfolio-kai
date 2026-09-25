@@ -19,42 +19,11 @@
   color: var(--cs-text-alt);
 }
 
-.card-logo {
-  max-width: 100%;
-  transition: width var(--ease-hover);
-}
-
 /* ─── Case Page Nav ──────────────────────────────────────────────────────── */
 
 .case-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-xs) var(--page-gutter);
-  border-bottom: 1px solid var(--cs-rule);
-  background: var(--cs-bg);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.case-nav-link {
-  background: none;
-  border: none;
-  color: var(--cs-text);
-  cursor: pointer;
-  transition: color var(--ease-theme);
-}
-
-.case-nav-link:hover {
-  color: var(--cs-accent);
-  transition: color var(--ease-hover);
-}
-
-@media (max-width: 768px) {
-  .case-nav-meta {
-    display: none;
-  }
+  background: color-mix(in srgb, var(--cs-surface) 85%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
 }
 
 /* ─── Case Page Hero ─────────────────────────────────────────────────────── */
@@ -63,8 +32,7 @@
   padding: var(--space-gap) var(--page-gutter) 80px;
   min-height: 760px;
   position: relative;
-  display: flex;
-  flex-direction: column;
+
   color: var(--cs-bg);
   transition:
     padding-bottom var(--ease-hover),

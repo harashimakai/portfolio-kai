@@ -31,12 +31,11 @@ function App() {
 
   return (
     <div className={darkMode ? "darkmode" : "lightmode"}>
-      {!isPutMeOn && (
-        <Navbar
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
-        />
-      )}
+      <Navbar
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        caseStudy={isPutMeOn}
+      />
       {!isPutMeOn && (
         <Sidebar
           darkMode={darkMode}

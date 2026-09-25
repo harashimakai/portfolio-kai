@@ -137,20 +137,6 @@ export default function PutMeOn() {
 
   return (
     <div style={putmeon.theme as React.CSSProperties}>
-      <nav className="case-nav">
-        <button
-          className="case-nav-link case-meta-text"
-          onClick={() => history.back()}
-        >
-          ← BACK TO PORTFOLIO
-        </button>
-        <span className="case-meta-text case-nav-meta">
-          CASE STUDY · {putmeon.id} OF 01
-        </span>
-        <span className="case-meta-text case-nav-meta">
-          KAI HARASHIMA · UX · {putmeon.date}
-        </span>
-      </nav>
       <motion.section
         className="case-hero"
         variants={container_m}
@@ -161,14 +147,6 @@ export default function PutMeOn() {
           background: `url(${backgroundCover}) no-repeat top center / 100% 65%, var(--cs-surface)`,
         }}
       >
-        <motion.div
-          variants={children_custom}
-          custom={0}
-          className="case-hero-meta"
-        >
-          <span>{putmeon.dateSpecific}</span>
-          <span>Kai Harashima — UX Designer</span>
-        </motion.div>
         <div className="case-hero-content">
           <motion.div
             variants={children_custom}

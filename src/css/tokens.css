@@ -59,9 +59,6 @@
 /* ─── Tracking (letter-spacing) ─────────────────────────────────────────── */
 
 :root {
-  --tracking-display: -0.025em; /* .display */
-  --tracking-lead: -0.015em; /* .lead */
-  --tracking-title: -0.01em; /* h1 */
   --tracking-label: 0.22em; /* h2 */
   --tracking-label-tight: 0.24em; /* h3 */
 }
