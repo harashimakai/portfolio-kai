@@ -35,6 +35,8 @@ export default function Lightbox({ projects, index, onChange }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const dirRef = useRef(1);
+  /* Where a touch began, for swipe navigation. */
+  const touchRef = useRef<{ x: number; y: number } | null>(null);
   const open = index !== null;
   const [shown, setShown] = useState<{ item: Project; index: number } | null>(
     null,
@@ -93,6 +95,24 @@ export default function Lightbox({ projects, index, onChange }: Props) {
   const dir = dirRef.current;
   const swallow = (e: React.MouseEvent) => e.stopPropagation();
 
+  /* A clear horizontal swipe steps to the next or previous piece; a
+     mostly vertical move is left alone so the dialog still scrolls.    */
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchRef.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchRef.current;
+    touchRef.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      step(dx < 0 ? 1 : -1);
+    }
+  };
+
   return (
     <div
       ref={rootRef}
@@ -103,6 +123,8 @@ export default function Lightbox({ projects, index, onChange }: Props) {
       aria-hidden={!open}
       aria-label={shown?.item.title}
       onClick={() => onChange(null)}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
       {shown && (
         <>
