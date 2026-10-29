@@ -6,7 +6,8 @@ import { useEffect, useRef } from "react";
    - Over anything clickable: an 8px square.
    - Over an element with data-cursor="<label>": the 8px square plus that
      label 10px to its right, e.g. "View project" on case study cards.
-   - Over an email link: "Copy email", then "Copied" once clicked.
+   - Over an email link: the 14px square with a filled label, "Copy
+     email" then "Copied" once clicked.
    Size changes ease over 0.12s (except into the caret); it fades in and
    out over 0.2s and sits exactly on the pointer with no trailing.
    Touch devices and reduced-motion users keep the native cursor.        */
@@ -135,7 +136,14 @@ export default function Cursor() {
           label.classList.add("cursor-label-out");
         }
       }
-      if (email || labelled || target?.closest(CLICKABLE)) {
+      root.classList.toggle("cursor-filled", Boolean(email));
+      /* The footer is its own dark surface: the cursor turns white there. */
+      root.classList.toggle("cursor-on-footer", Boolean(target?.closest("footer")));
+      if (email) {
+        apply(SQUARE);
+        return;
+      }
+      if (labelled || target?.closest(CLICKABLE)) {
         apply(SMALL);
         return;
       }

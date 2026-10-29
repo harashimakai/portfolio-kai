@@ -73,7 +73,6 @@ body {
   flex: none;
   display: block;
   background: var(--accent);
-  transition: background-color var(--ease-theme);
 }
 
 /* Label beside the square, its cap height level with the square. */
@@ -84,11 +83,37 @@ body {
   white-space: nowrap;
   color: var(--accent);
   margin-top: -3.5px;
-  transition: color var(--ease-theme);
 }
 
 .cursor-label[hidden] {
   display: none;
+}
+
+
+
+/* On the footer's dark surface everything the cursor shows is white, and
+   a filled label takes the footer colour for its text.                   */
+.cursor-on-footer .cursor-dot {
+  background: var(--white);
+}
+
+.cursor-on-footer .cursor-label {
+  color: var(--white);
+}
+
+.cursor-on-footer.cursor-filled .cursor-label {
+  background: var(--white);
+  color: var(--color-bg-inverse);
+}
+
+
+/* Filled variant (email links): an accent block with page-coloured text,
+   6 x 10 padding, centred on the full-size square.                      */
+.cursor-filled .cursor-label {
+  padding: 6px 10px;
+  margin-top: -6.5px;
+  background: var(--accent);
+  color: var(--bg);
 }
 
 /* Reveals left to right on enter and retracts right to left on leave: a
