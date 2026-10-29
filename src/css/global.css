@@ -84,7 +84,7 @@ h1 {
 
 h2 {
   font-family: var(--font-sans-display);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: var(--tracking-label);
   line-height: var(--leading-relaxed);
   font-style: normal;
@@ -98,7 +98,7 @@ h2 {
 
 h3 {
   font-family: var(--font-sans-display);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: var(--tracking-label-tight);
   line-height: var(--leading-relaxed);
   font-style: normal;
