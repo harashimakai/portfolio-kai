@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 
 /* Custom pointer for mouse and trackpad users, after Rachel Chen's:
    - Default: a 14px ✦ drawn as an SVG path, centred on the pointer.
-   - Over text: as the star turns 45°, its four tips spread to the caret's
-     corners and its curved sides straighten, becoming a 3 x 20 bar.
+   - Over text: the star turns while each tip travels to the opposite
+     side's corner of the caret and its curved sides straighten, becoming
+     a 3 x 20 bar.
    - Over anything clickable: the star shrinks to 8px.
    - Over a solid button (data-cursor="hide"): once the whole star is
      inside it, it shrinks away, melting into the button.
@@ -96,7 +97,7 @@ function overText(x: number, y: number): boolean {
    near the centre, giving the concave sides. The bar has the same
    structure: four corners joined by straight sides.
    Everything moves together on one eased progress value, in polar terms
-   so every frame stays symmetric: the star turns 45° while each tip
+   so every frame stays symmetric: the star turns 135° while each tip
    swings and travels out to its corner of the bar and each curve control
    moves out to its side's midpoint, straightening the curves.           */
 const R = 7; /* star radius: 14px tip to tip */
@@ -106,19 +107,23 @@ const BAR_W = 1.5,
 const DEG = Math.PI / 180;
 const CORNER_A = Math.atan2(BAR_W, BAR_H) / DEG;
 const CORNER_R = Math.hypot(BAR_W, BAR_H);
-/* [start angle, extra swing after the 45° turn] for each tip */
+/* Each tip travels to the opposite side's corner: top -> bottom right,
+   right -> bottom left, bottom -> top left, left -> top right. That is a
+   135° turn plus a small swing per tip; [start angle, swing] below.    */
+const TURN = 135;
 const TIPS: [number, number][] = [
-  [0, CORNER_A - 45],
-  [90, 180 - CORNER_A - 135],
-  [180, 180 + CORNER_A - 225],
-  [270, 360 - CORNER_A - 315],
+  [0, 180 - CORNER_A - TURN],
+  [90, 180 + CORNER_A - 90 - TURN],
+  [180, 360 - CORNER_A - 180 - TURN],
+  [270, 360 + CORNER_A - 270 - TURN],
 ];
-/* [start angle, final distance] for each curve control */
+/* [start angle, final distance] for each curve control: after the turn
+   they land on the bottom, left, top and right sides' midpoints.       */
 const CTRLS: [number, number][] = [
-  [45, BAR_W],
-  [135, BAR_H],
-  [225, BAR_W],
-  [315, BAR_H],
+  [45, BAR_H],
+  [135, BAR_W],
+  [225, BAR_H],
+  [315, BAR_W],
 ];
 
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
@@ -133,9 +138,9 @@ function shapePath(t: number): string {
   const turn = ease(clamp(t));
   const open = turn;
   const tips = TIPS.map(([a, swing]) =>
-    polar(a + 45 * turn + swing * open, R + (CORNER_R - R) * open),
+    polar(a + TURN * turn + swing * open, R + (CORNER_R - R) * open),
   );
-  const ctls = CTRLS.map(([a, r]) => polar(a + 45 * turn, C + (r - C) * open));
+  const ctls = CTRLS.map(([a, r]) => polar(a + TURN * turn, C + (r - C) * open));
   let d = `M${tips[0]}`;
   for (let i = 0; i < 4; i++) d += ` Q${ctls[i]} ${tips[(i + 1) % 4]}`;
   return d + "Z";
