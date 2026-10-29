@@ -152,7 +152,7 @@ body {
   color: var(--bg);
 }
 
-.cursor-on-footer.cursor-label-filled {
+.cursor-on-footer .cursor-label-filled {
   color: var(--color-bg-inverse);
 }
 
