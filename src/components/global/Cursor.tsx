@@ -46,8 +46,10 @@ function containsStar(el: Element, x: number, y: number): boolean {
   ].every(([px, py]) => el.contains(document.elementFromPoint(px, py)));
 }
 
-/* Is the point over an actual glyph rather than empty box space? */
-function overText(x: number, y: number): boolean {
+/* Is the point over an actual glyph rather than empty box space? The
+   glyph must belong to the element under the pointer (glyphs can overhang
+   their box) and must not sit inside anything clickable or labelled.    */
+function overText(x: number, y: number, target: Element | null): boolean {
   type Caret = { offsetNode: Node; offset: number };
   const doc = document as Document & {
     caretPositionFromPoint?: (x: number, y: number) => Caret | null;
@@ -69,6 +71,9 @@ function overText(x: number, y: number): boolean {
     }
   }
   if (!node || node.nodeType !== Node.TEXT_NODE) return false;
+  const owner = node.parentElement;
+  if (!owner || !target || !target.contains(owner)) return false;
+  if (owner.closest(`${CLICKABLE}, [data-cursor]`)) return false;
   const text = node.textContent ?? "";
   if (!text.trim()) return false;
   /* Check the characters either side of the caret actually contain the
@@ -267,7 +272,7 @@ export default function Cursor() {
         apply(SMALL);
         return;
       }
-      apply(overText(x, y) ? CARET : SQUARE);
+      apply(overText(x, y, target) ? CARET : SQUARE);
     };
 
     /* The root's 14px box is centred on the pointer; the star scales and
