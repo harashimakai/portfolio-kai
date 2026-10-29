@@ -16,8 +16,8 @@ interface Props {
    Row 2: the three backyard paintings, cropped alike so they align.
    Row 3: the thesis poster alone, full width, as its flat head-on image,
    trimmed a touch: the title starts 1% from the top and the posters end
-   4% from the bottom, so the crop takes 0.5% off the top and 3% off the
-   bottom (native ratio 1.595 -> 1.65).                                     */
+   4% from the bottom, so the crop takes ~0.85% off the top and ~2.65% off
+   the bottom (native ratio 1.595 -> 1.65).                                 */
 
 /* The sticky nav, the gallery's top padding and the row gap (both
    --space-gap), and a 64px glimpse of the row below.                      */
@@ -43,7 +43,7 @@ const layout: Record<string, TileLayout> = {
   "1": {
     image: "expanded",
     aspect: "1.65",
-    position: "center 14%",
+    position: "center 24%",
     naturalOnPhones: true,
   },
 };
