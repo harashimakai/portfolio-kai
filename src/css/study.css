@@ -480,8 +480,27 @@
   .study-row-2 {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* Phones: the meta sits two columns across at a smaller size. */
   .study-hero-meta {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm) var(--space-xs);
+    margin-top: var(--space-md);
+  }
+  /* Tools & Skills (fourth) swaps with Timeline (third) so the longer
+     list sits on the left of the second row. */
+  .study-hero-meta > :nth-child(3) {
+    order: 4;
+  }
+  .study-hero-meta > :nth-child(4) {
+    order: 3;
+  }
+  .study-hero-meta dt {
+    font-size: var(--text-xs);
+    margin-bottom: 6px;
+  }
+  .study-hero-meta dd {
+    font-size: var(--text-sm);
+    line-height: 1.4;
   }
   .study-takeaways li {
     gap: 18px;

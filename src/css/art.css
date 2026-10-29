@@ -249,6 +249,7 @@
   display: flex;
   flex-direction: column;
   padding: var(--space-sm) var(--page-gutter);
+  background: color-mix(in srgb, var(--bg) 50%, transparent);
   -webkit-backdrop-filter: blur(42px);
   backdrop-filter: blur(42px);
   overflow-y: auto;
@@ -273,17 +274,10 @@
     visibility 0s;
 }
 
-/* Half-transparent page-coloured tint over the blurred gallery. */
-.lightbox::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  opacity: 0.5;
-  z-index: -1;
-  transition: background-color var(--ease-theme);
-}
-
+/* Half-transparent page-coloured tint over the blurred gallery. It is the
+   dialog's own background rather than a fixed pseudo-element: backdrop
+   filters make the dialog the containing block for fixed descendants, so
+   a pseudo-element would scroll away with the content on phones.        */
 .lightbox > * {
   position: relative;
 }
@@ -442,9 +436,15 @@
 
 @media (max-width: 767px) {
   .lightbox {
-    padding: var(--space-xs) var(--page-gutter);
+    /* Room under the buttons at the end of the scroll, clear of the
+       phone's home indicator. */
+    padding: var(--space-xs) var(--page-gutter)
+      calc(var(--space-section) + env(safe-area-inset-bottom, 0px));
   }
+  /* Phones: the image fills the width, matching the plaque beneath it,
+     and takes whatever height that gives.                               */
   .lightbox-figure img {
-    max-height: 56dvh;
+    width: 100%;
+    max-height: none;
   }
 }

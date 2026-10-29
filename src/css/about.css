@@ -309,7 +309,7 @@
   }
   /* Tighter dots, so a long quote list stays on fewer rows. */
   .about-quote-dots button {
-    padding: 6px 4px;
+    padding: 6px 5.5px;
   }
   .about-body {
     padding: var(--space-xs) var(--page-gutter) var(--space-md);
