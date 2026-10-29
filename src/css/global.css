@@ -34,6 +34,49 @@ body {
   transition: background-color var(--ease-theme);
 }
 
+/* ─── Theme switch ───────────────────────────────────────────────────────── */
+/* While switching themes, every colour on the page eases on the theme
+   timing, so nothing snaps (hover-only colours, SVG strokes, borders).   */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition-property: color, background-color, border-color, outline-color,
+    text-decoration-color, fill, stroke, -webkit-text-fill-color !important;
+  transition-duration: 0.9s !important;
+  transition-timing-function: ease-in-out !important;
+  transition-delay: 0s !important;
+}
+
+/* ─── Custom cursor ──────────────────────────────────────────────────────── */
+
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--accent);
+  mix-blend-mode: normal;
+  transition:
+    width 0.18s ease,
+    height 0.18s ease,
+    border-radius 0.18s ease,
+    opacity 0.2s ease,
+    background-color var(--ease-theme);
+  will-change: transform;
+}
+
+/* Only exists while a fine pointer is in use. */
+html:not(.has-cursor) .cursor {
+  display: none;
+}
+
 /* ─── Base typography ────────────────────────────────────────────────────── */
 
 a {

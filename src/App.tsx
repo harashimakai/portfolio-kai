@@ -11,6 +11,7 @@ import Navbar from "./components/global/Navbar";
 import MenuButton from "./components/global/MenuButton";
 import Sidebar from "./components/global/Sidebar";
 import Socials from "./components/global/Socials";
+import Cursor from "./components/global/Cursor";
 import ComingSoon from "./pages/ComingSoon";
 import Art from "./pages/Art";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,16 @@ function App() {
   });
   const setDarkMode: React.Dispatch<React.SetStateAction<boolean>> =
     useCallback((next) => {
+      /* For the length of the switch, every element's colours ease on
+         the theme timing, including ones that normally only transition
+         on hover. */
+      const root = document.documentElement;
+      root.classList.add("theme-switching");
+      window.clearTimeout((window as unknown as { __themeT?: number }).__themeT);
+      (window as unknown as { __themeT?: number }).__themeT = window.setTimeout(
+        () => root.classList.remove("theme-switching"),
+        950,
+      );
       setDarkModeState((prev) => {
         const value = typeof next === "function" ? next(prev) : next;
         localStorage.setItem("theme", value ? "dark" : "light");
@@ -108,6 +119,7 @@ function App() {
         />
       </Routes>
       <Socials />
+      <Cursor />
     </div>
   );
 }
