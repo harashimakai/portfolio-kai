@@ -19,6 +19,32 @@ export default function ArtStrip({ projects = homeProjects }: Props) {
 
   return (
     <section className="grid-content">
+      {/* Label on the left, link to the full gallery on the right. */}
+      <motion.div
+        className="art-strip-head"
+        variants={container_s}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <motion.h2
+          variants={children_custom}
+          custom={0}
+        >
+          ARTWORK
+        </motion.h2>
+        <motion.div
+          className="art-strip-more"
+          variants={children_custom}
+          custom={0.1}
+        >
+          <Link to="/art">
+            <h2 className="underline-hover">
+              SEE MORE <Arrow dir="right" />
+            </h2>
+          </Link>
+        </motion.div>
+      </motion.div>
       <motion.div
         className="art-strip"
         variants={container_s}
@@ -40,20 +66,6 @@ export default function ArtStrip({ projects = homeProjects }: Props) {
             />
           </motion.div>
         ))}
-      </motion.div>
-      <motion.div
-        className="art-strip-more"
-        variants={children_custom}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        custom={0.2}
-      >
-        <Link to="/art">
-          <h2 className="underline-hover">
-            SEE MORE <Arrow dir="right" />
-          </h2>
-        </Link>
       </motion.div>
       <Lightbox
         projects={projects}

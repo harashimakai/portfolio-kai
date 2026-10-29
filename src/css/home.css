@@ -119,7 +119,7 @@
 /* ─── ART CELL ───────────────────────────────────────────────────────────── */
 
 .art-strip {
-  margin: var(--space-md) 0;
+  margin: 0 0 var(--space-md);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-xs);
@@ -136,11 +136,13 @@
   min-width: 0;
 }
 
-/* Text link beneath the strip, tucked up to sit a step below the images. */
-.art-strip-more {
+/* Row above the strip: a caps label on the left, the gallery link on
+   the right, both on one baseline.                                       */
+.art-strip-head {
   display: flex;
-  justify-content: flex-end;
-  margin: calc(var(--space-sm) - var(--space-md)) 0 var(--space-md);
+  justify-content: space-between;
+  align-items: baseline;
+  margin: var(--space-md) 0 var(--space-sm);
 }
 
 .art-strip-more a {
