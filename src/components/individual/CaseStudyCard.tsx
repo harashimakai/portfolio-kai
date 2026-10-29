@@ -21,6 +21,7 @@ export default function CaseStudyCardNew({ item }: Props) {
     <Link
       to={item.slug || "/comingsoon"}
       className="case-card"
+      data-cursor="View project"
     >
       <div className="card-image">
         <img

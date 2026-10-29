@@ -62,9 +62,33 @@ body {
   z-index: 10000;
   pointer-events: none;
   opacity: 0;
-  border-radius: 0;
-  background: var(--accent);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: opacity 0.2s ease-out;
   will-change: transform;
+}
+
+.cursor-dot {
+  flex: none;
+  display: block;
+  background: var(--accent);
+  transition: background-color var(--ease-theme);
+}
+
+/* Label beside the square, its cap height level with the square. */
+.cursor-label {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--accent);
+  margin-top: -3.5px;
+  transition: color var(--ease-theme);
+}
+
+.cursor-label[hidden] {
+  display: none;
 }
 
 /* Only exists while a fine pointer is in use. */

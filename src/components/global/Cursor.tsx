@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
    - Default: a 14px square, sharp corners, centred on the pointer.
    - Over text: a fixed 3 x 20 caret, switched instantly.
    - Over anything clickable: an 8px square.
+   - Over an element with data-cursor="<label>": the 8px square plus that
+     label 10px to its right, e.g. "View project" on case study cards.
    Size changes ease over 0.12s (except into the caret); it fades in and
    out over 0.2s and sits exactly on the pointer with no trailing.
    Touch devices and reduced-motion users keep the native cursor.        */
@@ -64,14 +66,19 @@ function overText(x: number, y: number): boolean {
 
 export default function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLSpanElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
     const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (!fine.matches || calm.matches) return;
 
-    const el = ref.current!;
+    const root = ref.current!;
+    const el = dotRef.current!;
+    const label = labelRef.current!;
     document.documentElement.classList.add("has-cursor");
+    let labelText = "";
 
     let x = -100,
       y = -100;
@@ -83,8 +90,8 @@ export default function Cursor() {
       if (s === shape) return;
       shape = s;
       el.style.transition = s.snap
-        ? "opacity 0.2s ease-out"
-        : "width 0.12s ease-out, height 0.12s ease-out, opacity 0.2s ease-out";
+        ? "none"
+        : "width 0.12s ease-out, height 0.12s ease-out";
       el.style.width = `${s.w}px`;
       el.style.height = `${s.h}px`;
     };
@@ -94,24 +101,35 @@ export default function Cursor() {
       y = e.clientY;
       if (!visible) {
         visible = true;
-        el.style.opacity = "1";
+        root.style.opacity = "1";
       }
       const target = e.target as Element | null;
-      if (target?.closest(CLICKABLE)) {
+      const labelled = target?.closest<HTMLElement>("[data-cursor]");
+      const nextLabel = labelled?.dataset.cursor ?? "";
+      if (nextLabel !== labelText) {
+        labelText = nextLabel;
+        label.textContent = nextLabel;
+        label.hidden = !nextLabel;
+      }
+      if (labelled || target?.closest(CLICKABLE)) {
         apply(SMALL);
         return;
       }
       apply(overText(x, y) ? CARET : SQUARE);
     };
 
+    /* The root is placed so the square, its first child, is centred on
+       the pointer; a label simply extends to the right of it.            */
     const loop = () => {
-      el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      const w = shape?.w ?? 14;
+      const h = shape?.h ?? 14;
+      root.style.transform = `translate3d(${x - w / 2}px, ${y - h / 2}px, 0)`;
       raf = requestAnimationFrame(loop);
     };
 
     const hide = () => {
       visible = false;
-      el.style.opacity = "0";
+      root.style.opacity = "0";
     };
 
     apply(SQUARE);
@@ -133,6 +151,16 @@ export default function Cursor() {
       ref={ref}
       className="cursor"
       aria-hidden="true"
-    />
+    >
+      <span
+        ref={dotRef}
+        className="cursor-dot"
+      />
+      <span
+        ref={labelRef}
+        className="cursor-label"
+        hidden
+      />
+    </div>
   );
 }
