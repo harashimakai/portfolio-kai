@@ -108,13 +108,16 @@ export default function Cursor() {
       const nextLabel = labelled?.dataset.cursor ?? "";
       if (nextLabel !== labelText) {
         labelText = nextLabel;
-        label.textContent = nextLabel;
-        label.hidden = !nextLabel;
-        /* Restart the left-to-right reveal each time a label appears. */
+        label.classList.remove("cursor-label-in", "cursor-label-out");
+        void label.offsetWidth; /* restart the animation */
         if (nextLabel) {
-          label.classList.remove("cursor-label-in");
-          void label.offsetWidth;
+          /* Appear: reveal left to right. */
+          label.textContent = nextLabel;
+          label.hidden = false;
           label.classList.add("cursor-label-in");
+        } else if (!label.hidden) {
+          /* Leave: retract right to left, then hide. */
+          label.classList.add("cursor-label-out");
         }
       }
       if (labelled || target?.closest(CLICKABLE)) {
@@ -138,6 +141,14 @@ export default function Cursor() {
       root.style.opacity = "0";
     };
 
+    const onLabelEnd = () => {
+      if (label.classList.contains("cursor-label-out")) {
+        label.classList.remove("cursor-label-out");
+        label.hidden = true;
+      }
+    };
+    label.addEventListener("animationend", onLabelEnd);
+
     apply(SQUARE);
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", hide);
@@ -145,6 +156,7 @@ export default function Cursor() {
     raf = requestAnimationFrame(loop);
     return () => {
       document.documentElement.classList.remove("has-cursor");
+      label.removeEventListener("animationend", onLabelEnd);
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", hide);
       window.removeEventListener("blur", hide);

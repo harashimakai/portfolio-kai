@@ -91,13 +91,22 @@ body {
   display: none;
 }
 
-/* Reveals left to right: a soft-edged mask slides across the text. */
-.cursor-label-in {
+/* Reveals left to right on enter and retracts right to left on leave: a
+   soft-edged mask slides across the text, then back.                    */
+.cursor-label-in,
+.cursor-label-out {
   -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
   mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
   -webkit-mask-size: 300% 100%;
   mask-size: 300% 100%;
+}
+
+.cursor-label-in {
   animation: cursor-label-in 0.35s ease-out both;
+}
+
+.cursor-label-out {
+  animation: cursor-label-in 0.25s ease-in reverse both;
 }
 
 @keyframes cursor-label-in {
