@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 
 /* Custom pointer for mouse and trackpad users, after Rachel Chen's:
    - Default: a 14px ✦ drawn as an SVG path, centred on the pointer.
-   - Over text: the star turns 45°, then its four tips spread to the
-     caret's corners as its curved sides straighten, becoming a 3 x 20 bar.
+   - Over text: as the star turns 45°, its four tips spread to the caret's
+     corners and its curved sides straighten, becoming a 3 x 20 bar.
    - Over anything clickable: the star shrinks to 8px.
    - Over a solid button (data-cursor="hide"): once the whole star is
      inside it, it shrinks away, melting into the button.
@@ -95,12 +95,10 @@ function overText(x: number, y: number): boolean {
    The star has four tips joined by quadratic curves whose controls sit
    near the centre, giving the concave sides. The bar has the same
    structure: four corners joined by straight sides.
-   The morph runs in two overlapping phases, in polar terms so every frame
-   stays symmetric:
-   1. the whole star turns 45° (tips and controls rotate together);
-   2. each tip swings the rest of the way to its corner of the bar and
-      moves out to the corner's distance, while each control moves out to
-      its side's midpoint, which straightens the curves.                  */
+   Everything moves together on one eased progress value, in polar terms
+   so every frame stays symmetric: the star turns 45° while each tip
+   swings and travels out to its corner of the bar and each curve control
+   moves out to its side's midpoint, straightening the curves.           */
 const R = 7; /* star radius: 14px tip to tip */
 const C = 1.25 * Math.SQRT2; /* curve controls' distance from the centre */
 const BAR_W = 1.5,
@@ -130,8 +128,10 @@ const polar = (a: number, r: number) =>
 
 /* The outline at morph progress t (0 = star, 1 = bar). */
 function shapePath(t: number): string {
-  const turn = ease(clamp(t / 0.6));
-  const open = ease(clamp((t - 0.3) / 0.7));
+  /* One progress value drives everything, so the star turns, its tips
+     travel and its curves straighten all at once. */
+  const turn = ease(clamp(t));
+  const open = turn;
   const tips = TIPS.map(([a, swing]) =>
     polar(a + 45 * turn + swing * open, R + (CORNER_R - R) * open),
   );
