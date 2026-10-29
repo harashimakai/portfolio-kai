@@ -214,6 +214,15 @@
     height: auto;
     aspect-ratio: auto;
   }
+  /* Pieces flagged for it drop their crop once stacked. */
+  .art-tile-natural-sm .art-tile-image {
+    aspect-ratio: auto !important;
+    max-height: none !important;
+  }
+  .art-tile-natural-sm .art-tile-image img {
+    height: auto;
+    object-fit: unset;
+  }
   /* Stacked: fill pieces show in full at their natural proportions. */
   .art-tile-fill,
   .art-tile-fill .art-tile-button,

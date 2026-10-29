@@ -40,7 +40,12 @@ const layout: Record<string, TileLayout> = {
   "4": { aspect: "4 / 5" },
   "5": { aspect: "4 / 5" },
   "6": { aspect: "4 / 5" },
-  "1": { image: "expanded", aspect: "1.65", position: "center 14%" },
+  "1": {
+    image: "expanded",
+    aspect: "1.65",
+    position: "center 14%",
+    naturalOnPhones: true,
+  },
 };
 
 export default function Art({ setSideOpen }: Props) {

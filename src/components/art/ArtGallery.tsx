@@ -10,6 +10,7 @@ export interface TileLayout {
   maxHeight?: string; /* CSS length; past it the image crops top and bottom */
   image?: "thumbnail" | "expanded"; /* which of the piece's images to show */
   position?: string; /* object-position for a cropped image */
+  naturalOnPhones?: boolean; /* drop the crop once the gallery is one column */
 }
 
 /* A row is either a mosaic of even tiles (or, with `columns`, tiles in
@@ -63,6 +64,7 @@ export default function ArtGallery({
       maxHeight={role ? undefined : layout[projects[index].id]?.maxHeight}
       image={layout[projects[index].id]?.image}
       position={layout[projects[index].id]?.position}
+      naturalOnPhones={layout[projects[index].id]?.naturalOnPhones}
       role={role}
       onOpen={() => onOpen(index)}
     />
@@ -134,6 +136,7 @@ export interface TileProps {
   maxHeight?: string;
   image?: "thumbnail" | "expanded";
   position?: string;
+  naturalOnPhones?: boolean;
   role?: "lead" | "fill";
   onOpen: () => void;
 }
@@ -146,13 +149,21 @@ export function Tile({
   maxHeight,
   image = "thumbnail",
   position,
+  naturalOnPhones,
   role,
   onOpen,
 }: TileProps) {
   const cropped = Boolean(aspect) || role === "fill";
+  const cls = [
+    "art-tile",
+    role && `art-tile-${role}`,
+    naturalOnPhones && "art-tile-natural-sm",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <article className={role ? `art-tile art-tile-${role}` : "art-tile"}>
+    <article className={cls}>
       <button
         type="button"
         className="art-tile-button"
