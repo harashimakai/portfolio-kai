@@ -148,6 +148,9 @@
 }
 
 .art-strip-more h2 {
+  position: relative; /* the hover underline sizes to this box */
+  display: inline-flex;
+  align-items: center;
   color: var(--ink);
 }
 
