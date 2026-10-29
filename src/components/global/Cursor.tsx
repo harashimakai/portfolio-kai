@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 
 /* Custom pointer for mouse and trackpad users, after Rachel Chen's:
-   - Default: a 14px four-pointed star (✦), centred on the pointer.
-   - Over text: the star flattens into a 3 x 20 caret.
-   - Over anything clickable: an 8px star turned 45°.
-   - Over a solid button (data-cursor="hide"): it shrinks away, melting
-     into the button.
+   - Default: the ✦ glyph from The Seasons, centred on the pointer.
+   - Over text: the star squeezes into a 3 x 20 caret.
+   - Over anything clickable: the star turns 45°.
+   - Over a solid button (data-cursor="hide"): once the whole star is
+     inside it, it shrinks away, melting into the button.
    - Over an element with data-cursor="<label>": the 8px square plus that
      label 10px to its right, e.g. "View project" on case study cards.
    - Over an email link: the 14px star with a filled label, "Copy email"
@@ -22,9 +22,21 @@ const CLICKABLE =
 type Shape = { w: number; h: number; kind: "star" | "bar" | "small" | "gone" };
 
 const SQUARE: Shape = { w: 14, h: 14, kind: "star" };
-const SMALL: Shape = { w: 8, h: 8, kind: "small" };
+const SMALL: Shape = { w: 14, h: 14, kind: "small" };
 const CARET: Shape = { w: 3, h: 20, kind: "bar" };
 const GONE: Shape = { w: 14, h: 14, kind: "gone" };
+
+/* Is the whole 14px star inside the element? Checks its four tips, so a
+   pill's rounded ends count as outside.                                  */
+function containsStar(el: Element, x: number, y: number): boolean {
+  const r = 7;
+  return [
+    [x - r, y],
+    [x + r, y],
+    [x, y - r],
+    [x, y + r],
+  ].every(([px, py]) => el.contains(document.elementFromPoint(px, py)));
+}
 
 /* Is the point over an actual glyph rather than empty box space? */
 function overText(x: number, y: number): boolean {
@@ -146,7 +158,8 @@ export default function Cursor() {
         apply(SQUARE);
         return;
       }
-      if (target?.closest('[data-cursor="hide"]')) {
+      const solid = target?.closest('[data-cursor="hide"]');
+      if (solid && containsStar(solid, x, y)) {
         apply(GONE);
         return;
       }
@@ -226,7 +239,9 @@ export default function Cursor() {
       <span
         ref={dotRef}
         className="cursor-dot"
-      />
+      >
+        <span className="cursor-glyph">✦</span>
+      </span>
       <span
         ref={labelRef}
         className="cursor-label"

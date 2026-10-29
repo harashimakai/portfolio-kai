@@ -56,6 +56,7 @@ body {
 }
 
 .cursor {
+  --cursor-c: var(--accent);
   position: fixed;
   top: 0;
   left: 0;
@@ -69,91 +70,93 @@ body {
   will-change: transform;
 }
 
-.cursor-dot {
-  flex: none;
-  display: block;
-  background: var(--accent);
+/* On the footer's dark surface the cursor takes the footer gold. */
+.cursor-on-footer {
+  --cursor-c: var(--gold);
 }
 
-/* The dot is a ✦ cut from a square with an 8-point outline: four tips and
-   four inner corners. Flattening into the text bar slides the inner
-   corners out to the square's corners, so the star visibly opens into a
-   rectangle while the box narrows. clip-path shapes animate everywhere,
-   including Safari, which SVG path morphing does not.                    */
+/* The dot is a box sized to the current shape. It holds the ✦ glyph, set
+   in The Seasons so it is the font's own character, and its background
+   is the text caret, shown only in the bar state.                       */
 .cursor-dot {
-  clip-path: polygon(
-    50% 0%, 61% 39%, 100% 50%, 61% 61%,
-    50% 100%, 39% 61%, 0% 50%, 39% 39%
-  );
+  position: relative;
+  flex: none;
+  display: block;
+  background-color: transparent;
   transition:
     width 0.15s ease-out,
     height 0.15s ease-out,
-    clip-path 0.15s ease-out,
-    transform 0.2s ease-out,
-    opacity 0.2s ease-out,
-    background-color 0.3s ease-out;
+    background-color 0.15s ease-out;
 }
 
+.cursor-glyph {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--cursor-c);
+  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px));
+  transition:
+    transform 0.25s ease-out,
+    opacity 0.15s ease-out,
+    color 0.3s ease-out;
+}
+
+/* Over text: the star squeezes narrow and tall as the bar fades in. */
 .cursor-dot[data-shape="bar"] {
-  clip-path: polygon(
-    50% 0%, 100% 0%, 100% 50%, 100% 100%,
-    50% 100%, 0% 100%, 0% 50%, 0% 0%
-  );
+  background-color: var(--cursor-c);
+  transition:
+    width 0.15s ease-out,
+    height 0.15s ease-out,
+    background-color 0.15s ease-out 0.05s;
 }
 
-.cursor-dot[data-shape="small"] {
-  transform: rotate(45deg);
+.cursor-dot[data-shape="bar"] .cursor-glyph {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px))
+    scale(0.15, 1.5);
+}
+
+/* Over clickables: the star turns 45 degrees, animated. */
+.cursor-dot[data-shape="small"] .cursor-glyph {
+  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px))
+    rotate(45deg);
 }
 
 /* Over a solid button the star shrinks away into it. */
-.cursor-dot[data-shape="gone"] {
-  transform: scale(0);
+.cursor-dot[data-shape="gone"] .cursor-glyph {
   opacity: 0;
+  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px)) scale(0);
 }
 
-.cursor-label {
-  transition: color 0.3s ease-out;
-}
-
-/* Label beside the square, its cap height level with the square. */
+/* Label beside the star, its cap height level with the star. */
 .cursor-label {
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1;
   white-space: nowrap;
-  color: var(--accent);
+  color: var(--cursor-c);
   margin-top: -3.5px;
+  transition: color 0.3s ease-out;
 }
 
 .cursor-label[hidden] {
   display: none;
 }
 
-
-
-/* On the footer's dark surface everything the cursor shows is gold, and
-   a filled label takes the footer colour for its text.                   */
-.cursor-on-footer .cursor-dot {
-  background: var(--gold);
-}
-
-.cursor-on-footer .cursor-label {
-  color: var(--gold);
-}
-
-.cursor-on-footer.cursor-filled .cursor-label {
-  background: var(--gold);
-  color: var(--color-bg-inverse);
-}
-
-
-/* Filled variant (email links): an accent block with page-coloured text,
-   6 x 10 padding, centred on the full-size square.                      */
+/* Filled variant (email links): a block in the cursor colour with
+   page-coloured text, 6 x 10 padding, centred on the full-size star.    */
 .cursor-filled .cursor-label {
   padding: 6px 10px;
   margin-top: -6.5px;
-  background: var(--accent);
+  background: var(--cursor-c);
   color: var(--bg);
+}
+
+.cursor-on-footer.cursor-filled .cursor-label {
+  color: var(--color-bg-inverse);
 }
 
 /* Reveals left to right on enter and retracts right to left on leave: a
