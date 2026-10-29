@@ -328,7 +328,7 @@
 /* Phone screens: centred on a quiet surface panel. */
 .study-figure-frame img {
   background: var(--color-surface);
-  padding: clamp(16px, 3vw, 40px);
+  padding: clamp(8px, 1.2vw, 16px);
   box-sizing: border-box;
   transition: background-color var(--ease-theme);
 }
