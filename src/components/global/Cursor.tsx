@@ -1,22 +1,24 @@
 import { useEffect, useRef } from "react";
 
-/* Custom pointer for mouse and trackpad users.
-   - Default: a small square that trails the pointer.
-   - Over text: a thin caret as tall as the text under it.
-   - Over anything clickable: a smaller square.
+/* Custom pointer for mouse and trackpad users, on Rachel Chen's spec:
+   - Default: a 14px square, sharp corners, centred on the pointer.
+   - Over text: a fixed 3 x 20 caret, switched instantly.
+   - Over anything clickable: an 8px square.
+   Size changes ease over 0.12s (except into the caret); it fades in and
+   out over 0.2s and sits exactly on the pointer with no trailing.
    Touch devices and reduced-motion users keep the native cursor.        */
 
 const CLICKABLE =
   'a, button, [role="button"], select, label, summary, input[type="checkbox"], input[type="radio"]';
 
-type Shape = { w: number; h: number; r: number };
+type Shape = { w: number; h: number; snap?: boolean };
 
-const SQUARE: Shape = { w: 10, h: 10, r: 1 };
-const SMALL: Shape = { w: 6, h: 6, r: 1 };
+const SQUARE: Shape = { w: 14, h: 14 };
+const SMALL: Shape = { w: 8, h: 8 };
+const CARET: Shape = { w: 3, h: 20, snap: true };
 
-/* Is the point over an actual glyph rather than empty box space? Returns
-   the height of that line of text, or 0.                                */
-function textHeightAt(x: number, y: number): number {
+/* Is the point over an actual glyph rather than empty box space? */
+function overText(x: number, y: number): boolean {
   type Caret = { offsetNode: Node; offset: number };
   const doc = document as Document & {
     caretPositionFromPoint?: (x: number, y: number) => Caret | null;
@@ -37,9 +39,9 @@ function textHeightAt(x: number, y: number): number {
       offset = r.startOffset;
     }
   }
-  if (!node || node.nodeType !== Node.TEXT_NODE) return 0;
+  if (!node || node.nodeType !== Node.TEXT_NODE) return false;
   const text = node.textContent ?? "";
-  if (!text.trim()) return 0;
+  if (!text.trim()) return false;
   /* Check the characters either side of the caret actually contain the
      point; caret APIs snap to the nearest text even from far away.     */
   const range = document.createRange();
@@ -53,14 +55,11 @@ function textHeightAt(x: number, y: number): number {
         x <= rect.right + 1 &&
         y >= rect.top &&
         y <= rect.bottom
-      ) {
-        const el = node.parentElement;
-        const size = el ? parseFloat(getComputedStyle(el).fontSize) : 16;
-        return Math.max(12, Math.round(size * 1.05));
-      }
+      )
+        return true;
     }
   }
-  return 0;
+  return false;
 }
 
 export default function Cursor() {
@@ -75,19 +74,19 @@ export default function Cursor() {
     document.documentElement.classList.add("has-cursor");
 
     let x = -100,
-      y = -100,
-      cx = -100,
-      cy = -100;
-    let shape = SQUARE;
+      y = -100;
+    let shape: Shape | null = null;
     let visible = false;
     let raf = 0;
 
     const apply = (s: Shape) => {
       if (s === shape) return;
       shape = s;
+      el.style.transition = s.snap
+        ? "opacity 0.2s ease-out"
+        : "width 0.12s ease-out, height 0.12s ease-out, opacity 0.2s ease-out";
       el.style.width = `${s.w}px`;
       el.style.height = `${s.h}px`;
-      el.style.borderRadius = `${s.r}px`;
     };
 
     const onMove = (e: PointerEvent) => {
@@ -95,8 +94,6 @@ export default function Cursor() {
       y = e.clientY;
       if (!visible) {
         visible = true;
-        cx = x;
-        cy = y;
         el.style.opacity = "1";
       }
       const target = e.target as Element | null;
@@ -104,17 +101,11 @@ export default function Cursor() {
         apply(SMALL);
         return;
       }
-      const h = textHeightAt(x, y);
-      if (h) {
-        if (shape.h !== h || shape.w !== 2) apply({ w: 2, h, r: 1 });
-      } else apply(SQUARE);
+      apply(overText(x, y) ? CARET : SQUARE);
     };
 
     const loop = () => {
-      /* Ease toward the pointer for a little trailing weight. */
-      cx += (x - cx) * 0.35;
-      cy += (y - cy) * 0.35;
-      el.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
       raf = requestAnimationFrame(loop);
     };
 
@@ -123,7 +114,7 @@ export default function Cursor() {
       el.style.opacity = "0";
     };
 
-    apply({ ...SQUARE });
+    apply(SQUARE);
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", hide);
     window.addEventListener("blur", hide);

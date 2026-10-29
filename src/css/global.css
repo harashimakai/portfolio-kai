@@ -41,7 +41,8 @@ body {
 .theme-switching *::before,
 .theme-switching *::after {
   transition-property: color, background-color, border-color, outline-color,
-    text-decoration-color, fill, stroke, -webkit-text-fill-color !important;
+    text-decoration-color, fill, stroke, box-shadow,
+    -webkit-text-fill-color !important;
   transition-duration: 0.9s !important;
   transition-timing-function: ease-in-out !important;
   transition-delay: 0s !important;
@@ -61,14 +62,8 @@ body {
   z-index: 10000;
   pointer-events: none;
   opacity: 0;
+  border-radius: 0;
   background: var(--accent);
-  mix-blend-mode: normal;
-  transition:
-    width 0.18s ease,
-    height 0.18s ease,
-    border-radius 0.18s ease,
-    opacity 0.2s ease,
-    background-color var(--ease-theme);
   will-change: transform;
 }
 

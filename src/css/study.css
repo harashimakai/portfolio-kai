@@ -379,7 +379,9 @@
   padding: var(--space-sm);
   background: var(--color-surface);
   box-shadow: 0 10px 30px var(--shadow);
-  transition: background-color var(--ease-theme);
+  transition:
+    background-color var(--ease-theme),
+    box-shadow var(--ease-theme);
 }
 
 .study-card-title {
