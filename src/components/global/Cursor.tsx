@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
    - Default: a 14px ✦ drawn as an SVG path, centred on the pointer.
    - Over text: the star turns while each tip travels to the opposite
      side's corner of the caret and its curved sides straighten, becoming
-     a 3 x 20 bar.
+     a 3 x 20 bar. Leaving text keeps turning the same way back to a star.
    - Over anything clickable: the star shrinks to 8px.
    - Over a solid button (data-cursor="hide"): once the whole star is
      inside it, it shrinks away, melting into the button.
@@ -127,20 +127,17 @@ const CTRLS: [number, number][] = [
 ];
 
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
-const clamp = (t: number) => Math.min(1, Math.max(0, t));
 const polar = (a: number, r: number) =>
   `${(r * Math.sin(a * DEG)).toFixed(3)} ${(-r * Math.cos(a * DEG)).toFixed(3)}`;
 
-/* The outline at morph progress t (0 = star, 1 = bar). */
-function shapePath(t: number): string {
-  /* One progress value drives everything, so the star turns, its tips
-     travel and its curves straighten all at once. */
-  const turn = ease(clamp(t));
-  const open = turn;
+/* The outline for a given turn (degrees, clockwise) and openness (0 =
+   star, 1 = bar). The bar is reached at turns of 135° + 180°k; a star at
+   any whole quarter turn looks upright, since it repeats every 90°.    */
+function shapePath(rotation: number, open: number): string {
   const tips = TIPS.map(([a, swing]) =>
-    polar(a + TURN * turn + swing * open, R + (CORNER_R - R) * open),
+    polar(a + rotation + swing * open, R + (CORNER_R - R) * open),
   );
-  const ctls = CTRLS.map(([a, r]) => polar(a + TURN * turn, C + (r - C) * open));
+  const ctls = CTRLS.map(([a, r]) => polar(a + rotation, C + (r - C) * open));
   let d = `M${tips[0]}`;
   for (let i = 0; i < 4; i++) d += ` Q${ctls[i]} ${tips[(i + 1) % 4]}`;
   return d + "Z";
@@ -165,12 +162,18 @@ export default function Cursor() {
     const path = pathRef.current!;
     document.documentElement.classList.add("has-cursor");
 
-    /* Morph progress toward the bar, animated by the frame loop. */
-    let morph = 0,
-      morphFrom = 0,
-      morphTo = 0,
-      morphStart = 0;
-    path.setAttribute("d", shapePath(0));
+    /* Turn and openness, animated by the frame loop. Entering text turns
+       the star 135° into the bar; leaving keeps turning the same way, a
+       further 135°, back into an upright star.                          */
+    let rotation = 0,
+      open = 0,
+      rotFrom = 0,
+      rotTo = 0,
+      openFrom = 0,
+      openTo = 0,
+      animStart = 0,
+      animating = false;
+    path.setAttribute("d", shapePath(0, 0));
     let labelText = "";
     let lastTarget: Element | null = null;
     let copiedOn: Element | null = null;
@@ -186,10 +189,18 @@ export default function Cursor() {
       shape = s;
       el.dataset.shape = s.kind;
       const target = s.kind === "bar" ? 1 : 0;
-      if (target !== morphTo) {
-        morphFrom = morph;
-        morphTo = target;
-        morphStart = performance.now();
+      if (target !== openTo) {
+        rotFrom = rotation;
+        openFrom = open;
+        openTo = target;
+        rotTo =
+          target === 1
+            ? /* next bar position: 135° + 180°k */
+              135 + 180 * Math.ceil((rotation - 135) / 180)
+            : /* a further turn, to the next quarter at least 90° on */
+              90 * Math.ceil((rotation + 90) / 90);
+        animStart = performance.now();
+        animating = true;
       }
     };
 
@@ -263,10 +274,18 @@ export default function Cursor() {
        morphs about that centre, and a label extends to the right.       */
     const loop = (now: number) => {
       root.style.transform = `translate3d(${x - 7}px, ${y - 7}px, 0)`;
-      if (morph !== morphTo) {
-        const k = Math.min(1, (now - morphStart) / MORPH_MS);
-        morph = morphFrom + (morphTo - morphFrom) * k;
-        path.setAttribute("d", shapePath(morph));
+      if (animating) {
+        const k = Math.min(1, (now - animStart) / MORPH_MS);
+        const e = ease(k);
+        rotation = rotFrom + (rotTo - rotFrom) * e;
+        open = openFrom + (openTo - openFrom) * e;
+        if (k === 1) {
+          animating = false;
+          /* Back at a star: fold the turn into one quarter, which looks
+             identical, so the numbers never grow. */
+          if (openTo === 0) rotation %= 90;
+        }
+        path.setAttribute("d", shapePath(rotation, open));
       }
       raf = requestAnimationFrame(loop);
     };
