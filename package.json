@@ -14,6 +14,7 @@
     "images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "bootstrap": "^5.2.3",
     "motion": "^12.23.26",
     "react": "^18.2.0",
