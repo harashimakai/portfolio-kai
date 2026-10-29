@@ -5,15 +5,20 @@
   transition: padding-top var(--ease-hover);
 }
 
+/* Side by side: the stats column keeps its content width and never
+   wraps; the statement takes the rest, capped so it stays three lines.   */
 .mission-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
+  gap: 48px;
 }
 
 .mission-body {
-  width: 60%;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 60%;
 }
 
 .mission-intro {
@@ -26,8 +31,14 @@
   text-underline-offset: 15.5%;
 }
 
+/* The statement's cap height and the first stat line's cap height sit on
+   the same line. The-seasons has a 1em ascent, a 0.296em descent and a
+   0.7em cap height, so the cap top sits 0.252em below the line box at
+   the statement's 1.2 line-height and 7.85px below it for 18px body at
+   1.55; the margin is the difference.                                     */
 .mission-stats {
-  margin-top: 15px;
+  flex: 0 0 auto;
+  margin-top: calc(0.252 * var(--text-lead) - 7.85px);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -119,16 +130,10 @@
   display: revert;
 }
 
-.art-cell-container {
-  aspect-ratio: 1/1;
-  overflow: hidden;
-}
-
-.art-cell-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+/* Each cell holds an art-page tile cropped square; its hover and
+   lightbox come from art.css.                                            */
+.art-cell {
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -149,6 +154,23 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
+/* Below 1400px the two columns no longer fit beside each other with the
+   statement on three lines, so it runs full width and the NOW / STUDYING
+   / EMAIL rows and buttons drop beneath it.                              */
+@media (max-width: 1399px) {
+  .mission-container {
+    flex-direction: column;
+    gap: 36px;
+  }
+  .mission-body {
+    max-width: none;
+  }
+  .mission-stats {
+    margin-top: 0;
+    max-width: none;
+  }
+}
+
 @media (max-width: 1189px) {
   .mission-content {
     padding: 72px var(--page-gutter) 64px;
@@ -160,10 +182,24 @@
     padding: 48px var(--page-gutter) 40px;
   }
   .mission-container {
-    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .mission-stat-row {
     gap: 24px;
   }
-  .mission-stats {
-    margin-top: 28px;
+  .mission-stat-row h3 {
+    min-width: 76px;
+  }
+  /* Same size as the case card excerpt, so the NOW line fits beside its
+     label without wrapping or overflowing. */
+  .mission-desc {
+    font-size: var(--text-sm);
+  }
+  .action-buttons {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .action-buttons button {
+    padding: 14px 24px;
   }
 }

@@ -24,7 +24,7 @@ const TOOLS = [
   },
   {
     group: "FINE ARTS",
-    items: ["OIL PAINT", "CALLIGRAPHY", "CNC", "SOLDERING", "LASER ENGRAVING"],
+    items: ["OIL PAINT", "DRAWING", "CALLIGRAPHY", "LASER ENGRAVING"],
   },
   {
     group: "BIOLOGY",
@@ -56,7 +56,7 @@ const EXPERIENCES = [
   {
     date: "FEB 2026 — PRESENT",
     title: "Cornell Design & Tech Initiative",
-    role: "Designer, CUApts",
+    role: "Design Engineer, CUApts",
   },
   {
     date: "JUN — AUG 2025, 2026",

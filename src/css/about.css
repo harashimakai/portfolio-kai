@@ -307,6 +307,10 @@
   .about-content {
     padding: 36px var(--page-gutter);
   }
+  /* Tighter dots, so a long quote list stays on fewer rows. */
+  .about-quote-dots button {
+    padding: 6px 4px;
+  }
   .about-body {
     padding: var(--space-xs) var(--page-gutter) var(--space-md);
     gap: 36px;
@@ -314,7 +318,9 @@
   .about-content-secondary {
     padding: var(--space-xs) var(--page-gutter) var(--space-md);
   }
+  /* Stacked: Education to Experiences matches the 56px that separates
+     Repertoire from Education. */
   .about-body-secondary {
-    gap: var(--space-md);
+    gap: 56px;
   }
 }

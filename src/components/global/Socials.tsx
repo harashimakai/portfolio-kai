@@ -1,16 +1,10 @@
 import { motion } from "motion/react";
 import { container_s, children } from "./AnimationConsts";
+import Arrow from "./Arrow";
 
-export default function Socials({
-  caseStudy = false,
-}: {
-  caseStudy?: boolean;
-}) {
+export default function Socials() {
   return (
-    <footer
-      className="social-container"
-      style={caseStudy ? { backgroundColor: "#222225" } : undefined}
-    >
+    <footer className="social-container">
       <motion.div
         className="social-grid"
         variants={container_s}
@@ -24,7 +18,7 @@ export default function Socials({
             className="body-lg"
             variants={children}
           >
-            Set in The Seasons and Inter Tight. Built in React, designed in
+            Set in The Seasons and Geist. Built in React, designed in
             Figma.
           </motion.p>
         </motion.div>
@@ -42,8 +36,7 @@ export default function Socials({
             href="mailto:kh862@cornell.edu"
             variants={children}
           >
-            kh862@cornell.edu &nbsp;
-            <span className="sans">{"\u2197\uFE0E"}</span>
+            kh862@cornell.edu <Arrow dir="ne" />
           </motion.a>
           <motion.a
             className="body-lg"
@@ -51,8 +44,7 @@ export default function Socials({
             href="mailto:harashimakai@gmail.com"
             variants={children}
           >
-            harashimakai@gmail.com &nbsp;
-            <span className="sans">{"\u2197\uFE0E"}</span>
+            harashimakai@gmail.com <Arrow dir="ne" />
           </motion.a>
         </motion.div>
         <motion.div className="social-box">
@@ -63,7 +55,7 @@ export default function Socials({
             href="https://www.instagram.com/kaiharashima/"
             variants={children}
           >
-            Instagram &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
+            Instagram <Arrow dir="ne" />
           </motion.a>
           <motion.a
             className="body-lg"
@@ -71,7 +63,7 @@ export default function Socials({
             href="https://www.linkedin.com/in/kai-harashima-109164364"
             variants={children}
           >
-            LinkedIn &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
+            LinkedIn <Arrow dir="ne" />
           </motion.a>
           <motion.a
             className="body-lg"
@@ -79,7 +71,7 @@ export default function Socials({
             href="https://github.com/harashimakai"
             variants={children}
           >
-            Github &nbsp;<span className="sans">{"\u2197\uFE0E"}</span>
+            Github <Arrow dir="ne" />
           </motion.a>
         </motion.div>
       </motion.div>
@@ -88,12 +80,14 @@ export default function Socials({
         variants={children}
       >
         <h2>© KAI HARASHIMA &nbsp;✦&nbsp; MMXXVI</h2>
-        <h2>DESIGN PORTFOLIO · No. 02 / 02</h2>
+        <h2>DESIGN PORTFOLIO</h2>
         <button
           className="back-to-top"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          <h2>{"\u2191\uFE0E"} BACK TO TOP</h2>
+          <h2>
+            <Arrow dir="up" lead /> BACK TO TOP
+          </h2>
         </button>
       </motion.div>
     </footer>

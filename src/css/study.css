@@ -1,0 +1,697 @@
+/* ─── Case study page ────────────────────────────────────────────────────── */
+/* Long-form, single column. Text sits in a reading measure; figures may
+   run the full gutter width. Everything draws on the site tokens, which
+   the page re-colours below to the project's palette.                     */
+
+:root {
+  --study-wide: 1080px;
+}
+
+/* ─── Hero gradient colours ──────────────────────────────────────────────── */
+/* Registered so they interpolate: the gradient's stops animate on a theme
+   change exactly like the page's background colour does.                  */
+
+@property --study-hero-a {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f3cea3;
+}
+
+@property --study-hero-b {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #b3b0ed;
+}
+
+/* ─── Palette ────────────────────────────────────────────────────────────── */
+/* Put Me On's cream and charcoal, with its amber accent. Applied on the
+   theme wrapper for the whole page, so the nav and footer follow too.    */
+
+.lightmode.theme-putmeon {
+  --bg: #f4efe7;
+  --color-surface: #faf6ee;
+  --color-border: rgba(26, 26, 28, 0.18);
+  --color-overlay: rgba(26, 26, 28, 0.06);
+  --hairline: rgba(26, 26, 28, 0.35);
+  --muted: #737065;
+  --accent: #be8b59;
+  --ink: #1a1a1c;
+  --shadow: rgba(26, 26, 28, 0.06);
+  --color-bg-inverse: #1a1a1c;
+  --selection: #1a1a1c;
+  --special-hover: #b97d44;
+  --study-hero-a: #f3cea3;
+  --study-hero-b: #b3b0ed;
+}
+
+.darkmode.theme-putmeon {
+  --bg: #1b1b1f;
+  --color-surface: #222225;
+  --color-border: rgba(245, 235, 217, 0.18);
+  --color-overlay: rgba(245, 235, 217, 0.06);
+  --hairline: rgba(245, 235, 217, 0.4);
+  --muted: #7a7a78;
+  --accent: #d39354;
+  --ink: #f5ebd9;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --color-bg-inverse: #141416;
+  --selection: #d39354;
+  --special-hover: #ffd2a6;
+  --study-hero-a: #c19a67;
+  --study-hero-b: #9392d5;
+}
+
+/* ─── Hero ───────────────────────────────────────────────────────────────── */
+/* The project's gradient on the page colour. Each palette has its own
+   gradient that fades into that palette's background, and the wordmark
+   swaps with the theme.                                                   */
+
+/* Pulled up under the translucent site nav so the gradient starts at the
+   top of the page; the padding grows by the same amount.                 */
+/* No background of its own: the page colour shows through, so when the
+   page arrives from another route the hero fades with the rest of it
+   instead of snapping to the study palette.                              */
+.study-hero {
+  position: relative;
+  isolation: isolate;
+  margin-top: calc(-1 * var(--nav-height));
+  padding: calc(clamp(96px, 14vw, 200px) + var(--nav-height)) var(--page-gutter)
+    var(--space-section);
+  color: var(--ink);
+}
+
+/* Peach to lavender, cut by a soft sine-wave edge: one full cycle across
+   the width, lowest at the wordmark's midpoint. The wave lives in an SVG
+   mask with a blur, so the page colour shows through beneath it and the
+   two hues (theme tokens) interpolate on a theme change.                */
+.study-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    var(--study-hero-a) 0%,
+    color-mix(in srgb, var(--study-hero-a), var(--study-hero-b) 55%) 30%,
+    var(--study-hero-b) 75%
+  );
+  animation: study-hero-in var(--ease-theme) both;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201000%201000%22%20preserveAspectRatio=%22none%22%3E%3Cfilter%20id=%22b%22%20filterUnits=%22userSpaceOnUse%22%20x=%22-600%22%20y=%22-800%22%20width=%222200%22%20height=%222600%22%3E%3CfeGaussianBlur%20stdDeviation=%2270%22/%3E%3C/filter%3E%3Cpath%20d=%22M-400,-600%20H1400%20V451%20L1400,451%20L1375,459%20L1350,467%20L1325,472%20L1300,477%20L1275,479%20L1250,480%20L1225,479%20L1200,477%20L1175,472%20L1150,467%20L1125,459%20L1100,451%20L1075,442%20L1050,432%20L1025,421%20L1000,410%20L975,399%20L950,388%20L925,378%20L900,369%20L875,361%20L850,353%20L825,348%20L800,343%20L775,341%20L750,340%20L725,341%20L700,343%20L675,348%20L650,353%20L625,361%20L600,369%20L575,378%20L550,388%20L525,399%20L500,410%20L475,421%20L450,432%20L425,442%20L400,451%20L375,459%20L350,467%20L325,472%20L300,477%20L275,479%20L250,480%20L225,479%20L200,477%20L175,472%20L150,467%20L125,459%20L100,451%20L75,442%20L50,432%20L25,421%20L0,410%20L-25,399%20L-50,388%20L-75,378%20L-100,369%20L-125,361%20L-150,353%20L-175,348%20L-200,343%20L-225,341%20L-250,340%20L-275,341%20L-300,343%20L-325,348%20L-350,353%20L-375,361%20L-400,369%20Z%22%20fill=%22%23000%22%20filter=%22url%28%23b%29%22/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201000%201000%22%20preserveAspectRatio=%22none%22%3E%3Cfilter%20id=%22b%22%20filterUnits=%22userSpaceOnUse%22%20x=%22-600%22%20y=%22-800%22%20width=%222200%22%20height=%222600%22%3E%3CfeGaussianBlur%20stdDeviation=%2270%22/%3E%3C/filter%3E%3Cpath%20d=%22M-400,-600%20H1400%20V451%20L1400,451%20L1375,459%20L1350,467%20L1325,472%20L1300,477%20L1275,479%20L1250,480%20L1225,479%20L1200,477%20L1175,472%20L1150,467%20L1125,459%20L1100,451%20L1075,442%20L1050,432%20L1025,421%20L1000,410%20L975,399%20L950,388%20L925,378%20L900,369%20L875,361%20L850,353%20L825,348%20L800,343%20L775,341%20L750,340%20L725,341%20L700,343%20L675,348%20L650,353%20L625,361%20L600,369%20L575,378%20L550,388%20L525,399%20L500,410%20L475,421%20L450,432%20L425,442%20L400,451%20L375,459%20L350,467%20L325,472%20L300,477%20L275,479%20L250,480%20L225,479%20L200,477%20L175,472%20L150,467%20L125,459%20L100,451%20L75,442%20L50,432%20L25,421%20L0,410%20L-25,399%20L-50,388%20L-75,378%20L-100,369%20L-125,361%20L-150,353%20L-175,348%20L-200,343%20L-225,341%20L-250,340%20L-275,341%20L-300,343%20L-325,348%20L-350,353%20L-375,361%20L-400,369%20Z%22%20fill=%22%23000%22%20filter=%22url%28%23b%29%22/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transition:
+    --study-hero-a var(--ease-theme),
+    --study-hero-b var(--ease-theme);
+}
+
+@keyframes study-hero-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* The two wordmarks share one cell and cross-fade the same way. */
+.study-hero-logo {
+  display: grid;
+  width: min(747px, 100%);
+}
+
+.study-hero-logo img {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity var(--ease-theme);
+}
+
+.study-hero-logo .study-hero-logo-dark,
+.darkmode .study-hero-logo .study-hero-logo-light {
+  opacity: 0;
+}
+
+.darkmode .study-hero-logo .study-hero-logo-dark {
+  opacity: 1;
+}
+
+.study-hero-subtitle {
+  margin: 28px 0 0;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--text-lg);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.study-hero-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-sm);
+  margin: clamp(48px, 6vw, 80px) 0 0;
+}
+
+.study-hero-meta dt {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  transition: color var(--ease-theme);
+}
+
+.study-hero-meta dd {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+/* ─── Sections ───────────────────────────────────────────────────────────── */
+
+/* Vertical rhythm. The scale lives here; which gap a block gets is decided
+   by gapBetween() in Study.tsx from the roles of it and its predecessor,
+   and applied as a class on the block's Slot. Nothing is spaced by its
+   position in the DOM.                                                    */
+:root {
+  --study-gap-eyebrow: 14px; /* after an eyebrow or section label */
+  --study-gap-header: 24px; /* after a header */
+  --study-gap-block: 40px; /* content after content */
+  --study-gap-group: 56px; /* a new header or eyebrow after content */
+}
+
+.study-slot {
+  position: relative;
+}
+
+.study-gap-none {
+  margin-top: 0;
+}
+
+.study-gap-eyebrow {
+  margin-top: var(--study-gap-eyebrow);
+}
+
+.study-gap-header {
+  margin-top: var(--study-gap-header);
+}
+
+.study-gap-block {
+  margin-top: var(--study-gap-block);
+}
+
+.study-gap-group {
+  margin-top: var(--study-gap-group);
+}
+
+.study-section-label + .study-slot,
+.study-section-tools + .study-slot {
+  margin-top: var(--study-gap-eyebrow);
+}
+
+
+.study-section {
+  padding: var(--space-section) var(--page-gutter);
+}
+
+.study-section-label {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Running text on the study page is set in the sans, one size and
+   weight everywhere; headings, card titles and takeaway titles keep the
+   serif.                                                                  */
+.study-body,
+.study-bullets p,
+.study-takeaway-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-md);
+  line-height: var(--leading-body);
+  font-style: normal;
+  color: var(--ink);
+}
+
+.study-statement {
+  margin: 0;
+  text-wrap: balance;
+}
+
+.study-statement-small {
+  font-size: var(--text-quote);
+  line-height: var(--leading-quote);
+}
+
+/* Eyebrows are always muted. */
+.study-kicker {
+  margin: 0;
+  color: var(--muted);
+}
+
+.study-body {
+  margin: 0;
+}
+
+.study-accent {
+  color: var(--accent);
+}
+
+/* Bold is heavier and in the accent. The serif ships 700, the sans 600;
+   both faces ship italics.                                                */
+.study strong {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.study-body strong,
+.study-bullets strong,
+.study-takeaway-body strong,
+.study-card-title strong {
+  font-weight: 600;
+}
+
+.study em {
+  font-style: italic;
+}
+
+/* ─── Bullets ────────────────────────────────────────────────────────────── */
+
+.study-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.study-bullets li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.study-bullets p {
+  margin: 0;
+}
+
+/* A short bar in the accent, centred on the first line of text. */
+.study-bullet-dash {
+  flex: none;
+  width: 16px;
+  height: 2px;
+  margin-top: 12px;
+  background: var(--accent);
+  transition: background-color var(--ease-theme);
+}
+
+/* ─── Figures ────────────────────────────────────────────────────────────── */
+
+.study-figure {
+  margin: 0;
+  max-width: var(--study-wide);
+}
+
+.study-figure-wide {
+  max-width: none;
+}
+
+.study-figure img,
+.study-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Phone screens: centred on a quiet surface panel. */
+.study-figure-frame img {
+  background: var(--color-surface);
+  padding: clamp(16px, 3vw, 40px);
+  box-sizing: border-box;
+  transition: background-color var(--ease-theme);
+}
+
+.study-figure figcaption {
+  margin-top: 12px;
+}
+
+.study-row {
+  display: grid;
+  gap: var(--space-gap);
+  align-items: start;
+}
+
+.study-row-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.study-row-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.study-row .study-figure {
+  margin: 0;
+  max-width: none;
+}
+
+.study-row-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.study-row-note {
+  color: var(--accent);
+  text-align: right;
+}
+
+/* ─── Cards and quotes ───────────────────────────────────────────────────── */
+
+.study-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.study-card {
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: background-color var(--ease-theme);
+}
+
+.study-card-title {
+  margin: 0 0 14px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+/* ─── Takeaways ──────────────────────────────────────────────────────────── */
+
+.study-takeaways {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.study-takeaways li {
+  display: flex;
+  gap: 32px;
+  padding: var(--space-sm) 0;
+  border-top: 1px solid var(--color-border);
+  transition: border-color var(--ease-theme);
+}
+
+.study-takeaways li:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.study-takeaways li > h3 {
+  flex: none;
+  width: 32px;
+  color: var(--accent);
+  padding-top: 6px;
+}
+
+.study-takeaway-title {
+  margin: 0 0 8px;
+}
+
+.study-takeaway-body {
+  margin: 0;
+}
+
+/* ─── End ────────────────────────────────────────────────────────────────── */
+
+.study-end {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-sm) var(--page-gutter) var(--space-section);
+}
+
+.study-end a {
+  text-decoration: none;
+}
+
+.study-end a h2,
+.study-top h2 {
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.study-end a:hover h2,
+.study-top:hover h2 {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}
+
+.study-top {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 1189px) {
+  .study-hero-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-md);
+  }
+  .study-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .study-row-3,
+  .study-row-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .study-hero-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .study-takeaways li {
+    gap: 18px;
+  }
+}
+
+/* ─── Dev edit mode ──────────────────────────────────────────────────────── */
+
+.study-editable {
+  outline: 1px dashed var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+  cursor: text;
+  white-space: pre-wrap;
+}
+
+/* Block chrome: a label and small pill buttons above each block. */
+.study-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.study-tools > h3 {
+  margin-right: 6px;
+}
+
+.study-section-tools {
+  padding: 10px 12px;
+  margin-bottom: var(--space-sm);
+  border: 1px dashed var(--color-border);
+}
+
+.study-tool {
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.study-tool h2 {
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.study-tool:hover h2 {
+  color: var(--accent);
+}
+
+.study-add {
+  margin: 12px 0 4px;
+}
+
+.study-select {
+  font: inherit;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  padding: 3px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--ink);
+}
+
+.study-editing .study-bullets p,
+.study-editing .study-card-title,
+.study-editing .study-takeaway-title,
+.study-editing .study-row-caption h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.study-divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin-bottom: 0; /* top margin comes from the section rhythm */
+  transition: border-color var(--ease-theme);
+}
+
+/* Gutter controls: a column of small round buttons in the page margin to
+   the left of each block and section, with the block type above them.  */
+.study-section-tools {
+  position: relative;
+}
+
+.study-section-tools {
+  min-height: 32px;
+  margin-bottom: var(--space-sm);
+}
+
+.study-gutter {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.study-gutter-label {
+  margin-right: 6px;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+/* Blocks keep enough height for their row of controls. */
+.study-editing .study-slot {
+  min-height: 30px;
+}
+
+.study-gutter-button {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    color var(--ease-hover),
+    border-color var(--ease-hover);
+}
+
+.study-gutter-button:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.study-gutter-button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.study-gutter-delete:hover {
+  color: #c0392b;
+  border-color: #c0392b;
+}
+
+.study-gutter-menu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  z-index: 30;
+  margin-left: 10px;
+  padding: 10px;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.study-gutter-menu > h3 {
+  margin-bottom: 4px;
+}
+
+.study-gutter-menu .study-tool {
+  text-align: left;
+}
+
+/* Narrow gutters: controls fall inside the content column instead. */
+@media (max-width: 1189px) {
+  .study-gutter {
+    position: static;
+    margin: 0 0 8px;
+  }
+  .study-gutter-menu {
+    left: 0;
+    top: 100%;
+    margin: 6px 0 0;
+  }
+}
+
+.edit-bar {
+  position: fixed;
+  right: var(--space-sm);
+  bottom: var(--space-sm);
+  z-index: 50;
+  display: flex;
+  gap: 8px;
+}
+
+.edit-bar button {
+  padding: 12px 20px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  cursor: pointer;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.edit-bar button h2 {
+  color: var(--ink);
+}
+
+.edit-bar button:hover h2 {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}

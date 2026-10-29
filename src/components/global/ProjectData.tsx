@@ -1,13 +1,15 @@
 import thesisCover from "../../assets/full-images/thesis-poster-final.webp";
 import ashokanCover from "../../assets/full-images/ashokan-reservoir.webp";
 import icelandCover from "../../assets/full-images/iceland.webp";
-import backyard1Cover from "../../assets/full-images/backyard-1.webp";
-import backyard2Cover from "../../assets/full-images/backyard-2.webp";
-import backyard3Cover from "../../assets/full-images/backyard-3.webp";
+import backyard1Cover from "../../assets/optimized/backyard-1-thumb.webp";
+import backyard2Cover from "../../assets/optimized/backyard-2-thumb.webp";
+import backyard3Cover from "../../assets/optimized/backyard-3-thumb.webp";
 import notebooks1Cover from "../../assets/full-images/notebook-comission-closeup.webp";
-import ledSignCover from "../../assets/full-images/led-sign.webp";
 
-import thesisExpanded from "../../assets/full-images/thesis-poster-flat.webp";
+import thesisExpanded from "../../assets/optimized/thesis-poster-flat-large.webp";
+import backyard1Expanded from "../../assets/optimized/backyard-1-large.webp";
+import backyard2Expanded from "../../assets/optimized/backyard-2-large.webp";
+import backyard3Expanded from "../../assets/optimized/backyard-3-large.webp";
 
 export interface Project {
   id: string;
@@ -86,6 +88,7 @@ export const projects: Project[] = [
     shortDescription:
       "A triptych study in texture, light, and composition. The first in a series drawn from photos of overlooked nature.",
     thumbnailUrl: backyard1Cover,
+    expandedUrl: backyard1Expanded,
     imagePos: "center 55%",
     category: "PAINTING",
     skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
@@ -101,6 +104,7 @@ export const projects: Project[] = [
     shortDescription:
       "Inspired by Rembrandt's baroque style: loose, gestural brushwork becomes depth and detail upon stepping back.",
     thumbnailUrl: backyard2Cover,
+    expandedUrl: backyard2Expanded,
     category: "PAINTING",
     skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
@@ -116,6 +120,7 @@ export const projects: Project[] = [
     shortDescription:
       "Beauty at a minute scale. Most landscapes look to coastlines or mountain ranges, but small, meditative moments can be found everywhere—even right below our feet.",
     thumbnailUrl: backyard3Cover,
+    expandedUrl: backyard3Expanded,
     category: "PAINTING",
     skills: "TEXTURE · MICRO-LANDSCAPE PAINTING",
     onHome: true,
@@ -138,26 +143,11 @@ export const projects: Project[] = [
     onWork: true,
     imagePos: "center 70%",
   },
-  {
-    id: "9",
-    title: "connect - Merging Fine Arts and Fabrication",
-    slug: "/work/9",
-    medium: "FABRICATION",
-    year: "2023",
-    shortDescription:
-      "A single word — connect — translated from pen to vector to engraved oak and LED. An exercise in carrying one idea across four mediums.",
-    thumbnailUrl: ledSignCover,
-    category: "FABRICATION",
-    skills: "CNC · SOLDERING · ILLUSTRATOR",
-    onHome: false,
-    onWork: true,
-    imagePos: "center 60%",
-  },
 ];
 
 // Display order for each context
-export const homeOrder = ["1", "2", "3", "4", "5", "6"];
-export const expandedOrder = ["1", "3", "4", "5", "6", "2", "7", "9"];
+export const homeOrder = ["2", "3", "4", "5", "1", "6"];
+export const expandedOrder = ["3", "2", "4", "5", "6", "1", "7"];
 
 export const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
 

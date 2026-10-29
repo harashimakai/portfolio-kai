@@ -9,8 +9,8 @@ import {
 } from "../components/global/AnimationConsts";
 import { Link } from "react-router-dom";
 import SectionDiv from "../components/global/SectionDiv";
-import monogram from "../assets/logos/monogram.svg";
-import monograml from "../assets/logos/monogram-light.svg";
+import Monogram from "../components/global/Monogram";
+import Arrow from "../components/global/Arrow";
 
 interface Props {
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,16 +39,7 @@ export default function NotFound({ setSideOpen }: Props) {
               custom={0}
               className="centerpiece-logos"
             >
-              <img
-                src={monogram}
-                alt="Logo"
-                className="monogram m-light"
-              />
-              <img
-                src={monograml}
-                alt="Logo"
-                className="monogram m-dark"
-              />
+              <Monogram />
             </motion.div>
             <motion.h3
               variants={children_custom}
@@ -84,12 +75,17 @@ export default function NotFound({ setSideOpen }: Props) {
                 custom={1}
                 style={{ display: "inline-block", width: "fit-content" }}
               >
-                <Link to="/">
+                <Link
+                to="/"
+                tabIndex={-1}
+              >
                   <motion.button
                     className="btn-secondary"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <h3>RETURN HOME →</h3>
+                    <h3>
+                      RETURN HOME <Arrow dir="right" />
+                    </h3>
                   </motion.button>
                 </Link>
               </motion.div>

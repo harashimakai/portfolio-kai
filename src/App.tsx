@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import "./css/tokens.css";
 import "./css/global.css";
@@ -15,42 +14,60 @@ import Socials from "./components/global/Socials";
 import ComingSoon from "./pages/ComingSoon";
 import Art from "./pages/Art";
 import NotFound from "./pages/NotFound";
-import PutMeOn from "./components/individual/put-me-on/PutMeOn";
+import CaseStudy from "./pages/CaseStudy";
+
+const systemDark = () =>
+  window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
 
 function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
-    return localStorage.getItem("theme") === "dark";
+  /* Theme: a choice made with the toggle is remembered; otherwise the
+     site follows the system setting, including when it changes.         */
+  const [darkMode, setDarkModeState] = useState<boolean>(() => {
+    const stored = localStorage.getItem("theme");
+    return stored ? stored === "dark" : systemDark();
   });
+  const setDarkMode: React.Dispatch<React.SetStateAction<boolean>> =
+    useCallback((next) => {
+      setDarkModeState((prev) => {
+        const value = typeof next === "function" ? next(prev) : next;
+        localStorage.setItem("theme", value ? "dark" : "light");
+        return value;
+      });
+    }, []);
   const [sideOpen, setSideOpen] = useState(false);
-  const location = useLocation();
-  const isPutMeOn = location.pathname === "/putmeon";
+  /* A case study page carries its own palette for the whole page. */
+  const path = useLocation().pathname;
+  const study =
+    path === "/putmeon" || path.startsWith("/work/") ? " theme-putmeon" : "";
 
   useEffect(() => {
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-  }, [darkMode]);
+    const mq = window.matchMedia?.("(prefers-color-scheme: dark)");
+    if (!mq) return;
+    const follow = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem("theme")) setDarkModeState(e.matches);
+    };
+    mq.addEventListener("change", follow);
+    return () => mq.removeEventListener("change", follow);
+  }, []);
 
   return (
-    <div className={darkMode ? "darkmode" : "lightmode"}>
+    <div className={(darkMode ? "darkmode" : "lightmode") + study}>
       <Navbar
         darkMode={darkMode}
         setDarkMode={setDarkMode}
-        caseStudy={isPutMeOn}
       />
-      {!isPutMeOn && (
-        <Sidebar
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
+      <Sidebar
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        sideOpen={sideOpen}
+        setSideOpen={setSideOpen}
+      />
+      <div className="menu-container">
+        <MenuButton
           sideOpen={sideOpen}
+          setSideOpen={setSideOpen}
         />
-      )}
-      {!isPutMeOn && (
-        <div className="menu-container">
-          <MenuButton
-            sideOpen={sideOpen}
-            setSideOpen={setSideOpen}
-          />
-        </div>
-      )}
+      </div>
       <Routes>
         <Route
           path="/"
@@ -74,14 +91,23 @@ function App() {
         />
         <Route
           path="/putmeon"
-          element={<PutMeOn />}
+          element={
+            <CaseStudy
+              setSideOpen={setSideOpen}
+              slug="putmeon"
+            />
+          }
+        />
+        <Route
+          path="/work/:slug"
+          element={<CaseStudy setSideOpen={setSideOpen} />}
         />
         <Route
           path="*"
           element={<NotFound setSideOpen={setSideOpen} />}
         />
       </Routes>
-      <Socials caseStudy={isPutMeOn} />
+      <Socials />
     </div>
   );
 }

@@ -24,7 +24,9 @@ export default function CaseStudyCardNew({ item }: Props) {
     >
       <div className="card-image">
         <img
-          loading="lazy"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           src={item.thumbnailUrl}
           alt={item.title}
         />

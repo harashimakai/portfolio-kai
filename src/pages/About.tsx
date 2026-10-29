@@ -10,6 +10,7 @@ import "../css/about.css";
 import AboutMain from "../components/about/AboutMain";
 import AboutSecond from "../components/about/AboutSecond";
 import AboutSplash from "../components/about/AboutSplash";
+import Arrow from "../components/global/Arrow";
 
 interface Props {
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -50,7 +51,7 @@ export default function About({ setSideOpen }: Props) {
                 variants={children_custom}
                 custom={0.3}
               >
-                <h2 className="underline-hover">RÉSUMÉ {"\u2197\uFE0E"}</h2>
+                <h2 className="underline-hover">RÉSUMÉ <Arrow dir="ne" /></h2>
               </motion.a>
               <motion.a
                 target="_blank"
@@ -58,7 +59,7 @@ export default function About({ setSideOpen }: Props) {
                 variants={children_custom}
                 custom={0.45}
               >
-                <h2 className="underline-hover">EMAIL {"\u2197\uFE0E"}</h2>
+                <h2 className="underline-hover">EMAIL <Arrow dir="ne" /></h2>
               </motion.a>
               <motion.a
                 target="_blank"
@@ -66,7 +67,7 @@ export default function About({ setSideOpen }: Props) {
                 variants={children_custom}
                 custom={0.6}
               >
-                <h2 className="underline-hover">LINKEDIN {"\u2197\uFE0E"}</h2>
+                <h2 className="underline-hover">LINKEDIN <Arrow dir="ne" /></h2>
               </motion.a>
             </div>
           </div>

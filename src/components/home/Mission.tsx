@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { children_custom, container_m } from "../global/AnimationConsts";
 import { Link } from "react-router-dom";
+import Arrow from "../global/Arrow";
 
 export default function Mission() {
   return (
@@ -18,8 +19,8 @@ export default function Mission() {
             variants={children_custom}
             custom={0.1}
           >
-            I’m Kai, a product designer at Cornell using computer science to
-            sharpen design thinking.
+            I’m Kai, a student at Cornell exploring the intersection of
+            computer science and design.
           </motion.p>
         </div>
         <div className="mission-stats">
@@ -30,13 +31,13 @@ export default function Mission() {
           >
             <h3>NOW</h3>
             <p className="mission-desc">
+              Design Engineer @{" "}
               <a
                 target="_blank"
                 href="https://new.cornelldti.org/"
               >
                 Cornell DTI
               </a>
-              , Ithaca NY
             </p>
           </motion.div>
           <motion.div
@@ -58,8 +59,7 @@ export default function Mission() {
               target="_blank"
               href="mailto:kh862@cornell.edu"
             >
-              kh862@cornell.edu &nbsp;
-              <span className="sans">{"\u2197\uFE0E"}</span>
+              kh862@cornell.edu <Arrow dir="ne" />
             </a>
           </motion.div>
           <div className="action-buttons">
@@ -68,9 +68,14 @@ export default function Mission() {
               custom={0.5}
               style={{ display: "inline-block", width: "fit-content" }}
             >
-              <Link to="/work">
+              <Link
+                to="/work"
+                tabIndex={-1}
+              >
                 <motion.button whileHover={{ scale: 1.05 }}>
-                  <h3>CASE STUDIES →</h3>
+                  <h3>
+                    CASE STUDIES <Arrow dir="right" />
+                  </h3>
                 </motion.button>
               </Link>
             </motion.div>
@@ -79,7 +84,10 @@ export default function Mission() {
               custom={0.6}
               style={{ display: "inline-block", width: "fit-content" }}
             >
-              <Link to="/about">
+              <Link
+                to="/about"
+                tabIndex={-1}
+              >
                 <motion.button
                   className="btn-secondary"
                   whileHover={{ scale: 1.05 }}

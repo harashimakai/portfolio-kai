@@ -36,6 +36,7 @@ export default function ItemCard({ item, index, total }: Props) {
         <img
           ref={imgRef}
           loading="lazy"
+          decoding="async"
           src={item.thumbnailUrl}
           alt={item.title}
           onLoad={measure}

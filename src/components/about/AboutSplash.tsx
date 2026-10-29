@@ -170,7 +170,7 @@ const QUOTES: Quote[] = [
         “Our flesh is the debris of dead stars, and this is also true of the
         apple and its tree, of each hair on the spider’s legs, and of the rock
         rusting on planet Mars. Each minuscule being has spokes radiating out to
-        all of creation… From one living thing, the properties of any other may
+        all of creation. From one living thing, the properties of any other may
         be predicted. Looking at any particle with sufficient care, and
         following the chain that links all things together, we can arrive at the
         universe.”
@@ -184,9 +184,9 @@ const QUOTES: Quote[] = [
         “The hardships of last winter had become a memory—a series of vivid and
         yet partial recollections. He knew that he had been cold but could not
         invoke the cold in his bones; he knew that it had been windy but could
-        not relive the wind slicing through his flesh... These things—the
-        numbing cold, the gritty gales grounding into the skin—could be brought
-        back as words or pictures, but not as experiences.”
+        not relive the wind slicing through his flesh. These things—the numbing
+        cold, the gritty gales grounding into the skin—could be brought back as
+        words or pictures, but not as experiences.”
       </>
     ),
     author: "HERNAN DIAZ, IN THE DISTANCE",

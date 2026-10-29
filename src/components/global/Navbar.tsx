@@ -1,68 +1,26 @@
 import { Link } from "react-router-dom";
-import { putmeon } from "../individual/StudyData";
 
-import monogram from "../../assets/logos/monogram.svg";
-import monograml from "../../assets/logos/monogram-light.svg";
-import monogramla from "../../assets/logos/monograml-accent.svg";
-import monogramda from "../../assets/logos/monogramd-accent.svg";
 
 import NavButton from "./NavButton";
 import DarkButton from "./DarkButton";
+import Monogram from "./Monogram";
 
 type NavbarProps = {
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-  caseStudy?: boolean;
 };
 
-export default function Navbar({
-  darkMode,
-  setDarkMode,
-  caseStudy = false,
-}: NavbarProps) {
+export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
   return (
-    <nav
-      className={`navbar ${caseStudy ? "case-nav" : ""}`}
-      style={putmeon.theme as React.CSSProperties}
-    >
-      {caseStudy && (
-        <div className="navbar-controls">
-          <div className="navbar-nav">
-            <NavButton
-              to="/"
-              label="← BACK TO WORKS"
-            />
-          </div>
-        </div>
-      )}
+    <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/">
           <div className="navbar-logos">
-            <img
-              src={monogram}
-              alt="Logo"
-              className="monogram m-light"
-            />
-            <img
-              src={monograml}
-              alt="Logo"
-              className="monogram m-dark"
-            />
-            <img
-              src={monogramla}
-              alt="Logo"
-              className="monogram m-light-accent"
-            />
-            <img
-              src={monogramda}
-              alt="Logo"
-              className="monogram m-dark-accent"
-            />
+            <Monogram />
           </div>
         </Link>
       </div>
-      {!caseStudy && (
-        <div className="navbar-controls">
+              <div className="navbar-controls">
           <div className="navbar-nav">
             <NavButton
               to="/"
@@ -86,7 +44,6 @@ export default function Navbar({
             setDarkMode={setDarkMode}
           />
         </div>
-      )}
     </nav>
   );
 }

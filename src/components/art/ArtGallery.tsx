@@ -7,36 +7,58 @@ import "../../css/art.css";
    their natural proportions.                                               */
 export interface TileLayout {
   aspect?: string; /* CSS aspect-ratio; the image is cropped to it */
+  maxHeight?: string; /* CSS length; past it the image crops top and bottom */
 }
+
+/* A row is either a mosaic of even tiles (or, with `columns`, tiles in
+   custom grid columns), or a feature pair: `natural` shows uncropped and
+   sets the row height; `crop` fills the other column at that height.
+   By default the pair is 60 / 40 with `crop` first. With `height` (and
+   the natural piece's `ratio`), the row is that tall instead: the
+   natural piece takes exactly the width that gives at that height and
+   `crop` fills the rest.                                                   */
+export type GalleryRow =
+  | { kind: "mosaic"; ids: string[]; columns?: string }
+  | {
+      kind: "feature";
+      crop: string;
+      natural: string;
+      naturalFirst?: boolean;
+      height?: string;
+      ratio?: string;
+    };
 
 interface Props {
   projects: Project[];
   onOpen: (index: number) => void;
   layout?: Record<string, TileLayout>;
-  /* Two pieces for the first row, 60 / 40. `natural` shows uncropped in
-     the narrow column and sets the row height; `crop` fills the wide
-     column at that height.                                                 */
-  feature?: { crop: string; natural: string };
+  /* Row order, top to bottom. Pieces not named in any row are appended
+     as a final mosaic row.                                                 */
+  rows?: GalleryRow[];
 }
 
 export default function ArtGallery({
   projects,
   onOpen,
   layout = {},
-  feature,
+  rows = [],
 }: Props) {
-  const pair = (feature ? [feature.crop, feature.natural] : [])
-    .map((id) => projects.findIndex((p) => p.id === id))
-    .filter((i) => i >= 0);
+  const indexOf = (id: string) => projects.findIndex((p) => p.id === id);
+  const named = new Set(
+    rows.flatMap((r) =>
+      r.kind === "feature" ? [r.crop, r.natural] : r.ids,
+    ),
+  );
   const rest = projects
     .map((_, i) => i)
-    .filter((i) => !pair.includes(i));
+    .filter((i) => !named.has(projects[i].id));
 
   const tile = (index: number, role?: "lead" | "fill") => (
     <Tile
       key={projects[index].id}
       project={projects[index]}
       aspect={role ? undefined : layout[projects[index].id]?.aspect}
+      maxHeight={role ? undefined : layout[projects[index].id]?.maxHeight}
       role={role}
       onOpen={() => onOpen(index)}
     />
@@ -52,26 +74,64 @@ export default function ArtGallery({
         viewport={{ once: true }}
         custom={0.3}
       >
-        {pair.length === 2 && (
-          <div className="art-feature">
-            {tile(pair[0], "fill")}
-            {tile(pair[1], "lead")}
-          </div>
+        {rows.map((row, r) =>
+          row.kind === "feature" ? (
+            <div
+              key={r}
+              className={
+                [
+                  "art-feature",
+                  row.naturalFirst && "art-feature-lead-first",
+                  row.height && "art-feature-fixed",
+                ]
+                  .filter(Boolean)
+                  .join(" ")
+              }
+              style={
+                row.height
+                  ? ({
+                      "--art-lead-height": row.height,
+                      "--art-lead-ratio": row.ratio,
+                    } as React.CSSProperties)
+                  : undefined
+              }
+            >
+              {row.naturalFirst
+                ? [tile(indexOf(row.natural), "lead"), tile(indexOf(row.crop), "fill")]
+                : [tile(indexOf(row.crop), "fill"), tile(indexOf(row.natural), "lead")]}
+            </div>
+          ) : (
+            <div
+              key={r}
+              className={row.columns ? "art-mosaic art-mosaic-custom" : "art-mosaic"}
+              style={
+                row.columns
+                  ? ({ "--art-columns": row.columns } as React.CSSProperties)
+                  : undefined
+              }
+            >
+              {row.ids.map((id) => tile(indexOf(id)))}
+            </div>
+          ),
         )}
-        <div className="art-mosaic">{rest.map((i) => tile(i))}</div>
+        {rest.length > 0 && (
+          <div className="art-mosaic">{rest.map((i) => tile(i))}</div>
+        )}
       </motion.div>
     </section>
   );
 }
 
-interface TileProps {
+export interface TileProps {
   project: Project;
   aspect?: string;
+  maxHeight?: string;
   role?: "lead" | "fill";
   onOpen: () => void;
 }
 
-function Tile({ project, aspect, role, onOpen }: TileProps) {
+/* One piece: image, hover zoom with gradient title, opens the lightbox. */
+export function Tile({ project, aspect, maxHeight, role, onOpen }: TileProps) {
   const cropped = Boolean(aspect) || role === "fill";
 
   return (
@@ -84,7 +144,7 @@ function Tile({ project, aspect, role, onOpen }: TileProps) {
       >
         <div
           className={cropped ? "art-tile-image art-tile-cropped" : "art-tile-image"}
-          style={cropped ? { aspectRatio: aspect } : undefined}
+          style={cropped ? { aspectRatio: aspect, maxHeight } : undefined}
         >
           <img
             src={project.thumbnailUrl}

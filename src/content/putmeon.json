@@ -1,0 +1,453 @@
+{
+  "hero": {
+    "subtitle": "a social music discovery platform / case study",
+    "meta": [
+      {
+        "label": "Team",
+        "lines": [
+          "Solo Project"
+        ]
+      },
+      {
+        "label": "Role",
+        "lines": [
+          "Product Designer"
+        ]
+      },
+      {
+        "label": "Timeline",
+        "lines": [
+          "2 Weeks"
+        ]
+      },
+      {
+        "label": "Tools & Skills",
+        "lines": [
+          "UX Research",
+          "Figma",
+          "Visual Design",
+          "Rapid Prototyping"
+        ]
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "n81",
+      "label": "OVERVIEW",
+      "blocks": [
+        {
+          "id": "n123",
+          "type": "statement",
+          "text": "Problem: Music discovery currently \nfeels *ingenuous* and *algorithmic.*",
+          "small": true
+        },
+        {
+          "id": "n91",
+          "type": "body",
+          "text": "Platforms like Spotify have been trying to maximize engagement through an infinite reels-style feed, but have lost something essential in the process."
+        },
+        {
+          "id": "n107",
+          "type": "kicker",
+          "text": "OBJECTIVE"
+        },
+        {
+          "id": "n131",
+          "type": "statement",
+          "text": "How might we help users *escape repetitive listening* habits and *discover new music* through friends and fellow music lovers?",
+          "small": true
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "label": "USER RESEARCH",
+      "blocks": [
+        {
+          "id": "n139",
+          "type": "statement",
+          "text": "Based on interviews, here's what I found",
+          "small": true
+        },
+        {
+          "id": "n5",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "n6",
+              "text": "Users disapprove of music apps modeled after TikTok, Instagram, or YouTube to maximize active usage rather than passive listening"
+            },
+            {
+              "id": "n7",
+              "text": "Users report information overload: audiobook and podcast recommendations clutter the discovery page and make discovering new music more difficult"
+            },
+            {
+              "id": "n8",
+              "text": "Users want more emphasis on album art and social aspects of music discovery"
+            }
+          ]
+        },
+        {
+          "id": "n147",
+          "type": "statement",
+          "text": "I identified two distinct *user bases*, and the goals they share:",
+          "small": true
+        },
+        {
+          "id": "n10",
+          "type": "cards",
+          "items": [
+            {
+              "id": "n11",
+              "title": "ENJOYERS",
+              "lines": [
+                {
+                  "id": "n12",
+                  "text": "Love music, but don't chase discovery"
+                },
+                {
+                  "id": "n13",
+                  "text": "Want a new favorite song without effort"
+                },
+                {
+                  "id": "n14",
+                  "text": "Trust their friends' taste more than playlists"
+                }
+              ]
+            },
+            {
+              "id": "n15",
+              "title": "EXPLORERS",
+              "lines": [
+                {
+                  "id": "n16",
+                  "text": "Want to diversify their taste"
+                },
+                {
+                  "id": "n17",
+                  "text": "Actively seek new genres and artists"
+                },
+                {
+                  "id": "n18",
+                  "text": "Feel like their recommendations are too algorithmic"
+                }
+              ]
+            },
+            {
+              "id": "n19",
+              "title": "BOTH",
+              "lines": [
+                {
+                  "id": "n20",
+                  "text": "Want to see what their friends are loving right now"
+                },
+                {
+                  "id": "n21",
+                  "text": "Discover music without having to search through extensive playlists"
+                },
+                {
+                  "id": "n22",
+                  "text": "Connect and stay in touch with friends through music"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direction",
+      "label": "IDEATION",
+      "blocks": [
+        {
+          "id": "n155",
+          "type": "statement",
+          "text": "Based on user feedback, what are my priorities?",
+          "small": true
+        },
+        {
+          "id": "n24",
+          "type": "kicker",
+          "text": "KEY ELEMENTS"
+        },
+        {
+          "id": "n25",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "n26",
+              "text": "Emphasis on album artwork"
+            },
+            {
+              "id": "n27",
+              "text": "Make process of discovering music more socially driven"
+            },
+            {
+              "id": "n163",
+              "text": "As this is a social app, finding your friends should be easy"
+            },
+            {
+              "id": "n165",
+              "text": "Counters information overload and allows users to slow down and listen to music rather than consume it"
+            }
+          ]
+        },
+        {
+          "id": "n28",
+          "type": "kicker",
+          "text": "ADDITIONAL FEATURES"
+        },
+        {
+          "id": "n29",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "n30",
+              "text": "Added onboarding flow to introduce new features and reduce friction"
+            },
+            {
+              "id": "n31",
+              "text": "Added 'Save' feature integrated with music platforms so users can save songs without leaving the app"
+            }
+          ]
+        },
+        {
+          "id": "n175",
+          "type": "statement",
+          "text": "**Solution:**  The Weekly Recommendation",
+          "small": true
+        },
+        {
+          "id": "n183",
+          "type": "body",
+          "text": "Each friend shares **one pick** per week. Your home page shows you your friend's recommendations, one song at a time. By only allowing users one pick per week, Put Me On forces users to slow down and think about their recommendations. There's no infinite feed or algorithms, everything is chosen intentionally by people you know."
+        }
+      ]
+    },
+    {
+      "id": "iterations",
+      "label": "PROTOTYPING + ITERATION",
+      "blocks": [
+        {
+          "id": "n191",
+          "type": "statement",
+          "text": "The Home Page: Iterations",
+          "small": true
+        },
+        {
+          "id": "n35",
+          "type": "figures",
+          "frame": true,
+          "items": [
+            {
+              "id": "n36",
+              "asset": "home1",
+              "alt": "Home page, iteration 1",
+              "label": "HOME · V1",
+              "note": "ITERATION 1"
+            },
+            {
+              "id": "n37",
+              "asset": "home2",
+              "alt": "Home page, iteration 2",
+              "label": "HOME · V2",
+              "note": "ITERATION 2"
+            },
+            {
+              "id": "n38",
+              "asset": "home3",
+              "alt": "Home page, final",
+              "label": "HOME · V3",
+              "note": "FINAL PROTOTYPE"
+            }
+          ]
+        },
+        {
+          "id": "n39",
+          "type": "kicker",
+          "text": "KEY CHANGES"
+        },
+        {
+          "id": "n40",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "n41",
+              "text": "Changed from card format to record player to emphasize album art"
+            },
+            {
+              "id": "n42",
+              "text": "Emphasize one song at a time to counter information overload and mindless consuming"
+            },
+            {
+              "id": "n43",
+              "text": "Changed the navbar to a pill format to reduce visual hierarchy"
+            }
+          ]
+        },
+        {
+          "id": "n199",
+          "type": "divider"
+        },
+        {
+          "id": "n45",
+          "type": "statement",
+          "text": "The About Page: Iterations",
+          "small": true
+        },
+        {
+          "id": "n46",
+          "type": "figures",
+          "frame": true,
+          "items": [
+            {
+              "id": "n47",
+              "asset": "account1",
+              "alt": "Account page, iteration 1",
+              "label": "ACCOUNT · V1",
+              "note": "ITERATION 1"
+            },
+            {
+              "id": "n48",
+              "asset": "account2",
+              "alt": "Account page, iteration 2",
+              "label": "ACCOUNT · V2",
+              "note": "ITERATION 2"
+            },
+            {
+              "id": "n49",
+              "asset": "account3",
+              "alt": "Account page, final",
+              "label": "ACCOUNT · V3",
+              "note": "FINAL PROTOTYPE"
+            }
+          ]
+        },
+        {
+          "id": "n50",
+          "type": "kicker",
+          "text": "KEY CHANGES"
+        },
+        {
+          "id": "n51",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "n52",
+              "text": "Changed from card format to record player to emphasize album art"
+            },
+            {
+              "id": "n53",
+              "text": "Expanded social features: option to sync contacts and share profile to make connecting with friends as frictionless as possible"
+            },
+            {
+              "id": "n54",
+              "text": "Increased visuals for previous picks to reduce the amount users have to read"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "label": "LIBRARY / ONBOARDING + LIVE",
+      "blocks": [
+        {
+          "id": "n55",
+          "type": "statement",
+          "text": "The finishing touches."
+        },
+        {
+          "id": "n56",
+          "type": "figures",
+          "frame": true,
+          "items": [
+            {
+              "id": "n57",
+              "asset": "library",
+              "alt": "Library page, final",
+              "label": "LIBRARY PAGE",
+              "note": "FINAL PROTOTYPE"
+            },
+            {
+              "id": "n58",
+              "asset": "onboarding",
+              "alt": "Onboarding flow, final",
+              "label": "ONBOARDING FLOW",
+              "note": "FINAL PROTOTYPE"
+            },
+            {
+              "id": "n59",
+              "asset": "homePopup",
+              "alt": "Home page with a saved-to-library toast",
+              "label": "SAVE TOAST",
+              "note": "FINAL PROTOTYPE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "label": "",
+      "blocks": [
+        {
+          "id": "n207",
+          "type": "kicker",
+          "text": "WHAT WOULD I CHANGE?"
+        },
+        {
+          "id": "n208",
+          "type": "statement",
+          "text": "If I had *more time*, I would've…"
+        },
+        {
+          "id": "n209",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "n210",
+              "text": "spent longer *ideating wireframes* and app structure — specifically the organization of the library page."
+            },
+            {
+              "id": "n211",
+              "text": "explored this concept as an *integrated feature* within Spotify as opposed to an independent app."
+            },
+            {
+              "id": "n212",
+              "text": "conducted *more formalized research* — possibly a survey. Most of my user research was based on what I'd heard from friends or found online."
+            }
+          ]
+        },
+        {
+          "id": "n213",
+          "type": "kicker",
+          "text": "TAKEAWAYS"
+        },
+        {
+          "id": "n214",
+          "type": "takeaways",
+          "items": [
+            {
+              "id": "n215",
+              "title": "First *Figma* experience",
+              "body": "Picked up Figma in two weeks — going from using squares instead of frames to fully animated components, relying on advice from mentors and YouTube tutorials."
+            },
+            {
+              "id": "n216",
+              "title": "First *UI/UX case study* experience",
+              "body": "Learned everything about case studies. Navigated brainstorming, user research, and iterations while learning how to create lo-fi and hi-fi prototypes."
+            },
+            {
+              "id": "n217",
+              "title": "User Research: Designing with *empathy*",
+              "body": "I realized that design is about much more than how aesthetically pleasing something looks. Every aspect of a product must have intention and care behind it to truly improve users' lives."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nextId": 218
+}

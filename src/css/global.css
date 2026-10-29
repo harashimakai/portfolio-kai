@@ -107,6 +107,15 @@ h3 {
   margin: 0;
 }
 
+/* ─── Keyboard focus ─────────────────────────────────────────────────────── */
+/* One ring for the whole site, shown only for keyboard focus: a hairline in
+   the accent, floated off the element the way the art tiles had it.       */
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 8px;
+}
+
 /* ─── Serif display tiers ────────────────────────────────────────────────── */
 /* Size comes from the ladder in tokens.css; every other metric is fixed here
    so a tier is never restyled at the point of use.                          */
@@ -191,7 +200,7 @@ hr {
   font-style: italic;
 }
 
-/* OpenType stylistic alternates for Inter Tight */
+/* OpenType stylistic alternates (Inter Tight sets; ignored by Geist) */
 .alternative_a {
   font-feature-settings: "ss01" on;
 }
@@ -213,6 +222,51 @@ hr {
   font-family: var(--font-sans);
   position: relative;
   bottom: -2px;
+}
+
+/* ─── Inline arrows ──────────────────────────────────────────────────────── */
+/* .arrow is an inline span holding one no-break space, stretched with
+   word-spacing to the width of the gap plus the icon; the icon is laid
+   over it, centred on the line. Any underline the surrounding link has
+   covers the space, so it continues under the arrow unchanged.          */
+
+.arrow {
+  position: relative;
+  display: inline;
+  white-space: nowrap;
+  /* The hidden em dash is 1em; letter-spacing adds the 0.4em gap. The
+     fill is transparent but `color` stays, so the underline and the
+     icon keep the link's colour.                                         */
+  letter-spacing: 0.4em;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+  color: inherit;
+}
+
+.arrow-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1em;
+  height: 1em;
+  transform: translateY(-50%);
+}
+
+.arrow-lead .arrow-icon {
+  right: auto;
+  left: 0;
+}
+
+/* Caps labels: a bigger icon, with a wider space behind it. */
+h2 .arrow,
+h3 .arrow {
+  letter-spacing: 0.7em; /* 1em dash + 0.7em: a 0.4em gap plus the 1.3em icon */
+}
+
+h2 .arrow-icon,
+h3 .arrow-icon {
+  width: 1.3em;
+  height: 1.3em;
 }
 
 /* ─── Section divider ────────────────────────────────────────────────────── */
@@ -315,39 +369,17 @@ hr {
   height: 34.5781px;
 }
 
-.navbar-logos img {
-  grid-row: 1 / 1;
-  grid-column: 1 / 1;
-}
-
 .monogram {
+  display: block;
   width: 100%;
   height: 100%;
-  transition: opacity var(--ease-theme);
+  color: var(--ink);
+  transition: color var(--ease-theme);
 }
 
-.m-light {
-  opacity: var(--logo-light-opacity);
-}
-.m-light-accent,
-.m-dark-accent {
-  opacity: 0;
-}
-
-.m-dark {
-  opacity: var(--logo-dark-opacity);
-}
-
-.navbar-logos:hover .m-light-accent,
-.navbar-logos:hover .m-dark-accent {
-  transition: opacity var(--ease-hover);
-}
-
-.navbar-logos:hover .m-light-accent {
-  opacity: min(100, var(--logo-light-opacity));
-}
-.navbar-logos:hover .m-dark-accent {
-  opacity: min(100, var(--logo-dark-opacity));
+.navbar-logos:hover .monogram {
+  color: var(--accent);
+  transition: color var(--ease-hover);
 }
 
 .navbar-controls {
@@ -465,7 +497,6 @@ hr {
   max-width: fit-content;
   cursor: pointer;
   background: none;
-  outline: none;
   border: none;
   border-radius: 50%;
   z-index: 1004;
@@ -560,6 +591,7 @@ footer.social-container {
 
 .social-box a {
   display: block;
+  width: fit-content;
   font-weight: 400;
   color: var(--gold);
   transition: color var(--ease-theme);
@@ -681,11 +713,6 @@ footer.social-container {
   transition:
     width var(--ease-hover),
     height var(--ease-hover);
-}
-
-.centerpiece-logos img {
-  grid-row: 1 / 1;
-  grid-column: 1 / 1;
 }
 
 .centerpiece-desc {

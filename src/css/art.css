@@ -25,6 +25,31 @@
   align-items: stretch;
 }
 
+.art-feature-lead-first {
+  grid-template-columns: 2fr 3fr;
+}
+
+/* Fixed-height pair: the lead is exactly as tall as the row and as wide
+   as its proportions allow; the fill takes whatever width is left.       */
+.art-feature-fixed {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.art-feature-fixed:not(.art-feature-lead-first) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.art-feature-fixed .art-tile-lead .art-tile-image {
+  width: auto;
+  height: var(--art-lead-height);
+  aspect-ratio: var(--art-lead-ratio);
+}
+
+.art-feature-fixed .art-tile-lead .art-tile-image img {
+  height: 100%;
+  object-fit: cover;
+}
+
 .art-tile-fill,
 .art-tile-fill .art-tile-button,
 .art-tile-fill .art-tile-image {
@@ -69,13 +94,11 @@
   font: inherit;
 }
 
-.art-tile-button:focus-visible {
-  outline: 1px solid var(--accent);
-  outline-offset: 8px;
-}
-
+/* Explicit width so a max-height cap crops the image rather than letting
+   aspect-ratio narrow the tile.                                           */
 .art-tile-image {
   position: relative;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -142,20 +165,56 @@
   transform: translateY(0);
 }
 
+/* A row with its own column proportions (set inline per row). */
+.art-mosaic.art-mosaic-custom {
+  grid-template-columns: var(--art-columns);
+}
+
+/* Tablets keep the desktop rows (three across, the pairs side by side)
+   so no row is left with an orphan; only the fixed-height pair changes:
+   its height no longer fits the viewport once the columns are narrow,
+   so it falls back to a plain 40 / 60 lead-first pair where the lead
+   shows uncropped and sets the row height.                                */
 @media (max-width: 1189px) {
-  .art-mosaic {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .art-feature-fixed,
+  .art-feature-fixed.art-feature-lead-first {
+    grid-template-columns: 2fr 3fr;
+  }
+  .art-feature-fixed:not(.art-feature-lead-first) {
+    grid-template-columns: 3fr 2fr;
+  }
+  .art-feature-fixed .art-tile-lead .art-tile-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--art-lead-ratio);
   }
 }
 
+/* Phones: every row stacks to one column and, with nothing left to
+   hover, the titles sit beneath the images.                              */
 @media (max-width: 767px) {
-  .art-mosaic {
+  /* Stacked: every gap is between two pieces, so give them more air. */
+  .art-layout {
+    --art-gap: calc(2 * var(--space-gap));
+  }
+  .art-mosaic,
+  .art-mosaic.art-mosaic-custom {
     grid-template-columns: minmax(0, 1fr);
   }
-  .art-feature {
+  .art-feature,
+  .art-feature-lead-first,
+  .art-feature-fixed,
+  .art-feature-fixed.art-feature-lead-first,
+  .art-feature-fixed:not(.art-feature-lead-first) {
     grid-template-columns: minmax(0, 1fr);
   }
-  /* Stacked: the thesis shows in full at its natural proportions. */
+  /* Stacked: the lead goes back to full width at natural proportions. */
+  .art-feature-fixed .art-tile-lead .art-tile-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+  }
+  /* Stacked: fill pieces show in full at their natural proportions. */
   .art-tile-fill,
   .art-tile-fill .art-tile-button,
   .art-tile-fill .art-tile-image {
@@ -167,7 +226,6 @@
     height: auto;
     object-fit: unset;
   }
-  /* Phones have no hover: the title sits beneath the image instead. */
   .art-tile-title {
     position: static;
     padding: 0;
@@ -194,7 +252,6 @@
   -webkit-backdrop-filter: blur(42px);
   backdrop-filter: blur(42px);
   overflow-y: auto;
-  cursor: zoom-out;
   opacity: 0;
   visibility: hidden;
   transition:
@@ -255,10 +312,6 @@
   transition: color var(--ease-hover);
 }
 
-.lightbox-control:focus-visible {
-  outline: none;
-}
-
 /* The row is centred vertically; inside it, the text block sits on the
    image's bottom edge.                                                     */
 .lightbox-inner {
@@ -299,9 +352,21 @@
   object-fit: contain;
 }
 
+/* Label and buttons stack in a fixed-width column whose bottom edge sits
+   on the image's bottom edge.                                              */
+.lightbox-side {
+  flex: 0 0 clamp(240px, 24vw, 340px);
+}
+
+.lightbox-side-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: default;
+}
+
 /* Museum wall label: a quiet surface panel, separated by space alone. */
 .lightbox-info {
-  flex: 0 0 clamp(240px, 24vw, 340px);
   display: flex;
   flex-direction: column;
   padding: var(--space-sm);
@@ -323,6 +388,36 @@
   margin: 0;
 }
 
+/* Prev / next: two equal halves of the label's width. */
+.lightbox-nav {
+  display: flex;
+  gap: 12px;
+  cursor: default;
+}
+
+.lightbox-nav-button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 12px 0;
+  border: none;
+  background: var(--color-surface);
+  box-shadow: 0 10px 30px var(--shadow);
+  cursor: pointer;
+  transition: background-color var(--ease-theme);
+}
+
+.lightbox-nav-button h2 {
+  text-align: center;
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.lightbox-nav-button:hover h2,
+.lightbox-nav-button:focus-visible h2 {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}
+
 @media (max-width: 1189px) {
   .lightbox-inner {
     align-items: flex-start;
@@ -340,7 +435,7 @@
   .lightbox-figure img {
     max-height: 62dvh;
   }
-  .lightbox-info {
+  .lightbox-side {
     flex: none;
   }
 }
