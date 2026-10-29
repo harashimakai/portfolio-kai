@@ -136,7 +136,6 @@
   --ink: #0c2e08;
   --shadow: rgb(0, 0, 0, 0.05);
   --color-bg-inverse: color-mix(in srgb, black 40%, var(--ink) 60%);
-  --selection: var(--ink);
   --special-hover: #407537;
 
   transition: background-color var(--ease-theme);
@@ -157,7 +156,6 @@
   --ink: #eae3d6;
   --shadow: rgb(0, 0, 0, 0.15);
   --color-bg-inverse: #161915;
-  --selection: var(--gold);
   --special-hover: #d3ba88;
 
   transition: background-color var(--ease-theme);

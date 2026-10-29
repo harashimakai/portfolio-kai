@@ -1,10 +1,8 @@
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
 import { children_custom, container_m } from "../global/AnimationConsts";
 import SectionDiv from "../global/SectionDiv";
 import "../../css/study.css";
-import Arrow from "../global/Arrow";
 
 /* Layout primitives for long-form case studies. The format follows the
    editorial pattern of breadcrumb, title and stacked metadata, a sticky
@@ -423,35 +421,5 @@ export function Takeaways({ items }: { items: Takeaway[] }) {
         </motion.li>
       ))}
     </motion.ol>
-  );
-}
-
-/* ─── Footer link ────────────────────────────────────────────────────────── */
-
-export function StudyEnd() {
-  return (
-    <>
-      <SectionDiv />
-      <motion.div
-        className="study-end"
-        {...reveal}
-        custom={0}
-      >
-        <Link to="/work">
-          <h2>
-            <Arrow dir="left" lead /> ALL WORK
-          </h2>
-        </Link>
-        <button
-          type="button"
-          className="study-top"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          <h2>
-            <Arrow dir="up" lead /> BACK TO TOP
-          </h2>
-        </button>
-      </motion.div>
-    </>
   );
 }

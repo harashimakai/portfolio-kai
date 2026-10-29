@@ -38,7 +38,6 @@
   --ink: #1a1a1c;
   --shadow: rgba(26, 26, 28, 0.06);
   --color-bg-inverse: #1a1a1c;
-  --selection: #1a1a1c;
   --special-hover: #b97d44;
   --study-hero-a: #f3cea3;
   --study-hero-b: #b3b0ed;
@@ -55,7 +54,6 @@
   --ink: #f5ebd9;
   --shadow: rgba(0, 0, 0, 0.3);
   --color-bg-inverse: #141416;
-  --selection: #d39354;
   --special-hover: #ffd2a6;
   --study-hero-a: #c19a67;
   --study-hero-b: #9392d5;
@@ -429,38 +427,6 @@
 
 .study-takeaway-body {
   margin: 0;
-}
-
-/* ─── End ────────────────────────────────────────────────────────────────── */
-
-.study-end {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: var(--space-sm) var(--page-gutter) var(--space-section);
-}
-
-.study-end a {
-  text-decoration: none;
-}
-
-.study-end a h2,
-.study-top h2 {
-  color: var(--ink);
-  transition: color var(--ease-theme);
-}
-
-.study-end a:hover h2,
-.study-top:hover h2 {
-  color: var(--accent);
-  transition: color var(--ease-hover);
-}
-
-.study-top {
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────────────── */

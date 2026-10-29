@@ -10,9 +10,8 @@
 }
 
 ::selection {
-  background-color: var(--selection);
-  color: var(--bg);
-  transition: background-color var(--ease-theme);
+  background-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
 }
 
 ::-moz-selection {

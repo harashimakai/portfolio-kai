@@ -21,7 +21,6 @@ import {
   Video,
   Cards,
   Takeaways,
-  StudyEnd,
 } from "./Study";
 
 /* A case study is a hero plus a list of sections, each a list of blocks.
@@ -937,7 +936,6 @@ export default function StudyPage({
           </StudySection>
         ))}
 
-        <StudyEnd />
       </article>
 
 
