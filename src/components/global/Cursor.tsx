@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 
 /* Custom pointer for mouse and trackpad users, after Rachel Chen's:
-   - Default: the ✦ glyph from The Seasons, centred on the pointer.
-   - Over text: the star squeezes into a 3 x 20 caret.
+   - Default: a 14px ✦ drawn as an SVG path, centred on the pointer.
+   - Over text: the star turns 45°, then its four tips spread to the
+     caret's corners as its curved sides straighten, becoming a 3 x 20 bar.
    - Over anything clickable: the star shrinks to 8px.
    - Over a solid button (data-cursor="hide"): once the whole star is
      inside it, it shrinks away, melting into the button.
@@ -10,8 +11,8 @@ import { useEffect, useRef } from "react";
      label 10px to its right, e.g. "View project" on case study cards.
    - Over an email link: the 14px star with a filled label, "Copy email"
      then "Copied" once clicked.
-   Shape changes ease over 0.15s; it fades in and out over 0.2s and sits
-   exactly on the pointer with no trailing.
+   The star always scales about its own centre, which sits exactly on the
+   pointer; it fades in and out over 0.2s with no trailing.
    Touch devices and reduced-motion users keep the native cursor.        */
 
 const EMAIL = 'a[href^="mailto:"]';
@@ -83,9 +84,63 @@ function overText(x: number, y: number): boolean {
   return false;
 }
 
+/* ── The ✦ and its morph into the caret ────────────────────────────────
+   Points are in px about the pointer, angles clockwise from straight up.
+   The star has four tips joined by quadratic curves whose controls sit
+   near the centre, giving the concave sides. The bar has the same
+   structure: four corners joined by straight sides.
+   The morph runs in two overlapping phases, in polar terms so every frame
+   stays symmetric:
+   1. the whole star turns 45° (tips and controls rotate together);
+   2. each tip swings the rest of the way to its corner of the bar and
+      moves out to the corner's distance, while each control moves out to
+      its side's midpoint, which straightens the curves.                  */
+const R = 7; /* star radius: 14px tip to tip */
+const C = 1.25 * Math.SQRT2; /* curve controls' distance from the centre */
+const BAR_W = 1.5,
+  BAR_H = 10; /* half-sizes of the 3 x 20 caret */
+const DEG = Math.PI / 180;
+const CORNER_A = Math.atan2(BAR_W, BAR_H) / DEG;
+const CORNER_R = Math.hypot(BAR_W, BAR_H);
+/* [start angle, extra swing after the 45° turn] for each tip */
+const TIPS: [number, number][] = [
+  [0, CORNER_A - 45],
+  [90, 180 - CORNER_A - 135],
+  [180, 180 + CORNER_A - 225],
+  [270, 360 - CORNER_A - 315],
+];
+/* [start angle, final distance] for each curve control */
+const CTRLS: [number, number][] = [
+  [45, BAR_W],
+  [135, BAR_H],
+  [225, BAR_W],
+  [315, BAR_H],
+];
+
+const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
+const clamp = (t: number) => Math.min(1, Math.max(0, t));
+const polar = (a: number, r: number) =>
+  `${(r * Math.sin(a * DEG)).toFixed(3)} ${(-r * Math.cos(a * DEG)).toFixed(3)}`;
+
+/* The outline at morph progress t (0 = star, 1 = bar). */
+function shapePath(t: number): string {
+  const turn = ease(clamp(t / 0.6));
+  const open = ease(clamp((t - 0.3) / 0.7));
+  const tips = TIPS.map(([a, swing]) =>
+    polar(a + 45 * turn + swing * open, R + (CORNER_R - R) * open),
+  );
+  const ctls = CTRLS.map(([a, r]) => polar(a + 45 * turn, C + (r - C) * open));
+  let d = `M${tips[0]}`;
+  for (let i = 0; i < 4; i++) d += ` Q${ctls[i]} ${tips[(i + 1) % 4]}`;
+  return d + "Z";
+}
+
+const MORPH_MS = 260;
+
 export default function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLSpanElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -96,7 +151,15 @@ export default function Cursor() {
     const root = ref.current!;
     const el = dotRef.current!;
     const label = labelRef.current!;
+    const path = pathRef.current!;
     document.documentElement.classList.add("has-cursor");
+
+    /* Morph progress toward the bar, animated by the frame loop. */
+    let morph = 0,
+      morphFrom = 0,
+      morphTo = 0,
+      morphStart = 0;
+    path.setAttribute("d", shapePath(0));
     let labelText = "";
     let lastTarget: Element | null = null;
     let copiedOn: Element | null = null;
@@ -111,8 +174,12 @@ export default function Cursor() {
       if (s === shape) return;
       shape = s;
       el.dataset.shape = s.kind;
-      el.style.width = `${s.w}px`;
-      el.style.height = `${s.h}px`;
+      const target = s.kind === "bar" ? 1 : 0;
+      if (target !== morphTo) {
+        morphFrom = morph;
+        morphTo = target;
+        morphStart = performance.now();
+      }
     };
 
     const onMove = (e: PointerEvent) => {
@@ -172,12 +239,15 @@ export default function Cursor() {
       apply(overText(x, y) ? CARET : SQUARE);
     };
 
-    /* The root is placed so the square, its first child, is centred on
-       the pointer; a label simply extends to the right of it.            */
-    const loop = () => {
-      const w = shape?.w ?? 14;
-      const h = shape?.h ?? 14;
-      root.style.transform = `translate3d(${x - w / 2}px, ${y - h / 2}px, 0)`;
+    /* The root's 14px box is centred on the pointer; the star scales and
+       morphs about that centre, and a label extends to the right.       */
+    const loop = (now: number) => {
+      root.style.transform = `translate3d(${x - 7}px, ${y - 7}px, 0)`;
+      if (morph !== morphTo) {
+        const k = Math.min(1, (now - morphStart) / MORPH_MS);
+        morph = morphFrom + (morphTo - morphFrom) * k;
+        path.setAttribute("d", shapePath(morph));
+      }
       raf = requestAnimationFrame(loop);
     };
 
@@ -242,7 +312,14 @@ export default function Cursor() {
         ref={dotRef}
         className="cursor-dot"
       >
-        <span className="cursor-glyph">✦</span>
+        <svg
+          className="cursor-star"
+          viewBox="-12 -12 24 24"
+          width="24"
+          height="24"
+        >
+          <path ref={pathRef} />
+        </svg>
       </span>
       <span
         ref={labelRef}

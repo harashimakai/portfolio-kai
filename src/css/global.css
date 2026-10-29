@@ -75,66 +75,42 @@ body {
   --cursor-c: var(--gold);
 }
 
-/* The dot is a box sized to the current shape. It holds the ✦ glyph, set
-   in The Seasons so it is the font's own character, and its background
-   is the text caret, shown only in the bar state.                       */
+/* The dot is a fixed 14px box centred on the pointer. The star is an SVG
+   larger than it (so the 20px bar fits), centred on the same point; it
+   morphs into the bar by script and scales about its centre.            */
 .cursor-dot {
   position: relative;
   flex: none;
   display: block;
-  background-color: transparent;
-  transition:
-    width 0.15s ease-out,
-    height 0.15s ease-out,
-    background-color 0.15s ease-out;
+  width: 14px;
+  height: 14px;
 }
 
-.cursor-glyph {
+.cursor-star {
   position: absolute;
   left: 50%;
   top: 50%;
-  font-family: var(--font-serif);
-  font-size: 20px;
-  line-height: 1;
-  color: var(--cursor-c);
-  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px));
+  overflow: visible;
+  transform: translate(-50%, -50%);
   transition:
-    transform 0.25s ease-out,
-    opacity 0.15s ease-out,
-    color 0.3s ease-out;
+    transform 0.18s ease-out,
+    opacity 0.18s ease-out;
 }
 
-/* Over text: the star squeezes to the caret's proportions (3 x 20 from
-   14 x 14) and only then hands over to the solid bar. Going back, the bar
-   drops at once and the star opens out again.                            */
-.cursor-dot[data-shape="bar"] {
-  background-color: var(--cursor-c);
-  transition:
-    width 0.16s ease-in-out,
-    height 0.16s ease-in-out,
-    background-color 0.06s linear 0.12s;
+.cursor-star path {
+  fill: var(--cursor-c);
+  transition: fill 0.3s ease-out;
 }
 
-.cursor-dot[data-shape="bar"] .cursor-glyph {
-  opacity: 0;
-  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px))
-    scale(0.22, 1.43);
-  transition:
-    transform 0.16s ease-in-out,
-    opacity 0.06s linear 0.12s,
-    color 0.3s ease-out;
-}
-
-/* Over clickables: the star shrinks to 8px. */
-.cursor-dot[data-shape="small"] .cursor-glyph {
-  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px))
-    scale(0.57);
+/* Over clickables: the star shrinks to 8px about its centre. */
+.cursor-dot[data-shape="small"] .cursor-star {
+  transform: translate(-50%, -50%) scale(0.57);
 }
 
 /* Over a solid button the star shrinks away into it. */
-.cursor-dot[data-shape="gone"] .cursor-glyph {
+.cursor-dot[data-shape="gone"] .cursor-star {
   opacity: 0;
-  transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px)) scale(0);
+  transform: translate(-50%, -50%) scale(0);
 }
 
 /* Label beside the star, its cap height level with the star. */
@@ -150,6 +126,11 @@ body {
 
 .cursor-label[hidden] {
   display: none;
+}
+
+/* Keep the 10px gap from the visible star's edge when it is small. */
+.cursor-dot[data-shape="small"] + .cursor-label {
+  margin-left: -3px;
 }
 
 /* Filled variant (email links): a block in the cursor colour with
