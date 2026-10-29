@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { container_s, children } from "../global/AnimationConsts";
+import { Link } from "react-router-dom";
+import { container_s, children, children_custom } from "../global/AnimationConsts";
+import Arrow from "../global/Arrow";
 import { homeProjects, Project } from "../global/ProjectData";
 import { Tile } from "../art/ArtGallery";
 import Lightbox from "../art/Lightbox";
@@ -38,6 +40,20 @@ export default function ArtStrip({ projects = homeProjects }: Props) {
             />
           </motion.div>
         ))}
+      </motion.div>
+      <motion.div
+        className="art-strip-more"
+        variants={children_custom}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        custom={0.2}
+      >
+        <Link to="/art">
+          <h2 className="underline-hover">
+            SEE MORE <Arrow dir="right" />
+          </h2>
+        </Link>
       </motion.div>
       <Lightbox
         projects={projects}

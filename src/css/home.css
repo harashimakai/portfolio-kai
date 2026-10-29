@@ -136,6 +136,21 @@
   min-width: 0;
 }
 
+/* Text link beneath the strip, tucked up to sit a step below the images. */
+.art-strip-more {
+  display: flex;
+  justify-content: flex-end;
+  margin: calc(var(--space-sm) - var(--space-md)) 0 var(--space-md);
+}
+
+.art-strip-more a {
+  text-decoration: none;
+}
+
+.art-strip-more h2 {
+  color: var(--ink);
+}
+
 /* Phones: the strip stays a 3 x 2 grid of images, no titles beneath. */
 @media (max-width: 767px) {
   .art-strip .art-tile-title {
