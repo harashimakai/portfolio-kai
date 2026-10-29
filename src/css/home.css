@@ -152,6 +152,12 @@
   display: inline-flex;
   align-items: center;
   color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.art-strip-more a:hover h2 {
+  color: var(--accent);
+  transition: color var(--ease-hover);
 }
 
 /* Phones: the strip stays a 3 x 2 grid of images, no titles beneath. */
