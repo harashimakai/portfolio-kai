@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 
 /* Custom pointer for mouse and trackpad users, after Rachel Chen's:
    - Default: a 14px ✦ drawn as an SVG path, centred on the pointer.
-   - Over text: the star turns while each tip travels to the opposite
-     side's corner of the caret and its curved sides straighten, becoming
-     a 3 x 20 bar. Leaving text keeps turning the same way back to a star.
+   - Over text: the star turns while each tip travels to its nearest
+     corner of the caret and its curved sides straighten, becoming a 3 x
+     20 bar. Leaving text keeps turning the same way back to a star.
    - Over anything clickable: the star shrinks to 8px.
    - Over a solid button (data-cursor="hide"): once the whole star is
      inside it, it shrinks away, melting into the button.
@@ -97,7 +97,7 @@ function overText(x: number, y: number): boolean {
    near the centre, giving the concave sides. The bar has the same
    structure: four corners joined by straight sides.
    Everything moves together on one eased progress value, in polar terms
-   so every frame stays symmetric: the star turns 135° while each tip
+   so every frame stays symmetric: the star turns 45° while each tip
    swings and travels out to its corner of the bar and each curve control
    moves out to its side's midpoint, straightening the curves.           */
 const R = 7; /* star radius: 14px tip to tip */
@@ -107,23 +107,23 @@ const BAR_W = 1.5,
 const DEG = Math.PI / 180;
 const CORNER_A = Math.atan2(BAR_W, BAR_H) / DEG;
 const CORNER_R = Math.hypot(BAR_W, BAR_H);
-/* Each tip travels to the opposite side's corner: top -> bottom right,
-   right -> bottom left, bottom -> top left, left -> top right. That is a
-   135° turn plus a small swing per tip; [start angle, swing] below.    */
-const TURN = 135;
+/* Each tip travels to its nearest corner: top -> top right, right ->
+   bottom right, bottom -> bottom left, left -> top left. That is a 45°
+   turn plus a small swing per tip; [start angle, swing] below.         */
+const TURN = 45;
 const TIPS: [number, number][] = [
-  [0, 180 - CORNER_A - TURN],
-  [90, 180 + CORNER_A - 90 - TURN],
-  [180, 360 - CORNER_A - 180 - TURN],
-  [270, 360 + CORNER_A - 270 - TURN],
+  [0, CORNER_A - TURN],
+  [90, 180 - CORNER_A - 90 - TURN],
+  [180, 180 + CORNER_A - 180 - TURN],
+  [270, 360 - CORNER_A - 270 - TURN],
 ];
 /* [start angle, final distance] for each curve control: after the turn
-   they land on the bottom, left, top and right sides' midpoints.       */
+   they land on the right, bottom, left and top sides' midpoints.       */
 const CTRLS: [number, number][] = [
-  [45, BAR_H],
-  [135, BAR_W],
-  [225, BAR_H],
-  [315, BAR_W],
+  [45, BAR_W],
+  [135, BAR_H],
+  [225, BAR_W],
+  [315, BAR_H],
 ];
 
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
@@ -131,7 +131,7 @@ const polar = (a: number, r: number) =>
   `${(r * Math.sin(a * DEG)).toFixed(3)} ${(-r * Math.cos(a * DEG)).toFixed(3)}`;
 
 /* The outline for a given turn (degrees, clockwise) and openness (0 =
-   star, 1 = bar). The bar is reached at turns of 135° + 180°k; a star at
+   star, 1 = bar). The bar is reached at turns of 45° + 180°k; a star at
    any whole quarter turn looks upright, since it repeats every 90°.    */
 function shapePath(rotation: number, open: number): string {
   const tips = TIPS.map(([a, swing]) =>
@@ -163,8 +163,8 @@ export default function Cursor() {
     document.documentElement.classList.add("has-cursor");
 
     /* Turn and openness, animated by the frame loop. Entering text turns
-       the star 135° into the bar; leaving keeps turning the same way, a
-       further 135°, back into an upright star.                          */
+       the star 45° into the bar; leaving keeps turning the same way, a
+       further 45°, back into an upright star.                           */
     let rotation = 0,
       open = 0,
       rotFrom = 0,
@@ -195,10 +195,10 @@ export default function Cursor() {
         openTo = target;
         rotTo =
           target === 1
-            ? /* next bar position: 135° + 180°k */
-              135 + 180 * Math.ceil((rotation - 135) / 180)
-            : /* a further turn, to the next quarter at least 90° on */
-              90 * Math.ceil((rotation + 90) / 90);
+            ? /* next bar position: 45° + 180°k */
+              45 + 180 * Math.ceil((rotation - 45) / 180)
+            : /* keep turning forward to the next quarter turn */
+              90 * (Math.floor(rotation / 90) + 1);
         animStart = performance.now();
         animating = true;
       }
