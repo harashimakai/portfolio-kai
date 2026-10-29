@@ -232,7 +232,12 @@ export default function Cursor() {
       }
       /* The footer is its own dark surface: the cursor turns gold there. */
       root.classList.toggle("cursor-on-footer", Boolean(target?.closest("footer")));
-      root.classList.toggle("cursor-on-image", Boolean(target?.closest(IMAGE)));
+      /* Pictures marked data-cursor-plain (the About portrait) keep the
+         normal cursor colour. */
+      root.classList.toggle(
+        "cursor-on-image",
+        Boolean(target?.closest(IMAGE)) && !target?.closest("[data-cursor-plain]"),
+      );
       if (email || labelled?.dataset.cursorFilled !== undefined) {
         apply(SQUARE);
         return;

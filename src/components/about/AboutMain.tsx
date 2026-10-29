@@ -68,6 +68,7 @@ export default function AboutMain() {
             <img
               src={profile}
               alt="Kai Harashima"
+              data-cursor-plain
             />
           </div>
         </motion.div>
