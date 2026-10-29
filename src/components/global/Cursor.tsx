@@ -10,12 +10,18 @@ import { useEffect, useRef } from "react";
    - Over an element with data-cursor="<label>": the 8px square plus that
      label 10px to its right, e.g. "View project" on case study cards.
    - Over an email link: the 14px star with a filled label, "Copy email"
-     then "Copied" once clicked.
+     then "Copied" once clicked. Any element can ask for a filled label
+     with data-cursor-filled (the theme toggle: "Dark mode" / "Light mode").
+   - Over an actual image in dark mode, the cursor takes the page's dark
+     green so it reads against the picture.
    The star always scales about its own centre, which sits exactly on the
    pointer; it fades in and out over 0.2s with no trailing.
    Touch devices and reduced-motion users keep the native cursor.        */
 
 const EMAIL = 'a[href^="mailto:"]';
+/* Elements whose box is the picture itself. */
+const IMAGE =
+  "img, video, .art-tile-image, .card-image, .study-figure, .lightbox-figure";
 
 const CLICKABLE =
   'a, button, [role="button"], select, label, summary, input[type="checkbox"], input[type="radio"]';
@@ -212,7 +218,10 @@ export default function Cursor() {
           /* Appear: reveal left to right. The filled style is set before
              the label shows and kept through its retract, so the plain
              style never flashes.                                        */
-          label.classList.toggle("cursor-label-filled", Boolean(email));
+          label.classList.toggle(
+            "cursor-label-filled",
+            Boolean(email) || labelled?.dataset.cursorFilled !== undefined,
+          );
           label.textContent = nextLabel;
           label.hidden = false;
           label.classList.add("cursor-label-in");
@@ -223,7 +232,8 @@ export default function Cursor() {
       }
       /* The footer is its own dark surface: the cursor turns gold there. */
       root.classList.toggle("cursor-on-footer", Boolean(target?.closest("footer")));
-      if (email) {
+      root.classList.toggle("cursor-on-image", Boolean(target?.closest(IMAGE)));
+      if (email || labelled?.dataset.cursorFilled !== undefined) {
         apply(SQUARE);
         return;
       }
@@ -270,6 +280,11 @@ export default function Cursor() {
     };
     window.addEventListener("scroll", onScroll, { passive: true, capture: true });
 
+    /* After a click the element under the pointer may have changed its
+       label (the theme toggle does): re-read it on the next frame.      */
+    const onClick = () => requestAnimationFrame(() => update(lastTarget));
+    window.addEventListener("click", onClick);
+
     /* An email link was copied: swap its label to "Copied". */
     const onCopied = (e: Event) => {
       copiedOn = (e as CustomEvent<Element>).detail;
@@ -295,6 +310,7 @@ export default function Cursor() {
       label.removeEventListener("animationend", onLabelEnd);
       window.removeEventListener("email-copied", onCopied);
       window.removeEventListener("scroll", onScroll, { capture: true });
+      window.removeEventListener("click", onClick);
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", hide);
       window.removeEventListener("blur", hide);

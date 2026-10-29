@@ -75,6 +75,16 @@ body {
   --cursor-c: var(--gold);
 }
 
+/* Over a picture in dark mode it takes the dark green page colour, and a
+   filled label's text switches to the light ink to stay readable.       */
+.darkmode .cursor-on-image {
+  --cursor-c: var(--bg);
+}
+
+.darkmode .cursor-on-image .cursor-label-filled {
+  color: var(--ink);
+}
+
 /* The dot is a fixed 14px box centred on the pointer. The star is an SVG
    larger than it (so the 20px bar fits), centred on the same point; it
    morphs into the bar by script and scales about its centre.            */

@@ -5,7 +5,11 @@ interface Props {
 
 export default function DarkButton({ darkMode, setDarkMode }: Props) {
   return (
-    <div className="theme-toggle">
+    <div
+      className="theme-toggle"
+      data-cursor={darkMode ? "Light mode" : "Dark mode"}
+      data-cursor-filled
+    >
       <h2>{darkMode ? "◑" : "◐"}</h2>
       <button
         id="mode-switch"
