@@ -83,8 +83,8 @@ h1 {
 }
 
 h2 {
-  font-family: var(--font-sans);
-  font-weight: 500;
+  font-family: var(--font-sans-display);
+  font-weight: 400;
   letter-spacing: var(--tracking-label);
   line-height: var(--leading-relaxed);
   font-style: normal;
@@ -97,8 +97,8 @@ h2 {
 }
 
 h3 {
-  font-family: var(--font-sans);
-  font-weight: 500;
+  font-family: var(--font-sans-display);
+  font-weight: 400;
   letter-spacing: var(--tracking-label-tight);
   line-height: var(--leading-relaxed);
   font-style: normal;
@@ -216,7 +216,7 @@ hr {
   font-style: italic;
 }
 
-/* OpenType stylistic alternates (Inter Tight sets; ignored by Geist) */
+/* OpenType stylistic alternates (Inter Tight sets; ignored by other faces) */
 .alternative_a {
   font-feature-settings: "ss01" on;
 }
