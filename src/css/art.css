@@ -436,10 +436,14 @@
 
 @media (max-width: 767px) {
   .lightbox {
-    /* Room under the buttons at the end of the scroll, clear of the
-       phone's home indicator. */
-    padding: var(--space-xs) var(--page-gutter)
-      calc(var(--space-section) + env(safe-area-inset-bottom, 0px));
+    padding: var(--space-xs) var(--page-gutter);
+  }
+  /* Room under the buttons at the end of the scroll, clear of the
+     phone's home indicator. It lives on the content, not the scroll
+     container: mobile browsers drop a scroll container's own bottom
+     padding from the scrollable area.                                   */
+  .lightbox-inner {
+    padding-bottom: calc(var(--space-section) + env(safe-area-inset-bottom, 0px));
   }
   /* Phones: the image fills the width, matching the plaque beneath it,
      and takes whatever height that gives.                               */
