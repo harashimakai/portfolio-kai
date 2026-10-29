@@ -146,7 +146,7 @@ function shapePath(t: number): string {
   return d + "Z";
 }
 
-const MORPH_MS = 260;
+const MORPH_MS = 340;
 
 export default function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
