@@ -52,9 +52,8 @@ const QUOTES: Quote[] = [
         “He walked out in the gray light and stood and he saw for a brief moment
         the absolute truth of the world. The cold relentless circling of the
         intestate earth. Darkness implacable. The crushing black vacuum of the
-        universe. And somewhere two hunted animals trembling like ground-foxes
-        in their cover. Borrowed time and borrowed world and borrowed eyes with
-        which to sorrow it. ”
+        universe. Borrowed time and borrowed world and borrowed eyes with which
+        to sorrow it. ”
       </>
     ),
     author: "CORMAC MCCARTHY, THE ROAD",
