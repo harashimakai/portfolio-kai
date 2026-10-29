@@ -14,6 +14,8 @@ import backyard3Expanded from "../../assets/optimized/backyard-3-large.webp";
 export interface Project {
   id: string;
   title: string;
+  /* Shorter title for tight spots such as the home art strip. */
+  shortTitle?: string;
   slug: string;
   medium: string;
   year: string;
@@ -35,6 +37,7 @@ export const projects: Project[] = [
     id: "1",
     title:
       "Strategy, Subterfuge, and Deception - Science Communication via Graphic Design",
+    shortTitle: "Strategy, Subterfuge, and Deception",
     slug: "/work/1",
     medium: "GRAPHIC DESIGN",
     year: "2024",

@@ -124,6 +124,8 @@ export default function ArtGallery({
 
 export interface TileProps {
   project: Project;
+  /* Overrides the hover title; the alt text stays the full title. */
+  title?: string;
   aspect?: string;
   maxHeight?: string;
   role?: "lead" | "fill";
@@ -131,7 +133,7 @@ export interface TileProps {
 }
 
 /* One piece: image, hover zoom with gradient title, opens the lightbox. */
-export function Tile({ project, aspect, maxHeight, role, onOpen }: TileProps) {
+export function Tile({ project, title, aspect, maxHeight, role, onOpen }: TileProps) {
   const cropped = Boolean(aspect) || role === "fill";
 
   return (
@@ -157,7 +159,7 @@ export function Tile({ project, aspect, maxHeight, role, onOpen }: TileProps) {
             }
           />
         </div>
-        <p className="art-tile-title entry-title">{project.title}</p>
+        <p className="art-tile-title entry-title">{title ?? project.title}</p>
       </button>
     </article>
   );

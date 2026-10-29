@@ -61,6 +61,7 @@ export default function ArtStrip({ projects = homeProjects }: Props) {
           >
             <Tile
               project={project}
+              title={project.shortTitle ?? project.title}
               aspect="1 / 1"
               onOpen={() => setOpenIndex(i)}
             />
