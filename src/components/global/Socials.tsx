@@ -32,7 +32,6 @@ export default function Socials() {
           </motion.p>
           <motion.a
             className="body-lg"
-            target="_blank"
             href="mailto:kh862@cornell.edu"
             variants={children}
           >
@@ -40,7 +39,6 @@ export default function Socials() {
           </motion.a>
           <motion.a
             className="body-lg"
-            target="_blank"
             href="mailto:harashimakai@gmail.com"
             variants={children}
           >

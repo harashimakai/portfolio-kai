@@ -863,3 +863,30 @@ footer.social-container {
     margin-top: 24px;
   }
 }
+
+/* ─── Email copied toast (touch screens) ─────────────────────────────────── */
+
+.email-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--space-sm) + env(safe-area-inset-bottom, 0px));
+  z-index: 3000;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+}
+
+.email-toast-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

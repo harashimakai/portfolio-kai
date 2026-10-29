@@ -56,7 +56,6 @@ export default function Mission() {
             <h3>EMAIL</h3>
             <a
               className="mission-desc"
-              target="_blank"
               href="mailto:kh862@cornell.edu"
             >
               kh862@cornell.edu <Arrow dir="ne" />

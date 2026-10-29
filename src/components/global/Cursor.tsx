@@ -6,9 +6,12 @@ import { useEffect, useRef } from "react";
    - Over anything clickable: an 8px square.
    - Over an element with data-cursor="<label>": the 8px square plus that
      label 10px to its right, e.g. "View project" on case study cards.
+   - Over an email link: "Copy email", then "Copied" once clicked.
    Size changes ease over 0.12s (except into the caret); it fades in and
    out over 0.2s and sits exactly on the pointer with no trailing.
    Touch devices and reduced-motion users keep the native cursor.        */
+
+const EMAIL = 'a[href^="mailto:"]';
 
 const CLICKABLE =
   'a, button, [role="button"], select, label, summary, input[type="checkbox"], input[type="radio"]';
@@ -79,6 +82,8 @@ export default function Cursor() {
     const label = labelRef.current!;
     document.documentElement.classList.add("has-cursor");
     let labelText = "";
+    let lastTarget: Element | null = null;
+    let copiedOn: Element | null = null;
 
     let x = -100,
       y = -100;
@@ -103,9 +108,19 @@ export default function Cursor() {
         visible = true;
         root.style.opacity = "1";
       }
-      const target = e.target as Element | null;
+      update(e.target as Element | null);
+    };
+
+    const update = (target: Element | null) => {
+      lastTarget = target;
+      const email = target?.closest(EMAIL) ?? null;
+      if (copiedOn && email !== copiedOn) copiedOn = null;
       const labelled = target?.closest<HTMLElement>("[data-cursor]");
-      const nextLabel = labelled?.dataset.cursor ?? "";
+      const nextLabel = email
+        ? copiedOn
+          ? "Copied"
+          : "Copy email"
+        : (labelled?.dataset.cursor ?? "");
       if (nextLabel !== labelText) {
         labelText = nextLabel;
         label.classList.remove("cursor-label-in", "cursor-label-out");
@@ -120,7 +135,7 @@ export default function Cursor() {
           label.classList.add("cursor-label-out");
         }
       }
-      if (labelled || target?.closest(CLICKABLE)) {
+      if (email || labelled || target?.closest(CLICKABLE)) {
         apply(SMALL);
         return;
       }
@@ -141,6 +156,13 @@ export default function Cursor() {
       root.style.opacity = "0";
     };
 
+    /* An email link was copied: swap its label to "Copied". */
+    const onCopied = (e: Event) => {
+      copiedOn = (e as CustomEvent<Element>).detail;
+      update(lastTarget);
+    };
+    window.addEventListener("email-copied", onCopied);
+
     const onLabelEnd = () => {
       if (label.classList.contains("cursor-label-out")) {
         label.classList.remove("cursor-label-out");
@@ -157,6 +179,7 @@ export default function Cursor() {
     return () => {
       document.documentElement.classList.remove("has-cursor");
       label.removeEventListener("animationend", onLabelEnd);
+      window.removeEventListener("email-copied", onCopied);
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", hide);
       window.removeEventListener("blur", hide);

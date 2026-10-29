@@ -12,6 +12,7 @@ import MenuButton from "./components/global/MenuButton";
 import Sidebar from "./components/global/Sidebar";
 import Socials from "./components/global/Socials";
 import Cursor from "./components/global/Cursor";
+import EmailCopy from "./components/global/EmailCopy";
 import ComingSoon from "./pages/ComingSoon";
 import Art from "./pages/Art";
 import NotFound from "./pages/NotFound";
@@ -120,6 +121,7 @@ function App() {
       </Routes>
       <Socials />
       <Cursor />
+      <EmailCopy />
     </div>
   );
 }

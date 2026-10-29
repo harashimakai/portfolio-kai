@@ -54,7 +54,6 @@ export default function About({ setSideOpen }: Props) {
                 <h2 className="underline-hover">RÉSUMÉ <Arrow dir="ne" /></h2>
               </motion.a>
               <motion.a
-                target="_blank"
                 href="mailto:harashimakai@gmail.com"
                 variants={children_custom}
                 custom={0.45}
