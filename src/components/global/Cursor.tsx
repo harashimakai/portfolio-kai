@@ -137,7 +137,7 @@ export default function Cursor() {
         }
       }
       root.classList.toggle("cursor-filled", Boolean(email));
-      /* The footer is its own dark surface: the cursor turns white there. */
+      /* The footer is its own dark surface: the cursor turns gold there. */
       root.classList.toggle("cursor-on-footer", Boolean(target?.closest("footer")));
       if (email) {
         apply(SQUARE);
@@ -164,6 +164,20 @@ export default function Cursor() {
       root.style.opacity = "0";
     };
 
+    /* Scrolling moves the page under a still pointer: re-check what is
+       beneath it so labels and shapes stay correct without moving the
+       mouse. Throttled to one check per frame.                          */
+    let scrollQueued = false;
+    const onScroll = () => {
+      if (!visible || scrollQueued) return;
+      scrollQueued = true;
+      requestAnimationFrame(() => {
+        scrollQueued = false;
+        update(document.elementFromPoint(x, y));
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+
     /* An email link was copied: swap its label to "Copied". */
     const onCopied = (e: Event) => {
       copiedOn = (e as CustomEvent<Element>).detail;
@@ -188,6 +202,7 @@ export default function Cursor() {
       document.documentElement.classList.remove("has-cursor");
       label.removeEventListener("animationend", onLabelEnd);
       window.removeEventListener("email-copied", onCopied);
+      window.removeEventListener("scroll", onScroll, { capture: true });
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", hide);
       window.removeEventListener("blur", hide);
