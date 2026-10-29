@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 /* Custom pointer for mouse and trackpad users, after Rachel Chen's:
    - Default: the ✦ glyph from The Seasons, centred on the pointer.
    - Over text: the star squeezes into a 3 x 20 caret.
-   - Over anything clickable: the star turns 45°.
+   - Over anything clickable: the star shrinks to 8px.
    - Over a solid button (data-cursor="hide"): once the whole star is
      inside it, it shrinks away, melting into the button.
    - Over an element with data-cursor="<label>": the 8px square plus that
@@ -22,7 +22,7 @@ const CLICKABLE =
 type Shape = { w: number; h: number; kind: "star" | "bar" | "small" | "gone" };
 
 const SQUARE: Shape = { w: 14, h: 14, kind: "star" };
-const SMALL: Shape = { w: 14, h: 14, kind: "small" };
+const SMALL: Shape = { w: 8, h: 8, kind: "small" };
 const CARET: Shape = { w: 3, h: 20, kind: "bar" };
 const GONE: Shape = { w: 14, h: 14, kind: "gone" };
 
@@ -142,7 +142,10 @@ export default function Cursor() {
         label.classList.remove("cursor-label-in", "cursor-label-out");
         void label.offsetWidth; /* restart the animation */
         if (nextLabel) {
-          /* Appear: reveal left to right. */
+          /* Appear: reveal left to right. The filled style is set before
+             the label shows and kept through its retract, so the plain
+             style never flashes.                                        */
+          label.classList.toggle("cursor-label-filled", Boolean(email));
           label.textContent = nextLabel;
           label.hidden = false;
           label.classList.add("cursor-label-in");
@@ -151,7 +154,6 @@ export default function Cursor() {
           label.classList.add("cursor-label-out");
         }
       }
-      root.classList.toggle("cursor-filled", Boolean(email));
       /* The footer is its own dark surface: the cursor turns gold there. */
       root.classList.toggle("cursor-on-footer", Boolean(target?.closest("footer")));
       if (email) {

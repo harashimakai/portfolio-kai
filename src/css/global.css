@@ -104,25 +104,31 @@ body {
     color 0.3s ease-out;
 }
 
-/* Over text: the star squeezes narrow and tall as the bar fades in. */
+/* Over text: the star squeezes to the caret's proportions (3 x 20 from
+   14 x 14) and only then hands over to the solid bar. Going back, the bar
+   drops at once and the star opens out again.                            */
 .cursor-dot[data-shape="bar"] {
   background-color: var(--cursor-c);
   transition:
-    width 0.15s ease-out,
-    height 0.15s ease-out,
-    background-color 0.15s ease-out 0.05s;
+    width 0.16s ease-in-out,
+    height 0.16s ease-in-out,
+    background-color 0.06s linear 0.12s;
 }
 
 .cursor-dot[data-shape="bar"] .cursor-glyph {
   opacity: 0;
   transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px))
-    scale(0.15, 1.5);
+    scale(0.22, 1.43);
+  transition:
+    transform 0.16s ease-in-out,
+    opacity 0.06s linear 0.12s,
+    color 0.3s ease-out;
 }
 
-/* Over clickables: the star turns 45 degrees, animated. */
+/* Over clickables: the star shrinks to 8px. */
 .cursor-dot[data-shape="small"] .cursor-glyph {
   transform: translate(-50%, -50%) translateY(var(--glyph-dy, 0px))
-    rotate(45deg);
+    scale(0.57);
 }
 
 /* Over a solid button the star shrinks away into it. */
@@ -148,14 +154,14 @@ body {
 
 /* Filled variant (email links): a block in the cursor colour with
    page-coloured text, 6 x 10 padding, centred on the full-size star.    */
-.cursor-filled .cursor-label {
+.cursor-label-filled {
   padding: 6px 10px;
   margin-top: -6.5px;
   background: var(--cursor-c);
   color: var(--bg);
 }
 
-.cursor-on-footer.cursor-filled .cursor-label {
+.cursor-on-footer.cursor-label-filled {
   color: var(--color-bg-inverse);
 }
 
@@ -957,4 +963,9 @@ footer.social-container {
 .email-toast-on {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+/* Placeholder while a page's first images decode. */
+.page-pending {
+  min-height: 100vh;
 }

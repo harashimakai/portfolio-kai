@@ -32,7 +32,9 @@ export default function Home({ setSideOpen }: Props) {
     setSideOpen(false);
   }, []);
 
-  if (!ready) return null;
+  /* Hold the page's place while images decode, so the footer does
+     not jump up into view for a moment. */
+  if (!ready) return <div className="page-pending" />;
 
   return (
     <>
