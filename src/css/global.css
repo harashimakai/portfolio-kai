@@ -10,12 +10,12 @@
 }
 
 ::selection {
-  background-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  background-color: color-mix(in srgb, var(--accent) 22%, var(--bg));
   color: var(--accent);
 }
 
 ::-moz-selection {
-  background-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  background-color: color-mix(in srgb, var(--accent) 22%, var(--bg));
   color: var(--accent);
 }
 
