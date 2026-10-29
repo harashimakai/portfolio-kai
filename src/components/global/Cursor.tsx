@@ -110,6 +110,12 @@ export default function Cursor() {
         labelText = nextLabel;
         label.textContent = nextLabel;
         label.hidden = !nextLabel;
+        /* Restart the left-to-right reveal each time a label appears. */
+        if (nextLabel) {
+          label.classList.remove("cursor-label-in");
+          void label.offsetWidth;
+          label.classList.add("cursor-label-in");
+        }
       }
       if (labelled || target?.closest(CLICKABLE)) {
         apply(SMALL);

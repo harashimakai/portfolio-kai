@@ -91,6 +91,26 @@ body {
   display: none;
 }
 
+/* Reveals left to right: a soft-edged mask slides across the text. */
+.cursor-label-in {
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  animation: cursor-label-in 0.35s ease-out both;
+}
+
+@keyframes cursor-label-in {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
 /* Only exists while a fine pointer is in use. */
 html:not(.has-cursor) .cursor {
   display: none;
