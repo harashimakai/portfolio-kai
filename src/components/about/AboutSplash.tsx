@@ -75,15 +75,6 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “Open your eyes and see what you can with them before they close
-        forever.”
-      </>
-    ),
-    author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
-  },
-  {
-    node: (
-      <>
         “Most of us prefer to believe we are the active subjects of our
         victories but only the passive objects of our defeats. We triumph, but
         it is not really we who fail — we are ruined by forces beyond our
@@ -155,25 +146,6 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “You can’t get away from yourself by moving from one place to another.”
-      </>
-    ),
-    author: "ERNEST HEMINGWAY, THE SUN ALSO RISES",
-  },
-  {
-    node: (
-      <>
-        “We are travelers on a cosmic journey, stardust, swirling and dancing in
-        the eddies and whirlpools of infinity. Life is eternal. We have stopped
-        for a moment to encounter each other, to meet, to love, to share. This
-        is a precious moment. It is a little parenthesis in eternity.”
-      </>
-    ),
-    author: "PAULO COELHO, THE ALCHEMIST",
-  },
-  {
-    node: (
-      <>
         "When you compare the sorrows of real life to the pleasures of the
         imaginary one, you will never want to live again, only to dream
         forever."
@@ -184,21 +156,61 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “Autumn leaves don’t fall; they fly. They take their time and wander on
-        this, their only chance to soar.”
+        “Each day had its own sun. During its journey across the sky, the bright
+        disc would burn out, sink, and melt on the horizon, pouring down the
+        precipice at the end of the earth like wax. And just like a candle
+        maker, god would reuse these drippings to make a new sun overnight.”
       </>
     ),
-    author: "DELIA OWENS, WHERE THE CRAWDADS SING",
+    author: "HERNAN DIAZ, IN THE DISTANCE",
   },
   {
     node: (
       <>
-        “I thought once that gods are the opposite of death, but I see now they
-        are more dead than anything, for they are unchanging, and can hold
-        nothing in their hands.”
+        “Our flesh is the debris of dead stars, and this is also true of the
+        apple and its tree, of each hair on the spider’s legs, and of the rock
+        rusting on planet Mars. Each minuscule being has spokes radiating out to
+        all of creation… From one living thing, the properties of any other may
+        be predicted. Looking at any particle with sufficient care, and
+        following the chain that links all things together, we can arrive at the
+        universe.”
       </>
     ),
-    author: "MADELINE MILLER, CIRCE",
+    author: "HERNAN DIAZ, IN THE DISTANCE",
+  },
+  {
+    node: (
+      <>
+        “The hardships of last winter had become a memory—a series of vivid and
+        yet partial recollections. He knew that he had been cold but could not
+        invoke the cold in his bones; he knew that it had been windy but could
+        not relive the wind slicing through his flesh... These things—the
+        numbing cold, the gritty gales grounding into the skin—could be brought
+        back as words or pictures, but not as experiences.”
+      </>
+    ),
+    author: "HERNAN DIAZ, IN THE DISTANCE",
+  },
+  {
+    node: (
+      <>
+        “Nothing left behind in the wilderness could ever be retrieved. Every
+        encounter was final. Nobody came back from beyond the horizon. It was
+        impossible to return to anything or anyone. Whatever was out of sight
+        was forever lost.”
+      </>
+    ),
+    author: "HERNAN DIAZ, IN THE DISTANCE",
+  },
+  {
+    node: (
+      <>
+        “After thousands of nights under those same stars, he woke up as many
+        thousands of mornings under that same sun and trudged for as many
+        thousands of days under the same sky, always feeling out of place.”
+      </>
+    ),
+    author: "HERNAN DIAZ, IN THE DISTANCE",
   },
 ];
 

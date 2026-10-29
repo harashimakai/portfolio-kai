@@ -41,10 +41,10 @@ export default function AboutMain() {
               Cornell DTI
             </a>
             . Before that, a summer at Weill Cornell Medical College sparked a
-            year-long research project on cancer biology: 20 pages of writing
-            and 4 infographic posters, translating PhD-level immunology to be
-            accessible for anyone—not just scientists. It’s this work that
-            convinced me to spend my time designing.
+            year-long research paper: 20 pages of writing and 4 infographic
+            posters, translating PhD-level immunology to be accessible for
+            anyone—not just scientists. It’s this work that convinced me to
+            spend my time designing.
           </motion.p>
           <hr />
           <motion.p
@@ -55,17 +55,9 @@ export default function AboutMain() {
           >
             On the technical side: I taught myself Adobe Illustrator and Python
             in high school, and more recently became self-taught in Figma and
-            React. This site is my first front-end project.
-          </motion.p>
-          <motion.p
-            className="body-lg"
-            variants={children_custom}
-            custom={1.0}
-            style={{ margin: "24px 0 0" }}
-          >
-            Outside of work, I crave either speed or stillness: sailing, skiing,
-            tennis, and squash on one end; reading, piano, and oil painting and
-            on another. I’m also a huge foodie.
+            React. This site is my first front-end project. Outside of work, I
+            crave either speed or stillness: sailing, skiing, tennis, and squash
+            on one end; reading, piano, and oil painting and on another.
           </motion.p>
         </div>
         <motion.div

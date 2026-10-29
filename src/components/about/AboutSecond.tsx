@@ -11,7 +11,16 @@ const TOOLS = [
   },
   {
     group: "DEVELOPMENT",
-    items: ["PYTHON", "JAVA", "REACT", "TYPESCRIPT", "CSS", "HTML"],
+    items: [
+      "PYTHON",
+      "JAVA",
+      "JAVASCRIPT",
+      "TYPESCRIPT",
+      "REACT",
+      "HTML",
+      "CSS",
+      "GIT",
+    ],
   },
   {
     group: "FINE ARTS",
@@ -22,6 +31,8 @@ const TOOLS = [
     items: [
       "WILDERNESS FIRST RESPONDER",
       "WET LAB",
+      "CRISPR",
+      "PCR",
       "IMMUNOLOGY",
       "CANCER BIOLOGY",
     ],
@@ -31,12 +42,12 @@ const TOOLS = [
 const EDUCATION = [
   {
     school: "Cornell University",
-    program: "Computer Science",
+    program: "B.A. Computer Science · Arts & Sciences",
     year: "CLASS OF 2029",
   },
   {
     school: "Greenwich Country Day School",
-    program: "Computer Science & Visual Arts",
+    program: "Engineering & Visual Arts Diploma",
     year: "CLASS OF 2025",
   },
 ];
@@ -44,8 +55,8 @@ const EDUCATION = [
 const EXPERIENCES = [
   {
     date: "FEB 2026 — PRESENT",
-    title: "Digital Tech & Innovation @ Cornell",
-    role: "UI/UX Designer",
+    title: "Cornell Design & Tech Initiative",
+    role: "Designer, CUApts",
   },
   {
     date: "JUN — AUG 2025, 2026",
@@ -54,7 +65,7 @@ const EXPERIENCES = [
   },
   {
     date: "JAN 2024 — AUG 2024",
-    title: "Children's Brain Tumor Project @ Weill Cornell Medical",
+    title: "Children's Brain Tumor Project @ Weill Cornell Medicine",
     role: "Research Intern",
   },
   {

@@ -597,11 +597,27 @@
 }
 
 .card-image {
+  position: relative;
   display: flex;
   margin-bottom: 16px;
   transition: margin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
   aspect-ratio: 16/9;
   overflow: hidden;
+}
+
+/* Hover: a flat shade resolves in with the zoom, as on the art tiles. */
+.card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+
+.case-card:hover .card-image::after {
+  opacity: 1;
 }
 
 .card-image img {
@@ -615,24 +631,39 @@
   transform: scale(1.07);
 }
 
+/* Title and excerpt sit on one line while they fit beside the meta with
+   the gap below intact; the excerpt drops under the title the moment they
+   would otherwise wrap mid-phrase.                                        */
 .card-meta {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  gap: calc(var(--space-section) + 8px);
+}
+
+.card-meta h3 {
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .card-text {
+  flex: 1 1 auto;
+  min-width: 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
+  column-gap: 32px;
   margin: 0;
 }
 
 .card-title {
-  margin: 0 32px 0 0;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .card-excerpt {
   margin: 0;
+  white-space: nowrap;
 }
 
 .case-card:hover .card-title,
@@ -645,6 +676,13 @@
   .card-text {
     flex-direction: column;
     align-items: stretch;
+  }
+  .card-title,
+  .card-excerpt {
+    white-space: normal;
+  }
+  .card-meta h3 {
+    display: none;
   }
   .card-image {
     margin-bottom: 12px;

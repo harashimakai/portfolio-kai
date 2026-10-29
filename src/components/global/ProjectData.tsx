@@ -157,7 +157,7 @@ export const projects: Project[] = [
 
 // Display order for each context
 export const homeOrder = ["1", "2", "3", "4", "5", "6"];
-export const expandedOrder = ["4", "5", "6", "3", "1", "2", "7", "9"];
+export const expandedOrder = ["1", "3", "4", "5", "6", "2", "7", "9"];
 
 export const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
 
