@@ -93,6 +93,7 @@ export default function Sidebar({
           <NavButton
             to="/work"
             label="WORK"
+            alsoActive={["/putmeon"]}
           />
           <NavButton
             to="/art"

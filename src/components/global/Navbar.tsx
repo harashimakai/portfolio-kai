@@ -29,6 +29,7 @@ export default function Navbar({ darkMode, setDarkMode }: NavbarProps) {
             <NavButton
               to="/work"
               label="WORK"
+              alsoActive={["/putmeon"]}
             />
             <NavButton
               to="/art"
