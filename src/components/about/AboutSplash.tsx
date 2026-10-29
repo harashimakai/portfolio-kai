@@ -16,9 +16,8 @@ const QUOTES: Quote[] = [
         of roots, the matrix of crystals, the streets her father recreated in
         his models. Mazes in the nodules on murex shells and in the textures of
         sycamore bark and inside the hollow bones of eagles. None more
-        complicated than the human brain, Etienne would say, what may be the
-        most complex object in existence; one wet kilogram within which spin
-        universes.”
+        complicated than the human brain, what may be the most complex object in
+        existence; one wet kilogram within which spin universes.”
       </>
     ),
     author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
@@ -26,7 +25,7 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “Once there were brook trout in the streams in the mountains… They
+        “Once there were brook trout in the streams in the mountains. They
         smelled of moss in your hand. Polished and muscular and torsional. On
         their backs were vermiculate patterns that were maps of the world in its
         becoming. Maps and mazes. Of a thing which could not be put back. Not be
@@ -52,10 +51,10 @@ const QUOTES: Quote[] = [
       <>
         “He walked out in the gray light and stood and he saw for a brief moment
         the absolute truth of the world. The cold relentless circling of the
-        intestate earth. Darkness implacable. The blind dogs of the sun in their
-        running. The crushing black vacuum of the universe. And somewhere two
-        hunted animals trembling like ground-foxes in their cover. Borrowed time
-        and borrowed world and borrowed eyes with which to sorrow it. ”
+        intestate earth. Darkness implacable. The crushing black vacuum of the
+        universe. And somewhere two hunted animals trembling like ground-foxes
+        in their cover. Borrowed time and borrowed world and borrowed eyes with
+        which to sorrow it. ”
       </>
     ),
     author: "CORMAC MCCARTHY, THE ROAD",
