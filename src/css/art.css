@@ -443,6 +443,10 @@
      container: mobile browsers drop a scroll container's own bottom
      padding from the scrollable area.                                   */
   .lightbox-inner {
+    /* Sized by its content, not the viewport, so the padding lands
+       below the buttons rather than underneath the overflowing content. */
+    flex: none;
+    min-height: auto;
     padding-bottom: calc(var(--space-section) + env(safe-area-inset-bottom, 0px));
   }
   /* Phones: the image fills the width, matching the plaque beneath it,
