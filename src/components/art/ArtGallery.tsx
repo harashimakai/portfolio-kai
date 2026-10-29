@@ -8,6 +8,8 @@ import "../../css/art.css";
 export interface TileLayout {
   aspect?: string; /* CSS aspect-ratio; the image is cropped to it */
   maxHeight?: string; /* CSS length; past it the image crops top and bottom */
+  image?: "thumbnail" | "expanded"; /* which of the piece's images to show */
+  position?: string; /* object-position for a cropped image */
 }
 
 /* A row is either a mosaic of even tiles (or, with `columns`, tiles in
@@ -59,6 +61,8 @@ export default function ArtGallery({
       project={projects[index]}
       aspect={role ? undefined : layout[projects[index].id]?.aspect}
       maxHeight={role ? undefined : layout[projects[index].id]?.maxHeight}
+      image={layout[projects[index].id]?.image}
+      position={layout[projects[index].id]?.position}
       role={role}
       onOpen={() => onOpen(index)}
     />
@@ -128,12 +132,23 @@ export interface TileProps {
   title?: string;
   aspect?: string;
   maxHeight?: string;
+  image?: "thumbnail" | "expanded";
+  position?: string;
   role?: "lead" | "fill";
   onOpen: () => void;
 }
 
 /* One piece: image, hover zoom with gradient title, opens the lightbox. */
-export function Tile({ project, title, aspect, maxHeight, role, onOpen }: TileProps) {
+export function Tile({
+  project,
+  title,
+  aspect,
+  maxHeight,
+  image = "thumbnail",
+  position,
+  role,
+  onOpen,
+}: TileProps) {
   const cropped = Boolean(aspect) || role === "fill";
 
   return (
@@ -149,12 +164,16 @@ export function Tile({ project, title, aspect, maxHeight, role, onOpen }: TilePr
           style={cropped ? { aspectRatio: aspect, maxHeight } : undefined}
         >
           <img
-            src={project.thumbnailUrl}
+            src={
+              image === "expanded"
+                ? (project.expandedUrl ?? project.thumbnailUrl)
+                : project.thumbnailUrl
+            }
             alt={project.title}
             decoding="async"
             style={
-              cropped && project.imagePos
-                ? { objectPosition: project.imagePos }
+              cropped && (position ?? project.imagePos)
+                ? { objectPosition: position ?? project.imagePos }
                 : undefined
             }
           />

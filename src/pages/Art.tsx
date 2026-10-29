@@ -14,8 +14,10 @@ interface Props {
    64px of the next row peeking in; Iceland shows uncropped at that
    height and Ashokan fills the remaining width, cropping to fit.
    Row 2: the three backyard paintings, cropped alike so they align.
-   Row 3: thesis poster (60%, cropped) beside the calligraphy piece (40%,
-   uncropped).                                                              */
+   Row 3: the thesis poster alone, full width, as its flat head-on image,
+   trimmed a touch: the title starts 1% from the top and the posters end
+   4% from the bottom, so the crop takes 0.5% off the top and 3% off the
+   bottom (native ratio 1.595 -> 1.65).                                     */
 
 /* The sticky nav, the gallery's top padding and the row gap (both
    --space-gap), and a 64px glimpse of the row below.                      */
@@ -31,13 +33,14 @@ const rows: GalleryRow[] = [
     ratio: "738 / 1064",
   },
   { kind: "mosaic", ids: ["4", "5", "6"] },
-  { kind: "feature", crop: "1", natural: "7" },
+  { kind: "mosaic", ids: ["1"], columns: "minmax(0, 1fr)" },
 ];
 
 const layout: Record<string, TileLayout> = {
   "4": { aspect: "4 / 5" },
   "5": { aspect: "4 / 5" },
   "6": { aspect: "4 / 5" },
+  "1": { image: "expanded", aspect: "1.65", position: "center 14%" },
 };
 
 export default function Art({ setSideOpen }: Props) {
