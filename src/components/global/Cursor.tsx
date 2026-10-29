@@ -96,8 +96,8 @@ export default function Cursor() {
       if (s === shape) return;
       shape = s;
       el.style.transition = s.snap
-        ? "none"
-        : "width 0.12s ease-out, height 0.12s ease-out";
+        ? "background-color 0.3s ease-out"
+        : "width 0.12s ease-out, height 0.12s ease-out, background-color 0.3s ease-out";
       el.style.width = `${s.w}px`;
       el.style.height = `${s.h}px`;
     };

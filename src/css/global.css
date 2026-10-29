@@ -75,6 +75,15 @@ body {
   background: var(--accent);
 }
 
+/* A short ease when the cursor changes surface (page to footer). Size
+   transitions are set inline by the cursor script and kept alongside.    */
+.cursor-dot,
+.cursor-label {
+  transition-property: width, height, background-color, color;
+  transition-duration: 0.12s, 0.12s, 0.3s, 0.3s;
+  transition-timing-function: ease-out;
+}
+
 /* Label beside the square, its cap height level with the square. */
 .cursor-label {
   font-family: var(--font-sans);
