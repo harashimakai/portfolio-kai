@@ -100,18 +100,18 @@ body {
 
 
 
-/* On the footer's dark surface everything the cursor shows is white, and
+/* On the footer's dark surface everything the cursor shows is gold, and
    a filled label takes the footer colour for its text.                   */
 .cursor-on-footer .cursor-dot {
-  background: var(--white);
+  background: var(--gold);
 }
 
 .cursor-on-footer .cursor-label {
-  color: var(--white);
+  color: var(--gold);
 }
 
 .cursor-on-footer.cursor-filled .cursor-label {
-  background: var(--white);
+  background: var(--gold);
   color: var(--color-bg-inverse);
 }
 
