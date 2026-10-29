@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react";
 
-/* Custom pointer for mouse and trackpad users, on Rachel Chen's spec:
-   - Default: a 14px square, sharp corners, centred on the pointer.
-   - Over text: a fixed 3 x 20 caret, switched instantly.
-   - Over anything clickable: an 8px square.
+/* Custom pointer for mouse and trackpad users, after Rachel Chen's:
+   - Default: a 14px four-pointed star (✦), centred on the pointer.
+   - Over text: the star flattens into a 3 x 20 caret.
+   - Over anything clickable: an 8px star turned 45°.
+   - Over a solid button (data-cursor="hide"): it shrinks away, melting
+     into the button.
    - Over an element with data-cursor="<label>": the 8px square plus that
      label 10px to its right, e.g. "View project" on case study cards.
-   - Over an email link: the 14px square with a filled label, "Copy
-     email" then "Copied" once clicked.
-   Size changes ease over 0.12s (except into the caret); it fades in and
-   out over 0.2s and sits exactly on the pointer with no trailing.
+   - Over an email link: the 14px star with a filled label, "Copy email"
+     then "Copied" once clicked.
+   Shape changes ease over 0.15s; it fades in and out over 0.2s and sits
+   exactly on the pointer with no trailing.
    Touch devices and reduced-motion users keep the native cursor.        */
 
 const EMAIL = 'a[href^="mailto:"]';
@@ -17,11 +19,12 @@ const EMAIL = 'a[href^="mailto:"]';
 const CLICKABLE =
   'a, button, [role="button"], select, label, summary, input[type="checkbox"], input[type="radio"]';
 
-type Shape = { w: number; h: number; snap?: boolean };
+type Shape = { w: number; h: number; kind: "star" | "bar" | "small" | "gone" };
 
-const SQUARE: Shape = { w: 14, h: 14 };
-const SMALL: Shape = { w: 8, h: 8 };
-const CARET: Shape = { w: 3, h: 20, snap: true };
+const SQUARE: Shape = { w: 14, h: 14, kind: "star" };
+const SMALL: Shape = { w: 8, h: 8, kind: "small" };
+const CARET: Shape = { w: 3, h: 20, kind: "bar" };
+const GONE: Shape = { w: 14, h: 14, kind: "gone" };
 
 /* Is the point over an actual glyph rather than empty box space? */
 function overText(x: number, y: number): boolean {
@@ -95,9 +98,7 @@ export default function Cursor() {
     const apply = (s: Shape) => {
       if (s === shape) return;
       shape = s;
-      el.style.transition = s.snap
-        ? "background-color 0.3s ease-out"
-        : "width 0.12s ease-out, height 0.12s ease-out, background-color 0.3s ease-out";
+      el.dataset.shape = s.kind;
       el.style.width = `${s.w}px`;
       el.style.height = `${s.h}px`;
     };
@@ -116,7 +117,9 @@ export default function Cursor() {
       lastTarget = target;
       const email = target?.closest(EMAIL) ?? null;
       if (copiedOn && email !== copiedOn) copiedOn = null;
-      const labelled = target?.closest<HTMLElement>("[data-cursor]");
+      const labelled = target?.closest<HTMLElement>(
+        '[data-cursor]:not([data-cursor="hide"])',
+      );
       const nextLabel = email
         ? copiedOn
           ? "Copied"
@@ -141,6 +144,10 @@ export default function Cursor() {
       root.classList.toggle("cursor-on-footer", Boolean(target?.closest("footer")));
       if (email) {
         apply(SQUARE);
+        return;
+      }
+      if (target?.closest('[data-cursor="hide"]')) {
+        apply(GONE);
         return;
       }
       if (labelled || target?.closest(CLICKABLE)) {

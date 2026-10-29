@@ -71,7 +71,7 @@ export default function Mission() {
                 to="/work"
                 tabIndex={-1}
               >
-                <motion.button whileHover={{ scale: 1.05 }}>
+                <motion.button data-cursor="hide" whileHover={{ scale: 1.05 }}>
                   <h3>
                     CASE STUDIES <Arrow dir="right" />
                   </h3>

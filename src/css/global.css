@@ -75,13 +75,44 @@ body {
   background: var(--accent);
 }
 
-/* A short ease when the cursor changes surface (page to footer). Size
-   transitions are set inline by the cursor script and kept alongside.    */
-.cursor-dot,
+/* The dot is a ✦ cut from a square with an 8-point outline: four tips and
+   four inner corners. Flattening into the text bar slides the inner
+   corners out to the square's corners, so the star visibly opens into a
+   rectangle while the box narrows. clip-path shapes animate everywhere,
+   including Safari, which SVG path morphing does not.                    */
+.cursor-dot {
+  clip-path: polygon(
+    50% 0%, 61% 39%, 100% 50%, 61% 61%,
+    50% 100%, 39% 61%, 0% 50%, 39% 39%
+  );
+  transition:
+    width 0.15s ease-out,
+    height 0.15s ease-out,
+    clip-path 0.15s ease-out,
+    transform 0.2s ease-out,
+    opacity 0.2s ease-out,
+    background-color 0.3s ease-out;
+}
+
+.cursor-dot[data-shape="bar"] {
+  clip-path: polygon(
+    50% 0%, 100% 0%, 100% 50%, 100% 100%,
+    50% 100%, 0% 100%, 0% 50%, 0% 0%
+  );
+}
+
+.cursor-dot[data-shape="small"] {
+  transform: rotate(45deg);
+}
+
+/* Over a solid button the star shrinks away into it. */
+.cursor-dot[data-shape="gone"] {
+  transform: scale(0);
+  opacity: 0;
+}
+
 .cursor-label {
-  transition-property: width, height, background-color, color;
-  transition-duration: 0.12s, 0.12s, 0.3s, 0.3s;
-  transition-timing-function: ease-out;
+  transition: color 0.3s ease-out;
 }
 
 /* Label beside the square, its cap height level with the square. */
