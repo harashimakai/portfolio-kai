@@ -138,7 +138,10 @@
   --color-bg-inverse: color-mix(in srgb, black 40%, var(--ink) 60%);
   --special-hover: #407537;
 
-  transition: background-color var(--ease-theme);
+  transition:
+    background-color var(--ease-theme),
+    --sel-bg var(--ease-theme),
+    --sel-fg var(--ease-theme);
   background-color: var(--bg);
 }
 
@@ -158,6 +161,9 @@
   --color-bg-inverse: #161915;
   --special-hover: #d3ba88;
 
-  transition: background-color var(--ease-theme);
+  transition:
+    background-color var(--ease-theme),
+    --sel-bg var(--ease-theme),
+    --sel-fg var(--ease-theme);
   background-color: var(--bg);
 }

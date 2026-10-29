@@ -9,14 +9,35 @@
   font-variant-emoji: text;
 }
 
+/* Selection colours are registered properties set on the theme wrapper
+   and transitioned there. Browsers never animate ::selection itself, but
+   it reads these each frame, so the highlight fades with the theme.     */
+@property --sel-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --sel-fg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: currentColor;
+}
+
+.lightmode,
+.darkmode {
+  --sel-bg: color-mix(in srgb, var(--accent) 22%, var(--bg));
+  --sel-fg: var(--accent);
+}
+
 ::selection {
-  background-color: color-mix(in srgb, var(--accent) 22%, var(--bg));
-  color: var(--accent);
+  background-color: var(--sel-bg);
+  color: var(--sel-fg);
 }
 
 ::-moz-selection {
-  background-color: color-mix(in srgb, var(--accent) 22%, var(--bg));
-  color: var(--accent);
+  background-color: var(--sel-bg);
+  color: var(--sel-fg);
 }
 
 html,
@@ -46,6 +67,14 @@ body {
   transition-duration: 0.9s !important;
   transition-timing-function: ease-in-out !important;
   transition-delay: 0s !important;
+}
+
+/* Only the theme wrapper animates the selection colours; everything inside
+   just inherits the animated value, so the fades don't stack.           */
+.theme-switching .lightmode,
+.theme-switching .darkmode {
+  transition-property: color, background-color, border-color, box-shadow,
+    --sel-bg, --sel-fg !important;
 }
 
 /* ─── Custom cursor ──────────────────────────────────────────────────────── */
