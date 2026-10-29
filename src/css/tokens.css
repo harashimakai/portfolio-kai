@@ -12,8 +12,7 @@
   --font-serif:
     "the-seasons", "Cormorant Garamond", "EB Garamond", Garamond,
     "Times New Roman", serif;
-  --font-sans: "neue-haas-grotesk-text", "Helvetica Neue", Helvetica, sans-serif;
-  --font-sans-display: "neue-haas-grotesk-display", "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans: "Geist", "Inter Tight", "Inter", "Helvetica Neue", Helvetica, sans-serif;
 }
 
 /* ─── Type scale — labels & body ────────────────────────────────────────── */

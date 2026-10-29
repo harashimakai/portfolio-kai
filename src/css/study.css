@@ -151,8 +151,8 @@
 }
 
 .study-hero-meta dt {
-  font-family: var(--font-sans-display);
-  font-weight: 400;
+  font-family: var(--font-sans);
+  font-weight: 500;
   font-size: var(--text-label);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -260,10 +260,18 @@
   color: var(--accent);
 }
 
-/* Bold is heavier and in the accent. Both faces ship 700 and italics. */
+/* Bold is heavier and in the accent. The serif ships 700, the sans 600;
+   both faces ship italics.                                                */
 .study strong {
   font-weight: 700;
   color: var(--accent);
+}
+
+.study-body strong,
+.study-bullets strong,
+.study-takeaway-body strong,
+.study-card-title strong {
+  font-weight: 600;
 }
 
 .study em {
@@ -379,7 +387,7 @@
 .study-card-title {
   margin: 0 0 14px;
   font-family: var(--font-sans);
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--text-md);
   line-height: var(--leading-relaxed);
   color: var(--ink);

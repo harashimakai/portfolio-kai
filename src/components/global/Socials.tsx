@@ -18,7 +18,7 @@ export default function Socials() {
             className="body-lg"
             variants={children}
           >
-            Set in The Seasons and Neue Haas Grotesk. Built in React, designed in
+            Set in The Seasons and Geist. Built in React, designed in
             Figma.
           </motion.p>
         </motion.div>
