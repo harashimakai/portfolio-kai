@@ -152,7 +152,7 @@
 
 .study-hero-meta dt {
   font-family: var(--font-sans-display);
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--text-label);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -379,7 +379,7 @@
 .study-card-title {
   margin: 0 0 14px;
   font-family: var(--font-sans);
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--text-md);
   line-height: var(--leading-relaxed);
   color: var(--ink);
