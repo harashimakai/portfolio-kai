@@ -88,6 +88,11 @@ export default function Lightbox({ projects, index, onChange }: Props) {
     closeRef.current?.focus();
     return () => {
       document.body.style.overflow = prevOverflow;
+      /* Drop focus from the dialog as it closes, so the keyboard focus
+         ring does not sit on CLOSE through the fade-out. */
+      if (rootRef.current?.contains(document.activeElement)) {
+        (document.activeElement as HTMLElement).blur();
+      }
     };
   }, [open]);
 
