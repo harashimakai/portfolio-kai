@@ -18,8 +18,7 @@ export default function Socials() {
             className="body-lg"
             variants={children}
           >
-            Set in The Seasons and Geist. Built in React, designed in
-            Figma.
+            Typeset in The Seasons and Geist. Built in React, designed in Figma.
           </motion.p>
         </motion.div>
         <motion.div className="social-box">
@@ -84,7 +83,11 @@ export default function Socials() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           <h2>
-            <Arrow dir="up" lead /> BACK TO TOP
+            <Arrow
+              dir="up"
+              lead
+            />{" "}
+            BACK TO TOP
           </h2>
         </button>
       </motion.div>

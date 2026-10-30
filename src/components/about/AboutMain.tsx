@@ -57,7 +57,7 @@ export default function AboutMain() {
             in high school, and more recently became self-taught in Figma and
             React. This site is my first front-end project. Outside of work, I
             crave either speed or stillness: sailing, skiing, tennis, and squash
-            on one end; reading, piano, and oil painting and on another.
+            on one end; reading, piano, and oil painting on another.
           </motion.p>
         </div>
         <motion.div

@@ -92,11 +92,22 @@ body {
   z-index: 10000;
   pointer-events: none;
   opacity: 0;
+  transition: opacity 0.2s ease-out;
+  will-change: transform;
+}
+
+/* The star and its label, laid out side by side. Pressing shrinks them
+   together about the star's centre, which sits on the pointer.         */
+.cursor-body {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  transition: opacity 0.2s ease-out;
-  will-change: transform;
+  transform-origin: 7px 7px;
+  transition: transform 0.12s ease-out;
+}
+
+.cursor-body.cursor-pressed {
+  transform: scale(0.8);
 }
 
 /* On the footer's dark surface the cursor takes the footer gold. */
@@ -115,7 +126,7 @@ body {
 }
 
 /* The dot is a fixed 14px box centred on the pointer. The star is an SVG
-   larger than it (so the 20px bar fits), centred on the same point; it
+   larger than it (so the 22px bar fits), centred on the same point; it
    morphs into the bar by script and scales about its centre.            */
 .cursor-dot {
   position: relative;
@@ -141,9 +152,15 @@ body {
   transition: fill 0.3s ease-out;
 }
 
-/* Over clickables: the star shrinks to 8px about its centre. */
+/* Over clickables: the star shrinks to 70% about its centre. Pressing
+   over one takes it down the same step again, to 40%: 0.5 here on top of the
+   whole cursor's 0.8 press shrink.                                    */
 .cursor-dot[data-shape="small"] .cursor-star {
-  transform: translate(-50%, -50%) scale(0.57);
+  transform: translate(-50%, -50%) scale(0.7);
+}
+
+.cursor-pressed .cursor-dot[data-shape="small"] .cursor-star {
+  transform: translate(-50%, -50%) scale(0.5);
 }
 
 /* Over a solid button the star shrinks away into it. */
@@ -152,14 +169,14 @@ body {
   transform: translate(-50%, -50%) scale(0);
 }
 
-/* Label beside the star, its cap height level with the star. */
+/* Label beside the star, its text centred on the star's centre. */
 .cursor-label {
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1;
   white-space: nowrap;
   color: var(--cursor-c);
-  margin-top: -3.5px;
+  margin-top: 0;
   transition: color 0.3s ease-out;
 }
 
@@ -167,9 +184,14 @@ body {
   display: none;
 }
 
-/* Keep the 10px gap from the visible star's edge when it is small. */
+/* Keep the 10px gap from the visible star's edge: the 18px star pokes
+   2px past the 14px dot each side; the 12.6px one sits 0.7px inside. */
+.cursor-dot + .cursor-label {
+  margin-left: 2px;
+}
+
 .cursor-dot[data-shape="small"] + .cursor-label {
-  margin-left: -3px;
+  margin-left: -0.7px;
 }
 
 /* Filled variant (email links): a block in the cursor colour with

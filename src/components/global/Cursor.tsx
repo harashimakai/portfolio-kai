@@ -1,18 +1,22 @@
 import { useEffect, useRef } from "react";
 
 /* Custom pointer for mouse and trackpad users, after Rachel Chen's:
-   - Default: a 14px ✦ drawn as an SVG path, centred on the pointer.
+   - Default: a 18px ✦ drawn as an SVG path, centred on the pointer.
    - Over text: the star turns while each tip travels to its nearest
-     corner of the caret and its curved sides straighten, becoming a 3 x
-     20 bar. Leaving text keeps turning the same way back to a star.
-   - Over anything clickable: the star shrinks to 8px.
+     corner of the caret and its sides reshape, becoming a 4 x 22 bar
+     with a narrow waist. Leaving text turns it back the way it came, into the star.
+   - Over anything clickable: the star shrinks to 70%, about 12.6px.
    - Over a solid button (data-cursor="hide"): once the whole star is
      inside it, it shrinks away, melting into the button.
-   - Over an element with data-cursor="<label>": the 8px square plus that
+   - Over an element with data-cursor="<label>": the 12.6px star plus that
      label 10px to its right, e.g. "View project" on case study cards.
-   - Over an email link: the 14px star with a filled label, "Copy email"
+   - Over an email link: the 18px star with a filled label, "Copy email"
      then "Copied" once clicked. Any element can ask for a filled label
      with data-cursor-filled (the theme toggle: "Dark mode" / "Light mode").
+   - Pressing the mouse button shrinks the whole cursor, label and all,
+     to 80%, whatever it is over, until it is released. Over clickables
+     the star drops from 70% to 40%, the same step as from normal
+     to clickable.
    - Over an actual image in dark mode, the cursor takes the page's dark
      green so it reads against the picture.
    The star always scales about its own centre, which sits exactly on the
@@ -34,10 +38,10 @@ const SMALL: Shape = { w: 8, h: 8, kind: "small" };
 const CARET: Shape = { w: 3, h: 20, kind: "bar" };
 const GONE: Shape = { w: 14, h: 14, kind: "gone" };
 
-/* Is the whole 14px star inside the element? Checks its four tips, so a
+/* Is the whole star inside the element? Checks its four tips, so a
    pill's rounded ends count as outside.                                  */
 function containsStar(el: Element, x: number, y: number): boolean {
-  const r = 7;
+  const r = R;
   return [
     [x - r, y],
     [x + r, y],
@@ -98,17 +102,25 @@ function overText(x: number, y: number, target: Element | null): boolean {
 
 /* ── The ✦ and its morph into the caret ────────────────────────────────
    Points are in px about the pointer, angles clockwise from straight up.
-   The star has four tips joined by quadratic curves whose controls sit
-   near the centre, giving the concave sides. The bar has the same
-   structure: four corners joined by straight sides.
-   Everything moves together on one eased progress value, in polar terms
-   so every frame stays symmetric: the star turns 45° while each tip
-   swings and travels out to its corner of the bar and each curve control
-   moves out to its side's midpoint, straightening the curves.           */
-const R = 7; /* star radius: 14px tip to tip */
-const C = 1.25 * Math.SQRT2; /* curve controls' distance from the centre */
-const BAR_W = 1.5,
-  BAR_H = 10; /* half-sizes of the 3 x 20 caret */
+   The star has four flat-cut tips joined by cubic curves. Each curve's
+   two controls sit near the centre, angled a little off the arms they
+   leave and enter, so the arms taper evenly to their tips. The bar has
+   the same structure: the cuts close to nothing at its four corners,
+   its ends are straight, and its long sides curve in to a waist a
+   third of its width, flaring out in rounded curves near the ends.
+   Everything moves together on one eased progress value, so every frame
+   stays symmetric: the star turns 45° while each tip
+   swings and travels out to its corner of the bar, its cut closing to a
+   point. On the ends each curve's two controls close together at the
+   midpoint, straightening them; on the long sides they spread to just
+   inside the waist near either end, pinching the side into a long
+   narrow neck.                                                           */
+const R = 9; /* star radius: 18px tip to tip */
+const K = 3.5; /* curve controls' distance from the centre */
+const SPREAD = 20; /* each control's angle either side of the diagonal */
+const BAR_W = 3,
+  BAR_H = 11; /* half-sizes of the 6 x 22 caret, flares included */
+const CUT = 0.55; /* half-width of each tip's slight flat cut */
 const DEG = Math.PI / 180;
 const CORNER_A = Math.atan2(BAR_W, BAR_H) / DEG;
 const CORNER_R = Math.hypot(BAR_W, BAR_H);
@@ -122,36 +134,140 @@ const TIPS: [number, number][] = [
   [180, 180 + CORNER_A - 180 - TURN],
   [270, 360 - CORNER_A - 270 - TURN],
 ];
-/* [start angle, final distance] for each curve control: after the turn
-   they land on the right, bottom, left and top sides' midpoints.       */
-const CTRLS: [number, number][] = [
-  [45, BAR_W],
-  [135, BAR_H],
-  [225, BAR_W],
-  [315, BAR_H],
+
+type Pt = [number, number];
+const at = (a: number, r: number): Pt => [r * Math.sin(a * DEG), -r * Math.cos(a * DEG)];
+const turn = ([x, y]: Pt, a: number): Pt => {
+  const c = Math.cos(a * DEG),
+    s = Math.sin(a * DEG);
+  return [x * c - y * s, x * s + y * c];
+};
+const pt = ([x, y]: Pt) => `${x.toFixed(3)} ${y.toFixed(3)}`;
+
+const lerp = ([ax, ay]: Pt, [bx, by]: Pt, t: number): Pt => [
+  ax + (bx - ax) * t,
+  ay + (by - ay) * t,
 ];
 
+/* Each side runs cubic, straight line, cubic: six points after the tip
+   it leaves, [control, control, end, line end, control, control], with
+   the next tip closing it.
+
+   The star's sides are its single taper curve, split exactly in half
+   (de Casteljau), with a zero-length line between the halves.
+
+   The caret's long sides are a straight stem STEM across, flaring out
+   near each end over FLARE px in a rounded bracket to a short flat
+   FLAT px tall at each corner, like the star's cut tips. Its ends are
+   straight, split the same way. Its points are laid out on
+   its right, bottom, left and top sides and turned back by the 45° the
+   star turns on the way, so the two can be blended directly.         */
+const STEM = 1.1; /* half-width of the caret's straight stem */
+const FLARE = 2.2; /* height of each flare at the caret's ends */
+const FLAT = 0.5; /* height of the flat at each of the caret's corners */
+const NECK = BAR_H - FLARE;
+
+function starSide(i: number): Pt[] {
+  /* The curve runs from just after this tip's cut to just before the
+     next one's. */
+  const [lx, ly] = at(90 * i, R),
+    [ex, ey] = at(90 * (i + 1), R);
+  const [ox, oy] = turn([CUT, 0], 90 * i),
+    [nx, ny] = turn([CUT, 0], 90 * (i + 1));
+  const p0: Pt = [lx + ox, ly + oy],
+    p3: Pt = [ex - nx, ey - ny];
+  const c1 = at(45 + 90 * i - SPREAD, K),
+    c2 = at(45 + 90 * i + SPREAD, K);
+  const a = lerp(p0, c1, 0.5),
+    b = lerp(c1, c2, 0.5),
+    c = lerp(c2, p3, 0.5);
+  const d = lerp(a, b, 0.5),
+    e = lerp(b, c, 0.5);
+  const m = lerp(d, e, 0.5);
+  return [a, d, m, m, e, c];
+}
+
+/* The right side, from below the top corner's flat to above the bottom
+   one's; the others are this turned. A flare's controls sit partway
+   from each end towards the bracket's inside corner, giving a rounded
+   quarter curve.                                                      */
+const R_SIDE: Pt[] = (() => {
+  const corner: Pt = [BAR_W, -BAR_H + FLAT],
+    neck: Pt = [STEM, -NECK],
+    inside: Pt = [STEM, -BAR_H + FLAT];
+  const flip = ([x, y]: Pt): Pt => [x, -y];
+  const tip = lerp(corner, inside, 0.55);
+  return [
+    tip,
+    lerp(neck, inside, 0.55),
+    neck,
+    flip(neck),
+    flip(lerp(neck, inside, 0.55)),
+    flip(tip),
+  ];
+})();
+/* The bottom end, right corner to left, straight. */
+const B_SIDE: Pt[] = [
+  [BAR_W * (2 / 3), BAR_H],
+  [BAR_W / 3, BAR_H],
+  [0, BAR_H],
+  [0, BAR_H],
+  [-BAR_W / 3, BAR_H],
+  [-BAR_W * (2 / 3), BAR_H],
+];
+const barSide = (i: number): Pt[] =>
+  (i % 2 ? B_SIDE : R_SIDE).map((p) => turn(p, (i >> 1) * 180 - TURN));
+
+const SIDES: [Pt[], Pt[]][] = [0, 1, 2, 3].map((i) => [starSide(i), barSide(i)]);
+/* At each of the caret's corners the flat runs along the long side:
+   [before, after] offsets from the corner, upright, for the top right,
+   bottom right, bottom left and top left corners in turn.           */
+const FLATS: [Pt, Pt][] = (
+  [
+    [[0, 0], [0, FLAT]],
+    [[0, -FLAT], [0, 0]],
+    [[0, 0], [0, -FLAT]],
+    [[0, FLAT], [0, 0]],
+  ] as [Pt, Pt][]
+).map(([a, b]) => [turn(a, -TURN), turn(b, -TURN)]);
+
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
-const polar = (a: number, r: number) =>
-  `${(r * Math.sin(a * DEG)).toFixed(3)} ${(-r * Math.cos(a * DEG)).toFixed(3)}`;
 
 /* The outline for a given turn (degrees, clockwise) and openness (0 =
-   star, 1 = bar). The bar is reached at turns of 45° + 180°k; a star at
-   any whole quarter turn looks upright, since it repeats every 90°.    */
+   star, 1 = bar). The star sits at 0° and the bar at 45°.             */
 function shapePath(rotation: number, open: number): string {
-  const tips = TIPS.map(([a, swing]) =>
-    polar(a + rotation + swing * open, R + (CORNER_R - R) * open),
+  /* Each tip is a flat edge square to its direction: [before, after]. */
+  /* Each side's points, and the caret's corner flats, slide in straight
+     lines from their star spots to their bar spots, mostly near the end
+     (cubed), once the tips have swung round to meet them, so the sides
+     never bulge outward.                                              */
+  const k = open ** 3;
+  const cut = CUT * (1 - open);
+  const tips = TIPS.map(([a, swing], i) => {
+    const t = a + rotation + swing * open;
+    const [x, y] = at(t, R + (CORNER_R - R) * open);
+    const [dx, dy] = [cut * Math.cos(t * DEG), cut * Math.sin(t * DEG)];
+    const [[bx, by], [ax, ay]] = FLATS[i].map((f) => turn([f[0] * k, f[1] * k], rotation));
+    return [pt([x - dx + bx, y - dy + by]), pt([x + dx + ax, y + dy + ay])];
+  });
+  const sides = SIDES.map(([star, bar]) =>
+    star.map((p, j) => pt(turn(lerp(p, bar[j], k), rotation))),
   );
-  const ctls = CTRLS.map(([a, r]) => polar(a + rotation, C + (r - C) * open));
-  let d = `M${tips[0]}`;
-  for (let i = 0; i < 4; i++) d += ` Q${ctls[i]} ${tips[(i + 1) % 4]}`;
+  let d = `M${tips[0][0]} L${tips[0][1]}`;
+  for (let i = 0; i < 4; i++) {
+    const [c1, c2, m1, m2, c3, c4] = sides[i];
+    const next = tips[(i + 1) % 4];
+    d += ` C${c1} ${c2} ${m1} L${m2} C${c3} ${c4} ${next[0]}`;
+    if (i < 3) d += ` L${next[1]}`;
+  }
   return d + "Z";
 }
 
-const MORPH_MS = 290;
+const MORPH_MS = 180;
 
 export default function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLSpanElement>(null);
   const dotRef = useRef<HTMLSpanElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
@@ -162,14 +278,15 @@ export default function Cursor() {
     if (!fine.matches || calm.matches) return;
 
     const root = ref.current!;
+    const body = bodyRef.current!;
     const el = dotRef.current!;
     const label = labelRef.current!;
     const path = pathRef.current!;
     document.documentElement.classList.add("has-cursor");
 
     /* Turn and openness, animated by the frame loop. Entering text turns
-       the star 45° into the bar; leaving keeps turning the same way, a
-       further 45°, back into an upright star.                           */
+       the star 45° into the bar; leaving turns it back 45° into the
+       star, from wherever it had got to.                                */
     let rotation = 0,
       open = 0,
       rotFrom = 0,
@@ -198,12 +315,7 @@ export default function Cursor() {
         rotFrom = rotation;
         openFrom = open;
         openTo = target;
-        rotTo =
-          target === 1
-            ? /* next bar position: 45° + 180°k */
-              45 + 180 * Math.ceil((rotation - 45) / 180)
-            : /* keep turning forward to the next quarter turn */
-              90 * (Math.floor(rotation / 90) + 1);
+        rotTo = target === 1 ? 45 : 0;
         animStart = performance.now();
         animating = true;
       }
@@ -284,12 +396,7 @@ export default function Cursor() {
         const e = ease(k);
         rotation = rotFrom + (rotTo - rotFrom) * e;
         open = openFrom + (openTo - openFrom) * e;
-        if (k === 1) {
-          animating = false;
-          /* Back at a star: fold the turn into one quarter, which looks
-             identical, so the numbers never grow. */
-          if (openTo === 0) rotation %= 90;
-        }
+        if (k === 1) animating = false;
         path.setAttribute("d", shapePath(rotation, open));
       }
       raf = requestAnimationFrame(loop);
@@ -326,6 +433,15 @@ export default function Cursor() {
     };
     window.addEventListener("email-copied", onCopied);
 
+    /* Pressing shrinks the star and its label together about the
+       pointer; releasing, or the press ending some other way, undoes it. */
+    const onDown = () => body.classList.add("cursor-pressed");
+    const onUp = () => body.classList.remove("cursor-pressed");
+    window.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+    window.addEventListener("blur", onUp);
+
     const onLabelEnd = () => {
       if (label.classList.contains("cursor-label-out")) {
         label.classList.remove("cursor-label-out");
@@ -343,6 +459,10 @@ export default function Cursor() {
       document.documentElement.classList.remove("has-cursor");
       label.removeEventListener("animationend", onLabelEnd);
       window.removeEventListener("email-copied", onCopied);
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("blur", onUp);
       window.removeEventListener("scroll", onScroll, { capture: true });
       window.removeEventListener("click", onClick);
       window.removeEventListener("pointermove", onMove);
@@ -359,23 +479,28 @@ export default function Cursor() {
       aria-hidden="true"
     >
       <span
-        ref={dotRef}
-        className="cursor-dot"
+        ref={bodyRef}
+        className="cursor-body"
       >
-        <svg
-          className="cursor-star"
-          viewBox="-12 -12 24 24"
-          width="24"
-          height="24"
+        <span
+          ref={dotRef}
+          className="cursor-dot"
         >
-          <path ref={pathRef} />
-        </svg>
+          <svg
+            className="cursor-star"
+            viewBox="-12 -12 24 24"
+            width="24"
+            height="24"
+          >
+            <path ref={pathRef} />
+          </svg>
+        </span>
+        <span
+          ref={labelRef}
+          className="cursor-label"
+          hidden
+        />
       </span>
-      <span
-        ref={labelRef}
-        className="cursor-label"
-        hidden
-      />
     </div>
   );
 }
