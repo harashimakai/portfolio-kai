@@ -264,6 +264,16 @@ function shapePath(rotation: number, open: number): string {
 }
 
 const MORPH_MS = 180;
+const SWAP_MS = 300;
+
+/* The label's text sits in its own span, so a change of wording can
+   crossfade between two of them.                                       */
+function textSpan(text: string): HTMLSpanElement {
+  const span = document.createElement("span");
+  span.className = "cursor-label-text";
+  span.textContent = text;
+  return span;
+}
 
 export default function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
@@ -297,6 +307,50 @@ export default function Cursor() {
       animating = false;
     path.setAttribute("d", shapePath(0, 0));
     let labelText = "";
+    let resize: Animation | null = null;
+
+    /* A label already showing changes its wording in place: the box
+       eases to the new width while the old text fades out and the new
+       fades in over it, rather than retracting and revealing again.    */
+    const swapLabel = (text: string) => {
+      resize?.cancel();
+      const spans = label.querySelectorAll<HTMLSpanElement>(".cursor-label-text");
+      spans.forEach((s, i) => i < spans.length - 1 && s.remove());
+      const old = spans[spans.length - 1];
+      const from = label.offsetWidth;
+      const cs = getComputedStyle(label);
+      if (old) {
+        old.style.position = "absolute";
+        old.style.left = cs.paddingLeft;
+        old.style.top = cs.paddingTop;
+      }
+      const next = textSpan(text);
+      label.appendChild(next);
+      const to = label.offsetWidth;
+      label.classList.add("cursor-label-swapping");
+      const anim = label.animate(
+        [{ width: `${from}px` }, { width: `${to}px` }],
+        { duration: SWAP_MS, easing: "ease-in-out" },
+      );
+      resize = anim;
+      anim.finished.then(
+        () => resize === anim && label.classList.remove("cursor-label-swapping"),
+        () => {},
+      );
+      old
+        ?.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: SWAP_MS / 2,
+          easing: "ease-in",
+          fill: "forwards",
+        })
+        .finished.then(() => old.remove(), () => {});
+      next.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: SWAP_MS * 0.6,
+        delay: SWAP_MS * 0.4,
+        easing: "ease-out",
+        fill: "backwards",
+      });
+    };
     let lastTarget: Element | null = null;
     let copiedOn: Element | null = null;
 
@@ -343,7 +397,19 @@ export default function Cursor() {
           ? "Copied"
           : "Copy email"
         : (labelled?.dataset.cursor ?? "");
-      if (nextLabel !== labelText) {
+      const filled =
+        Boolean(email) || labelled?.dataset.cursorFilled !== undefined;
+      if (
+        nextLabel &&
+        labelText &&
+        nextLabel !== labelText &&
+        !label.hidden &&
+        !label.classList.contains("cursor-label-out") &&
+        label.classList.contains("cursor-label-filled") === filled
+      ) {
+        labelText = nextLabel;
+        swapLabel(nextLabel);
+      } else if (nextLabel !== labelText) {
         labelText = nextLabel;
         label.classList.remove("cursor-label-in", "cursor-label-out");
         void label.offsetWidth; /* restart the animation */
@@ -351,11 +417,10 @@ export default function Cursor() {
           /* Appear: reveal left to right. The filled style is set before
              the label shows and kept through its retract, so the plain
              style never flashes.                                        */
-          label.classList.toggle(
-            "cursor-label-filled",
-            Boolean(email) || labelled?.dataset.cursorFilled !== undefined,
-          );
-          label.textContent = nextLabel;
+          label.classList.toggle("cursor-label-filled", filled);
+          resize?.cancel();
+          label.classList.remove("cursor-label-swapping");
+          label.replaceChildren(textSpan(nextLabel));
           label.hidden = false;
           label.classList.add("cursor-label-in");
         } else if (!label.hidden) {

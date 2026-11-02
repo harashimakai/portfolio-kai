@@ -80,10 +80,11 @@
 @media (max-width: 767px) {
   .chapter-label-row {
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
+    margin-bottom: 16px;
   }
   .chapter-header {
-    padding-top: 36px;
+    padding-top: 32px;
   }
   .filter-buttons {
     margin-top: var(--space-sm);
@@ -96,6 +97,15 @@
   flex-direction: column;
   padding: var(--space-section) var(--page-gutter) var(--space-xs);
   gap: var(--space-sm);
+}
+
+/* Phones: 24px either side of the divider and above the footer; cards
+   lose their own margin, so the gap alone spaces them. */
+@media (max-width: 767px) {
+  .case-content {
+    padding: 24px var(--page-gutter) var(--space-section);
+    gap: 32px;
+  }
 }
 
 /* ─── Project Grid ───────────────────────────────────────────────────────── */

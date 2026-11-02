@@ -164,6 +164,9 @@
 
 /* Phones: the strip stays a 3 x 2 grid of images, no titles beneath. */
 @media (max-width: 767px) {
+  .art-strip {
+    margin-bottom: 0;
+  }
   .art-strip .art-tile-title {
     display: none;
   }
@@ -212,10 +215,13 @@
 
 @media (max-width: 767px) {
   .mission-content {
-    padding: 48px var(--page-gutter) 40px;
+    padding: 32px var(--page-gutter);
   }
   .mission-container {
-    gap: 28px;
+    gap: 24px;
+  }
+  .mission-stats {
+    gap: 2px;
   }
   .mission-stat-row {
     gap: 24px;
@@ -228,9 +234,15 @@
   .mission-desc {
     font-size: var(--text-sm);
   }
+  /* 24px above the buttons, counting the rows' 2px gap. */
   .action-buttons {
     flex-wrap: wrap;
     gap: 12px;
+    margin-top: 22px;
+  }
+  /* The card's own margin goes; 24px then sits above the divider. */
+  .home-case-content {
+    padding-bottom: 24px;
   }
   .action-buttons button {
     padding: 14px 24px;

@@ -76,6 +76,14 @@ export default function Sidebar({
           initial="hidden"
           animate="visible"
           exit="hidden"
+          /* Swipe left to close; a short drag springs back. */
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={{ left: 1, right: 0 }}
+          onDragEnd={(_, info) => {
+            if (info.offset.x < -80 || info.velocity.x < -400)
+              setSideOpen(false);
+          }}
         >
           <div className="navbar-logos">
             <Monogram />

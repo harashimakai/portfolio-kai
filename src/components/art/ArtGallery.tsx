@@ -1,3 +1,5 @@
+import { useLayoutEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { motion } from "motion/react";
 import { children_custom } from "../global/AnimationConsts";
 import { Project } from "../global/ProjectData";
@@ -82,30 +84,14 @@ export default function ArtGallery({
       >
         {rows.map((row, r) =>
           row.kind === "feature" ? (
-            <div
+            <FeatureRow
               key={r}
-              className={
-                [
-                  "art-feature",
-                  row.naturalFirst && "art-feature-lead-first",
-                  row.height && "art-feature-fixed",
-                ]
-                  .filter(Boolean)
-                  .join(" ")
-              }
-              style={
-                row.height
-                  ? ({
-                      "--art-lead-height": row.height,
-                      "--art-lead-ratio": row.ratio,
-                    } as React.CSSProperties)
-                  : undefined
-              }
+              row={row}
             >
               {row.naturalFirst
                 ? [tile(indexOf(row.natural), "lead"), tile(indexOf(row.crop), "fill")]
                 : [tile(indexOf(row.crop), "fill"), tile(indexOf(row.natural), "lead")]}
-            </div>
+            </FeatureRow>
           ) : (
             <div
               key={r}
@@ -125,6 +111,84 @@ export default function ArtGallery({
         )}
       </motion.div>
     </section>
+  );
+}
+
+type FeatureRowProps = {
+  row: Extract<GalleryRow, { kind: "feature" }>;
+  children: ReactNode;
+};
+
+/* A fixed-height pair holds its height only while the fill piece is at
+   least as wide as its own proportions. Narrower than that, the crop
+   would only eat into its sides, so the row falls back to the plain
+   proportional pair instead; below 1190px it always does. That point depends on the viewport's
+   height as well as its width, so it is measured rather than set as a
+   breakpoint.                                                            */
+function FeatureRow({ row, children }: FeatureRowProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const probe = useRef<HTMLSpanElement>(null);
+  const [snapped, setSnapped] = useState(false);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!row.height || !row.ratio || !el) return;
+    const [w, h] = row.ratio.split("/").map(Number);
+    const leadRatio = w / h;
+    const check = () => {
+      const img = el.querySelector<HTMLImageElement>(".art-tile-fill img");
+      if (!img?.naturalWidth || !probe.current) return;
+      const fillRatio = img.naturalWidth / img.naturalHeight;
+      const height = probe.current.offsetHeight;
+      const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+      const room = el.clientWidth - gap - height * leadRatio;
+      setSnapped(
+        room < height * fillRatio ||
+          window.matchMedia("(max-width: 1189px)").matches,
+      );
+    };
+    check();
+    const img = el.querySelector<HTMLImageElement>(".art-tile-fill img");
+    img?.addEventListener("load", check);
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    window.addEventListener("resize", check);
+    return () => {
+      img?.removeEventListener("load", check);
+      ro.disconnect();
+      window.removeEventListener("resize", check);
+    };
+  }, [row.height, row.ratio]);
+
+  return (
+    <div
+      ref={ref}
+      className={[
+        "art-feature",
+        row.naturalFirst && "art-feature-lead-first",
+        row.height && "art-feature-fixed",
+        snapped && "art-feature-snapped",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={
+        row.height
+          ? ({
+              "--art-lead-height": row.height,
+              "--art-lead-ratio": row.ratio,
+            } as React.CSSProperties)
+          : undefined
+      }
+    >
+      {row.height && (
+        <span
+          ref={probe}
+          className="art-feature-probe"
+          aria-hidden
+        />
+      )}
+      {children}
+    </div>
   );
 }
 

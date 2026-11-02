@@ -30,19 +30,46 @@
 }
 
 /* Fixed-height pair: the lead is exactly as tall as the row and as wide
-   as its proportions allow; the fill takes whatever width is left.       */
+   as its proportions allow; the fill takes whatever width is left.
+
+   Once the fill would only lose its sides (measured in ArtGallery), the
+   row turns into the proportional pair: the lead takes 40% of the row
+   and its height follows from its proportions. --art-snap blends the two
+   from 0 to 1. Only that number eases, so the sizes keep tracking the
+   window every frame while the switch plays out.                         */
+@property --art-snap {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
 .art-feature-fixed {
-  grid-template-columns: auto minmax(0, 1fr);
+  --art-snap: 0;
+  --art-fixed-width: calc(var(--art-lead-height) * (var(--art-lead-ratio)));
+  --art-fixed-height: var(--art-lead-height);
+  --art-snap-width: calc((100% - var(--art-gap)) * 0.4);
+  --art-snap-height: calc(
+    (100cqw - var(--art-gap)) * 0.4 / (var(--art-lead-ratio))
+  );
+  --art-lead-width: calc(
+    var(--art-fixed-width) * (1 - var(--art-snap)) + var(--art-snap-width) *
+      var(--art-snap)
+  );
+  container-type: inline-size;
+  grid-template-columns: var(--art-lead-width) minmax(0, 1fr);
+  transition: --art-snap var(--ease-hover);
 }
 
 .art-feature-fixed:not(.art-feature-lead-first) {
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) var(--art-lead-width);
 }
 
 .art-feature-fixed .art-tile-lead .art-tile-image {
-  width: auto;
-  height: var(--art-lead-height);
-  aspect-ratio: var(--art-lead-ratio);
+  width: 100%;
+  height: calc(
+    var(--art-fixed-height) * (1 - var(--art-snap)) + var(--art-snap-height) *
+      var(--art-snap)
+  );
 }
 
 .art-feature-fixed .art-tile-lead .art-tile-image img {
@@ -171,28 +198,36 @@
 }
 
 /* Tablets keep the desktop rows (three across, the pairs side by side)
-   so no row is left with an orphan; only the fixed-height pair changes:
-   its height no longer fits the viewport once the columns are narrow,
-   so it falls back to a plain 40 / 60 lead-first pair where the lead
-   shows uncropped and sets the row height.                                */
-@media (max-width: 1189px) {
-  .art-feature-fixed,
-  .art-feature-fixed.art-feature-lead-first {
-    grid-template-columns: 2fr 3fr;
+   so no row is left with an orphan. The fixed-height pair turns into the
+   proportional one once its fill would only lose its sides, and always
+   below 1190px, where its height no longer fits the viewport (both set
+   by ArtGallery), so every switch eases.                                 */
+@media (min-width: 768px) {
+  .art-feature-fixed.art-feature-snapped {
+    --art-snap: 1;
   }
-  .art-feature-fixed:not(.art-feature-lead-first) {
-    grid-template-columns: 3fr 2fr;
-  }
-  .art-feature-fixed .art-tile-lead .art-tile-image {
-    width: 100%;
-    height: auto;
-    aspect-ratio: var(--art-lead-ratio);
-  }
+}
+
+/* Measures the fixed row height, whichever layout the row is in. */
+.art-feature {
+  position: relative;
+}
+.art-feature-probe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: var(--art-lead-height);
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* Phones: every row stacks to one column and, with nothing left to
    hover, the titles sit beneath the images.                              */
 @media (max-width: 767px) {
+  .art-gallery {
+    padding-top: 32px;
+  }
   /* Stacked: every gap is between two pieces, so give them more air. */
   .art-layout {
     --art-gap: calc(2 * var(--space-gap));

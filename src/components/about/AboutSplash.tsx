@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import SectionDiv from "../global/SectionDiv";
@@ -214,16 +214,51 @@ const QUOTES: Quote[] = [
 
 export default function AboutSplash() {
   // `dir` keeps the outgoing quote leaving the way the incoming one arrives,
-  // so stepping backwards through the dots reads as backwards.
-  const [state, setState] = useState({ index: 0, prev: -1, dir: 1 });
+  // so stepping backwards through the dots reads as backwards. `swiped`
+  // turns that motion sideways, to follow the finger.
+  const [state, setState] = useState({
+    index: 0,
+    prev: -1,
+    dir: 1,
+    swiped: false,
+  });
 
   const go = useCallback((next: number) => {
     setState((s) =>
       next === s.index
         ? s
-        : { index: next, prev: s.index, dir: next > s.index ? 1 : -1 },
+        : {
+            index: next,
+            prev: s.index,
+            dir: next > s.index ? 1 : -1,
+            swiped: false,
+          },
     );
   }, []);
+
+  // Swipe left for the next quote, right for the previous, wrapping at
+  // either end. Mostly-vertical drags are left to scroll the page.
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touch.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touch.current;
+    touch.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+    const step = dx < 0 ? 1 : -1;
+    setState((s) => ({
+      index: (s.index + step + QUOTES.length) % QUOTES.length,
+      prev: s.index,
+      dir: step,
+      swiped: true,
+    }));
+  };
 
   // Keyed on the current index, so choosing a quote restarts the dwell rather
   // than inheriting whatever was left of the previous one.
@@ -233,6 +268,7 @@ export default function AboutSplash() {
         index: (s.index + 1) % QUOTES.length,
         prev: s.index,
         dir: 1,
+        swiped: false,
       }));
     }, INTERVAL);
     return () => clearTimeout(timer);
@@ -242,7 +278,11 @@ export default function AboutSplash() {
     <>
       <SectionDiv />
       <div className="about-quote-container">
-        <div className="about-quote-stage">
+        <div
+          className="about-quote-stage"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
           {/* All quotes share the same grid cell; the container sizes to the tallest. */}
           <div
             className="about-quote-overlay"
@@ -251,6 +291,15 @@ export default function AboutSplash() {
             {QUOTES.map((quote, i) => {
               const active = i === state.index;
               const leaving = i === state.prev;
+              const offset = (leaving ? -1 : 1) * state.dir;
+              // A swiped-in quote starts off to the side it came from,
+              // wherever it was resting before.
+              const enter = state.swiped
+                ? { x: [40 * state.dir, 0], y: 0 }
+                : { x: 0, y: 0 };
+              const rest = state.swiped
+                ? { x: 40 * offset, y: 0 }
+                : { x: 0, y: 20 * offset };
               return (
                 <motion.blockquote
                   key={i}
@@ -263,7 +312,7 @@ export default function AboutSplash() {
                   initial={false}
                   animate={{
                     opacity: active ? 1 : 0,
-                    y: active ? 0 : (leaving ? -20 : 20) * state.dir,
+                    ...(active ? enter : rest),
                     filter: active ? BLUR_NONE : BLUR_IN,
                   }}
                   transition={

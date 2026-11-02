@@ -97,4 +97,7 @@
   .card-image {
     margin-bottom: 12px;
   }
+  .case-card {
+    margin-bottom: 0;
+  }
 }

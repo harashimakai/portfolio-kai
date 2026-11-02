@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { container_s, children, children_custom } from "../global/AnimationConsts";
 import Arrow from "../global/Arrow";
-import { homeProjects, Project } from "../global/ProjectData";
+import {
+  homeProjects,
+  homePhoneProjects,
+  Project,
+} from "../global/ProjectData";
 import { Tile } from "../art/ArtGallery";
 import Lightbox from "../art/Lightbox";
 import "../../css/home.css";
+
+/* Phones lay the strip out 3 x 2, which reads best in its own order. */
+const PHONE = "(max-width: 767px)";
+const subscribe = (cb: () => void) => {
+  const mq = window.matchMedia(PHONE);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+};
+const isPhone = () => window.matchMedia(PHONE).matches;
 
 interface Props {
   projects?: Project[];
@@ -14,8 +27,10 @@ interface Props {
 
 /* The home page's row of artworks: the same tiles as the art page, with
    its hover state, and the same lightbox on click.                      */
-export default function ArtStrip({ projects = homeProjects }: Props) {
+export default function ArtStrip({ projects: given }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const phone = useSyncExternalStore(subscribe, isPhone, () => false);
+  const projects = given ?? (phone ? homePhoneProjects : homeProjects);
 
   return (
     <section className="grid-content">

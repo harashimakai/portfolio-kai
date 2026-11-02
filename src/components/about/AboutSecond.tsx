@@ -116,7 +116,7 @@ export default function AboutSecond() {
               ))}
             </div>
             <motion.h1
-              style={{ margin: "56px 0 28px" }}
+              className="about-secondary-next"
               variants={children_custom}
               custom={1.0}
             >

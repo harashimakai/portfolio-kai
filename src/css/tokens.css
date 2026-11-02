@@ -34,6 +34,9 @@
 
 :root {
   --text-display: 96px; /* .display — page hero */
+  /* Ends of the display ladder, for a hero that scales between them. */
+  --text-display-max: 96px;
+  --text-display-min: 48px;
   /* .lead — hero statement. Stepped at the widths where it would
      otherwise wrap past three lines beside the stats column; below
      1400px the home splash stacks and the step is no longer needed. */
@@ -109,6 +112,13 @@
   --nav-height: 84px; /* sticky site nav; sticky in-page bars sit below it */
 }
 
+/* Phones: sections step on the 8px grid. */
+@media (max-width: 767px) {
+  :root {
+    --space-section: 32px;
+  }
+}
+
 /* ─── Motion ─────────────────────────────────────────────────────────────── */
 
 :root {
@@ -158,7 +168,7 @@
   --accent: #d3ba88;
   --ink: #eae3d6;
   --shadow: rgb(0, 0, 0, 0.15);
-  --color-bg-inverse: #161915;
+  --color-bg-inverse: #151a13;
   --special-hover: #d3ba88;
 
   transition:

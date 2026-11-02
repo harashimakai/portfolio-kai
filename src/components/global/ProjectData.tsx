@@ -150,9 +150,12 @@ export const projects: Project[] = [
 
 // Display order for each context
 export const homeOrder = ["2", "3", "4", "5", "1", "6"];
+// Phones show the home strip as a 3 x 2 grid in this order instead
+export const homePhoneOrder = ["3", "2", "1", "4", "5", "6"];
 export const expandedOrder = ["3", "2", "4", "5", "6", "1"];
 
 export const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
 
 export const homeProjects = homeOrder.map((id) => byId[id]);
+export const homePhoneProjects = homePhoneOrder.map((id) => byId[id]);
 export const expandedProjects = expandedOrder.map((id) => byId[id]);

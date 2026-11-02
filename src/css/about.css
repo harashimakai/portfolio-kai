@@ -2,20 +2,30 @@
 
 .about-content {
   padding: 80px var(--page-gutter) 32px;
+  container-type: inline-size;
 }
 
 /* ─── Current Status ─────────────────────────────────────────────────────── */
 
+/* The name and the links share one line while both fit (see the hero
+   below), then stack.                                                    */
 .about-status {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
+  row-gap: 24px;
   transition: gap var(--ease-hover);
+}
+
+.about-status .about-hero {
+  flex: 1 1 0;
 }
 
 .about-status-links {
   display: flex;
-  flex-wrap: wrap;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
   gap: 28px;
   align-items: baseline;
   transition: gap var(--ease-hover);
@@ -35,18 +45,6 @@
   transition: color var(--ease-hover);
 }
 
-@media (max-width: 767px) {
-  .about-status {
-    flex-direction: column;
-    gap: 18px;
-    align-items: flex-start;
-  }
-
-  .about-status-links {
-    flex-wrap: wrap;
-    gap: 16px 22px;
-  }
-}
 
 /* ─── Hero ───────────────────────────────────────────────────────────────── */
 
@@ -54,6 +52,40 @@
   margin-top: 18px;
   margin-right: 36px;
   margin-bottom: 0;
+}
+
+/* The name stays on one line beside the links, shrinking from the top
+   display size as the page narrows. One line of the name is 7.38em
+   wide; the links row is 301px and the name's margin 36px, plus a
+   little slack. It reaches the phone display size at a 703.25px-wide
+   header; narrower than that, the links stack beneath it with the
+   phone spacing, the same moment on every screen.                        */
+.about-status .about-hero {
+  font-size: clamp(
+    var(--text-display-min),
+    (100cqw - 349px) / 7.38,
+    var(--text-display-max)
+  );
+  white-space: nowrap;
+  /* Fluid already; easing it would lag the links off the line. */
+  transition: color var(--ease-theme);
+}
+
+@container (width < 703.25px) {
+  .about-status {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .about-status .about-hero {
+    flex: none;
+    margin-top: 16px;
+    white-space: normal;
+  }
+  .about-status-links {
+    flex-wrap: wrap;
+    gap: 16px 22px;
+  }
 }
 
 /* ─── Main Body ──────────────────────────────────────────────────────────── */
@@ -110,6 +142,11 @@
 
 .about-secondary-block h1 {
   margin: 0 0 28px;
+}
+
+/* A second heading inside the same block. */
+.about-secondary-block h1.about-secondary-next {
+  margin-top: 56px;
 }
 
 /* ─── Shared Entry Styles ────────────────────────────────────────────────── */
@@ -212,8 +249,11 @@
 
 /* ─── Quote Carousel ─────────────────────────────────────────────────────── */
 
+/* Clipped here, at the page edge, so a quote sliding sideways is not cut
+   off at the gutter.                                                     */
 .about-quote-container {
   padding: 0 var(--page-gutter) var(--space-section);
+  overflow: clip;
 }
 
 .about-quote-stage {
@@ -225,7 +265,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
 }
 
 .about-quote {
@@ -304,23 +343,49 @@
 }
 
 @media (max-width: 767px) {
+  /* Phones run on an 8px grid: 32px below the navbar, 24px either side
+     of every divider and between stacked blocks, 48px between groups.  */
   .about-content {
-    padding: 36px var(--page-gutter);
+    padding: 32px var(--page-gutter) 24px;
   }
   /* Tighter dots, so a long quote list stays on fewer rows. */
   .about-quote-dots button {
     padding: 6px 5.5px;
   }
   .about-body {
-    padding: var(--space-xs) var(--page-gutter) var(--space-md);
-    gap: 36px;
+    padding: 24px var(--page-gutter);
+    gap: 24px;
+  }
+  /* Portrait first, then the text a size down. Block, so no baseline
+     gap pads the space beneath it. */
+  .about-image-wrap {
+    order: -1;
+  }
+  .about-image img {
+    display: block;
+  }
+  .about-text-block p {
+    font-size: var(--text-md);
   }
   .about-content-secondary {
-    padding: var(--space-xs) var(--page-gutter) var(--space-md);
+    padding: 24px var(--page-gutter);
   }
-  /* Stacked: Education to Experiences matches the 56px that separates
-     Repertoire from Education. */
   .about-body-secondary {
-    gap: 56px;
+    gap: 48px;
+  }
+  .about-secondary-block h1 {
+    margin-bottom: 24px;
+  }
+  .about-secondary-block h1.about-secondary-next {
+    margin-top: 48px;
+  }
+  .about-education {
+    gap: 24px;
+  }
+  .about-quote {
+    margin-top: 24px;
+  }
+  .about-quote-attr {
+    margin-top: 16px;
   }
 }

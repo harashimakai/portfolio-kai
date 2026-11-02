@@ -177,7 +177,22 @@ body {
   white-space: nowrap;
   color: var(--cursor-c);
   margin-top: 0;
-  transition: color 0.3s ease-out;
+  /* So a change of wording can crossfade inside the box while it eases
+     to its new width. */
+  position: relative;
+  box-sizing: border-box;
+  transition:
+    color 0.3s ease-out,
+    background-color 0.3s ease-out;
+}
+
+.cursor-label-text {
+  white-space: nowrap;
+}
+
+/* Only while the box is easing to a new width. */
+.cursor-label-swapping {
+  overflow: hidden;
 }
 
 .cursor-label[hidden] {
@@ -750,12 +765,15 @@ h3 .arrow-icon {
   .sidebar .theme-toggle {
     display: flex;
   }
+  .sidebar-mission {
+    margin-right: 55px;
+  }
   .navbar {
     justify-content: center;
-    padding: 20px var(--page-gutter);
+    padding: 16px var(--page-gutter);
   }
   .menu-button {
-    top: 19.535px;
+    top: 15.535px;
   }
 }
 
@@ -848,10 +866,15 @@ footer.social-container {
   transition: color var(--ease-hover);
 }
 
+/* Two columns: the aside goes, leaving the contact boxes side by side,
+   ELSEWHERE starting three fifths of the way across.                     */
 @media (max-width: 1189px) {
   .social-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
     gap: 36px;
+  }
+  .social-box-aside {
+    display: none;
   }
 }
 
@@ -865,7 +888,11 @@ footer.social-container {
   }
   .social-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 24px;
+  }
+  /* One column: the bottom bar goes too. */
+  .social-bottom {
+    display: none;
   }
 }
 

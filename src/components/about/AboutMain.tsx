@@ -61,6 +61,7 @@ export default function AboutMain() {
           </motion.p>
         </div>
         <motion.div
+          className="about-image-wrap"
           variants={children_custom}
           custom={0.4}
         >
