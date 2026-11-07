@@ -1,0 +1,21 @@
+.section-divider {
+  padding: 0 var(--page-gutter);
+  scroll-margin-top: calc(var(--space-sm) * 2 + 42px);
+}
+
+.section-divider-full {
+  padding: 0 !important;
+}
+
+.section-divider-inner {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.section-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+  transition: background-color var(--ease-theme);
+}

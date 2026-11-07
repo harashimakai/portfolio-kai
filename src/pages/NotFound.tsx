@@ -1,93 +1,68 @@
-import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
-import "../css/work.css";
+import { children_custom } from "../lib/animations";
+import ButtonLink from "../components/ui/ButtonLink";
+import SectionDivider from "../components/ui/SectionDivider";
+import Monogram from "../components/ui/Monogram";
+import Arrow from "../components/ui/Arrow";
 
-import {
-  children_custom,
-  container_trigger,
-} from "../components/global/AnimationConsts";
-import { Link } from "react-router-dom";
-import SectionDiv from "../components/global/SectionDiv";
-import Monogram from "../components/global/Monogram";
-import Arrow from "../components/global/Arrow";
-
-interface Props {
-  setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function NotFound({ setSideOpen }: Props) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setSideOpen(false);
-  }, []);
-
+export default function NotFound() {
   return (
-    <section className="mission-content">
-      <SectionDiv fullWidth={true} />
+    <section className="intro-section">
+      <SectionDivider fullWidth />
       <motion.div
-        className="missing-container"
-        variants={container_trigger}
+        className="not-found"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="centerpiece-container">
-          <div className="centerpiece-info">
+        <div className="not-found-brand">
+          <div className="not-found-brand-info">
             <motion.div
               variants={children_custom}
               custom={0}
-              className="centerpiece-logos"
+              className="not-found-brand-logo"
             >
               <Monogram />
             </motion.div>
             <motion.h3
               variants={children_custom}
               custom={0.25}
-              className="centerpiece-desc"
+              className="not-found-brand-text"
             >
               KAI HARASHIMA
               <br />
-              WESTCHESTER · ITHACA
+              DESIGNER &amp; DEVELOPER
               <br />
-              ESTAB. MMXXVI
+              WESTCHESTER · ITHACA
             </motion.h3>
           </div>
           <div>
             <motion.p
               variants={children_custom}
               custom={0.5}
-              className="missing-header display"
+              className="not-found-title display"
             >
-              <span className="italic accent">404</span> — Page not found.
+              404: Page not found.
             </motion.p>
             <motion.p
               variants={children_custom}
               custom={0.75}
-              className="missing-body body-lg"
+              className="not-found-text body-lg"
             >
-              No record of this page in the index. It may have moved or been
-              retired.
+              The page you're looking for doesn't exist or has been moved.
             </motion.p>
-            <div className="action-buttons">
+            <div className="intro-actions">
               <motion.div
                 variants={children_custom}
                 custom={1}
-                style={{ display: "inline-block", width: "fit-content" }}
               >
-                <Link
-                to="/"
-                tabIndex={-1}
-              >
-                  <motion.button
-                    className="btn-secondary"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <h3>
-                      RETURN HOME <Arrow dir="right" />
-                    </h3>
-                  </motion.button>
-                </Link>
+                <ButtonLink
+                  to="/"
+                  variant="primary"
+                >
+                  RETURN HOME <Arrow dir="right" />
+                </ButtonLink>
               </motion.div>
             </div>
           </div>

@@ -1,0 +1,77 @@
+.not-found {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found-brand {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: var(--page-gutter);
+  align-items: center;
+  padding: var(--space-section) 0;
+  transition: padding-top var(--ease-hover);
+}
+
+.not-found-brand-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.not-found-brand-logo {
+  display: grid;
+  place-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 109.2px;
+  transition:
+    width var(--ease-hover),
+    height var(--ease-hover);
+}
+
+.not-found-brand-text {
+  line-height: 1.8;
+}
+
+.not-found-title {
+  text-wrap: balance;
+}
+
+.not-found-text {
+  margin: 32px 0 0;
+  max-width: 560px;
+  transition:
+    color var(--ease-theme),
+    font-size var(--ease-hover),
+    margin-top var(--ease-hover);
+}
+
+@media (max-width: 1189px) {
+  .not-found-brand {
+    grid-template-columns: 1fr;
+    gap: var(--space-gap);
+    align-items: start;
+  }
+  .not-found-brand-info {
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .not-found-brand {
+    padding: var(--space-gap) 0;
+  }
+  .not-found-brand-logo {
+    width: 88px;
+    height: 80px;
+  }
+  .not-found-text {
+    font-size: var(--text-base);
+    margin-top: 24px;
+  }
+}

@@ -1,0 +1,188 @@
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+.cursor {
+  --cursor-c: var(--accent);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  will-change: transform;
+}
+
+.cursor-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+}
+
+.cursor-dot {
+  transform-origin: 7px 7px;
+  transition: transform 0.12s ease-out;
+}
+
+.cursor-body.is-pressed .cursor-dot {
+  transform: scale(0.8);
+}
+
+.cursor-on-footer {
+  --cursor-c: var(--gold);
+}
+
+.theme-dark .cursor-on-image {
+  --cursor-c: var(--bg);
+}
+
+.theme-dark .cursor-on-image .cursor-label-filled {
+  color: var(--ink);
+}
+
+.cursor-dot {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.cursor-star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  overflow: visible;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.18s ease-out,
+    opacity 0.18s ease-out;
+}
+
+.cursor-star path {
+  fill: var(--cursor-c);
+  transition: fill 0.3s ease-out;
+}
+
+.cursor-dot[data-shape="small"] .cursor-star {
+  transform: translate(-50%, -50%) scale(0.7);
+}
+
+.cursor-body.is-pressed .cursor-dot[data-shape="small"] .cursor-star {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.cursor-dot[data-shape="gone"] .cursor-star {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.cursor-label {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--cursor-c);
+  margin-top: 0;
+  box-sizing: border-box;
+  transition:
+    color 0.3s ease-out,
+    background-color 0.3s ease-out;
+}
+
+.cursor-label-text {
+  white-space: nowrap;
+}
+
+.cursor-label[hidden] {
+  display: none;
+}
+
+.cursor-dot + .cursor-label {
+  margin-left: 2px;
+}
+
+.cursor-dot[data-shape="small"] + .cursor-label {
+  margin-left: -0.7px;
+}
+
+.cursor-label-filled {
+  padding: 6px 10px;
+  margin-top: -6.5px;
+  background: var(--cursor-c);
+  color: var(--bg);
+}
+
+.cursor-on-footer .cursor-label-filled {
+  color: var(--color-bg-inverse);
+}
+
+.cursor-label.is-entering,
+.cursor-label.is-leaving {
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+}
+
+.cursor-label.is-entering {
+  animation: cursor-label-in 0.35s ease-out both;
+}
+
+.cursor-label.is-leaving {
+  animation: cursor-label-in 0.25s ease-in reverse both;
+}
+
+@keyframes cursor-label-in {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+.cursor-mode-pointer {
+  --cursor-c: var(--ink);
+  --cursor-edge: var(--bg);
+}
+
+.cursor-arrow {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  overflow: visible;
+}
+
+.cursor-arrow path {
+  fill: var(--cursor-c);
+  stroke: var(--cursor-edge);
+  stroke-width: 2px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  transition:
+    fill 0.3s ease-out,
+    stroke 0.3s ease-out;
+}
+
+.cursor-mode-pointer .cursor-dot + .cursor-label {
+  margin-left: -2px;
+  margin-top: 7px;
+}
+
+.cursor-mode-pointer .cursor-dot + .cursor-label-filled {
+  margin-top: 0.5px;
+}
+
+.cursor-mode-pointer .cursor-label:not(.cursor-label-filled) {
+  color: #0c2e08;
+}
+
+html:not(.has-cursor) .cursor {
+  display: none;
+}

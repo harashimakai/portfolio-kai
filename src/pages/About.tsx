@@ -1,83 +1,15 @@
-import { motion } from "motion/react";
-import {
-  children_custom,
-  container_m,
-} from "../components/global/AnimationConsts";
-import { useEffect } from "react";
+import AboutHeader from "../features/about/AboutHeader";
+import AboutBio from "../features/about/AboutBio";
+import AboutDetails from "../features/about/AboutDetails";
+import AboutQuotes from "../features/about/AboutQuotes";
 
-import "../css/about.css";
-
-import AboutMain from "../components/about/AboutMain";
-import AboutSecond from "../components/about/AboutSecond";
-import AboutSplash from "../components/about/AboutSplash";
-import Arrow from "../components/global/Arrow";
-
-interface Props {
-  setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function About({ setSideOpen }: Props) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setSideOpen(false);
-  }, []);
-
+export default function About() {
   return (
     <>
-      <section className="about-content">
-        <motion.div
-          variants={container_m}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.h2
-            variants={children_custom}
-            custom={0}
-          >
-            ABOUT ME
-          </motion.h2>
-          <div className="about-status">
-            <motion.h1
-              className="about-hero display"
-              variants={children_custom}
-              custom={0.15}
-            >
-              KAI H<span className="alternative_c">A</span>RASHIMA
-            </motion.h1>
-            <div className="about-status-links">
-              <motion.a
-                target="_blank"
-                href="https://drive.google.com/file/d/11wb1SoarL96mU4PIX8ObmXxljO8bAm7y/view?usp=sharing"
-                variants={children_custom}
-                custom={0.3}
-              >
-                <h2 className="underline-hover">RÉSUMÉ <Arrow dir="ne" /></h2>
-              </motion.a>
-              <motion.a
-                href="mailto:harashimakai@gmail.com"
-                variants={children_custom}
-                custom={0.45}
-              >
-                <h2 className="underline-hover">EMAIL <Arrow dir="ne" /></h2>
-              </motion.a>
-              <motion.a
-                target="_blank"
-                href="https://www.linkedin.com/in/kai-harashima-109164364"
-                variants={children_custom}
-                custom={0.6}
-              >
-                <h2 className="underline-hover">LINKEDIN <Arrow dir="ne" /></h2>
-              </motion.a>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      <AboutMain />
-
-      <AboutSecond />
-
-      <AboutSplash />
+      <AboutHeader />
+      <AboutBio />
+      <AboutDetails />
+      <AboutQuotes />
     </>
   );
 }

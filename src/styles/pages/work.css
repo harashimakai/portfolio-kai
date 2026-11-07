@@ -1,0 +1,13 @@
+.case-list {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-section) var(--page-gutter) var(--space-xs);
+  gap: var(--space-sm);
+}
+
+@media (max-width: 767px) {
+  .case-list {
+    padding: 24px var(--page-gutter) var(--space-section);
+    gap: 32px;
+  }
+}

@@ -1,0 +1,149 @@
+:root {
+  --gold: #d3ba88;
+  --gray: #767d73;
+  --white: #f7f7f8;
+}
+
+:root {
+  --font-serif:
+    "the-seasons", "Cormorant Garamond", "EB Garamond", Garamond,
+    "Times New Roman", serif;
+  --font-sans: "Geist", "Inter Tight", "Inter", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+:root {
+  --text-xs: 10px;
+  --text-label: 11px;
+  --text-sm: 15px;
+  --text-md: 17px;
+  --text-base: 18px;
+  --text-lg: 20px;
+  --text-xl: 22px;
+  --text-hero: 64px;
+}
+
+:root {
+  --text-display: 96px;
+  --text-display-max: 96px;
+  --text-display-min: 48px;
+  --text-lead: 54px;
+  --text-title: 48px;
+  --text-quote: 40px;
+}
+
+@media (max-width: 1599px) {
+  :root {
+    --text-lead: 48px;
+  }
+}
+
+@media (max-width: 1499px) {
+  :root {
+    --text-lead: 44px;
+  }
+}
+
+@media (max-width: 1399px) {
+  :root {
+    --text-lead: 42px;
+  }
+}
+
+@media (max-width: 1189px) {
+  :root {
+    --text-display: 64px;
+    --text-lead: 38px;
+    --text-quote: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --text-display: 48px;
+    --text-lead: 26px;
+    --text-title: 36px;
+    --text-quote: 24px;
+  }
+}
+
+:root {
+  --tracking-label: 0.22em;
+  --tracking-label-tight: 0.24em;
+}
+
+:root {
+  --leading-display: 0.95;
+  --leading-tight: 1.05;
+  --leading-snug: 1.2;
+  --leading-quote: 1.25;
+  --leading-relaxed: 1.4;
+  --leading-body: 1.55;
+  --leading-loose: 1.65;
+}
+
+:root {
+  --page-gutter: clamp(20px, calc(15.9vw - 37.3px), 192px);
+  --space-section: clamp(30px, 5.5vw, 64px);
+  --space-gap: clamp(24px, 4vw, 56px);
+  --space-md: 40px;
+  --space-sm: 24px;
+  --space-xs: 16px;
+  --nav-height: 84px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --space-section: 32px;
+  }
+}
+
+:root {
+  --ease-theme: 0.9s ease-in-out;
+  --ease-hover: 0.5s ease-in-out;
+}
+
+:root {
+  --radius-pill: 100vw;
+}
+
+.theme-light {
+  --color-border: rgba(12, 46, 8, 0.2);
+  --color-overlay: rgba(12, 46, 8, 0.06);
+  --hairline: rgba(12, 46, 8, 0.35);
+
+  --bg: #f8f7f1;
+  --color-surface: #fdfcf6;
+  --muted: #7a7f76;
+  --accent: #226a14;
+  --ink: #0c2e08;
+  --shadow: rgb(0, 0, 0, 0.05);
+  --color-bg-inverse: color-mix(in srgb, black 40%, var(--ink) 60%);
+  --special-hover: #407537;
+
+  transition:
+    background-color var(--ease-theme),
+    --sel-bg var(--ease-theme),
+    --sel-fg var(--ease-theme);
+  background-color: var(--bg);
+}
+
+.theme-dark {
+  --color-border: rgba(234, 227, 214, 0.1);
+  --color-overlay: rgba(234, 227, 214, 0.06);
+  --hairline: rgba(234, 227, 214, 0.4);
+
+  --bg: #1f2520;
+  --color-surface: #262c25;
+  --muted: #8a8d83;
+  --accent: #d3ba88;
+  --ink: #eae3d6;
+  --shadow: rgb(0, 0, 0, 0.15);
+  --color-bg-inverse: #151a13;
+  --special-hover: #d3ba88;
+
+  transition:
+    background-color var(--ease-theme),
+    --sel-bg var(--ease-theme),
+    --sel-fg var(--ease-theme);
+  background-color: var(--bg);
+}

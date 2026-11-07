@@ -1,0 +1,238 @@
+#root {
+  min-height: 100dvh;
+}
+
+:root {
+  overscroll-behavior-y: none;
+  font-variant-emoji: text;
+}
+
+@property --sel-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --sel-fg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: currentColor;
+}
+
+.theme-light,
+.theme-dark {
+  --sel-bg: color-mix(in srgb, var(--accent) 22%, var(--bg));
+  --sel-fg: var(--accent);
+}
+
+::selection {
+  background-color: var(--sel-bg);
+  color: var(--sel-fg);
+}
+
+::-moz-selection {
+  background-color: var(--sel-bg);
+  color: var(--sel-fg);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  transition: background-color var(--ease-theme);
+}
+
+.is-theme-switching *,
+.is-theme-switching *::before,
+.is-theme-switching *::after {
+  transition-property: color, background-color, border-color, outline-color,
+    text-decoration-color, fill, stroke, box-shadow,
+    -webkit-text-fill-color !important;
+  transition-duration: 0.9s !important;
+  transition-timing-function: ease-in-out !important;
+  transition-delay: 0s !important;
+}
+
+.is-theme-switching .theme-light,
+.is-theme-switching .theme-dark {
+  transition-property: color, background-color, border-color, box-shadow,
+    --sel-bg, --sel-fg !important;
+}
+
+a {
+  text-decoration: none;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  color: var(--accent);
+  transition:
+    color var(--ease-theme),
+    text-decoration-color var(--ease-theme);
+  text-decoration-line: underline;
+  text-decoration-thickness: 8%;
+  text-underline-offset: 23%;
+}
+
+a:hover {
+  color: var(--ink);
+  transition:
+    color var(--ease-hover),
+    text-decoration-color var(--ease-hover);
+}
+
+p {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: normal;
+  font-size: var(--text-title);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  margin: 0;
+  transition:
+    color var(--ease-theme),
+    font-size var(--ease-hover);
+}
+
+h2 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  line-height: var(--leading-relaxed);
+  font-style: normal;
+  font-size: var(--text-label);
+  color: var(--muted);
+  transition:
+    color var(--ease-theme),
+    text-decoration-color var(--ease-theme);
+  margin: 0;
+}
+
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label-tight);
+  line-height: var(--leading-relaxed);
+  font-style: normal;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  transition:
+    color var(--ease-theme),
+    text-decoration-color var(--ease-theme);
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 8px;
+}
+
+.display,
+.lead,
+.quote,
+.entry-title,
+.body-lg,
+.body-sm,
+.body-xs {
+  font-style: normal;
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.display,
+.lead,
+.quote,
+.entry-title {
+  font-family: var(--font-serif);
+}
+
+.body-lg,
+.body-sm,
+.body-xs {
+  font-family: var(--font-sans);
+}
+
+.display,
+.lead,
+.quote {
+  font-weight: 400;
+  margin: 0;
+  transition:
+    color var(--ease-theme),
+    font-size var(--ease-hover);
+}
+
+.display {
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+}
+
+.lead {
+  font-size: var(--text-lead);
+  line-height: var(--leading-snug);
+}
+
+.quote {
+  font-size: var(--text-quote);
+  line-height: var(--leading-quote);
+}
+
+.entry-title {
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+}
+
+.body-lg,
+.body-sm,
+.body-xs {
+  font-weight: 400;
+}
+
+.body-lg {
+  font-size: var(--text-lg);
+  line-height: var(--leading-loose);
+}
+
+.body-sm {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+}
+
+.body-xs {
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+}
+
+hr {
+  width: 100%;
+  border-width: 0.5px;
+  border-color: var(--color-border);
+  transition: border-color var(--ease-theme);
+}
+
+.font-ss04 {
+  font-feature-settings: "ss04" on;
+}
+
+.accent {
+  color: var(--accent);
+  transition:
+    color var(--ease-theme),
+    text-decoration-color var(--ease-theme);
+}

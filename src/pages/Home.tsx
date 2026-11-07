@@ -1,56 +1,35 @@
-import { useEffect } from "react";
-import { motion } from "motion/react";
 
-import "../css/home.css";
+import HomeIntro from "../features/home/HomeIntro";
+import SectionDivider from "../components/ui/SectionDivider";
+import CaseStudyList from "../features/case-study/CaseStudyList";
 
-import Mission from "../components/home/Mission";
-import SectionDiv from "../components/global/SectionDiv";
-import ProjectGrid from "../components/home/ProjectGrid";
-import CaseStudyCard from "../components/individual/CaseStudyCard";
+import { studyList, toCard } from "../data/caseStudies";
+import { homeProjects } from "../data/projects";
+import ArtStrip from "../features/home/ArtStrip";
+import usePreload from "../hooks/usePreload";
 
-import { putmeon } from "../components/individual/StudyData";
-import { homeProjects } from "../components/global/ProjectData";
-import ArtStrip from "../components/home/ArtStrip";
-import { children_custom } from "../components/global/AnimationConsts";
-import usePreload from "../components/global/usePreload";
+const featured = studyList.filter((d) => d.featured).map(toCard);
 
-/* What the first screen needs before its entrances play. */
 const firstScreen = [
-  putmeon.thumbnailUrl,
+  ...featured.map((s) => s.thumbnailUrl),
   ...homeProjects.map((p) => p.thumbnailUrl),
 ];
 
-interface Props {
-  setSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-export default function Home({ setSideOpen }: Props) {
+export default function Home() {
   const ready = usePreload(firstScreen);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setSideOpen(false);
-  }, []);
-
-  /* Hold the page's place while images decode, so the footer does
-     not jump up into view for a moment. */
   if (!ready) return <div className="page-pending" />;
 
   return (
     <>
-      <Mission />
-      <section className="home-case-content">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={children_custom}
-          custom={0.1}
-        >
-          <CaseStudyCard item={putmeon} />
-        </motion.div>
-      </section>
-      <SectionDiv />
+      <HomeIntro />
+      <CaseStudyList
+        studies={featured}
+        className="home-case-list"
+        delay={0.1}
+      />
+      <SectionDivider />
       <ArtStrip />
     </>
   );

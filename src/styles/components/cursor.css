@@ -1,0 +1,145 @@
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+.cursor {
+  --cursor-c: var(--ink);
+  --cursor-edge: var(--bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  will-change: transform;
+}
+
+html:not(.has-cursor) .cursor {
+  display: none;
+}
+
+.cursor-body {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.cursor-arrow {
+  flex: none;
+  overflow: visible;
+  transform-origin: 0 0;
+  transition: transform 0.12s ease-out;
+}
+
+.cursor-body.is-pressed .cursor-arrow {
+  transform: scale(0.8);
+}
+
+.cursor.is-clickable .cursor-arrow {
+  transform: scale(0.85);
+}
+
+.cursor.is-clickable .cursor-body.is-pressed .cursor-arrow {
+  transform: scale(0.68);
+}
+
+.cursor.is-clickable .cursor-arrow path {
+  fill: var(--accent);
+}
+
+.cursor.is-text .cursor-arrow {
+  visibility: hidden;
+}
+
+.cursor-ibeam {
+  position: absolute;
+  top: -9px;
+  left: -4.5px;
+  overflow: visible;
+  visibility: hidden;
+}
+
+.cursor.is-text .cursor-ibeam {
+  visibility: visible;
+}
+
+.cursor-ibeam path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease-out;
+}
+
+.cursor-ibeam-edge {
+  stroke: var(--cursor-edge);
+  stroke-width: 3.5px;
+}
+
+.cursor-ibeam-line {
+  stroke: var(--cursor-c);
+  stroke-width: 1.5px;
+}
+
+.cursor-arrow path {
+  fill: var(--cursor-c);
+  stroke: var(--cursor-edge);
+  stroke-width: 2px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  transition:
+    fill 0.3s ease-out,
+    stroke 0.3s ease-out;
+}
+
+.cursor-label {
+  margin-left: 10px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  color: #0c2e08;
+  box-sizing: border-box;
+  transition:
+    color 0.3s ease-out,
+    background-color 0.3s ease-out;
+}
+
+.cursor-label[hidden] {
+  display: none;
+}
+
+.cursor-label-filled {
+  padding: 6px 10px;
+  margin-top: -6.5px;
+  background: var(--cursor-c);
+  color: var(--bg);
+}
+
+.cursor-label.is-entering,
+.cursor-label.is-leaving {
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+}
+
+.cursor-label.is-entering {
+  animation: cursor-label-in 0.35s ease-out both;
+}
+
+.cursor-label.is-leaving {
+  animation: cursor-label-in 0.25s ease-in reverse both;
+}
+
+@keyframes cursor-label-in {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}

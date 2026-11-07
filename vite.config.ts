@@ -4,8 +4,6 @@ import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-/* Dev only: the edit bar on content pages posts edited copy here and it is
-   written straight back into src/content/<name>.json.                      */
 function contentEditor(): Plugin {
   const root = path.dirname(fileURLToPath(import.meta.url));
   return {
@@ -23,7 +21,7 @@ function contentEditor(): Plugin {
           try {
             const data = JSON.parse(body);
             writeFileSync(
-              path.join(root, "src/content", `${name}.json`),
+              path.join(root, "src/data/content", `${name}.json`),
               JSON.stringify(data, null, 2) + "\n",
             );
             res.statusCode = 200;
@@ -38,7 +36,6 @@ function contentEditor(): Plugin {
   };
 }
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), contentEditor()],
 });

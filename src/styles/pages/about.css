@@ -1,0 +1,351 @@
+.about-content {
+  padding: 80px var(--page-gutter) 0;
+  container-type: inline-size;
+}
+
+.about-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  row-gap: 24px;
+  transition: gap var(--ease-hover);
+}
+
+.about-status .about-hero {
+  flex: 1 1 0;
+}
+
+.about-status-links {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 28px;
+  align-items: baseline;
+  transition: gap var(--ease-hover);
+}
+
+.about-status-links a h2 {
+  position: relative;
+  color: var(--ink);
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.about-status-links a h2:hover {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}
+
+.about-hero {
+  margin-top: 0;
+  margin-right: 36px;
+  margin-bottom: 0;
+}
+
+.about-status .about-hero {
+  font-size: clamp(
+    var(--text-display-min),
+    (100cqw - 349px) / 7.38,
+    var(--text-display-max)
+  );
+  white-space: nowrap;
+  transition: color var(--ease-theme);
+}
+
+@container (width < 703.25px) {
+  .about-status {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .about-status .about-hero {
+    flex: none;
+    margin-top: 0;
+    white-space: normal;
+  }
+  .about-status-links {
+    flex-wrap: wrap;
+    gap: 16px 22px;
+  }
+}
+
+.about-body {
+  padding: 48px var(--page-gutter);
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text-block {
+  max-width: 550px;
+}
+
+.about-text-block p {
+  margin: 0;
+}
+
+/* Space between paragraphs, where the hr used to sit. */
+.about-text-block p + p {
+  margin-top: 24px;
+}
+
+.about-image {
+  position: relative;
+}
+
+.about-image img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+}
+
+.about-content-secondary {
+  padding: 48px var(--page-gutter) var(--space-section);
+}
+
+.about-body-secondary {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: 96px;
+  align-items: start;
+}
+
+.about-secondary-block h1 {
+  margin: 0 0 28px;
+}
+
+.about-secondary-block h1.about-secondary-next {
+  margin-top: 56px;
+}
+
+.about-skill-group,
+.about-education-year,
+.about-experiences-date {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.about-education-program,
+.about-experiences-role {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.about-skills {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.about-skill-group {
+  margin-bottom: 12px;
+}
+
+.about-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tool-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline);
+  background-color: transparent;
+  transition: border-color var(--ease-theme);
+}
+.tool-pill h3 {
+  color: var(--ink);
+}
+
+.about-education {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.about-education-entry {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.about-education-star {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  color: var(--accent);
+  transition: color var(--ease-theme);
+  line-height: 1;
+}
+
+.about-education-year {
+  margin-top: 6px;
+}
+
+.about-experiences {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-experiences-item {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: border-bottom var(--ease-theme);
+}
+
+.about-experiences-item:first-child {
+  padding-top: 0;
+}
+
+.about-experiences-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.about-experiences-date {
+  margin-bottom: 8px;
+}
+
+.about-quote-container {
+  padding: 0 var(--page-gutter) var(--space-section);
+  overflow: clip;
+}
+
+.about-quote-stage {
+  display: grid;
+}
+
+.about-quote-overlay {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-quote {
+  text-align: center;
+  max-width: 24em;
+  margin: var(--space-gap) auto var(--space-xs);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  word-spacing: 0.04em;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+  text-wrap: pretty;
+}
+
+.about-quote-attr {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.about-quote-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+.about-quote-dots button {
+  display: grid;
+  place-items: center;
+  padding: 8px 7px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.about-quote-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background-color: var(--muted);
+  opacity: 0.35;
+  transition:
+    opacity var(--ease-hover),
+    background-color var(--ease-theme);
+}
+
+.about-quote-dots button:hover span {
+  background-color: var(--accent);
+  opacity: 1;
+  transition:
+    opacity var(--ease-hover),
+    background-color var(--ease-hover);
+}
+
+.about-quote-dots button[aria-current="true"] {
+  cursor: default;
+}
+
+.about-quote-dots button[aria-current="true"] span {
+  background-color: var(--ink);
+  opacity: 1;
+}
+
+@media (max-width: 1189px) {
+  .about-content {
+    padding: 64px var(--page-gutter) 0;
+  }
+  .about-body {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .about-body-secondary {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .about-text-block {
+    max-width: initial;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-content {
+    padding: 32px var(--page-gutter) 0;
+  }
+  .about-quote-dots button {
+    padding: 6px 5.5px;
+  }
+  .about-body {
+    padding: 24px var(--page-gutter);
+    gap: 24px;
+  }
+  .about-image-wrap {
+    order: -1;
+  }
+  .about-image img {
+    display: block;
+  }
+  .about-text-block p {
+    font-size: var(--text-md);
+  }
+  .about-content-secondary {
+    padding: 24px var(--page-gutter);
+  }
+  .about-body-secondary {
+    gap: 48px;
+  }
+  .about-secondary-block h1 {
+    margin-bottom: 24px;
+  }
+  .about-secondary-block h1.about-secondary-next {
+    margin-top: 48px;
+  }
+  .about-education {
+    gap: 24px;
+  }
+  .about-quote {
+    margin-top: 24px;
+  }
+  .about-quote-attr {
+    margin-top: 16px;
+  }
+}
