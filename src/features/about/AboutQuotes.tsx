@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import SectionDivider from "../../components/ui/SectionDivider";
 import { BLUR_IN, BLUR_NONE } from "../../lib/animations";
 
-const INTERVAL = 12000;
+const INTERVAL = 10000;
 
 type Quote = { node: ReactNode; author: string };
 
