@@ -91,6 +91,7 @@ export default function Cursor() {
         "is-text",
         !labelled && !target?.closest(CLICKABLE) && overText(x, y, target),
       );
+      root.classList.toggle("is-over-image", Boolean(target?.closest("img, video")));
       if (next === labelText) return;
       labelText = next;
 

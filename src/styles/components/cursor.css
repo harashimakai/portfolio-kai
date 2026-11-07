@@ -106,6 +106,10 @@ html:not(.has-cursor) .cursor {
     background-color 0.3s ease-out;
 }
 
+.theme-dark .cursor.is-over-image .cursor-label:not(.cursor-label-filled) {
+  color: #0c2e08;
+}
+
 .cursor-label[hidden] {
   display: none;
 }
