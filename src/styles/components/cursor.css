@@ -99,7 +99,7 @@ html:not(.has-cursor) .cursor {
   font-size: 15px;
   line-height: 1;
   white-space: nowrap;
-  color: #0c2e08;
+  color: var(--accent);
   box-sizing: border-box;
   transition:
     color 0.3s ease-out,
