@@ -4,8 +4,7 @@ import type { ReactNode } from "react";
 import SectionDivider from "../../components/ui/SectionDivider";
 import { BLUR_IN, BLUR_NONE } from "../../lib/animations";
 
-const INTERVAL = 9000;
-const AUTO_ROTATE = false;
+const INTERVAL = 14000;
 
 type Quote = { node: ReactNode; author: string };
 
@@ -257,7 +256,6 @@ export default function AboutQuotes() {
   };
 
   useEffect(() => {
-    if (!AUTO_ROTATE) return;
     const timer = setTimeout(() => {
       setState((s) => ({
         index: (s.index + 1) % QUOTES.length,
