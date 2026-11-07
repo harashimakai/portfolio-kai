@@ -12,19 +12,6 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “What mazes there are in this world. The branches of trees, the filigree
-        of roots, the matrix of crystals. Mazes in the nodules on murex shells
-        and in the textures of sycamore bark and inside the hollow bones of
-        eagles. None more complicated than the human brain, what may be the most
-        complex object in existence; one wet kilogram within which spin
-        universes.”
-      </>
-    ),
-    author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
-  },
-  {
-    node: (
-      <>
         “Once there were brook trout in the streams in the mountains. They
         smelled of moss in your hand. Polished and muscular and torsional. On
         their backs were vermiculate patterns that were maps of the world in its
@@ -38,10 +25,23 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “What do we call visible light? We call it color. But the
-        electromagnetic spectrum runs to zero in one direction and infinity in
-        the other, so really, children, mathematically, all of light is
-        invisible.”
+        “Learning does not make one learned: there are those who have knowledge
+        and those who have understanding. The first requires memory and the
+        second philosophy.”
+      </>
+    ),
+    author: "ALEXANDRE DUMAS, THE COUNT OF MONTE CRISTO",
+  },
+
+  {
+    node: (
+      <>
+        “What mazes there are in this world. The branches of trees, the filigree
+        of roots, the matrix of crystals. Mazes in the nodules on murex shells
+        and in the textures of sycamore bark and inside the hollow bones of
+        eagles. None more complicated than the human brain, what may be the most
+        complex object in existence; one wet kilogram within which spin
+        universes.”
       </>
     ),
     author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
@@ -57,6 +57,20 @@ const QUOTES: Quote[] = [
       </>
     ),
     author: "CORMAC MCCARTHY, THE ROAD",
+  },
+  {
+    node: (
+      <>
+        “Our flesh is the debris of dead stars, and this is also true of the
+        apple and its tree, of each hair on the spider’s legs, and of the rock
+        rusting on planet Mars. Each minuscule being has spokes radiating out to
+        all of creation. From one living thing, the properties of any other may
+        be predicted. Looking at any particle with sufficient care, and
+        following the chain that links all things together, we can arrive at the
+        universe.”
+      </>
+    ),
+    author: "HERNAN DIAZ, IN THE DISTANCE",
   },
   {
     node: (
@@ -84,17 +98,6 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “Every life is organized around a small number of events that either
-        propel us or bring us to a grinding halt. We spend the years between
-        these episodes benefiting or suffering from their consequences until the
-        arrival of the next forceful moment.”
-      </>
-    ),
-    author: "HERNAN DIAZ, TRUST",
-  },
-  {
-    node: (
-      <>
         “Nature’s first green is gold,
         <br /> Her hardest hue to hold.
         <br />
@@ -111,6 +114,17 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
+        “Every life is organized around a small number of events that either
+        propel us or bring us to a grinding halt. We spend the years between
+        these episodes benefiting or suffering from their consequences until the
+        arrival of the next forceful moment.”
+      </>
+    ),
+    author: "HERNAN DIAZ, TRUST",
+  },
+  {
+    node: (
+      <>
         “A man’s worth is established by the number of these defining
         circumstances he is able to create for himself. He need not always be
         successful, for there can be great honor in defeat. But he ought to be
@@ -119,27 +133,6 @@ const QUOTES: Quote[] = [
       </>
     ),
     author: "HERNAN DIAZ, TRUST",
-  },
-  {
-    node: (
-      <>
-        “Perhaps in the world’s destruction it would be possible at last to see
-        how it was made. Oceans, mountains. The ponderous counterspectacle of
-        things ceasing to be. The sweeping waste, hydroptic and coldly secular.
-        The silence.”
-      </>
-    ),
-    author: "CORMAC MCCARTHY, THE ROAD",
-  },
-  {
-    node: (
-      <>
-        “Learning does not make one learned: there are those who have knowledge
-        and those who have understanding. The first requires memory and the
-        second philosophy.”
-      </>
-    ),
-    author: "ALEXANDRE DUMAS, THE COUNT OF MONTE CRISTO",
   },
   {
     node: (
@@ -165,16 +158,13 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “Our flesh is the debris of dead stars, and this is also true of the
-        apple and its tree, of each hair on the spider’s legs, and of the rock
-        rusting on planet Mars. Each minuscule being has spokes radiating out to
-        all of creation. From one living thing, the properties of any other may
-        be predicted. Looking at any particle with sufficient care, and
-        following the chain that links all things together, we can arrive at the
-        universe.”
+        “What do we call visible light? We call it color. But the
+        electromagnetic spectrum runs to zero in one direction and infinity in
+        the other, so really, children, mathematically, all of light is
+        invisible.”
       </>
     ),
-    author: "HERNAN DIAZ, IN THE DISTANCE",
+    author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
   },
   {
     node: (
@@ -199,6 +189,17 @@ const QUOTES: Quote[] = [
       </>
     ),
     author: "HERNAN DIAZ, IN THE DISTANCE",
+  },
+  {
+    node: (
+      <>
+        “Perhaps in the world’s destruction it would be possible at last to see
+        how it was made. Oceans, mountains. The ponderous counterspectacle of
+        things ceasing to be. The sweeping waste, hydroptic and coldly secular.
+        The silence.”
+      </>
+    ),
+    author: "CORMAC MCCARTHY, THE ROAD",
   },
   {
     node: (
