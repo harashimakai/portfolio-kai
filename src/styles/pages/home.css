@@ -3,7 +3,7 @@
 }
 
 .intro-section {
-  padding: 100px var(--page-gutter) 80px;
+  padding: 80px var(--page-gutter) 80px;
   transition: padding-top var(--ease-hover);
 }
 
