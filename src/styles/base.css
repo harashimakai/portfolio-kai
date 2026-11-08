@@ -101,7 +101,7 @@ h1 {
   font-family: var(--font-serif);
   font-weight: 400;
   font-style: normal;
-  font-size: var(--text-title);
+  font-size: var(--text-heading);
   line-height: var(--leading-tight);
   color: var(--ink);
   margin: 0;
@@ -189,7 +189,7 @@ h3 {
 }
 
 .quote {
-  font-size: var(--text-quote);
+  font-size: var(--text-heading);
   line-height: var(--leading-quote);
 }
 

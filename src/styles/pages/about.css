@@ -109,9 +109,19 @@
 
 .about-body-secondary {
   display: grid;
-  grid-template-columns: 5fr 6fr;
+  /* Right column hugs its longest title so it ends flush with the gutter;
+     the left column absorbs the remaining width. */
+  grid-template-columns: minmax(0, 1fr) fit-content(60%);
   gap: 96px;
   align-items: start;
+}
+
+@media (min-width: 1190px) {
+  /* Pad the titles (not the column) so the column widens past the
+     longest title while the divider lines still run to the gutter. */
+  .about-experiences-title {
+    padding-right: 96px;
+  }
 }
 
 .about-secondary-block h1 {

@@ -108,23 +108,38 @@ function FeatureRow({ row, children }: FeatureRowProps) {
   const ref = useRef<HTMLDivElement>(null);
   const probe = useRef<HTMLSpanElement>(null);
   const [snapped, setSnapped] = useState(false);
+  // The snap transition stays off until the first real measurement lands,
+  // so the initial size is applied instantly instead of easing in.
+  const [animate, setAnimate] = useState(false);
 
   useLayoutEffect(() => {
     const el = ref.current;
     if (!row.height || !row.ratio || !el) return;
     const [w, h] = row.ratio.split("/").map(Number);
     const leadRatio = w / h;
-    const check = () => {
+    let armed = false;
+    let raf = 0;
+    const measure = () => {
+      // Narrow viewports always snap; no need to wait for the image.
+      if (window.matchMedia("(max-width: 1189px)").matches) return true;
       const img = el.querySelector<HTMLImageElement>(".art-tile-fill img");
-      if (!img?.naturalWidth || !probe.current) return;
+      if (!img?.naturalWidth || !probe.current) return null;
       const fillRatio = img.naturalWidth / img.naturalHeight;
       const height = probe.current.offsetHeight;
       const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
       const room = el.clientWidth - gap - height * leadRatio;
-      setSnapped(
-        room < height * fillRatio ||
-          window.matchMedia("(max-width: 1189px)").matches,
-      );
+      return room < height * fillRatio;
+    };
+    const check = () => {
+      const next = measure();
+      if (next === null) return;
+      setSnapped(next);
+      if (!armed) {
+        armed = true;
+        raf = requestAnimationFrame(() => {
+          raf = requestAnimationFrame(() => setAnimate(true));
+        });
+      }
     };
     check();
     const img = el.querySelector<HTMLImageElement>(".art-tile-fill img");
@@ -134,6 +149,7 @@ function FeatureRow({ row, children }: FeatureRowProps) {
     window.addEventListener("resize", check);
     return () => {
       img?.removeEventListener("load", check);
+      cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener("resize", check);
     };
@@ -147,6 +163,7 @@ function FeatureRow({ row, children }: FeatureRowProps) {
         row.naturalFirst && "art-feature-lead-first",
         row.height && "art-feature-fixed",
         snapped && "art-feature-snapped",
+        animate && "art-feature-animate",
       ]
         .filter(Boolean)
         .join(" ")}

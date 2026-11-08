@@ -4,17 +4,21 @@ import cuaptsContent from "./content/cuapts.json";
 
 import home1 from "../assets/optimized/putmeon-home1.webp";
 import home2 from "../assets/optimized/putmeon-home2.webp";
-import home3 from "../assets/optimized/putmeon-home3.webp";
+import home3 from "../assets/case-studies/putmeon/home3.mp4";
+import home3Poster from "../assets/optimized/putmeon-home3-poster.webp";
 import homePopup from "../assets/optimized/putmeon-home-popup.webp";
 import account1 from "../assets/optimized/putmeon-account1.webp";
 import account2 from "../assets/optimized/putmeon-account2.webp";
-import account3 from "../assets/optimized/putmeon-account3.webp";
+import account3 from "../assets/case-studies/putmeon/account3.mp4";
+import account3Poster from "../assets/optimized/putmeon-account3-poster.webp";
 import library from "../assets/optimized/putmeon-library.webp";
-import onboarding from "../assets/optimized/putmeon-onboarding.webp";
+import onboarding from "../assets/case-studies/putmeon/onboarding.mp4";
+import onboardingPoster from "../assets/optimized/putmeon-onboarding-poster.webp";
 import demo from "../assets/case-studies/putmeon/demo.mp4";
 import demoPoster from "../assets/optimized/putmeon-demo-poster.webp";
 import wordmark from "../assets/case-studies/putmeon/wordmark.svg?raw";
-import cover from "../assets/optimized/putmeon-cover.webp";
+import cover from "../assets/case-studies/putmeon/cover.mp4";
+import coverPoster from "../assets/optimized/putmeon-cover-poster.webp";
 
 import cuaptsResults from "../assets/optimized/cuapts-results.webp";
 import cuaptsBreakdown from "../assets/optimized/cuapts-results-breakdown.webp";
@@ -59,8 +63,8 @@ export const studyList: StudyDef[] = [
     },
     logoSvg: cuaptsLogo,
     card: {
-      date: "SPRING 2026",
-      context: "CORNELL DTI",
+      date: "Spring 2026",
+      context: "Cornell DTI",
       thumbnailUrl: cuaptsCoverPoster,
       video: cuaptsCover,
       subheading: "Helping college students navigate housing with AI",
@@ -74,20 +78,21 @@ export const studyList: StudyDef[] = [
     assets: {
       home1: { src: home1 },
       home2: { src: home2 },
-      home3: { src: home3 },
+      home3: { src: home3, poster: home3Poster },
       homePopup: { src: homePopup },
       account1: { src: account1 },
       account2: { src: account2 },
-      account3: { src: account3 },
+      account3: { src: account3, poster: account3Poster },
       library: { src: library },
-      onboarding: { src: onboarding },
+      onboarding: { src: onboarding, poster: onboardingPoster },
       demo: { src: demo, poster: demoPoster },
     },
     logoSvg: wordmark,
     card: {
-      date: "FEB 2026",
-      context: "INDEPENDENT",
-      thumbnailUrl: cover,
+      date: "Feb 2026",
+      context: "Concept",
+      thumbnailUrl: coverPoster,
+      video: cover,
       subheading: "a social music discovery platform / case study",
     },
   },

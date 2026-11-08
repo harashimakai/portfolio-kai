@@ -211,7 +211,7 @@ export function AssetSelect({
     >
       {optional && <option value="">none</option>}
       {Object.keys(assets)
-        .filter((a) => !assets[a].poster)
+        .filter((a) => !assets[a].poster || a === value)
         .map((a) => (
           <option
             key={a}

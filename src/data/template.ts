@@ -42,8 +42,8 @@ export const templateStudy: StudyDef = {
   },
   logoSvg,
   card: {
-    date: "MONTH YEAR",
-    context: "CONTEXT",
+    date: "Month Year",
+    context: "Context",
     thumbnailUrl: landscape("COVER"),
     subheading: "a one-line description / case study",
   },

@@ -29,8 +29,7 @@
   --text-display-max: 96px;
   --text-display-min: 48px;
   --text-lead: 54px;
-  --text-title: 48px;
-  --text-quote: 40px;
+  --text-heading: 40px;
 }
 
 @media (max-width: 1599px) {
@@ -55,7 +54,7 @@
   :root {
     --text-display: 64px;
     --text-lead: 38px;
-    --text-quote: 32px;
+    --text-heading: 32px;
   }
 }
 
@@ -63,8 +62,7 @@
   :root {
     --text-display: 48px;
     --text-lead: 26px;
-    --text-title: 36px;
-    --text-quote: 24px;
+    --text-heading: 24px;
   }
 }
 

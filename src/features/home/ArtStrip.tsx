@@ -22,12 +22,13 @@ export default function ArtStrip() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <motion.h2
+        <motion.p
+          className="art-strip-label body-lg"
           variants={children_custom}
           custom={0}
         >
-          ARTWORK
-        </motion.h2>
+          Artwork
+        </motion.p>
         <motion.div
           className="art-strip-more"
           variants={children_custom}

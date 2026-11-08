@@ -10,6 +10,7 @@ import {
 import { motion } from "motion/react";
 import { children_custom, container_m } from "../../lib/animations";
 import SectionDivider from "../../components/ui/SectionDivider";
+import InViewVideo from "../../components/ui/InViewVideo";
 
 const reveal = (delay: number) => ({
   variants: children_custom,
@@ -88,7 +89,7 @@ export function StudyHero({ logoSvg, logoAlt, subtitle, video, meta }: HeroProps
             variants={children_custom}
             custom={0.15}
           >
-            <video
+            <InViewVideo
               src={video.src || undefined}
               poster={video.poster}
               aria-label={logoAlt}
@@ -371,7 +372,7 @@ export function FigureRow({
   items,
   sequence,
 }: {
-  items: (Pointed & { src: string; alt: string; label: ReactNode })[];
+  items: (Pointed & { src: string; poster?: string; alt: string; label: ReactNode })[];
   sequence: boolean;
 }) {
   return (
@@ -394,12 +395,24 @@ export function FigureRow({
             className="study-figure is-framed"
             {...child(i)}
           >
-            <img
-              src={item.src}
-              alt={item.alt}
-              loading="lazy"
-              decoding="async"
-            />
+            {item.poster ? (
+              <InViewVideo
+                src={item.src}
+                poster={item.poster}
+                aria-label={item.alt}
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ) : (
+              <img
+                src={item.src}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             <figcaption>
               <h3>{item.label}</h3>
             </figcaption>
@@ -429,7 +442,7 @@ export function Video({
       className={portrait ? "study-figure study-video is-portrait" : "study-figure study-video"}
       {...reveal(0.1)}
     >
-      <video
+      <InViewVideo
         src={src}
         poster={poster}
         onLoadedMetadata={(e) =>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import type { StudyCard } from "../../types/caseStudy";
+import InViewVideo from "../../components/ui/InViewVideo";
 
 interface Props {
   item: StudyCard;
@@ -15,7 +16,7 @@ export default function CaseStudyCard({ item }: Props) {
     >
       <div className="case-card-image">
         {item.video ? (
-          <video
+          <InViewVideo
             src={item.video}
             poster={item.thumbnailUrl}
             aria-label={item.title}
@@ -40,9 +41,9 @@ export default function CaseStudyCard({ item }: Props) {
           <span className="case-card-title entry-title">{item.title}</span>
           <span className="case-card-excerpt body-xs">{item.subheading}</span>
         </p>
-        <h3>
+        <p className="case-card-info body-xs">
           {item.context} · {item.date}
-        </h3>
+        </p>
       </div>
     </Link>
   );

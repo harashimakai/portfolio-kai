@@ -23,6 +23,13 @@
 
 .intro-lead {
   margin: 0;
+  /* Same readability tuning as .about-quote (minus line-height). */
+  letter-spacing: 0.01em;
+  word-spacing: 0.04em;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+  text-wrap: pretty;
 }
 
 .intro-lead a {
@@ -91,6 +98,11 @@
   justify-content: space-between;
   align-items: baseline;
   margin: 0 0 var(--space-sm);
+}
+
+.art-strip-label {
+  margin: 0;
+  color: var(--muted);
 }
 
 .art-strip-more a {

@@ -12,9 +12,9 @@ const jobs = [
     { src: `full-images/${name}.webp`, out: `${name}-large.webp`, width: 2000, quality: 82 },
   ]),
   { src: "full-images/thesis-poster-flat.webp", out: "thesis-poster-flat-large.webp", width: 2400, quality: 82 },
-  { src: "case-studies/putmeon/covernew.png", out: "putmeon-cover.webp", width: 2000, quality: 82 },
+  { src: "case-studies/putmeon/cover-poster.png", out: "putmeon-cover-poster.webp", width: 1600, quality: 84 },
   { src: "case-studies/putmeon/demo-poster.jpg", out: "putmeon-demo-poster.webp", width: 1280, quality: 80 },
-  ...["home1", "home2", "home3", "home-popup", "account1", "account2", "account3", "library", "onboarding"].map((name) => ({
+  ...["home1", "home2", "home-popup", "account1", "account2", "library", "home3-poster", "account3-poster", "onboarding-poster"].map((name) => ({
     src: `case-studies/putmeon/${name}.png`, out: `putmeon-${name}.webp`, width: 804, quality: 88,
   })),
   ...Object.entries({

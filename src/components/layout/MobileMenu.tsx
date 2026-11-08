@@ -117,7 +117,7 @@ export default function MobileMenu() {
               <NavLinks />
             </nav>
             <hr />
-            <ThemeToggle />
+            <ThemeToggle showLabel />
           </motion.div>
         )}
       </AnimatePresence>

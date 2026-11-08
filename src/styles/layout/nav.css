@@ -85,7 +85,13 @@
 
 .theme-toggle h2 {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle-label {
+  text-transform: uppercase;
 }
 
 .theme-toggle:hover h2 {

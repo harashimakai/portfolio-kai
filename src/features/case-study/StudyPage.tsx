@@ -244,6 +244,7 @@ function BlockView({
             sequence={Boolean(block.sequence)}
             items={block.items.map((f, i) => ({
               src: src(f.asset),
+              poster: assets[f.asset]?.poster,
               alt: f.alt,
               label: removable(
                 <>
