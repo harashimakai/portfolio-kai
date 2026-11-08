@@ -17,62 +17,35 @@
   initial-value: transparent;
 }
 
+/* Case studies only swap the accent; background and text stay site-wide.
+   The footer always uses its dark-mode look on case studies. */
+[class*="palette-"] {
+  --color-bg-inverse: var(--footer-dark);
+  --footer-muted: var(--footer-dark-muted);
+}
+
 .theme-light.palette-putmeon {
-  --bg: #f4efe7;
-  --color-surface: #faf6ee;
-  --color-border: rgba(26, 26, 28, 0.18);
-  --color-overlay: rgba(26, 26, 28, 0.06);
-  --hairline: rgba(26, 26, 28, 0.35);
-  --muted: #737065;
   --accent: #be8b59;
-  --ink: #1a1a1c;
-  --shadow: rgba(26, 26, 28, 0.06);
-  --color-bg-inverse: #1a1a1c;
+  --study-logo-ink: #1a1a1c;
   --study-hero-a: #f3cea3;
   --study-hero-b: #b3b0ed;
   --study-logo-accent: #d39354;
 }
 
 .theme-dark.palette-putmeon {
-  --bg: #1b1b1f;
-  --color-surface: #222225;
-  --color-border: rgba(245, 235, 217, 0.18);
-  --color-overlay: rgba(245, 235, 217, 0.06);
-  --hairline: rgba(245, 235, 217, 0.4);
-  --muted: #a4a4a0;
   --accent: #d39354;
-  --ink: #f5ebd9;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --color-bg-inverse: #141416;
+  --study-logo-ink: #f5ebd9;
   --study-hero-a: #c19a67;
   --study-hero-b: #9392d5;
   --study-logo-accent: #d39354;
 }
 
 .theme-light.palette-cuapts {
-  --bg: #fbfbfb;
-  --color-surface: #ffffff;
-  --color-border: rgba(0, 0, 0, 0.12);
-  --color-overlay: rgba(0, 0, 0, 0.05);
-  --hairline: rgba(0, 0, 0, 0.3);
-  --muted: #696969;
   --accent: #b94630;
-  --ink: #1a1a1a;
-  --shadow: rgba(26, 26, 28, 0.1);
-  --color-bg-inverse: #1e1e1e;
 }
 
 .theme-dark.palette-cuapts {
-  --bg: #1d1c1c;
-  --color-surface: #222020;
-  --color-border: rgba(249, 249, 249, 0.12);
-  --color-overlay: rgba(249, 249, 249, 0.06);
-  --hairline: rgba(249, 249, 249, 0.35);
-  --muted: #898989;
   --accent: #cd5b42;
-  --ink: #f9f9f9;
-  --shadow: rgba(0, 0, 0, 0.35);
-  --color-bg-inverse: #151515;
 }
 
 .palette-cuapts .study-hero-logo {
@@ -168,7 +141,7 @@
 .study-hero-logo {
   display: block;
   width: min(747px, 100%);
-  color: var(--ink);
+  color: var(--study-logo-ink, var(--ink));
   transition: color var(--ease-theme);
 }
 

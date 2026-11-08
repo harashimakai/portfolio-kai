@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type RefObject,
   type ReactNode,
 } from "react";
 import { motion } from "motion/react";
@@ -45,7 +46,8 @@ function useHeroOffset() {
         setOffset(null);
         return;
       }
-      const nav = document.querySelector<HTMLElement>(".navbar")?.offsetHeight ?? 0;
+      const nav =
+        document.querySelector<HTMLElement>(".navbar")?.offsetHeight ?? 0;
       setOffset(nav + Math.max(16, (vh - nav - el.offsetHeight) / 2));
     };
     measure();
@@ -56,6 +58,65 @@ function useHeroOffset() {
   return { ref, offset };
 }
 
+const INTRO_DELAY = 400;
+const INTRO_DURATION = 1400;
+const INTRO_VISIBLE = 0.075; // share of the cover left showing below the navbar
+
+const easeInOutCubic = (t: number) =>
+  t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
+
+function pageTop(el: HTMLElement) {
+  let y = 0;
+  for (
+    let n: HTMLElement | null = el;
+    n;
+    n = n.offsetParent as HTMLElement | null
+  )
+    y += n.offsetTop;
+  return y;
+}
+
+// Opens at the top of the page, then eases down so the title and meta come into view.
+function useIntroScroll(ref: RefObject<HTMLElement | null>, ready: boolean) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!ready || !el || window.location.hash) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    let timer = 0;
+    const cancel = () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+      stopListening();
+    };
+    const events = ["wheel", "touchstart", "keydown", "mousedown"] as const;
+    const stopListening = () =>
+      events.forEach((e) => window.removeEventListener(e, cancel));
+    events.forEach((e) =>
+      window.addEventListener(e, cancel, { passive: true }),
+    );
+
+    timer = window.setTimeout(() => {
+      const nav =
+        document.querySelector<HTMLElement>(".navbar")?.offsetHeight ?? 0;
+      const target = pageTop(el) + el.offsetHeight * (1 - INTRO_VISIBLE) - nav;
+      const from = window.scrollY;
+      if (target <= from) return stopListening();
+      const start = performance.now();
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / INTRO_DURATION);
+        window.scrollTo(0, from + (target - from) * easeInOutCubic(t));
+        if (t < 1) frame = requestAnimationFrame(step);
+        else stopListening();
+      };
+      frame = requestAnimationFrame(step);
+    }, INTRO_DELAY);
+
+    return cancel;
+  }, [ref, ready]);
+}
+
 interface HeroProps {
   logoSvg: string;
   logoAlt: string;
@@ -64,12 +125,21 @@ interface HeroProps {
   meta: { label: string; lines: ReactNode[] }[];
 }
 
-export function StudyHero({ logoSvg, logoAlt, subtitle, video, meta }: HeroProps) {
+export function StudyHero({
+  logoSvg,
+  logoAlt,
+  subtitle,
+  video,
+  meta,
+}: HeroProps) {
   const hero = useHeroOffset();
+  useIntroScroll(hero.ref, Boolean(video));
   return (
     <motion.header
       className={video ? "study-hero has-video" : "study-hero"}
-      style={video && hero.offset !== null ? { paddingTop: hero.offset } : undefined}
+      style={
+        video && hero.offset !== null ? { paddingTop: hero.offset } : undefined
+      }
       variants={container_m}
       initial="hidden"
       whileInView="visible"
@@ -126,9 +196,7 @@ export function StudyHero({ logoSvg, logoAlt, subtitle, video, meta }: HeroProps
           </motion.p>
         </>
       )}
-      <dl
-        className="study-hero-meta"
-      >
+      <dl className="study-hero-meta">
         {meta.map((col, i) => (
           <motion.div
             key={col.label}
@@ -204,7 +272,11 @@ export function StudySection({
         className="study-section"
       >
         {aside ? (
-          <div className={narrow ? "study-section-split is-narrow" : "study-section-split"}>
+          <div
+            className={
+              narrow ? "study-section-split is-narrow" : "study-section-split"
+            }
+          >
             <div>
               {heading}
               {children}
@@ -223,7 +295,13 @@ export function StudySection({
   );
 }
 
-export function Statement({ children, small }: { children: ReactNode; small?: boolean }) {
+export function Statement({
+  children,
+  small,
+}: {
+  children: ReactNode;
+  small?: boolean;
+}) {
   return (
     <motion.h1
       className={small ? "study-statement is-small" : "study-statement"}
@@ -245,7 +323,13 @@ export function Kicker({ children }: { children: ReactNode }) {
   );
 }
 
-export function Subheading({ children, logo }: { children: ReactNode; logo?: string }) {
+export function Subheading({
+  children,
+  logo,
+}: {
+  children: ReactNode;
+  logo?: string;
+}) {
   return (
     <motion.h3
       className={logo ? "study-subheading has-logo" : "study-subheading"}
@@ -258,7 +342,10 @@ export function Subheading({ children, logo }: { children: ReactNode; logo?: str
         >
           <span
             className="study-subheading-logo"
-            style={{ maskImage: `url("${logo}")`, WebkitMaskImage: `url("${logo}")` }}
+            style={{
+              maskImage: `url("${logo}")`,
+              WebkitMaskImage: `url("${logo}")`,
+            }}
           />
         </span>
       )}
@@ -278,7 +365,13 @@ export function Body({ children }: { children: ReactNode }) {
   );
 }
 
-export function Bullets({ items, grid = false }: { items: ReactNode[]; grid?: boolean }) {
+export function Bullets({
+  items,
+  grid = false,
+}: {
+  items: ReactNode[];
+  grid?: boolean;
+}) {
   return (
     <motion.ul
       className={grid ? "study-bullets is-grid" : "study-bullets"}
@@ -372,7 +465,12 @@ export function FigureRow({
   items,
   sequence,
 }: {
-  items: (Pointed & { src: string; poster?: string; alt: string; label: ReactNode })[];
+  items: (Pointed & {
+    src: string;
+    poster?: string;
+    alt: string;
+    label: ReactNode;
+  })[];
   sequence: boolean;
 }) {
   return (
@@ -439,7 +537,11 @@ export function Video({
   const [portrait, setPortrait] = useState(false);
   return (
     <motion.figure
-      className={portrait ? "study-figure study-video is-portrait" : "study-figure study-video"}
+      className={
+        portrait
+          ? "study-figure study-video is-portrait"
+          : "study-figure study-video"
+      }
       {...reveal(0.1)}
     >
       <InViewVideo
@@ -464,7 +566,12 @@ export function Cards({
   items,
   stacked = false,
 }: {
-  items: { title: ReactNode; lines: ReactNode[]; logo?: string; image?: string }[];
+  items: {
+    title: ReactNode;
+    lines: ReactNode[];
+    logo?: string;
+    image?: string;
+  }[];
   stacked?: boolean;
 }) {
   return (
@@ -490,7 +597,10 @@ export function Cards({
           {card.logo && (
             <span
               className="study-card-logo"
-              style={{ maskImage: `url("${card.logo}")`, WebkitMaskImage: `url("${card.logo}")` }}
+              style={{
+                maskImage: `url("${card.logo}")`,
+                WebkitMaskImage: `url("${card.logo}")`,
+              }}
               aria-hidden="true"
             />
           )}
@@ -511,7 +621,13 @@ interface EntryView {
   body: ReactNode;
 }
 
-export function Takeaways({ items, grid = false }: { items: EntryView[]; grid?: boolean }) {
+export function Takeaways({
+  items,
+  grid = false,
+}: {
+  items: EntryView[];
+  grid?: boolean;
+}) {
   return (
     <motion.ol
       className={grid ? "study-takeaways is-grid" : "study-takeaways"}
@@ -533,7 +649,11 @@ export function Takeaways({ items, grid = false }: { items: EntryView[]; grid?: 
   );
 }
 
-export function Stats({ items }: { items: { value: ReactNode; label: ReactNode }[] }) {
+export function Stats({
+  items,
+}: {
+  items: { value: ReactNode; label: ReactNode }[];
+}) {
   return (
     <motion.dl
       className="study-stats"
@@ -598,7 +718,13 @@ export function Steps({ items }: { items: EntryView[] }) {
   );
 }
 
-export function Callout({ label, text }: { label: ReactNode; text: ReactNode }) {
+export function Callout({
+  label,
+  text,
+}: {
+  label: ReactNode;
+  text: ReactNode;
+}) {
   return (
     <motion.aside
       className="study-callout"
@@ -799,7 +925,9 @@ function useTypewriter(lines: string[]) {
     let length = all[0].length;
     let deleting = false;
     let timer: number;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const tick = () => {
       if (reduced) {
         line = (line + 1) % all.length;
@@ -832,7 +960,13 @@ function useTypewriter(lines: string[]) {
   return text;
 }
 
-export function Prompts({ label, prompts }: { label: ReactNode; prompts: string[] }) {
+export function Prompts({
+  label,
+  prompts,
+}: {
+  label: ReactNode;
+  prompts: string[];
+}) {
   const text = useTypewriter(prompts);
   const longest = prompts.reduce((a, b) => (b.length > a.length ? b : a), "");
   return (
@@ -883,7 +1017,11 @@ export function AnnotatedImage({
   return (
     <div
       className="study-annotated"
-      style={height ? ({ "--stack-height": `${height}px` } as CSSProperties) : undefined}
+      style={
+        height
+          ? ({ "--stack-height": `${height}px` } as CSSProperties)
+          : undefined
+      }
     >
       <motion.figure
         className="study-figure study-image"

@@ -107,7 +107,7 @@ html:not(.has-cursor) .cursor {
 }
 
 .theme-dark .cursor.is-over-image .cursor-label:not(.cursor-label-filled) {
-  color: #0c2e08;
+  color: #1f1f24;
 }
 
 .cursor-label[hidden] {
