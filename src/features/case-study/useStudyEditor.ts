@@ -53,7 +53,10 @@ function isList(bl: Block): bl is ListBlock {
 }
 
 function newBlock(kind: BlockKind, id: NewId, image: string, video: string): Block {
-  const { type } = kind;
+  return { ...createBlock(kind.type, id, image, video), ...kind.preset } as Block;
+}
+
+function createBlock(type: Block["type"], id: NewId, image: string, video: string): Block {
   if (isListType(type)) {
     const items = Array.from({ length: NEW_ITEM_COUNT[type] ?? 1 }, () => NEW_ITEM[type](id, image));
     if (type === "options") Object.assign(items[items.length - 1], { chosen: true });
@@ -67,7 +70,7 @@ function newBlock(kind: BlockKind, id: NewId, image: string, video: string): Blo
   }
   switch (type) {
     case "statement":
-      return { id: id(), type, text: "New statement.", ...(kind.small && { small: true }) };
+      return { id: id(), type, text: "New statement." };
     case "body":
       return { id: id(), type, text: "New paragraph." };
     case "kicker":

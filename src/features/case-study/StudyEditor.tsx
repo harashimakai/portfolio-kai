@@ -2,15 +2,17 @@ import { createContext, useContext, useState, type MutableRefObject, type ReactN
 import { rich } from "../../lib/richText";
 import type { Asset, Block } from "../../types/caseStudy";
 
-const BLOCK_TYPES: { type: Block["type"]; label: string; small?: boolean }[] = [
+const BLOCK_TYPES: { type: Block["type"]; label: string; preset?: Record<string, unknown> }[] = [
   { type: "statement", label: "Statement" },
-  { type: "statement", label: "Small statement", small: true },
+  { type: "statement", label: "Small statement", preset: { small: true } },
   { type: "kicker", label: "Eyebrow" },
   { type: "subheading", label: "Subheading" },
   { type: "body", label: "Paragraph" },
   { type: "bullets", label: "Bullets" },
+  { type: "bullets", label: "Bullets (columns)", preset: { layout: "grid" } },
   { type: "cards", label: "3 cards" },
   { type: "takeaways", label: "Takeaways" },
+  { type: "takeaways", label: "Takeaways (grid)", preset: { layout: "grid" } },
   { type: "figures", label: "Images" },
   { type: "video", label: "Video" },
   { type: "image", label: "Wide image" },
@@ -21,6 +23,7 @@ const BLOCK_TYPES: { type: Block["type"]; label: string; small?: boolean }[] = [
   { type: "steps", label: "Process steps" },
   { type: "columns", label: "Labeled columns" },
   { type: "callout", label: "Callout" },
+  { type: "callout", label: "Callout (body text)", preset: { plain: true } },
   { type: "quotes", label: "User quotes" },
   { type: "decision", label: "Design decision" },
   { type: "options", label: "Options compared" },

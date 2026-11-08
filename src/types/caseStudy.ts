@@ -68,15 +68,15 @@ export type Block =
   | { id: string; type: "kicker"; text: string }
   | { id: string; type: "subheading"; text: string; logo?: string }
   | { id: string; type: "columns"; items: Column[] }
-  | { id: string; type: "bullets"; items: Item[] }
+  | { id: string; type: "bullets"; layout?: "list" | "grid"; items: Item[] }
   | { id: string; type: "cards"; items: Card[] }
-  | { id: string; type: "takeaways"; items: Entry[] }
+  | { id: string; type: "takeaways"; layout?: "list" | "grid"; items: Entry[] }
   | { id: string; type: "figures"; sequence?: boolean; items: FigureItem[] }
   | { id: string; type: "video"; asset: string; caption: string }
   | { id: string; type: "divider" }
   | { id: string; type: "stats"; items: Stat[] }
   | { id: string; type: "steps"; items: Entry[] }
-  | { id: string; type: "callout"; label: string; text: string }
+  | { id: string; type: "callout"; label: string; text: string; plain?: boolean }
   | { id: string; type: "quotes"; items: Item[] }
   | {
       id: string;

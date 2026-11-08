@@ -63,7 +63,7 @@ body {
 .is-theme-switching .theme-light,
 .is-theme-switching .theme-dark {
   transition-property: color, background-color, border-color, box-shadow,
-    --sel-bg, --sel-fg !important;
+    --sel-bg, --sel-fg, --study-hero-a, --study-hero-b !important;
 }
 
 a {

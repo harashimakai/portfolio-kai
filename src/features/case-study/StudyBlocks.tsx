@@ -31,17 +31,9 @@ const child = (i: number, step = 0.15) => ({
   custom: 0.1 + i * step,
 });
 
-const HERO_RATIOS = [1, 5 / 4, 4 / 3, 3 / 2, 16 / 10, 16 / 9, 2, 21 / 9];
-const HERO_MARGIN = 56;
-
-interface HeroFit {
-  ratio: number;
-  offset: number | null;
-}
-
-function useHeroFit() {
+function useHeroOffset() {
   const ref = useRef<HTMLElement>(null);
-  const [fit, setFit] = useState<HeroFit>({ ratio: 16 / 9, offset: null });
+  const [offset, setOffset] = useState<number | null>(null);
 
   useLayoutEffect(() => {
     const measure = () => {
@@ -49,24 +41,18 @@ function useHeroFit() {
       if (!el) return;
       const vh = window.innerHeight;
       if (window.innerWidth <= vh) {
-        setFit({ ratio: 16 / 9, offset: null });
+        setOffset(null);
         return;
       }
       const nav = document.querySelector<HTMLElement>(".navbar")?.offsetHeight ?? 0;
-      const width = el.offsetWidth;
-      const target = vh - nav - 2 * HERO_MARGIN;
-      const ratio = HERO_RATIOS.reduce((best, r) =>
-        Math.abs(width / r - target) < Math.abs(width / best - target) ? r : best,
-      );
-      const offset = nav + Math.max(16, (vh - nav - width / ratio) / 2);
-      setFit({ ratio, offset });
+      setOffset(nav + Math.max(16, (vh - nav - el.offsetHeight) / 2));
     };
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  return { ref, ...fit };
+  return { ref, offset };
 }
 
 interface HeroProps {
@@ -78,7 +64,7 @@ interface HeroProps {
 }
 
 export function StudyHero({ logoSvg, logoAlt, subtitle, video, meta }: HeroProps) {
-  const hero = useHeroFit();
+  const hero = useHeroOffset();
   return (
     <motion.header
       className={video ? "study-hero has-video" : "study-hero"}
@@ -95,23 +81,31 @@ export function StudyHero({ logoSvg, logoAlt, subtitle, video, meta }: HeroProps
         />
       )}
       {video ? (
-        <motion.figure
-          ref={hero.ref}
-          className="study-hero-video"
-          variants={children_custom}
-          custom={0.15}
-          style={{ aspectRatio: hero.ratio }}
-        >
-          <video
-            src={video.src || undefined}
-            poster={video.poster}
-            aria-label={logoAlt}
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        </motion.figure>
+        <>
+          <motion.figure
+            ref={hero.ref}
+            className="study-hero-video"
+            variants={children_custom}
+            custom={0.15}
+          >
+            <video
+              src={video.src || undefined}
+              poster={video.poster}
+              aria-label={logoAlt}
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </motion.figure>
+          <motion.h1
+            className="study-hero-title"
+            variants={children_custom}
+            custom={0.3}
+          >
+            {subtitle}
+          </motion.h1>
+        </>
       ) : (
         <>
           <motion.div
@@ -151,11 +145,11 @@ export function StudyHero({ logoSvg, logoAlt, subtitle, video, meta }: HeroProps
   );
 }
 
-export type Role = "label" | "eyebrow" | "header" | "content";
-export type Gap = "none" | "eyebrow" | "header" | "block" | "group";
+export type Role = "label" | "eyebrow" | "header" | "heading" | "content";
+export type Gap = "none" | "item" | "eyebrow" | "header" | "block" | "group";
 
 export function gapBetween(prev: Role | null, cur: Role): Gap {
-  if (prev === null) return "none";
+  if (prev === null || prev === "heading") return "none";
   if (prev === "label" || prev === "eyebrow") return "eyebrow";
   if (prev === "header") return "header";
   return cur === "content" ? "block" : "group";
@@ -283,10 +277,10 @@ export function Body({ children }: { children: ReactNode }) {
   );
 }
 
-export function Bullets({ items }: { items: ReactNode[] }) {
+export function Bullets({ items, grid = false }: { items: ReactNode[]; grid?: boolean }) {
   return (
     <motion.ul
-      className="study-bullets"
+      className={grid ? "study-bullets is-grid" : "study-bullets"}
       {...stagger(0.3)}
     >
       {items.map((item, i) => (
@@ -295,7 +289,7 @@ export function Bullets({ items }: { items: ReactNode[] }) {
           {...child(i, 0.1)}
         >
           <span
-            className="study-bullet-dash"
+            className="study-bullet"
             aria-hidden="true"
           />
           <p>{item}</p>
@@ -504,10 +498,10 @@ interface EntryView {
   body: ReactNode;
 }
 
-export function Takeaways({ items }: { items: EntryView[] }) {
+export function Takeaways({ items, grid = false }: { items: EntryView[]; grid?: boolean }) {
   return (
     <motion.ol
-      className="study-takeaways"
+      className={grid ? "study-takeaways is-grid" : "study-takeaways"}
       {...stagger()}
     >
       {items.map((t, i) => (
@@ -515,7 +509,7 @@ export function Takeaways({ items }: { items: EntryView[] }) {
           key={i}
           {...child(i)}
         >
-          <h3>{String(i + 1).padStart(2, "0")}</h3>
+          {!grid && <h3>{String(i + 1).padStart(2, "0")}</h3>}
           <div>
             <p className="study-takeaway-title">{t.title}</p>
             <p className="study-takeaway-body">{t.body}</p>
@@ -561,7 +555,7 @@ export function Columns({
           key={i}
           {...child(i)}
         >
-          <h2 className="study-kicker">{item.title}</h2>
+          <p className="study-column-title">{item.title}</p>
           {item.body && <p className="study-body">{item.body}</p>}
           {item.lines && <Bullets items={item.lines} />}
         </motion.div>
@@ -591,10 +585,18 @@ export function Steps({ items }: { items: EntryView[] }) {
   );
 }
 
-export function Callout({ label, text }: { label: ReactNode; text: ReactNode }) {
+export function Callout({
+  label,
+  text,
+  plain = false,
+}: {
+  label: ReactNode;
+  text: ReactNode;
+  plain?: boolean;
+}) {
   return (
     <motion.aside
-      className="study-callout"
+      className={plain ? "study-callout is-plain" : "study-callout"}
       {...reveal(0.1)}
     >
       <h2 className="study-callout-label">{label}</h2>
@@ -672,9 +674,13 @@ export function Options({
 }: {
   items: (Pointed & { src: string; title: ReactNode; chosen: boolean })[];
 }) {
+  const [ratios, setRatios] = useState<Record<number, number>>({});
+  const loaded = Object.values(ratios);
+  const frame = loaded.length ? Math.min(...loaded) : 16 / 10;
   return (
     <motion.div
       className="study-options"
+      style={{ "--frame-ratio": frame } as CSSProperties}
       {...stagger()}
     >
       {items.map((option, i) => (
@@ -689,6 +695,10 @@ export function Options({
               alt=""
               loading="lazy"
               decoding="async"
+              onLoad={(e) => {
+                const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+                setRatios((r) => ({ ...r, [i]: w / h }));
+              }}
             />
           </figure>
           <div className="study-option-head">

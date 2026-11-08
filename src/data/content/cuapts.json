@@ -1,6 +1,6 @@
 {
   "hero": {
-    "subtitle": "Helping users find apartments that fit their constraints with AI",
+    "subtitle": "Helping college students navigate housing with AI",
     "meta": [
       {
         "label": "Team",
@@ -87,7 +87,7 @@
         {
           "id": "n5",
           "type": "body",
-          "text": "First-time searchers have endless options and factors to weigh, and navigating complex filters or searching apartment by address only makes it harder."
+          "text": "College students who are looking for an apartment for the first time have endless options and factors to weigh, and navigating complex filters or searching apartment by address only makes it harder."
         },
         {
           "id": "n6",
@@ -155,7 +155,7 @@
         {
           "id": "n67",
           "type": "subheading",
-          "text": "What they have in common"
+          "text": "What they have in common:"
         },
         {
           "id": "n68",
@@ -411,12 +411,12 @@
           "items": [
             {
               "id": "n119",
-              "title": "PROBLEM",
+              "title": "Problem",
               "body": "Students search with a set of constraints (roommates, distance to campus, budget), but a list of results doesn't show which ones each apartment meets."
             },
             {
               "id": "n120",
-              "title": "SOLUTION",
+              "title": "Solution",
               "body": "Instead of auto-applying filters, the LLM builds each answer from a library of components, picking the ones that best explain the results, so it's clear how each apartment fits what the user asked for."
             }
           ]
@@ -469,7 +469,8 @@
           "id": "n102",
           "type": "callout",
           "label": "BUILT TO SCALE",
-          "text": "New CUApts features can easily be added to the set of components the AI uses to build its answers, making the feature scalable as the platform grows."
+          "text": "New CUApts features can easily be added to the set of components the AI uses to build its answers, making the feature scalable as the platform grows.",
+          "plain": true
         }
       ]
     },
@@ -477,6 +478,12 @@
       "id": "reflection",
       "label": "TAKEAWAYS",
       "blocks": [
+        {
+          "id": "n122",
+          "type": "statement",
+          "text": "What I learned",
+          "small": true
+        },
         {
           "id": "n103",
           "type": "takeaways",
@@ -491,10 +498,11 @@
               "title": "Designing with *developers*",
               "body": "Handoff involved documenting the component system and user flow in detail to ensure they understood my vision for the feature. Working closely with developers to balance design with feasibility, I gained a better understanding of how design and programming come together in a product environment."
             }
-          ]
+          ],
+          "layout": "grid"
         }
       ]
     }
   ],
-  "nextId": 122
+  "nextId": 123
 }

@@ -386,12 +386,12 @@
           "items": [
             {
               "id": "t110",
-              "title": "PROBLEM",
+              "title": "Problem",
               "body": "The tension in one or two sentences."
             },
             {
               "id": "t111",
-              "title": "SOLUTION",
+              "title": "Solution",
               "body": "What you did about it, in one or two sentences."
             }
           ]

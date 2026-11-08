@@ -62,7 +62,7 @@
         {
           "id": "n226",
           "type": "statement",
-          "text": "How I approached it",
+          "text": "How I approached the problem",
           "small": true
         },
         {
@@ -223,29 +223,29 @@
           "items": [
             {
               "id": "n249",
-              "title": "KEY ELEMENTS",
+              "title": "Key Elements",
               "lines": [
                 {
                   "id": "n26",
-                  "text": "Emphasis on album artwork"
-                },
-                {
-                  "id": "n27",
                   "text": "Make process of discovering music more socially driven"
                 },
                 {
-                  "id": "n163",
+                  "id": "n27",
                   "text": "As this is a social app, finding your friends should be easy"
                 },
                 {
-                  "id": "n165",
+                  "id": "n163",
                   "text": "Counters information overload and allows users to slow down and listen to music rather than consume it"
+                },
+                {
+                  "id": "n165",
+                  "text": "Emphasis on album artwork"
                 }
               ]
             },
             {
               "id": "n250",
-              "title": "ADDITIONAL FEATURES",
+              "title": "Additional Features",
               "lines": [
                 {
                   "id": "n30",
@@ -268,7 +268,7 @@
         {
           "id": "n183",
           "type": "body",
-          "text": "Each friend shares **one pick** per week. Your home page shows you your friend's recommendations, one song at a time. By only allowing users one pick per week, Put Me On forces users to slow down and think about their recommendations. There's no infinite feed or algorithms, everything is chosen intentionally by people you know."
+          "text": "Each friend shares *one pick* per week. Your home page shows you your friend's recommendations, one song at a time. By only allowing users one pick per week, Put Me On forces users to slow down and think about their recommendations. There's no infinite feed or algorithms, everything is chosen intentionally by people you know."
         }
       ]
     },
@@ -472,7 +472,7 @@
         {
           "id": "n208",
           "type": "statement",
-          "text": "If I had *more time*, I would've…"
+          "text": "If I had more time, I would've…"
         },
         {
           "id": "n209",
@@ -490,7 +490,8 @@
               "id": "n212",
               "text": "conducted *more formalized research* — possibly through a survey to reach a wider base of users."
             }
-          ]
+          ],
+          "layout": "grid"
         },
         {
           "id": "n213",

@@ -35,7 +35,11 @@ import type { Block, Item, StudyDef } from "../../types/caseStudy";
 
 const SPACIOUS = new Set<Block["type"]>(["options", "decision"]);
 
+const FLOWS_UNDER_HEADING = new Set<Block["type"]>(["body", "bullets"]);
+
 function gapFor(prev: Block | undefined, cur: Block, hasLabel: boolean) {
+  if (prev?.type === "subheading" && cur.type === "bullets") return "item";
+  if (prev?.type === "subheading" && !FLOWS_UNDER_HEADING.has(cur.type)) return "header";
   const gap = gapBetween(prev ? roleOf(prev.type) : hasLabel ? "label" : null, roleOf(cur.type));
   return gap === "block" && (SPACIOUS.has(cur.type) || (prev && SPACIOUS.has(prev.type)))
     ? "group"
@@ -43,7 +47,8 @@ function gapFor(prev: Block | undefined, cur: Block, hasLabel: boolean) {
 }
 
 function roleOf(type: Block["type"]): Role {
-  if (type === "statement" || type === "subheading") return "header";
+  if (type === "statement") return "header";
+  if (type === "subheading") return "heading";
   if (type === "kicker") return "eyebrow";
   return "content";
 }
@@ -169,7 +174,10 @@ function BlockView({
     case "bullets":
       view = (
         <>
-          <Bullets items={texts(block.items).map((t, i) => removable(t, i, "Remove bullet"))} />
+          <Bullets
+            grid={block.layout === "grid"}
+            items={texts(block.items).map((t, i) => removable(t, i, "Remove bullet"))}
+          />
           {adder("BULLET")}
         </>
       );
@@ -207,6 +215,7 @@ function BlockView({
       view = (
         <>
           <Takeaways
+            grid={block.layout === "grid"}
             items={block.items.map((t, i) => ({
               title: removable(
                 <Text
@@ -353,6 +362,7 @@ function BlockView({
     case "callout":
       view = (
         <Callout
+          plain={block.plain}
           label={
             <Text
               of={block}
