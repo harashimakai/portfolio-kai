@@ -102,11 +102,6 @@
   margin: 0 0 var(--space-sm);
 }
 
-.art-strip-label {
-  margin: 0;
-  color: var(--muted);
-}
-
 .art-strip-more a {
   text-decoration: none;
 }
