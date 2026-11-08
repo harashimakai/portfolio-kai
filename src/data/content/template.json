@@ -52,7 +52,7 @@
         {
           "id": "t90",
           "type": "prompts",
-          "label": "TRY ASKING",
+          "label": "Try asking",
           "items": [
             {
               "id": "t91",
@@ -67,7 +67,7 @@
         {
           "id": "t3",
           "type": "callout",
-          "label": "THE CHALLENGE",
+          "label": "The challenge",
           "text": "How might we *[outcome for users]* without *[the constraint that made it hard]*?"
         },
         {
@@ -712,7 +712,7 @@
         {
           "id": "t85",
           "type": "callout",
-          "label": "IF I HAD MORE TIME",
+          "label": "If I had more time",
           "text": "What you'd do next, and what you'd change knowing what you know now."
         }
       ]

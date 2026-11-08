@@ -351,13 +351,11 @@
 
 .study-section-label,
 .study-kicker,
-.study-callout-label,
 .study-decision-part h2 {
   margin: 0;
   color: var(--accent);
 }
 
-.study-callout-label,
 .study-decision-part h2 {
   margin-bottom: 8px;
 }
@@ -379,7 +377,7 @@
 .study-step-body,
 .study-points p,
 .study-stat-label,
-.study-callout.is-plain .study-callout-text {
+.study-callout-text {
   margin: 0;
   font-family: var(--font-sans);
   font-weight: 400;
@@ -409,7 +407,9 @@
 .study-decision-title,
 .study-option-title,
 .study-column-title,
-.study-step-title {
+.study-step-title,
+.study-callout-label,
+.study-stat-value {
   margin: 0;
   font-family: var(--font-sans);
   font-weight: 400;
@@ -450,7 +450,6 @@
   -webkit-mask: center / contain no-repeat;
 }
 
-.study-callout-text,
 .study-quote {
   margin: 0;
   font-family: var(--font-serif);
@@ -733,20 +732,8 @@
   border-top: 3px solid var(--accent);
 }
 
-.study-stat-value {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: var(--text-quote);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--accent);
-  transition:
-    color var(--ease-theme),
-    font-size var(--ease-hover);
-}
-
 .study-stat-label {
-  margin-top: 8px;
+  margin: 0;
 }
 
 .study-columns {
@@ -772,8 +759,8 @@
   border-left: 3px solid var(--accent);
 }
 
-.study-callout.is-plain .study-callout-text {
-  color: var(--ink);
+.study-callout-label {
+  margin-bottom: var(--study-item-gap);
 }
 
 .study-prompts-text {
@@ -1022,15 +1009,11 @@
   .study-points li,
   .study-bullets li,
   .study-stat-label,
-  .study-callout.is-plain .study-callout-text {
+  .study-callout-text {
     font-size: var(--text-sm);
   }
-  .study-callout-text,
   .study-quote {
     font-size: var(--text-lg);
-  }
-  .study-stat-value {
-    font-size: 32px;
   }
   .study-stats {
     grid-template-columns: minmax(0, 1fr);

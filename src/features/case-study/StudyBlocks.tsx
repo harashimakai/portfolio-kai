@@ -585,21 +585,13 @@ export function Steps({ items }: { items: EntryView[] }) {
   );
 }
 
-export function Callout({
-  label,
-  text,
-  plain = false,
-}: {
-  label: ReactNode;
-  text: ReactNode;
-  plain?: boolean;
-}) {
+export function Callout({ label, text }: { label: ReactNode; text: ReactNode }) {
   return (
     <motion.aside
-      className={plain ? "study-callout is-plain" : "study-callout"}
+      className="study-callout"
       {...reveal(0.1)}
     >
-      <h2 className="study-callout-label">{label}</h2>
+      <p className="study-callout-label">{label}</p>
       <p className="study-callout-text">{text}</p>
     </motion.aside>
   );
@@ -835,7 +827,7 @@ export function Prompts({ label, prompts }: { label: ReactNode; prompts: string[
       className="study-callout"
       {...reveal(0.1)}
     >
-      <h2 className="study-callout-label">{label}</h2>
+      <p className="study-callout-label">{label}</p>
       <p
         className="study-callout-text study-prompts-text"
         aria-label={prompts.join(" / ")}

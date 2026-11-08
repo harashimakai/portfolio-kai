@@ -76,7 +76,7 @@ export type Block =
   | { id: string; type: "divider" }
   | { id: string; type: "stats"; items: Stat[] }
   | { id: string; type: "steps"; items: Entry[] }
-  | { id: string; type: "callout"; label: string; text: string; plain?: boolean }
+  | { id: string; type: "callout"; label: string; text: string }
   | { id: string; type: "quotes"; items: Item[] }
   | {
       id: string;

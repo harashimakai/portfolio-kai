@@ -362,7 +362,6 @@ function BlockView({
     case "callout":
       view = (
         <Callout
-          plain={block.plain}
           label={
             <Text
               of={block}

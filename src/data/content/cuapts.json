@@ -51,7 +51,7 @@
         {
           "id": "n95",
           "type": "prompts",
-          "label": "TRY ASKING",
+          "label": "Try asking:",
           "items": [
             {
               "id": "n96",
@@ -92,7 +92,7 @@
         {
           "id": "n6",
           "type": "callout",
-          "label": "OBJECTIVE",
+          "label": "Objective",
           "text": "How might we give users a way to easily navigate *complex preferences* and find apartments that meet their constraints?"
         }
       ],
@@ -124,7 +124,7 @@
               "lines": [
                 {
                   "id": "n11",
-                  "text": "One open field that lets users ask in *plain language* instead of using filters."
+                  "text": "One open field that lets users ask in plain language instead of using filters."
                 }
               ]
             },
@@ -135,7 +135,7 @@
               "lines": [
                 {
                   "id": "n13",
-                  "text": "*Example prompts* under the input to help users understand how best to use the tool."
+                  "text": "Example prompts under the input to help users understand how best to use the tool."
                 }
               ]
             },
@@ -146,7 +146,7 @@
               "lines": [
                 {
                   "id": "n15",
-                  "text": "*Search modes* switch inside the same input so users never leave the page."
+                  "text": "Search modes switch inside the same input so users never leave the page."
                 }
               ]
             }
@@ -163,15 +163,15 @@
           "items": [
             {
               "id": "n69",
-              "text": "Focus on *open-ended* search"
+              "text": "Focus on open-ended search"
             },
             {
               "id": "n70",
-              "text": "*Division into sections* for improved readability rather than one long, unbroken response"
+              "text": "Division into sections for improved readability rather than one long, unbroken response"
             },
             {
               "id": "n71",
-              "text": "A *glowing* design motif to indicate the use of AI"
+              "text": "A glowing design motif to indicate the use of AI"
             }
           ]
         },
@@ -468,9 +468,8 @@
         {
           "id": "n102",
           "type": "callout",
-          "label": "BUILT TO SCALE",
-          "text": "New CUApts features can easily be added to the set of components the AI uses to build its answers, making the feature scalable as the platform grows.",
-          "plain": true
+          "label": "Built to Scale",
+          "text": "New CUApts features can easily be added to the set of components the AI uses to build its answers, making the feature scalable as the platform grows."
         }
       ]
     },
@@ -491,7 +490,7 @@
             {
               "id": "n104",
               "title": "Exploring an *emergent* field in design",
-              "body": "AI / LLM UX is a relatively new space without as many set conventions. I enjoyed learning about the patterns that are starting to emerge through market research and how to incorporate innovation in a way that's easy for users to understand."
+              "body": "UX for AI/LLM is a relatively new space without as many set conventions. I enjoyed learning about the patterns that are starting to emerge through market research and how to incorporate innovation in a way that's easy for users to understand."
             },
             {
               "id": "n105",

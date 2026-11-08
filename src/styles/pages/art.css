@@ -252,6 +252,7 @@
 }
 
 .lightbox {
+  --lightbox-side: clamp(240px, 24vw, 340px);
   position: fixed;
   inset: 0;
   z-index: 2000;
@@ -329,7 +330,7 @@
   flex: 0 1 auto;
   min-width: 0;
   max-width: calc(
-    100% - clamp(240px, 24vw, 340px) - var(--space-section) - var(--space-sm)
+    100% - var(--lightbox-side) - var(--space-section) - var(--space-sm)
   );
   margin: 0;
   display: flex;
@@ -347,7 +348,9 @@
 }
 
 .lightbox-side {
-  flex: 0 0 clamp(240px, 24vw, 340px);
+  flex: 1 1 var(--lightbox-side);
+  min-width: var(--lightbox-side);
+  max-width: 480px;
 }
 
 .lightbox-side-inner {
@@ -369,6 +372,8 @@
 
 .lightbox-title {
   margin: 0 0 6px;
+  font-size: 28px;
+  line-height: 1.2;
 }
 
 .lightbox-meta {
@@ -377,6 +382,7 @@
 
 .lightbox-desc {
   margin: 0;
+  font-size: var(--text-base);
 }
 
 .lightbox-nav {
