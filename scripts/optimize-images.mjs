@@ -27,7 +27,7 @@ const jobs = [
     results: 2000,
     "inline-quotes": 1200,
     "listing-cards": 1200,
-    "cover-poster": 1600,
+    "cover-poster": 1920,
     "ai-page-v1": 1200,
     "mode-switch": 1200,
     grid: 1200,

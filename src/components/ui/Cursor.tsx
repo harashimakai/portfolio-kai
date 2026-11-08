@@ -120,6 +120,17 @@ export default function Cursor() {
       }
     };
 
+    // Pointer events can arrive several times per frame (high polling-rate
+    // mice). Moving the cursor is a cheap style write, so it happens on every
+    // event; update() does layout reads for the text hit-test, so it's
+    // coalesced to once per animation frame to keep the main thread free.
+    let moveTarget: Element | null = null;
+    let moveQueued = 0;
+    const flushMove = () => {
+      moveQueued = 0;
+      update(moveTarget);
+    };
+
     const onMove = (e: PointerEvent) => {
       x = e.clientX;
       y = e.clientY;
@@ -128,7 +139,8 @@ export default function Cursor() {
         visible = true;
         root.style.opacity = "1";
       }
-      update(e.target as Element | null);
+      moveTarget = e.target as Element | null;
+      if (!moveQueued) moveQueued = requestAnimationFrame(flushMove);
     };
 
     const hide = () => {
@@ -176,6 +188,7 @@ export default function Cursor() {
     label.addEventListener("animationend", onLabelEnd);
 
     return () => {
+      cancelAnimationFrame(moveQueued);
       document.documentElement.classList.remove("has-cursor");
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("scroll", onScroll, { capture: true });
