@@ -1,0 +1,722 @@
+{
+  "hero": {
+    "subtitle": "one-line description of the product / case study",
+    "video": "heroVideo",
+    "meta": [
+      {
+        "label": "Role",
+        "lines": [
+          "Your title"
+        ]
+      },
+      {
+        "label": "Timeline",
+        "lines": [
+          "e.g. 4 months"
+        ]
+      },
+      {
+        "label": "Team",
+        "lines": [
+          "e.g. 2 designers",
+          "3 engineers",
+          "1 PM"
+        ]
+      },
+      {
+        "label": "Tools & Skills",
+        "lines": [
+          "Figma",
+          "User research",
+          "Prototyping"
+        ]
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "label": "OVERVIEW",
+      "blocks": [
+        {
+          "id": "t1",
+          "type": "statement",
+          "text": "[Product name] is a [what it is] that helps *[who]* [do what].",
+          "small": true
+        },
+        {
+          "id": "t2",
+          "type": "body",
+          "text": "Two or three sentences of context: the product, the team, and where your work fit in. Say what you owned, end to end, in plain words."
+        },
+        {
+          "id": "t90",
+          "type": "prompts",
+          "label": "TRY ASKING",
+          "items": [
+            {
+              "id": "t91",
+              "text": "An example of what a user might type"
+            },
+            {
+              "id": "t92",
+              "text": "Another request, phrased differently"
+            }
+          ]
+        },
+        {
+          "id": "t3",
+          "type": "callout",
+          "label": "THE CHALLENGE",
+          "text": "How might we *[outcome for users]* without *[the constraint that made it hard]*?"
+        },
+        {
+          "id": "t4",
+          "type": "stats",
+          "items": [
+            {
+              "id": "t5",
+              "value": "8",
+              "label": "User interviews"
+            },
+            {
+              "id": "t6",
+              "value": "40+",
+              "label": "Screens designed"
+            },
+            {
+              "id": "t7",
+              "value": "3",
+              "label": "Rounds of testing"
+            }
+          ]
+        }
+      ],
+      "aside": "t90"
+    },
+    {
+      "id": "problem",
+      "label": "PROBLEM",
+      "blocks": [
+        {
+          "id": "t9",
+          "type": "statement",
+          "text": "Problem: [what users want] keeps losing to *[what gets in the way]*.",
+          "small": true
+        },
+        {
+          "id": "t10",
+          "type": "body",
+          "text": "Describe the tension, not the solution. Ground it in one concrete baseline if you have it — e.g. setup took 20+ clicks and 10 minutes on average."
+        },
+        {
+          "id": "t11",
+          "type": "cards",
+          "items": [
+            {
+              "id": "t12",
+              "title": "Pain point one",
+              "lines": [
+                {
+                  "id": "t13",
+                  "text": "One sentence on what breaks and for whom."
+                }
+              ]
+            },
+            {
+              "id": "t14",
+              "title": "Pain point two",
+              "lines": [
+                {
+                  "id": "t15",
+                  "text": "One sentence on what breaks and for whom."
+                }
+              ]
+            },
+            {
+              "id": "t16",
+              "title": "Pain point three",
+              "lines": [
+                {
+                  "id": "t17",
+                  "text": "One sentence on what breaks and for whom."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "label": "RESEARCH",
+      "blocks": [
+        {
+          "id": "t18",
+          "type": "statement",
+          "text": "Based on [method], here's what I found",
+          "small": true
+        },
+        {
+          "id": "t19",
+          "type": "stats",
+          "items": [
+            {
+              "id": "t20",
+              "value": "8",
+              "label": "1:1 interviews"
+            },
+            {
+              "id": "t21",
+              "value": "30+",
+              "label": "Survey responses"
+            },
+            {
+              "id": "t22",
+              "value": "3",
+              "label": "Competitors audited"
+            }
+          ]
+        },
+        {
+          "id": "t23",
+          "type": "kicker",
+          "text": "IN THEIR WORDS"
+        },
+        {
+          "id": "t24",
+          "type": "quotes",
+          "items": [
+            {
+              "id": "t25",
+              "text": "A real thing a participant said that captures the problem."
+            },
+            {
+              "id": "t26",
+              "text": "A second quote that shows a different side of it."
+            },
+            {
+              "id": "t27",
+              "text": "A third quote, ideally one that surprised you."
+            }
+          ]
+        },
+        {
+          "id": "t28",
+          "type": "kicker",
+          "text": "KEY INSIGHTS"
+        },
+        {
+          "id": "t29",
+          "type": "cards",
+          "items": [
+            {
+              "id": "t30",
+              "title": "Insight one",
+              "lines": [
+                {
+                  "id": "t31",
+                  "text": "A short claim, then one sentence of evidence."
+                }
+              ]
+            },
+            {
+              "id": "t32",
+              "title": "Insight two",
+              "lines": [
+                {
+                  "id": "t33",
+                  "text": "A short claim, then one sentence of evidence."
+                }
+              ]
+            },
+            {
+              "id": "t34",
+              "title": "Insight three",
+              "lines": [
+                {
+                  "id": "t35",
+                  "text": "A short claim, then one sentence of evidence."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t93",
+          "type": "subheading",
+          "text": "How [competitors] handle it"
+        },
+        {
+          "id": "t94",
+          "type": "cards",
+          "items": [
+            {
+              "id": "t95",
+              "logo": "logo",
+              "title": "Competitor A",
+              "lines": [
+                {
+                  "id": "t96",
+                  "text": "One sentence on what they do, with *one key idea* you borrowed."
+                }
+              ]
+            },
+            {
+              "id": "t97",
+              "logo": "logo",
+              "title": "Competitor B",
+              "lines": [
+                {
+                  "id": "t98",
+                  "text": "One sentence on what they do, with *one key idea* you borrowed."
+                }
+              ]
+            },
+            {
+              "id": "t99",
+              "logo": "logo",
+              "title": "Competitor C",
+              "lines": [
+                {
+                  "id": "t100",
+                  "text": "One sentence on what they do, with *one key idea* you borrowed."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t101",
+          "type": "subheading",
+          "logo": "logo",
+          "text": "Deep Dive: [one product's flow]"
+        }
+      ]
+    },
+    {
+      "id": "process",
+      "label": "PROCESS",
+      "blocks": [
+        {
+          "id": "t36",
+          "type": "statement",
+          "text": "How I approached it",
+          "small": true
+        },
+        {
+          "id": "t37",
+          "type": "steps",
+          "items": [
+            {
+              "id": "t38",
+              "title": "Discover",
+              "body": "Interviews, surveys and a competitive audit to find where the experience breaks."
+            },
+            {
+              "id": "t39",
+              "title": "Define",
+              "body": "Synthesized findings into insights and a single design question."
+            },
+            {
+              "id": "t40",
+              "title": "Design",
+              "body": "Sketched, wireframed and prototyped options, then narrowed them down."
+            },
+            {
+              "id": "t41",
+              "title": "Test",
+              "body": "Ran usability tests on each iteration and folded the feedback back in."
+            }
+          ]
+        },
+        {
+          "id": "t102",
+          "type": "annotated",
+          "asset": "wide",
+          "alt": "Placeholder wireframe",
+          "items": [
+            {
+              "id": "t103",
+              "title": "Note one",
+              "lines": [
+                {
+                  "id": "t104",
+                  "text": "What this part of the sketch shows."
+                }
+              ]
+            },
+            {
+              "id": "t105",
+              "title": "Note two",
+              "lines": [
+                {
+                  "id": "t106",
+                  "text": "What this part of the sketch shows."
+                }
+              ]
+            },
+            {
+              "id": "t107",
+              "title": "Note three",
+              "lines": [
+                {
+                  "id": "t108",
+                  "text": "What this part of the sketch shows."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "label": "DESIGN DECISIONS",
+      "blocks": [
+        {
+          "id": "t42",
+          "type": "statement",
+          "text": "The decisions that shaped it",
+          "small": true
+        },
+        {
+          "id": "t109",
+          "type": "columns",
+          "items": [
+            {
+              "id": "t110",
+              "title": "PROBLEM",
+              "body": "The tension in one or two sentences."
+            },
+            {
+              "id": "t111",
+              "title": "SOLUTION",
+              "body": "What you did about it, in one or two sentences."
+            }
+          ]
+        },
+        {
+          "id": "t43",
+          "type": "decision",
+          "title": "Name the decision in one line",
+          "problem": "What wasn't working, and the evidence that showed it.",
+          "solution": "What you changed, why it was the right trade-off, and what you gave up.",
+          "asset": "decision1"
+        },
+        {
+          "id": "t44",
+          "type": "decision",
+          "title": "A second decision",
+          "problem": "What wasn't working, and the evidence that showed it.",
+          "solution": "What you changed, why it was the right trade-off, and what you gave up.",
+          "asset": "decision2"
+        },
+        {
+          "id": "t45",
+          "type": "kicker",
+          "text": "OPTIONS EXPLORED"
+        },
+        {
+          "id": "t56",
+          "type": "options",
+          "items": [
+            {
+              "id": "t46",
+              "asset": "optionA",
+              "title": "Option A",
+              "pros": [
+                {
+                  "id": "t47",
+                  "text": "What it did well"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "t48",
+                  "text": "Why it didn't work"
+                }
+              ]
+            },
+            {
+              "id": "t49",
+              "asset": "optionB",
+              "title": "Option B",
+              "pros": [
+                {
+                  "id": "t50",
+                  "text": "What it did well"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "t51",
+                  "text": "Why it didn't work"
+                },
+                {
+                  "id": "t52",
+                  "text": "A second drawback"
+                }
+              ]
+            },
+            {
+              "id": "t53",
+              "asset": "optionC",
+              "title": "Option C",
+              "pros": [
+                {
+                  "id": "t54",
+                  "text": "Why this one won"
+                },
+                {
+                  "id": "t55",
+                  "text": "A second strength"
+                }
+              ],
+              "cons": [],
+              "chosen": true
+            }
+          ]
+        },
+        {
+          "id": "t112",
+          "type": "cards",
+          "items": [
+            {
+              "id": "t113",
+              "image": "decision1",
+              "title": "Component one",
+              "lines": [
+                {
+                  "id": "t114",
+                  "text": "*What question it answers.* What it shows."
+                }
+              ]
+            },
+            {
+              "id": "t115",
+              "image": "decision2",
+              "title": "Component two",
+              "lines": [
+                {
+                  "id": "t116",
+                  "text": "*What question it answers.* What it shows."
+                }
+              ]
+            },
+            {
+              "id": "t117",
+              "image": "optionA",
+              "title": "Component three",
+              "lines": [
+                {
+                  "id": "t118",
+                  "text": "*What question it answers.* What it shows."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iteration",
+      "label": "ITERATION",
+      "blocks": [
+        {
+          "id": "t57",
+          "type": "statement",
+          "text": "[Screen name]: Iteration Process",
+          "small": true
+        },
+        {
+          "id": "t58",
+          "type": "figures",
+          "items": [
+            {
+              "id": "t59",
+              "asset": "phone1",
+              "alt": "Screen, iteration 1",
+              "label": "ITERATION 1"
+            },
+            {
+              "id": "t60",
+              "asset": "phone2",
+              "alt": "Screen, iteration 2",
+              "label": "ITERATION 2"
+            },
+            {
+              "id": "t61",
+              "asset": "phone3",
+              "alt": "Screen, final",
+              "label": "FINAL PROTOTYPE"
+            }
+          ],
+          "sequence": true
+        },
+        {
+          "id": "t62",
+          "type": "kicker",
+          "text": "KEY CHANGES"
+        },
+        {
+          "id": "t63",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "t64",
+              "text": "What changed between versions, and the feedback behind it"
+            },
+            {
+              "id": "t65",
+              "text": "A second change and why it mattered"
+            },
+            {
+              "id": "t66",
+              "text": "A third change and why it mattered"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "label": "FINAL DESIGN",
+      "blocks": [
+        {
+          "id": "t67",
+          "type": "statement",
+          "text": "The final design",
+          "small": true
+        },
+        {
+          "id": "t68",
+          "type": "image",
+          "asset": "wide",
+          "alt": "",
+          "caption": "HERO MOCKUP"
+        },
+        {
+          "id": "t119",
+          "type": "images",
+          "items": [
+            {
+              "id": "t120",
+              "asset": "decision1",
+              "alt": "",
+              "caption": "DETAIL ONE"
+            },
+            {
+              "id": "t121",
+              "asset": "decision2",
+              "alt": "",
+              "caption": "DETAIL TWO"
+            }
+          ]
+        },
+        {
+          "id": "t69",
+          "type": "figures",
+          "items": [
+            {
+              "id": "t70",
+              "asset": "phone1",
+              "alt": "Screen one",
+              "label": "SCREEN NAME"
+            },
+            {
+              "id": "t71",
+              "asset": "phone2",
+              "alt": "Screen two",
+              "label": "SCREEN NAME"
+            },
+            {
+              "id": "t72",
+              "asset": "phone3",
+              "alt": "Screen three",
+              "label": "SCREEN NAME"
+            }
+          ]
+        },
+        {
+          "id": "t73",
+          "type": "video",
+          "asset": "demo",
+          "caption": "PROTOTYPE WALKTHROUGH"
+        }
+      ]
+    },
+    {
+      "id": "outcomes",
+      "label": "OUTCOMES",
+      "blocks": [
+        {
+          "id": "t74",
+          "type": "statement",
+          "text": "What happened after launch",
+          "small": true
+        },
+        {
+          "id": "t75",
+          "type": "stats",
+          "items": [
+            {
+              "id": "t76",
+              "value": "100k+",
+              "label": "Users reached"
+            },
+            {
+              "id": "t77",
+              "value": "−60%",
+              "label": "Time to complete setup"
+            },
+            {
+              "id": "t78",
+              "value": "4.8",
+              "label": "Average rating"
+            }
+          ]
+        },
+        {
+          "id": "t79",
+          "type": "body",
+          "text": "Pair each number with what it means. If it didn't ship, say so plainly — handed off, tested, or concept — and share the strongest evidence it works."
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "label": "REFLECTION",
+      "blocks": [
+        {
+          "id": "t81",
+          "type": "takeaways",
+          "items": [
+            {
+              "id": "t82",
+              "title": "A lesson, with one word in *accent*",
+              "body": "What you learned and how it changed the way you work."
+            },
+            {
+              "id": "t83",
+              "title": "A second lesson",
+              "body": "Specific to this project, not a generic design truth."
+            },
+            {
+              "id": "t84",
+              "title": "A third lesson",
+              "body": "Optional: a skill you picked up or a tool you learned."
+            }
+          ]
+        },
+        {
+          "id": "t85",
+          "type": "callout",
+          "label": "IF I HAD MORE TIME",
+          "text": "What you'd do next, and what you'd change knowing what you know now."
+        }
+      ]
+    }
+  ],
+  "nextId": 1
+}

@@ -1,21 +1,9 @@
-import {
-  useCallback,
-  useContext,
-  useMemo,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
-import {
-  EditCtx,
-  Field,
-  Gutter,
-  Tool,
-  type Ctx,
-} from "./StudyEditor";
+import { useContext, useMemo, type ReactNode } from "react";
+import { AssetSelect, EditCtx, Field, Gutter, Tool } from "./StudyEditor";
 import {
   gapBetween,
   Slot,
+  type Gap,
   type Role,
   StudyHero,
   StudySection,
@@ -27,25 +15,56 @@ import {
   Video,
   Cards,
   Takeaways,
+  Stats,
+  Steps,
+  Columns,
+  Callout,
+  Quotes,
+  Decision,
+  Options,
+  WideImage,
+  ImageRow,
+  Subheading,
+  Prompts,
+  AnnotatedImage,
 } from "./StudyBlocks";
-import type {
-  Block,
-  Section,
-  StudyContent,
-  StudyDef,
-} from "../../types/caseStudy";
+import StudyNav from "./StudyNav";
+import MoreStudies from "./MoreStudies";
+import useStudyEditor, { type SaveStatus } from "./useStudyEditor";
+import type { Block, Item, StudyDef } from "../../types/caseStudy";
 
-const ROLE: Record<Block["type"], Role> = {
-  statement: "header",
-  kicker: "eyebrow",
-  body: "content",
-  bullets: "content",
-  cards: "content",
-  takeaways: "content",
-  figures: "content",
-  video: "content",
-  divider: "content",
-};
+const SPACIOUS = new Set<Block["type"]>(["options", "decision"]);
+
+function gapFor(prev: Block | undefined, cur: Block, hasLabel: boolean) {
+  const gap = gapBetween(prev ? roleOf(prev.type) : hasLabel ? "label" : null, roleOf(cur.type));
+  return gap === "block" && (SPACIOUS.has(cur.type) || (prev && SPACIOUS.has(prev.type)))
+    ? "group"
+    : gap;
+}
+
+function roleOf(type: Block["type"]): Role {
+  if (type === "statement" || type === "subheading") return "header";
+  if (type === "kicker") return "eyebrow";
+  return "content";
+}
+
+function Text<T extends { id: string }>({ of, field }: { of: T; field: keyof T & string }) {
+  return (
+    <Field
+      k={`${of.id}.${field}`}
+      value={String(of[field])}
+    />
+  );
+}
+
+const texts = (items: Item[] = []) =>
+  items.map((it) => (
+    <Text
+      key={it.id}
+      of={it}
+      field="text"
+    />
+  ));
 
 function BlockView({
   s,
@@ -53,25 +72,65 @@ function BlockView({
   block,
   count,
   gap,
+  isAside,
 }: {
   s: number;
   b: number;
   block: Block;
   count: number;
-  gap: ReturnType<typeof gapBetween>;
+  gap: Gap;
+  isAside: boolean;
 }) {
-  const ctx = useContext(EditCtx)!;
-  const { editing, ops, assets } = ctx;
-  const id = block.id;
+  const { editing, ops, assets } = useContext(EditCtx)!;
+  const src = (asset: string) => assets[asset]?.src ?? "";
+
+  const removable = (node: ReactNode, i: number, title: string, card?: number) => (
+    <>
+      {node}
+      {editing && (
+        <Tool
+          onClick={() => ops.deleteItem(s, b, i, card)}
+          title={title}
+        >
+          ✕
+        </Tool>
+      )}
+    </>
+  );
+  const adder = (label: string, card?: number) =>
+    editing && <Tool onClick={() => ops.addItem(s, b, card)}>+ {label}</Tool>;
+  const assetPicker = (asset: string, i = -1) =>
+    editing && (
+      <>
+        {" "}
+        <AssetSelect
+          value={asset}
+          onChange={(a) => ops.setAsset(s, b, i, a)}
+        />
+      </>
+    );
+
+  const mediaPicker = (field: "logo" | "image", value?: string, item?: number) =>
+    editing && (
+      <>
+        {" "}
+        <h3>{field.toUpperCase()}</h3>
+        <AssetSelect
+          optional
+          value={value ?? ""}
+          onChange={(a) => ops.setMedia(s, b, field, a || undefined, item)}
+        />
+      </>
+    );
 
   let view: ReactNode;
   switch (block.type) {
     case "statement":
       view = (
         <Statement small={block.small}>
-          <Field
-            k={id}
-            value={block.text}
+          <Text
+            of={block}
+            field="text"
           />
         </Statement>
       );
@@ -79,19 +138,30 @@ function BlockView({
     case "body":
       view = (
         <Body>
-          <Field
-            k={id}
-            value={block.text}
+          <Text
+            of={block}
+            field="text"
           />
         </Body>
+      );
+      break;
+    case "subheading":
+      view = (
+        <Subheading logo={block.logo ? src(block.logo) : undefined}>
+          <Text
+            of={block}
+            field="text"
+          />
+          {mediaPicker("logo", block.logo)}
+        </Subheading>
       );
       break;
     case "kicker":
       view = (
         <Kicker>
-          <Field
-            k={id}
-            value={block.text}
+          <Text
+            of={block}
+            field="text"
           />
         </Kicker>
       );
@@ -99,25 +169,8 @@ function BlockView({
     case "bullets":
       view = (
         <>
-          <Bullets
-            items={block.items.map((it, i) => (
-              <>
-                <Field
-                  k={it.id}
-                  value={it.text}
-                />
-                {editing && (
-                  <Tool
-                    onClick={() => ops.deleteItem(s, b, i)}
-                    title="Remove bullet"
-                  >
-                    ✕
-                  </Tool>
-                )}
-              </>
-            ))}
-          />
-          {editing && <Tool onClick={() => ops.addItem(s, b)}>+ BULLET</Tool>}
+          <Bullets items={texts(block.items).map((t, i) => removable(t, i, "Remove bullet"))} />
+          {adder("BULLET")}
         </>
       );
       break;
@@ -126,46 +179,27 @@ function BlockView({
         <>
           <Cards
             items={block.items.map((card, c) => ({
-              title: (
+              logo: card.logo ? src(card.logo) : undefined,
+              image: card.image ? src(card.image) : undefined,
+              title: removable(
                 <>
-                  <Field
-                    k={`${card.id}.title`}
-                    value={card.title}
+                  <Text
+                    of={card}
+                    field="title"
                   />
-                  {editing && (
-                    <Tool
-                      onClick={() => ops.deleteItem(s, b, c)}
-                      title="Remove card"
-                    >
-                      ✕ CARD
-                    </Tool>
-                  )}
-                </>
+                  {mediaPicker("image", card.image, c)}
+                  {mediaPicker("logo", card.logo, c)}
+                </>,
+                c,
+                "Remove card",
               ),
               lines: [
-                ...card.lines.map((line, i) => (
-                  <>
-                    <Field
-                      k={line.id}
-                      value={line.text}
-                    />
-                    {editing && (
-                      <Tool
-                        onClick={() => ops.deleteItem(s, b, i, c)}
-                        title="Remove line"
-                      >
-                        ✕
-                      </Tool>
-                    )}
-                  </>
-                )),
-                ...(editing
-                  ? [<Tool onClick={() => ops.addItem(s, b, c)}>+ LINE</Tool>]
-                  : []),
+                ...texts(card.lines).map((t, i) => removable(t, i, "Remove line", c)),
+                ...(editing ? [adder("LINE", c)] : []),
               ],
             }))}
           />
-          {editing && <Tool onClick={() => ops.addItem(s, b)}>+ CARD</Tool>}
+          {adder("CARD")}
         </>
       );
       break;
@@ -174,31 +208,23 @@ function BlockView({
         <>
           <Takeaways
             items={block.items.map((t, i) => ({
-              title: (
-                <>
-                  <Field
-                    k={`${t.id}.title`}
-                    value={t.title}
-                  />
-                  {editing && (
-                    <Tool
-                      onClick={() => ops.deleteItem(s, b, i)}
-                      title="Remove takeaway"
-                    >
-                      ✕
-                    </Tool>
-                  )}
-                </>
+              title: removable(
+                <Text
+                  of={t}
+                  field="title"
+                />,
+                i,
+                "Remove takeaway",
               ),
               body: (
-                <Field
-                  k={`${t.id}.body`}
-                  value={t.body}
+                <Text
+                  of={t}
+                  field="body"
                 />
               ),
             }))}
           />
-          {editing && <Tool onClick={() => ops.addItem(s, b)}>+ TAKEAWAY</Tool>}
+          {adder("TAKEAWAY")}
         </>
       );
       break;
@@ -207,58 +233,33 @@ function BlockView({
         <>
           <FigureRow
             sequence={Boolean(block.sequence)}
-            columns={block.items.length === 2 ? 2 : 3}
             items={block.items.map((f, i) => ({
-              src: assets[f.asset]?.src ?? "",
+              src: src(f.asset),
               alt: f.alt,
-              label: (
+              label: removable(
                 <>
-                  <Field
-                    k={`${f.id}.label`}
-                    value={f.label}
+                  <Text
+                    of={f}
+                    field="label"
                   />
-                  {editing && (
-                    <>
-                      {" "}
-                      <select
-                        className="study-select"
-                        value={f.asset}
-                        onChange={(e) => ops.setAsset(s, b, i, e.target.value)}
-                      >
-                        {Object.keys(assets)
-                          .filter((a) => !assets[a].poster)
-                          .map((a) => (
-                            <option
-                              key={a}
-                              value={a}
-                            >
-                              {a}
-                            </option>
-                          ))}
-                      </select>
-                      <Tool
-                        onClick={() => ops.deleteItem(s, b, i)}
-                        title="Remove image"
-                      >
-                        ✕
-                      </Tool>
-                    </>
-                  )}
-                </>
+                  {assetPicker(f.asset, i)}
+                </>,
+                i,
+                "Remove image",
               ),
-              note: (
-                <Field
-                  k={`${f.id}.note`}
-                  value={f.note}
-                />
-              ),
+              pros: texts(f.pros),
+              cons: texts(f.cons),
             }))}
           />
           {editing && (
             <div className="study-tools">
-              {block.items.length < 3 && (
-                <Tool onClick={() => ops.addItem(s, b)}>+ IMAGE</Tool>
-              )}
+              <Tool
+                onClick={() => ops.togglePoints(s, b)}
+                title="Show pros and cons under each image"
+              >
+                {block.items.some((f) => f.pros || f.cons) ? "✓ PROS/CONS" : "+ PROS/CONS"}
+              </Tool>
+              {block.items.length < 3 && adder("IMAGE")}
               <Tool
                 onClick={() => ops.toggleSequence(s, b)}
                 title="Show arrows between the images"
@@ -273,20 +274,264 @@ function BlockView({
     case "divider":
       view = <hr className="study-divider" />;
       break;
-    case "video": {
-      const a = assets[block.asset];
-      view = a ? (
-        <Video
-          src={a.src}
-          poster={a.poster ?? ""}
-          caption={
-            <Field
-              k={`${id}.caption`}
-              value={block.caption}
+    case "stats":
+      view = (
+        <>
+          <Stats
+            items={block.items.map((st, i) => ({
+              value: removable(
+                <Text
+                  of={st}
+                  field="value"
+                />,
+                i,
+                "Remove stat",
+              ),
+              label: (
+                <Text
+                  of={st}
+                  field="label"
+                />
+              ),
+            }))}
+          />
+          {adder("STAT")}
+        </>
+      );
+      break;
+    case "steps":
+      view = (
+        <>
+          <Steps
+            items={block.items.map((st, i) => ({
+              title: removable(
+                <Text
+                  of={st}
+                  field="title"
+                />,
+                i,
+                "Remove step",
+              ),
+              body: (
+                <Text
+                  of={st}
+                  field="body"
+                />
+              ),
+            }))}
+          />
+          {adder("STEP")}
+        </>
+      );
+      break;
+    case "columns":
+      view = (
+        <>
+          <Columns
+            items={block.items.map((it, i) => ({
+              title: removable(
+                <Text
+                  of={it}
+                  field="title"
+                />,
+                i,
+                "Remove column",
+              ),
+              body: it.body !== undefined && (
+                <Text
+                  of={it}
+                  field="body"
+                />
+              ),
+              lines: it.lines && texts(it.lines),
+            }))}
+          />
+          {block.items.length < 3 && adder("COLUMN")}
+        </>
+      );
+      break;
+    case "callout":
+      view = (
+        <Callout
+          label={
+            <Text
+              of={block}
+              field="label"
+            />
+          }
+          text={
+            <Text
+              of={block}
+              field="text"
             />
           }
         />
-      ) : null;
+      );
+      break;
+    case "quotes":
+      view = (
+        <>
+          <Quotes items={texts(block.items).map((t, i) => removable(t, i, "Remove quote"))} />
+          {adder("QUOTE")}
+        </>
+      );
+      break;
+    case "decision":
+      view = (
+        <Decision
+          title={
+            <Text
+              of={block}
+              field="title"
+            />
+          }
+          problem={
+            <Text
+              of={block}
+              field="problem"
+            />
+          }
+          solution={
+            <Text
+              of={block}
+              field="solution"
+            />
+          }
+          src={src(block.asset)}
+          tools={assetPicker(block.asset)}
+        />
+      );
+      break;
+    case "options":
+      view = (
+        <>
+          <Options
+            items={block.items.map((o, i) => ({
+              src: src(o.asset),
+              chosen: Boolean(o.chosen),
+              title: removable(
+                <>
+                  <Text
+                    of={o}
+                    field="title"
+                  />
+                  {assetPicker(o.asset, i)}
+                  {editing && (
+                    <Tool
+                      onClick={() => ops.toggleChosen(s, b, i)}
+                      title="Mark as the chosen option"
+                    >
+                      {o.chosen ? "✓ FINAL" : "+ FINAL"}
+                    </Tool>
+                  )}
+                </>,
+                i,
+                "Remove option",
+              ),
+              pros: texts(o.pros),
+              cons: texts(o.cons),
+            }))}
+          />
+          {adder("OPTION")}
+        </>
+      );
+      break;
+    case "image":
+      view = (
+        <WideImage
+          src={src(block.asset)}
+          alt={block.alt}
+          caption={
+            <>
+              <Text
+                of={block}
+                field="caption"
+              />
+              {assetPicker(block.asset)}
+            </>
+          }
+        />
+      );
+      break;
+    case "images":
+      view = (
+        <>
+          <ImageRow
+            items={block.items.map((im, i) => ({
+              src: src(im.asset),
+              alt: im.alt,
+              caption: removable(
+                <>
+                  <Text
+                    of={im}
+                    field="caption"
+                  />
+                  {assetPicker(im.asset, i)}
+                </>,
+                i,
+                "Remove image",
+              ),
+            }))}
+          />
+          {block.items.length < 3 && adder("IMAGE")}
+        </>
+      );
+      break;
+    case "prompts":
+      view = (
+        <>
+          <Prompts
+            label={
+              <Text
+                of={block}
+                field="label"
+              />
+            }
+            prompts={block.items.map((it) => it.text)}
+          />
+          {editing && (
+            <Bullets items={texts(block.items).map((t, i) => removable(t, i, "Remove prompt"))} />
+          )}
+          {adder("PROMPT")}
+        </>
+      );
+      break;
+    case "annotated":
+      view = (
+        <>
+          <AnnotatedImage
+            src={src(block.asset)}
+            alt={block.alt}
+            cards={block.items.map((card, c) => ({
+              title: removable(
+                <Text
+                  of={card}
+                  field="title"
+                />,
+                c,
+                "Remove card",
+              ),
+              lines: texts(card.lines),
+            }))}
+          />
+          {adder("CARD")}
+        </>
+      );
+      break;
+    case "video": {
+      const asset = assets[block.asset];
+      view = asset && (
+        <Video
+          src={asset.src}
+          poster={asset.poster ?? ""}
+          caption={
+            <Text
+              of={block}
+              field="caption"
+            />
+          }
+        />
+      );
       break;
     }
   }
@@ -294,7 +539,7 @@ function BlockView({
   return (
     <Slot
       gap={gap}
-      chrome={
+      tools={
         editing && (
           <Gutter
             label={block.type.toUpperCase()}
@@ -304,6 +549,7 @@ function BlockView({
             onDown={() => ops.moveBlock(s, b, 1)}
             onDelete={() => ops.deleteBlock(s, b)}
             onAdd={(kind) => ops.addBlock(s, b + 1, kind)}
+            aside={{ active: isAside, onToggle: () => ops.toggleAside(s, b) }}
           />
         )
       }
@@ -313,300 +559,23 @@ function BlockView({
   );
 }
 
-interface PageProps {
-  study: StudyDef;
+function statusLabel(status: SaveStatus) {
+  if (status === "saved") return "SAVED ✓ · EDIT PAGE";
+  if (status === "error") return "SAVE FAILED · EDIT PAGE";
+  return "EDIT PAGE";
 }
 
-export default function StudyPage({ study }: PageProps) {
-  const { slug: file, content: initial, assets } = study;
-  const [content, setContentState] = useState<StudyContent>(initial);
-  const contentRef = useRef(initial);
-  const setContent = useCallback((c: StudyContent) => {
-    contentRef.current = c;
-    setContentState(c);
-  }, []);
-  const [editing, setEditing] = useState(false);
-  const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">(
-    "idle",
-  );
-  const drafts = useRef<Record<string, string>>({});
+export default function StudyPage({ study }: { study: StudyDef }) {
+  const { slug, assets } = study;
+  const editor = useStudyEditor(slug, study.content, assets);
+  const { content, editing, status, drafts, ops } = editor;
+  const heroVideo = content.hero.video ? assets[content.hero.video] : undefined;
 
-  const commit = useCallback((c: StudyContent): StudyContent => {
-    const d = drafts.current;
-    const t = (k: string, v: string) => (k in d ? d[k] : v);
-    const next: StudyContent = {
-      ...c,
-      hero: {
-        subtitle: t("hero.subtitle", c.hero.subtitle),
-        meta: c.hero.meta.map((m, i) => ({
-          label: m.label,
-          lines: m.lines.map((l, j) => t(`hero.meta.${i}.${j}`, l)),
-        })),
-      },
-      sections: c.sections.map((sec) => ({
-        ...sec,
-        label: sec.label === undefined ? undefined : t(`${sec.id}.label`, sec.label),
-        blocks: sec.blocks.map((bl): Block => {
-          switch (bl.type) {
-            case "statement":
-            case "body":
-            case "kicker":
-              return { ...bl, text: t(bl.id, bl.text) };
-            case "bullets":
-              return { ...bl, items: bl.items.map((it) => ({ ...it, text: t(it.id, it.text) })) };
-            case "cards":
-              return {
-                ...bl,
-                items: bl.items.map((card) => ({
-                  ...card,
-                  title: t(`${card.id}.title`, card.title),
-                  lines: card.lines.map((l) => ({ ...l, text: t(l.id, l.text) })),
-                })),
-              };
-            case "takeaways":
-              return {
-                ...bl,
-                items: bl.items.map((x) => ({
-                  ...x,
-                  title: t(`${x.id}.title`, x.title),
-                  body: t(`${x.id}.body`, x.body),
-                })),
-              };
-            case "figures":
-              return {
-                ...bl,
-                items: bl.items.map((f) => ({
-                  ...f,
-                  label: t(`${f.id}.label`, f.label),
-                  note: t(`${f.id}.note`, f.note),
-                })),
-              };
-            case "video":
-              return { ...bl, caption: t(`${bl.id}.caption`, bl.caption) };
-            case "divider":
-              return bl;
-          }
-        }),
-      })),
-    };
-    drafts.current = {};
-    return next;
-  }, []);
-
-  const update = useCallback(
-    (fn: (c: StudyContent) => StudyContent) =>
-      setContent(fn(commit(contentRef.current))),
-    [commit, setContent],
-  );
-
-  const ops = useMemo<Ctx["ops"]>(() => {
-    const fresh = (c: StudyContent, count: number) => {
-      const ids = Array.from({ length: count }, (_, i) => `n${c.nextId + i}`);
-      return { ids, c: { ...c, nextId: c.nextId + count } };
-    };
-    const swap = <T,>(arr: T[], i: number, j: number) => {
-      if (j < 0 || j >= arr.length) return arr;
-      const out = arr.slice();
-      [out[i], out[j]] = [out[j], out[i]];
-      return out;
-    };
-    const inSection = (
-      c: StudyContent,
-      s: number,
-      fn: (sec: Section) => Section,
-    ): StudyContent => ({
-      ...c,
-      sections: c.sections.map((sec, i) => (i === s ? fn(sec) : sec)),
-    });
-    const inBlock = (
-      c: StudyContent,
-      s: number,
-      b: number,
-      fn: (bl: Block) => Block,
-    ) =>
-      inSection(c, s, (sec) => ({
-        ...sec,
-        blocks: sec.blocks.map((bl, i) => (i === b ? fn(bl) : bl)),
-      }));
-
-    return {
-      deleteSection: (i) =>
-        update((c) => ({ ...c, sections: c.sections.filter((_, j) => j !== i) })),
-      addSection: (i) =>
-        update((c0) => {
-          const { ids, c } = fresh(c0, 2);
-          const sec: Section = {
-            id: ids[0],
-            label: "NEW SECTION",
-            blocks: [{ id: ids[1], type: "statement", text: "New statement." }],
-          };
-          const sections = c.sections.slice();
-          sections.splice(i, 0, sec);
-          return { ...c, sections };
-        }),
-      moveBlock: (s, b, dir) =>
-        update((c) =>
-          inSection(c, s, (sec) => ({ ...sec, blocks: swap(sec.blocks, b, b + dir) })),
-        ),
-      moveSection: (i, dir) =>
-        update((c) => ({ ...c, sections: swap(c.sections, i, i + dir) })),
-      deleteBlock: (s, b) =>
-        update((c) =>
-          inSection(c, s, (sec) => ({
-            ...sec,
-            blocks: sec.blocks.filter((_, i) => i !== b),
-          })),
-        ),
-      addBlock: (s, b, kind) =>
-        update((c0) => {
-          const { ids, c } = fresh(c0, 8);
-          let bl: Block;
-          switch (kind.type) {
-            case "statement":
-              bl = { id: ids[0], type: "statement", text: "New statement.", ...(kind.small ? { small: true } : {}) };
-              break;
-            case "body":
-              bl = { id: ids[0], type: "body", text: "New paragraph." };
-              break;
-            case "kicker":
-              bl = { id: ids[0], type: "kicker", text: "EYEBROW" };
-              break;
-            case "bullets":
-              bl = { id: ids[0], type: "bullets", items: [{ id: ids[1], text: "First point" }] };
-              break;
-            case "cards":
-              bl = {
-                id: ids[0],
-                type: "cards",
-                items: [1, 2, 3].map((n, i) => ({
-                  id: ids[1 + i * 2],
-                  title: `Card ${n}`,
-                  lines: [{ id: ids[2 + i * 2], text: "A point" }],
-                })),
-              };
-              break;
-            case "takeaways":
-              bl = { id: ids[0], type: "takeaways", items: [{ id: ids[1], title: "Takeaway", body: "What it meant." }] };
-              break;
-            case "figures": {
-              const first = Object.keys(assets).find((a) => !assets[a].poster) ?? "";
-              bl = {
-                id: ids[0],
-                type: "figures",
-                items: [{ id: ids[1], asset: first, alt: "", label: "LABEL", note: "" }],
-              };
-              break;
-            }
-            case "video": {
-              const vid = Object.keys(assets).find((a) => assets[a].poster) ?? "";
-              bl = { id: ids[0], type: "video", asset: vid, caption: "VIDEO" };
-              break;
-            }
-            case "divider":
-              bl = { id: ids[0], type: "divider" };
-              break;
-          }
-          return inSection(c, s, (sec) => {
-            const blocks = sec.blocks.slice();
-            blocks.splice(b, 0, bl);
-            return { ...sec, blocks };
-          });
-        }),
-      addItem: (s, b, cIdx) =>
-        update((c0) => {
-          const { ids, c } = fresh(c0, 2);
-          return inBlock(c, s, b, (bl) => {
-            switch (bl.type) {
-              case "bullets":
-                return { ...bl, items: [...bl.items, { id: ids[0], text: "New point" }] };
-              case "cards":
-                if (cIdx === undefined)
-                  return { ...bl, items: [...bl.items, { id: ids[0], title: "Card", lines: [{ id: ids[1], text: "A point" }] }] };
-                return {
-                  ...bl,
-                  items: bl.items.map((card, i) =>
-                    i === cIdx ? { ...card, lines: [...card.lines, { id: ids[0], text: "New point" }] } : card,
-                  ),
-                };
-              case "takeaways":
-                return { ...bl, items: [...bl.items, { id: ids[0], title: "Takeaway", body: "What it meant." }] };
-              case "figures": {
-                const first = Object.keys(assets).find((a) => !assets[a].poster) ?? "";
-                return { ...bl, items: [...bl.items, { id: ids[0], asset: first, alt: "", label: "LABEL", note: "" }] };
-              }
-              default:
-                return bl;
-            }
-          });
-        }),
-      deleteItem: (s, b, i, cIdx) =>
-        update((c) =>
-          inBlock(c, s, b, (bl) => {
-            switch (bl.type) {
-              case "cards":
-                if (cIdx === undefined) return { ...bl, items: bl.items.filter((_, j) => j !== i) };
-                return {
-                  ...bl,
-                  items: bl.items.map((card, j) =>
-                    j === cIdx ? { ...card, lines: card.lines.filter((_, k) => k !== i) } : card,
-                  ),
-                };
-              case "bullets":
-              case "takeaways":
-              case "figures":
-                return { ...bl, items: (bl.items as { id: string }[]).filter((_, j) => j !== i) } as Block;
-              default:
-                return bl;
-            }
-          }),
-        ),
-      setAsset: (s, b, i, asset) =>
-        update((c) =>
-          inBlock(c, s, b, (bl) =>
-            bl.type === "figures"
-              ? { ...bl, items: bl.items.map((f, j) => (j === i ? { ...f, asset } : f)) }
-              : bl,
-          ),
-        ),
-      toggleSequence: (s, b) =>
-        update((c) =>
-          inBlock(c, s, b, (bl) => {
-            if (bl.type !== "figures") return bl;
-            const { sequence, ...rest } = bl;
-            return sequence ? rest : { ...rest, sequence: true };
-          }),
-        ),
-    };
-  }, [assets, update]);
-
-  const save = useCallback(async () => {
-    setStatus("saving");
-    const next = commit(contentRef.current);
-    setContent(next);
-    try {
-      const res = await fetch(`/__content/${file}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(next),
-      });
-      if (!res.ok) throw new Error(await res.text());
-      setStatus("saved");
-      setEditing(false);
-    } catch {
-      setStatus("error");
-    }
-  }, [commit, file, setContent]);
-
-  const cancel = useCallback(() => {
-    drafts.current = {};
-    setContent(initial);
-    setEditing(false);
-    setStatus("idle");
-  }, [initial, setContent]);
-
-  const ctx = useMemo<Ctx>(
-    () => ({ editing, drafts, assets, ops }),
-    [editing, assets, ops],
+  const ctx = useMemo(() => ({ editing, drafts, assets, ops }), [editing, drafts, assets, ops]);
+  const navSections = useMemo(
+    () =>
+      content.sections.flatMap((sec) => (sec.label ? [{ id: sec.id, label: sec.label }] : [])),
+    [content.sections],
   );
 
   return (
@@ -621,9 +590,10 @@ export default function StudyPage({ study }: PageProps) {
               value={content.hero.subtitle}
             />
           }
+          video={heroVideo ? { src: heroVideo.src, poster: heroVideo.poster ?? "" } : null}
           meta={content.hero.meta.map((m, i) => ({
             label: m.label,
-            value: m.lines.map((line, j) => (
+            lines: m.lines.map((line, j) => (
               <Field
                 key={j}
                 k={`hero.meta.${i}.${j}`}
@@ -633,55 +603,66 @@ export default function StudyPage({ study }: PageProps) {
           }))}
         />
 
-        {content.sections.map((sec, s) => (
-          <StudySection
-            key={sec.id}
-            id={sec.id}
-            label={
-              sec.label === undefined ? undefined : (
-                <Field
-                  k={`${sec.id}.label`}
-                  value={sec.label}
-                />
-              )
-            }
-          >
-            {editing && (
-              <div className="study-section-tools">
-                <Gutter
-                  label="SECTION"
-                  canUp={s > 0}
-                  canDown={s < content.sections.length - 1}
-                  onUp={() => ops.moveSection(s, -1)}
-                  onDown={() => ops.moveSection(s, 1)}
-                  onDelete={() => ops.deleteSection(s)}
-                  onAdd={(kind) => ops.addBlock(s, 0, kind)}
-                />
-                <div className="study-tools">
-                  <h3>SECTION</h3>
-                  <Tool onClick={() => ops.addSection(s + 1)}>+ SECTION BELOW</Tool>
-                  {sec.blocks.length === 0 && <h3>EMPTY · USE + TO ADD A COMPONENT</h3>}
-                </div>
-              </div>
-            )}
-            {sec.blocks.map((bl, b) => {
-              const prev: Role | null =
-                b > 0 ? ROLE[sec.blocks[b - 1].type] : sec.label !== undefined ? "label" : null;
-              return (
-                <BlockView
-                  key={bl.id}
-                  s={s}
-                  b={b}
-                  block={bl}
-                  count={sec.blocks.length}
-                  gap={gapBetween(prev, ROLE[bl.type])}
-                />
-              );
-            })}
-          </StudySection>
-        ))}
+        <StudyNav sections={navSections} />
 
+        {content.sections.map((sec, s) => {
+          const asideAt = sec.aside ? sec.blocks.findIndex((bl) => bl.id === sec.aside) : -1;
+          const view = (bl: Block, b: number) => (
+            <BlockView
+              key={bl.id}
+              s={s}
+              b={b}
+              block={bl}
+              count={sec.blocks.length}
+              gap={b === asideAt ? "none" : gapFor(sec.blocks[b - 1], bl, Boolean(sec.label))}
+              isAside={b === asideAt}
+            />
+          );
+          const asideBlock = asideAt >= 0 ? sec.blocks[asideAt] : undefined;
+          return (
+            <StudySection
+              key={sec.id}
+              id={sec.id}
+              label={
+                sec.label !== undefined && (
+                  <Text
+                    of={sec}
+                    field="label"
+                  />
+                )
+              }
+              aside={asideBlock && view(asideBlock, asideAt)}
+              narrow={asideBlock?.type === "prompts" || asideBlock?.type === "callout"}
+              below={asideBlock && sec.blocks.slice(asideAt + 1).map((bl, i) => view(bl, asideAt + 1 + i))}
+            >
+              {editing && (
+                <div className="study-section-tools">
+                  <Gutter
+                    label="SECTION"
+                    canUp={s > 0}
+                    canDown={s < content.sections.length - 1}
+                    onUp={() => ops.moveSection(s, -1)}
+                    onDown={() => ops.moveSection(s, 1)}
+                    onDelete={() => ops.deleteSection(s)}
+                    onAdd={(kind) => ops.addBlock(s, 0, kind)}
+                  />
+                  <div className="study-tools">
+                    <h3>SECTION</h3>
+                    <Tool onClick={() => ops.addSection(s + 1)}>+ SECTION BELOW</Tool>
+                    {sec.blocks.length === 0 && <h3>EMPTY · USE + TO ADD A COMPONENT</h3>}
+                  </div>
+                </div>
+              )}
+              {(asideBlock ? sec.blocks.slice(0, asideAt) : sec.blocks).map((bl, b) => view(bl, b))}
+            </StudySection>
+          );
+        })}
       </article>
+
+      <MoreStudies
+        current={slug}
+        preview={slug === "template"}
+      />
 
       {import.meta.env.DEV && (
         <div
@@ -693,14 +674,14 @@ export default function StudyPage({ study }: PageProps) {
             <>
               <button
                 type="button"
-                onClick={save}
+                onClick={editor.save}
                 disabled={status === "saving"}
               >
                 <h2>{status === "saving" ? "SAVING…" : "SAVE"}</h2>
               </button>
               <button
                 type="button"
-                onClick={cancel}
+                onClick={editor.cancel}
               >
                 <h2>CANCEL</h2>
               </button>
@@ -708,18 +689,9 @@ export default function StudyPage({ study }: PageProps) {
           ) : (
             <button
               type="button"
-              onClick={() => {
-                setStatus("idle");
-                setEditing(true);
-              }}
+              onClick={editor.start}
             >
-              <h2>
-                {status === "saved"
-                  ? "SAVED ✓ · EDIT PAGE"
-                  : status === "error"
-                    ? "SAVE FAILED · EDIT PAGE"
-                    : "EDIT PAGE"}
-              </h2>
+              <h2>{statusLabel(status)}</h2>
             </button>
           )}
         </div>

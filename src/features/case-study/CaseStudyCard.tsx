@@ -14,13 +14,25 @@ export default function CaseStudyCard({ item }: Props) {
       data-cursor="View project"
     >
       <div className="case-card-image">
-        <img
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-          src={item.thumbnailUrl}
-          alt={item.title}
-        />
+        {item.video ? (
+          <video
+            src={item.video}
+            poster={item.thumbnailUrl}
+            aria-label={item.title}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            src={item.thumbnailUrl}
+            alt={item.title}
+          />
+        )}
       </div>
 
       <div className="case-card-meta">

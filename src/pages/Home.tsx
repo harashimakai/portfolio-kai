@@ -8,13 +8,12 @@ import { homeProjects } from "../data/projects";
 import ArtStrip from "../features/home/ArtStrip";
 import usePreload from "../hooks/usePreload";
 
-const featured = studyList.filter((d) => d.featured).map(toCard);
+const latest = studyList.slice(0, 1).map(toCard);
 
 const firstScreen = [
-  ...featured.map((s) => s.thumbnailUrl),
+  ...latest.map((s) => s.thumbnailUrl),
   ...homeProjects.map((p) => p.thumbnailUrl),
 ];
-
 
 export default function Home() {
   const ready = usePreload(firstScreen);
@@ -25,7 +24,7 @@ export default function Home() {
     <>
       <HomeIntro />
       <CaseStudyList
-        studies={featured}
+        studies={latest}
         className="home-case-list"
         delay={0.1}
       />

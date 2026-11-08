@@ -15,6 +15,7 @@ import CaseStudy from "./pages/CaseStudy";
 import NotFound from "./pages/NotFound";
 import { useTheme } from "./context/ThemeContext";
 import { studyList, studyPath, studyForPath } from "./data/caseStudies";
+import { templateStudy } from "./data/template";
 
 export default function App() {
   const { darkMode } = useTheme();
@@ -60,6 +61,10 @@ export default function App() {
             element={<CaseStudy study={d} />}
           />
         ))}
+        <Route
+          path="/template"
+          element={<CaseStudy study={templateStudy} />}
+        />
         <Route
           path="*"
           element={<NotFound />}

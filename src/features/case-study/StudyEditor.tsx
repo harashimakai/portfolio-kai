@@ -1,38 +1,59 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type MutableRefObject, type ReactNode } from "react";
 import { rich } from "../../lib/richText";
 import type { Asset, Block } from "../../types/caseStudy";
 
-export const BLOCK_TYPES: { type: Block["type"]; label: string; small?: boolean }[] = [
+const BLOCK_TYPES: { type: Block["type"]; label: string; small?: boolean }[] = [
   { type: "statement", label: "Statement" },
   { type: "statement", label: "Small statement", small: true },
   { type: "kicker", label: "Eyebrow" },
+  { type: "subheading", label: "Subheading" },
   { type: "body", label: "Paragraph" },
   { type: "bullets", label: "Bullets" },
   { type: "cards", label: "3 cards" },
   { type: "takeaways", label: "Takeaways" },
   { type: "figures", label: "Images" },
   { type: "video", label: "Video" },
+  { type: "image", label: "Wide image" },
+  { type: "images", label: "Image row" },
+  { type: "annotated", label: "Image with notes" },
+  { type: "prompts", label: "Typed prompts" },
+  { type: "stats", label: "Stats" },
+  { type: "steps", label: "Process steps" },
+  { type: "columns", label: "Labeled columns" },
+  { type: "callout", label: "Callout" },
+  { type: "quotes", label: "User quotes" },
+  { type: "decision", label: "Design decision" },
+  { type: "options", label: "Options compared" },
   { type: "divider", label: "Divider" },
 ];
 
-export interface Ctx {
-  editing: boolean;
-  drafts: React.MutableRefObject<Record<string, string>>;
-  assets: Record<string, Asset>;
-  ops: {
-    deleteSection(i: number): void;
-    addSection(i: number): void;
-    moveBlock(s: number, b: number, dir: -1 | 1): void;
-    moveSection(i: number, dir: -1 | 1): void;
-    deleteBlock(s: number, b: number): void;
-    addBlock(s: number, b: number, kind: (typeof BLOCK_TYPES)[number]): void;
-    addItem(s: number, b: number, c?: number): void;
-    deleteItem(s: number, b: number, i: number, c?: number): void;
-    setAsset(s: number, b: number, i: number, asset: string): void;
-    toggleSequence(s: number, b: number): void;
-  };
+export type BlockKind = (typeof BLOCK_TYPES)[number];
+
+export interface EditorOps {
+  addSection(i: number): void;
+  deleteSection(i: number): void;
+  moveSection(i: number, dir: -1 | 1): void;
+  addBlock(s: number, b: number, kind: BlockKind): void;
+  deleteBlock(s: number, b: number): void;
+  moveBlock(s: number, b: number, dir: -1 | 1): void;
+  addItem(s: number, b: number, card?: number): void;
+  deleteItem(s: number, b: number, i: number, card?: number): void;
+  setAsset(s: number, b: number, i: number, asset: string): void;
+  togglePoints(s: number, b: number): void;
+  toggleSequence(s: number, b: number): void;
+  toggleChosen(s: number, b: number, i: number): void;
+  toggleAside(s: number, b: number): void;
+  setMedia(s: number, b: number, field: "logo" | "image", asset?: string, item?: number): void;
 }
-export const EditCtx = createContext<Ctx | null>(null);
+
+interface EditorContext {
+  editing: boolean;
+  drafts: MutableRefObject<Record<string, string>>;
+  assets: Record<string, Asset>;
+  ops: EditorOps;
+}
+
+export const EditCtx = createContext<EditorContext | null>(null);
 
 export function Field({ k, value }: { k: string; value: string }) {
   const ctx = useContext(EditCtx)!;
@@ -87,6 +108,7 @@ export function Gutter({
   onDown,
   onDelete,
   onAdd,
+  aside,
 }: {
   label: string;
   canUp: boolean;
@@ -94,7 +116,8 @@ export function Gutter({
   onUp: () => void;
   onDown: () => void;
   onDelete: () => void;
-  onAdd: (kind: (typeof BLOCK_TYPES)[number]) => void;
+  onAdd: (kind: BlockKind) => void;
+  aside?: { active: boolean; onToggle: () => void };
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -127,6 +150,17 @@ export function Gutter({
       >
         +
       </button>
+      {aside && (
+        <button
+          type="button"
+          className="study-gutter-button"
+          onClick={aside.onToggle}
+          title={aside.active ? "Move out of the side column" : "Show in the side column"}
+          aria-pressed={aside.active}
+        >
+          ⇥
+        </button>
+      )}
       <button
         type="button"
         className="study-gutter-button study-gutter-delete"
@@ -154,5 +188,36 @@ export function Gutter({
         </div>
       )}
     </div>
+  );
+}
+
+export function AssetSelect({
+  value,
+  onChange,
+  optional = false,
+}: {
+  value: string;
+  onChange: (asset: string) => void;
+  optional?: boolean;
+}) {
+  const { assets } = useContext(EditCtx)!;
+  return (
+    <select
+      className="study-select"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      {optional && <option value="">none</option>}
+      {Object.keys(assets)
+        .filter((a) => !assets[a].poster)
+        .map((a) => (
+          <option
+            key={a}
+            value={a}
+          >
+            {a}
+          </option>
+        ))}
+    </select>
   );
 }

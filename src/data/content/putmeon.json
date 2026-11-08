@@ -49,14 +49,47 @@
         },
         {
           "id": "n107",
-          "type": "kicker",
-          "text": "OBJECTIVE"
+          "type": "callout",
+          "label": "OBJECTIVE",
+          "text": "How might we help users *escape repetitive listening* habits and *discover new music* through friends and fellow music lovers?"
+        }
+      ]
+    },
+    {
+      "id": "process",
+      "label": "PROCESS",
+      "blocks": [
+        {
+          "id": "n226",
+          "type": "statement",
+          "text": "How I approached it",
+          "small": true
         },
         {
-          "id": "n131",
-          "type": "statement",
-          "text": "How might we help users *escape repetitive listening* habits and *discover new music* through friends and fellow music lovers?",
-          "small": true
+          "id": "n227",
+          "type": "steps",
+          "items": [
+            {
+              "id": "n228",
+              "title": "Research",
+              "body": "Conducted five user interviews and looked through online discussions to better understand the problem space."
+            },
+            {
+              "id": "n229",
+              "title": "Ideation",
+              "body": "Used user research findings to identify main priorities and pain points that addressed the user's feedback."
+            },
+            {
+              "id": "n230",
+              "title": "Prototyping",
+              "body": "Began by creating a wireframe, addressing each issue before converting my ideas to a hi-fi prototype in Figma."
+            },
+            {
+              "id": "n231",
+              "title": "Iteration",
+              "body": "Created three versions of the home and about screens, refining to reduce friction and improve visual design."
+            }
+          ]
         }
       ]
     },
@@ -72,19 +105,37 @@
         },
         {
           "id": "n5",
-          "type": "bullets",
+          "type": "cards",
           "items": [
             {
               "id": "n6",
-              "text": "Users disapprove of music apps modeled after TikTok, Instagram, or YouTube to maximize active usage rather than passive listening"
+              "title": "1.",
+              "lines": [
+                {
+                  "id": "n218",
+                  "text": "Users disapprove of music apps modeled after TikTok, Instagram, or YouTube to maximize active usage rather than passive listening"
+                }
+              ]
             },
             {
               "id": "n7",
-              "text": "Users report information overload: audiobook and podcast recommendations clutter the discovery page and make discovering new music more difficult"
+              "title": "2.",
+              "lines": [
+                {
+                  "id": "n219",
+                  "text": "Users report information overload: audiobook and podcast recommendations clutter the discovery page and make discovering new music more difficult"
+                }
+              ]
             },
             {
               "id": "n8",
-              "text": "Users want more emphasis on album art and social aspects of music discovery"
+              "title": "3.",
+              "lines": [
+                {
+                  "id": "n220",
+                  "text": "Users want more emphasis on album art and social aspects of music discovery"
+                }
+              ]
             }
           ]
         },
@@ -100,7 +151,7 @@
           "items": [
             {
               "id": "n11",
-              "title": "ENJOYERS",
+              "title": "Enjoyers",
               "lines": [
                 {
                   "id": "n12",
@@ -118,7 +169,7 @@
             },
             {
               "id": "n15",
-              "title": "EXPLORERS",
+              "title": "Explorers",
               "lines": [
                 {
                   "id": "n16",
@@ -136,7 +187,7 @@
             },
             {
               "id": "n19",
-              "title": "BOTH",
+              "title": "Both",
               "lines": [
                 {
                   "id": "n20",
@@ -167,48 +218,44 @@
           "small": true
         },
         {
-          "id": "n24",
-          "type": "kicker",
-          "text": "KEY ELEMENTS"
-        },
-        {
-          "id": "n25",
-          "type": "bullets",
+          "id": "n248",
+          "type": "columns",
           "items": [
             {
-              "id": "n26",
-              "text": "Emphasis on album artwork"
+              "id": "n249",
+              "title": "KEY ELEMENTS",
+              "lines": [
+                {
+                  "id": "n26",
+                  "text": "Emphasis on album artwork"
+                },
+                {
+                  "id": "n27",
+                  "text": "Make process of discovering music more socially driven"
+                },
+                {
+                  "id": "n163",
+                  "text": "As this is a social app, finding your friends should be easy"
+                },
+                {
+                  "id": "n165",
+                  "text": "Counters information overload and allows users to slow down and listen to music rather than consume it"
+                }
+              ]
             },
             {
-              "id": "n27",
-              "text": "Make process of discovering music more socially driven"
-            },
-            {
-              "id": "n163",
-              "text": "As this is a social app, finding your friends should be easy"
-            },
-            {
-              "id": "n165",
-              "text": "Counters information overload and allows users to slow down and listen to music rather than consume it"
-            }
-          ]
-        },
-        {
-          "id": "n28",
-          "type": "kicker",
-          "text": "ADDITIONAL FEATURES"
-        },
-        {
-          "id": "n29",
-          "type": "bullets",
-          "items": [
-            {
-              "id": "n30",
-              "text": "Added onboarding flow to introduce new features and reduce friction"
-            },
-            {
-              "id": "n31",
-              "text": "Added 'Save' feature integrated with music platforms so users can save songs without leaving the app"
+              "id": "n250",
+              "title": "ADDITIONAL FEATURES",
+              "lines": [
+                {
+                  "id": "n30",
+                  "text": "Added onboarding flow to introduce new features and reduce friction"
+                },
+                {
+                  "id": "n31",
+                  "text": "Added 'Save' feature integrated with music platforms so users can save songs without leaving the app"
+                }
+              ]
             }
           ]
         },
@@ -232,7 +279,7 @@
         {
           "id": "n191",
           "type": "statement",
-          "text": "The Home Page: Iterations",
+          "text": "The Home Page: Iteration Process",
           "small": true
         },
         {
@@ -244,45 +291,62 @@
               "id": "n36",
               "asset": "home1",
               "alt": "Home page, iteration 1",
-              "label": "HOME · V1",
-              "note": "ITERATION 1"
+              "label": "ITERATION 1",
+              "pros": [
+                {
+                  "id": "n232",
+                  "text": "Each friend's pick gets its own card with album art"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "n233",
+                  "text": "Stacked cards lead to information overload"
+                },
+                {
+                  "id": "n234",
+                  "text": "There's no way to actually listen to the recommendations"
+                }
+              ]
             },
             {
               "id": "n37",
               "asset": "home2",
               "alt": "Home page, iteration 2",
-              "label": "HOME · V2",
-              "note": "ITERATION 2"
+              "label": "ITERATION 2",
+              "pros": [
+                {
+                  "id": "n235",
+                  "text": "The record player motif shows off the album art"
+                },
+                {
+                  "id": "n236",
+                  "text": "Only showing one song at a time forces listeners to slow down"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "n237",
+                  "text": "Full-width navbar adds visual weight"
+                }
+              ]
             },
             {
               "id": "n38",
               "asset": "home3",
               "alt": "Home page, final",
-              "label": "HOME · V3",
-              "note": "FINAL PROTOTYPE"
-            }
-          ]
-        },
-        {
-          "id": "n39",
-          "type": "kicker",
-          "text": "KEY CHANGES"
-        },
-        {
-          "id": "n40",
-          "type": "bullets",
-          "items": [
-            {
-              "id": "n41",
-              "text": "Changed from card format to record player to emphasize album art"
-            },
-            {
-              "id": "n42",
-              "text": "Emphasize one song at a time to counter information overload and mindless consuming"
-            },
-            {
-              "id": "n43",
-              "text": "Changed the navbar to a pill format to reduce visual hierarchy"
+              "label": "FINAL PROTOTYPE",
+              "pros": [
+                {
+                  "id": "n238",
+                  "text": "Pill navbar floats over the page, reducing visual hierarchy"
+                },
+                {
+                  "id": "n239",
+                  "text": "Album art and the current pick stay in focus"
+                }
+              ],
+              "cons": []
             }
           ]
         },
@@ -293,7 +357,7 @@
         {
           "id": "n45",
           "type": "statement",
-          "text": "The About Page: Iterations",
+          "text": "The About Page: Iteration Process",
           "small": true
         },
         {
@@ -305,45 +369,62 @@
               "id": "n47",
               "asset": "account1",
               "alt": "Account page, iteration 1",
-              "label": "ACCOUNT · V1",
-              "note": "ITERATION 1"
+              "label": "ITERATION 1",
+              "pros": [
+                {
+                  "id": "n240",
+                  "text": "Weekly pick and past picks live in one place"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "n241",
+                  "text": "Past picks are a plain text list that takes effort to read"
+                },
+                {
+                  "id": "n242",
+                  "text": "No way to find or add friends"
+                }
+              ]
             },
             {
               "id": "n48",
               "asset": "account2",
               "alt": "Account page, iteration 2",
-              "label": "ACCOUNT · V2",
-              "note": "ITERATION 2"
+              "label": "ITERATION 2",
+              "pros": [
+                {
+                  "id": "n243",
+                  "text": "Record player matches the home page"
+                },
+                {
+                  "id": "n244",
+                  "text": "Album thumbnails make past picks quick to scan"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "n245",
+                  "text": "Still no way to connect with friends"
+                }
+              ]
             },
             {
               "id": "n49",
               "asset": "account3",
               "alt": "Account page, final",
-              "label": "ACCOUNT · V3",
-              "note": "FINAL PROTOTYPE"
-            }
-          ]
-        },
-        {
-          "id": "n50",
-          "type": "kicker",
-          "text": "KEY CHANGES"
-        },
-        {
-          "id": "n51",
-          "type": "bullets",
-          "items": [
-            {
-              "id": "n52",
-              "text": "Changed from card format to record player to emphasize album art"
-            },
-            {
-              "id": "n53",
-              "text": "Expanded social features: option to sync contacts and share profile to make connecting with friends as frictionless as possible"
-            },
-            {
-              "id": "n54",
-              "text": "Increased visuals for previous picks to reduce the amount users have to read"
+              "label": "FINAL PROTOTYPE",
+              "pros": [
+                {
+                  "id": "n246",
+                  "text": "Sync contacts and share profile make connecting frictionless"
+                },
+                {
+                  "id": "n247",
+                  "text": "Visual history of past picks means less to read"
+                }
+              ],
+              "cons": []
             }
           ]
         }
@@ -351,7 +432,7 @@
     },
     {
       "id": "final",
-      "label": "LIBRARY / ONBOARDING + LIVE",
+      "label": "LIBRARY / ONBOARDING",
       "blocks": [
         {
           "id": "n55",
@@ -366,22 +447,19 @@
               "id": "n57",
               "asset": "library",
               "alt": "Library page, final",
-              "label": "LIBRARY PAGE",
-              "note": "FINAL PROTOTYPE"
+              "label": "LIBRARY PAGE"
             },
             {
               "id": "n58",
               "asset": "onboarding",
               "alt": "Onboarding flow, final",
-              "label": "ONBOARDING FLOW",
-              "note": "FINAL PROTOTYPE"
+              "label": "ONBOARDING PAGE"
             },
             {
               "id": "n59",
               "asset": "homePopup",
               "alt": "Home page with a saved-to-library toast",
-              "label": "SAVE TOAST",
-              "note": "FINAL PROTOTYPE"
+              "label": "SAVE TO LIBRARY TOAST"
             }
           ]
         }
@@ -389,13 +467,8 @@
     },
     {
       "id": "reflection",
-      "label": "",
+      "label": "REFLECTION",
       "blocks": [
-        {
-          "id": "n207",
-          "type": "kicker",
-          "text": "WHAT WOULD I CHANGE?"
-        },
         {
           "id": "n208",
           "type": "statement",
@@ -415,7 +488,7 @@
             },
             {
               "id": "n212",
-              "text": "conducted *more formalized research* — possibly a survey. Most of my user research was based on what I'd heard from friends or found online."
+              "text": "conducted *more formalized research* — possibly through a survey to reach a wider base of users."
             }
           ]
         },
@@ -431,12 +504,12 @@
             {
               "id": "n215",
               "title": "First *Figma* experience",
-              "body": "Picked up Figma in two weeks — going from using squares instead of frames to fully animated components, relying on advice from mentors and YouTube tutorials."
+              "body": "Picked up Figma in two weeks, going from using squares instead of frames to fully animated components by learning from more experienced designers."
             },
             {
               "id": "n216",
               "title": "First *UI/UX case study* experience",
-              "body": "Learned everything about case studies. Navigated brainstorming, user research, and iterations while learning how to create lo-fi and hi-fi prototypes."
+              "body": "Learned how a UX case study comes together — navigating brainstorming, user research, and iterations while building lo-fi and hi-fi prototypes along the way."
             },
             {
               "id": "n217",
@@ -448,5 +521,5 @@
       ]
     }
   ],
-  "nextId": 218
+  "nextId": 251
 }

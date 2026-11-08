@@ -1,5 +1,6 @@
 import type { StudyCard, StudyContent, StudyDef } from "../types/caseStudy";
 import putmeonContent from "./content/putmeon.json";
+import cuaptsContent from "./content/cuapts.json";
 
 import home1 from "../assets/optimized/putmeon-home1.webp";
 import home2 from "../assets/optimized/putmeon-home2.webp";
@@ -15,7 +16,56 @@ import demoPoster from "../assets/optimized/putmeon-demo-poster.webp";
 import wordmark from "../assets/case-studies/putmeon/wordmark.svg?raw";
 import cover from "../assets/optimized/putmeon-cover.webp";
 
+import cuaptsResults from "../assets/optimized/cuapts-results.webp";
+import cuaptsBreakdown from "../assets/optimized/cuapts-results-breakdown.webp";
+import cuaptsAiPageV1 from "../assets/optimized/cuapts-ai-page-v1.webp";
+import cuaptsModeSwitch from "../assets/optimized/cuapts-mode-switch.webp";
+import cuaptsInlineQuotes from "../assets/optimized/cuapts-inline-quotes.webp";
+import cuaptsListingCards from "../assets/optimized/cuapts-listing-cards.webp";
+import cuaptsLofi from "../assets/optimized/cuapts-lofi.webp";
+import cuaptsGrid from "../assets/optimized/cuapts-grid.webp";
+import cuaptsTextAnswer from "../assets/optimized/cuapts-text-answer.webp";
+import cuaptsComposed from "../assets/optimized/cuapts-answer-composed.webp";
+import logoClaude from "../assets/case-studies/cuapts/logos/claude.svg";
+import logoChatgpt from "../assets/case-studies/cuapts/logos/openai.svg";
+import logoPerplexity from "../assets/case-studies/cuapts/logos/perplexity.svg";
+import logoGoogle from "../assets/case-studies/cuapts/logos/google.svg";
+import cuaptsCover from "../assets/case-studies/cuapts/cover.mp4";
+import cuaptsCoverPoster from "../assets/optimized/cuapts-cover-poster.webp";
+import cuaptsLogo from "../assets/case-studies/cuapts/logo.svg?raw";
+
 export const studyList: StudyDef[] = [
+  {
+    slug: "cuapts",
+    title: "CUApts",
+    path: "/cuapts",
+    content: cuaptsContent as StudyContent,
+    assets: {
+      cover: { src: cuaptsCover, poster: cuaptsCoverPoster },
+      results: { src: cuaptsResults },
+      breakdown: { src: cuaptsBreakdown },
+      aiPageV1: { src: cuaptsAiPageV1 },
+      modeSwitch: { src: cuaptsModeSwitch },
+      inlineQuotes: { src: cuaptsInlineQuotes },
+      listingCards: { src: cuaptsListingCards },
+      lofi: { src: cuaptsLofi },
+      grid: { src: cuaptsGrid },
+      textAnswer: { src: cuaptsTextAnswer },
+      composed: { src: cuaptsComposed },
+      logoClaude: { src: logoClaude },
+      logoChatgpt: { src: logoChatgpt },
+      logoPerplexity: { src: logoPerplexity },
+      logoGoogle: { src: logoGoogle },
+    },
+    logoSvg: cuaptsLogo,
+    card: {
+      date: "SPRING 2026",
+      context: "CORNELL DTI",
+      thumbnailUrl: cuaptsCoverPoster,
+      video: cuaptsCover,
+      subheading: "Helping college students navigate housing with AI",
+    },
+  },
   {
     slug: "putmeon",
     title: "Put Me On",
@@ -34,7 +84,6 @@ export const studyList: StudyDef[] = [
       demo: { src: demo, poster: demoPoster },
     },
     logoSvg: wordmark,
-    featured: true,
     card: {
       date: "FEB 2026",
       context: "INDEPENDENT",

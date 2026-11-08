@@ -1,0 +1,500 @@
+{
+  "hero": {
+    "subtitle": "Helping users find apartments that fit their constraints with AI",
+    "meta": [
+      {
+        "label": "Team",
+        "lines": [
+          "Cornell DTI · CUApts"
+        ]
+      },
+      {
+        "label": "Role",
+        "lines": [
+          "Product Designer"
+        ]
+      },
+      {
+        "label": "Timeline",
+        "lines": [
+          "Spring 2026"
+        ]
+      },
+      {
+        "label": "Tools & Skills",
+        "lines": [
+          "Figma",
+          "Market Research",
+          "AI / LLM UX",
+          ""
+        ]
+      }
+    ],
+    "video": "cover"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "label": "OVERVIEW",
+      "blocks": [
+        {
+          "id": "n1",
+          "type": "statement",
+          "text": "Find your next place at Cornell, *described in your own words*.",
+          "small": true
+        },
+        {
+          "id": "n2",
+          "type": "body",
+          "text": "CUApts is a Cornell DTI project that helps students find off-campus housing by browsing listings and reading real reviews from other Cornellians. \n\nI designed its AI / LLM search bar. Users describe what they're looking for in their own words, and CUApts builds an informed answer around their request: deciding whether they'll find top picks, a budget comparison, or a neighborhood guide most relevant."
+        },
+        {
+          "id": "n95",
+          "type": "prompts",
+          "label": "TRY ASKING",
+          "items": [
+            {
+              "id": "n96",
+              "text": "4-person rentals close to West Campus"
+            },
+            {
+              "id": "n97",
+              "text": "Small studio apartment under $3000"
+            },
+            {
+              "id": "n98",
+              "text": "Cheapest studio near Statler"
+            },
+            {
+              "id": "n99",
+              "text": "2 bedroom in Collegetown under $1.5K"
+            }
+          ]
+        },
+        {
+          "id": "n57",
+          "type": "image",
+          "asset": "results",
+          "alt": "AI search results for 4-person rentals close to West Campus",
+          "caption": ""
+        },
+        {
+          "id": "n121",
+          "type": "statement",
+          "text": "Problem: the housing search is overwhelming",
+          "small": true
+        },
+        {
+          "id": "n5",
+          "type": "body",
+          "text": "First-time searchers have endless options and factors to weigh, and navigating complex filters or searching apartment by address only makes it harder."
+        },
+        {
+          "id": "n6",
+          "type": "callout",
+          "label": "OBJECTIVE",
+          "text": "How might we give users a way to easily navigate *complex preferences* and find apartments that meet their constraints?"
+        }
+      ],
+      "aside": "n95"
+    },
+    {
+      "id": "research",
+      "label": "MARKET RESEARCH",
+      "blocks": [
+        {
+          "id": "n7",
+          "type": "statement",
+          "text": "Learning from AI search products",
+          "small": true
+        },
+        {
+          "id": "n8",
+          "type": "body",
+          "text": "Because LLM search is a relatively new field without concrete UI/UX rules, I researched how current AI products help users navigate the novel technology and how they structure their responses."
+        },
+        {
+          "id": "n9",
+          "type": "cards",
+          "items": [
+            {
+              "id": "n10",
+              "logo": "logoClaude",
+              "title": "Claude",
+              "lines": [
+                {
+                  "id": "n11",
+                  "text": "One open field that lets users ask in *plain language* instead of using filters."
+                }
+              ]
+            },
+            {
+              "id": "n12",
+              "logo": "logoChatgpt",
+              "title": "ChatGPT",
+              "lines": [
+                {
+                  "id": "n13",
+                  "text": "*Example prompts* under the input to help users understand how best to use the tool."
+                }
+              ]
+            },
+            {
+              "id": "n14",
+              "logo": "logoPerplexity",
+              "title": "Perplexity",
+              "lines": [
+                {
+                  "id": "n15",
+                  "text": "*Search modes* switch inside the same input so users never leave the page."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "n67",
+          "type": "subheading",
+          "text": "What they have in common"
+        },
+        {
+          "id": "n68",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "n69",
+              "text": "Focus on *open-ended* search"
+            },
+            {
+              "id": "n70",
+              "text": "*Division into sections* for improved readability rather than one long, unbroken response"
+            },
+            {
+              "id": "n71",
+              "text": "A *glowing* design motif to indicate the use of AI"
+            }
+          ]
+        },
+        {
+          "id": "n16",
+          "type": "subheading",
+          "text": "User Flow Deep Dive: Google AI Mode",
+          "logo": "logoGoogle"
+        },
+        {
+          "id": "n17",
+          "type": "steps",
+          "items": [
+            {
+              "id": "n18",
+              "title": "Enter",
+              "body": "Open \"AI Mode\" from the default search bar and ask AI in a standard open-question format."
+            },
+            {
+              "id": "n20",
+              "title": "Digest",
+              "body": "Response structured by category (overall top, budget, by neighborhood), including breakdowns on estimated price, location, and key features."
+            },
+            {
+              "id": "n21",
+              "title": "Explore",
+              "body": "Links to Cornell and Ithaca websites for housing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ideation",
+      "label": "IDEATION",
+      "blocks": [
+        {
+          "id": "n22",
+          "type": "statement",
+          "text": "Putting market research findings into practice",
+          "small": true
+        },
+        {
+          "id": "n23",
+          "type": "annotated",
+          "asset": "lofi",
+          "alt": "Lo-fi sketches of the current page, the AI search entry point and the expanded AI search",
+          "items": [
+            {
+              "id": "n25",
+              "title": "Search bar",
+              "lines": [
+                {
+                  "id": "n26",
+                  "text": "Glowing outline motif (common for AI interfaces) with rotating suggestions like \"studio near campus under $900\"."
+                }
+              ]
+            },
+            {
+              "id": "n28",
+              "title": "Filter chips",
+              "lines": [
+                {
+                  "id": "n29",
+                  "text": "Generated based on the user's prompts after the search is run. I decided not to use these because users can apply filters themselves, so the feature does not add much value."
+                }
+              ]
+            },
+            {
+              "id": "n31",
+              "title": "Results",
+              "lines": [
+                {
+                  "id": "n32",
+                  "text": "Cards taken from the current design system, with an option to sort."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iteration",
+      "label": "ITERATION",
+      "blocks": [
+        {
+          "id": "n36",
+          "type": "statement",
+          "text": "Refining the user flow",
+          "small": true
+        },
+        {
+          "id": "n38",
+          "type": "options",
+          "items": [
+            {
+              "id": "n39",
+              "asset": "aiPageV1",
+              "title": "Separate AI page",
+              "pros": [
+                {
+                  "id": "n40",
+                  "text": "A dedicated space for AI search"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "n41",
+                  "text": "Having AI and normal search pages is redundant and might confuse users"
+                },
+                {
+                  "id": "n42",
+                  "text": "Harder to return to manual search"
+                }
+              ]
+            },
+            {
+              "id": "n43",
+              "asset": "modeSwitch",
+              "title": "Same-page mode switch",
+              "pros": [
+                {
+                  "id": "n44",
+                  "text": "Kept the \"Search with AI\" button (standard among AI search)"
+                },
+                {
+                  "id": "n45",
+                  "text": "The button changes the header, so users stay on the same page"
+                },
+                {
+                  "id": "n46",
+                  "text": "One click back to manual search"
+                }
+              ],
+              "cons": [],
+              "chosen": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "decision",
+      "label": "KEY DECISION",
+      "blocks": [
+        {
+          "id": "n34",
+          "type": "statement",
+          "text": "How should *AI search* differ from normal search?",
+          "small": true
+        },
+        {
+          "id": "n73",
+          "type": "options",
+          "items": [
+            {
+              "id": "n74",
+              "asset": "grid",
+              "title": "Grid of listing cards",
+              "pros": [
+                {
+                  "id": "n75",
+                  "text": "Familiar and easy to browse"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "n76",
+                  "text": "Identical to normal search"
+                },
+                {
+                  "id": "n77",
+                  "text": "Doesn't explain reasoning behind the results"
+                }
+              ]
+            },
+            {
+              "id": "n78",
+              "asset": "textAnswer",
+              "title": "Plain-text answer",
+              "pros": [
+                {
+                  "id": "n79",
+                  "text": "Explains budget and location considerations"
+                }
+              ],
+              "cons": [
+                {
+                  "id": "n80",
+                  "text": "Hard to scan + compare"
+                },
+                {
+                  "id": "n81",
+                  "text": "Disconnected from real listings"
+                }
+              ]
+            },
+            {
+              "id": "n82",
+              "asset": "composed",
+              "title": "Modular, component-based system",
+              "pros": [
+                {
+                  "id": "n83",
+                  "text": "Visually different from normal search"
+                },
+                {
+                  "id": "n84",
+                  "text": "Shows listings in the context of the user's constraints"
+                },
+                {
+                  "id": "n85",
+                  "text": "Combination of text and components makes scanning easy while still providing reasoning"
+                }
+              ],
+              "cons": [],
+              "chosen": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "approach",
+      "label": "APPROACH",
+      "blocks": [
+        {
+          "id": "n109",
+          "type": "statement",
+          "text": "Let AI build the answer",
+          "small": true
+        },
+        {
+          "id": "n118",
+          "type": "columns",
+          "items": [
+            {
+              "id": "n119",
+              "title": "PROBLEM",
+              "body": "Students search with a set of constraints (roommates, distance to campus, budget), but a list of results doesn't show which ones each apartment meets."
+            },
+            {
+              "id": "n120",
+              "title": "SOLUTION",
+              "body": "Instead of auto-applying filters, the LLM builds each answer from a library of components, picking the ones that best explain the results, so it's clear how each apartment fits what the user asked for."
+            }
+          ]
+        },
+        {
+          "id": "n86",
+          "type": "kicker",
+          "text": "COMPONENT LIBRARY"
+        },
+        {
+          "id": "n87",
+          "type": "cards",
+          "items": [
+            {
+              "id": "n88",
+              "title": "Listing cards",
+              "lines": [
+                {
+                  "id": "n89",
+                  "text": "*Which places match?* Top picks, using the same cards users already see when browsing."
+                }
+              ],
+              "image": "listingCards"
+            },
+            {
+              "id": "n90",
+              "title": "Accordion table",
+              "lines": [
+                {
+                  "id": "n91",
+                  "text": "*How do they compare?* Price + key features shown side by side. Each row expands to show the listing and a relevant review."
+                }
+              ],
+              "image": "breakdown"
+            },
+            {
+              "id": "n92",
+              "title": "Inline quotes",
+              "lines": [
+                {
+                  "id": "n93",
+                  "text": "*Where should I live?* A breakdown of each neighborhood, with a link to narrow the search."
+                }
+              ],
+              "image": "inlineQuotes"
+            }
+          ]
+        },
+        {
+          "id": "n102",
+          "type": "callout",
+          "label": "BUILT TO SCALE",
+          "text": "New CUApts features can easily be added to the set of components the AI uses to build its answers, making the feature scalable as the platform grows."
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "label": "TAKEAWAYS",
+      "blocks": [
+        {
+          "id": "n103",
+          "type": "takeaways",
+          "items": [
+            {
+              "id": "n104",
+              "title": "Exploring an *emergent* field in design",
+              "body": "AI / LLM UX is a relatively new space without as many set conventions. I enjoyed learning about the patterns that are starting to emerge through market research and how to incorporate innovation in a way that's easy for users to understand."
+            },
+            {
+              "id": "n105",
+              "title": "Designing with *developers*",
+              "body": "Handoff involved documenting the component system and user flow in detail to ensure they understood my vision for the feature. Working closely with developers to balance design with feasibility, I gained a better understanding of how design and programming come together in a product environment."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nextId": 122
+}

@@ -17,6 +17,21 @@ const jobs = [
   ...["home1", "home2", "home3", "home-popup", "account1", "account2", "account3", "library", "onboarding"].map((name) => ({
     src: `case-studies/putmeon/${name}.png`, out: `putmeon-${name}.webp`, width: 804, quality: 88,
   })),
+  ...Object.entries({
+    lofi: 1600,
+    "results-breakdown": 1400,
+    results: 2000,
+    "inline-quotes": 1200,
+    "listing-cards": 1200,
+    "cover-poster": 1600,
+    "ai-page-v1": 1200,
+    "mode-switch": 1200,
+    grid: 1200,
+    "answer-composed": 1200,
+    "text-answer": 1200,
+  }).map(([name, width]) => ({
+    src: `case-studies/cuapts/${name}.png`, out: `cuapts-${name}.webp`, width, quality: 84,
+  })),
 ];
 
 await mkdir(outDir, { recursive: true });

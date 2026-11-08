@@ -89,6 +89,7 @@
   --space-sm: 24px;
   --space-xs: 16px;
   --nav-height: 84px;
+  --study-nav-height: 48px;
 }
 
 @media (max-width: 767px) {
@@ -107,6 +108,8 @@
 }
 
 .theme-light {
+  --color-positive: #2e7d32;
+  --color-negative: #b3261e;
   --color-border: rgba(12, 46, 8, 0.2);
   --color-overlay: rgba(12, 46, 8, 0.06);
   --hairline: rgba(12, 46, 8, 0.35);
@@ -118,6 +121,7 @@
   --ink: #0c2e08;
   --shadow: rgb(0, 0, 0, 0.05);
   --color-bg-inverse: color-mix(in srgb, black 40%, var(--ink) 60%);
+  --footer-muted: #7a7f76;
   --special-hover: #407537;
 
   transition:
@@ -128,6 +132,8 @@
 }
 
 .theme-dark {
+  --color-positive: #81c784;
+  --color-negative: #e57373;
   --color-border: rgba(234, 227, 214, 0.1);
   --color-overlay: rgba(234, 227, 214, 0.06);
   --hairline: rgba(234, 227, 214, 0.4);
@@ -139,6 +145,7 @@
   --ink: #eae3d6;
   --shadow: rgb(0, 0, 0, 0.15);
   --color-bg-inverse: #151a13;
+  --footer-muted: #8a8d83;
   --special-hover: #d3ba88;
 
   transition:
@@ -146,4 +153,10 @@
     --sel-bg var(--ease-theme),
     --sel-fg var(--ease-theme);
   background-color: var(--bg);
+}
+
+@media (max-width: 500px) {
+  :root {
+    --nav-height: 67.58px;
+  }
 }

@@ -27,14 +27,16 @@
   opacity: 1;
 }
 
-.case-card-image img {
+.case-card-image img,
+.case-card-image video {
   height: 100%;
   width: 100%;
   object-fit: cover;
   transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.case-card:hover .case-card-image img {
+.case-card:hover .case-card-image img,
+.case-card-image video {
   transform: scale(1.07);
 }
 

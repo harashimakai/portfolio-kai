@@ -11,6 +11,7 @@
 @import "./components/cursor.css";
 @import "./components/email-toast.css";
 @import "./components/dev-bar.css";
+@import "./components/study-editor.css";
 
 @import "./pages/home.css";
 @import "./pages/work.css";
