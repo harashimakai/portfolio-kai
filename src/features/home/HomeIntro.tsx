@@ -29,7 +29,7 @@ export default function HomeIntro() {
             variants={children_custom}
             custom={0.2}
           >
-            <h3>NOW</h3>
+            <p className="intro-stat-label">Now</p>
             <p className="intro-stat-value">
               Designer &amp; Developer @{" "}
               <a
@@ -45,7 +45,7 @@ export default function HomeIntro() {
             variants={children_custom}
             custom={0.3}
           >
-            <h3>STUDYING</h3>
+            <p className="intro-stat-label">Studying</p>
             <p className="intro-stat-value">Computer Science</p>
           </motion.div>
           <motion.div
@@ -53,7 +53,7 @@ export default function HomeIntro() {
             variants={children_custom}
             custom={0.4}
           >
-            <h3>EMAIL</h3>
+            <p className="intro-stat-label">Email</p>
             <a
               className="intro-stat-value"
               href={`mailto:${EMAILS.school}`}

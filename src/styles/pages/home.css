@@ -53,11 +53,13 @@
   align-items: baseline;
 }
 
-.intro-stat h3 {
+.intro-stat-label {
   min-width: 90px;
   flex-shrink: 0;
+  color: var(--muted);
 }
 
+.intro-stat-label,
 .intro-stat-value {
   margin: 0;
   font-size: var(--text-base);
@@ -180,9 +182,10 @@
   .intro-stat {
     gap: 24px;
   }
-  .intro-stat h3 {
+  .intro-stat-label {
     min-width: 76px;
   }
+  .intro-stat-label,
   .intro-stat-value {
     font-size: var(--text-sm);
   }
