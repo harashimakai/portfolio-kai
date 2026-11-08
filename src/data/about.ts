@@ -1,31 +1,31 @@
 export const SKILLS = [
-  { group: "DESIGN", items: ["ILLUSTRATOR", "FIGMA"] },
+  { group: "Design", items: ["Illustrator", "Figma"] },
   {
-    group: "DEVELOPMENT",
+    group: "Development",
     items: [
-      "PYTHON",
-      "JAVA",
-      "JAVASCRIPT",
-      "TYPESCRIPT",
-      "REACT",
+      "Python",
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "React",
       "HTML",
       "CSS",
-      "GIT",
+      "Git",
       "C",
       "RISC-V",
       "SQL",
     ],
   },
-  { group: "FINE ARTS", items: ["OIL PAINT", "DRAWING", "CALLIGRAPHY"] },
+  { group: "Fine Arts", items: ["Oil paint", "Drawing", "Calligraphy"] },
   {
-    group: "BIOLOGY",
+    group: "Biology",
     items: [
-      "WILDERNESS FIRST RESPONDER",
-      "IN SITU HYBRIDIZATION",
+      "Wilderness First Responder",
+      "In situ hybridization",
       "CRISPR",
       "PCR",
-      "IMMUNOLOGY",
-      "CANCER BIOLOGY",
+      "Immunology",
+      "Cancer biology",
     ],
   },
 ];
@@ -34,38 +34,38 @@ export const EDUCATION = [
   {
     school: "Cornell University",
     program: "B.A. Computer Science · Arts & Sciences",
-    year: "CLASS OF 2029",
+    year: "Class of 2029",
   },
   {
     school: "Greenwich Country Day School",
     program: "Engineering & Visual Arts Diploma",
-    year: "CLASS OF 2025",
+    year: "Class of 2025",
   },
 ];
 
 export const EXPERIENCES = [
   {
-    date: "FEB 2026 — PRESENT",
+    date: "Feb 2026 — Present",
     title: "Cornell Digital Tech & Innovation Project Team",
     role: "Designer & Developer, CUApts",
   },
   {
-    date: "JUN — AUG 2025, 2026",
+    date: "Jun — Aug 2025, 2026",
     title: "Pine Island Wilderness Camp",
     role: "Sailing Instructor and Trip Leader",
   },
   {
-    date: "JAN 2024 — AUG 2024",
+    date: "Jan 2024 — Aug 2024",
     title: "Children's Brain Tumor Project @ Weill Cornell Medicine",
     role: "Research Intern",
   },
   {
-    date: "2018 — PRESENT",
+    date: "2018 — Present",
     title: "The Love4Lucas Foundation",
     role: "Volunteer",
   },
   {
-    date: "MAY 2025",
+    date: "May 2025",
     title: "QP Global Family Offices",
     role: "Business Analyst Intern",
   },

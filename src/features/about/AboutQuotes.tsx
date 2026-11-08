@@ -20,7 +20,7 @@ const QUOTES: Quote[] = [
         older than man and they hummed of mystery.”
       </>
     ),
-    author: "CORMAC MCCARTHY, THE ROAD",
+    author: "Cormac McCarthy, The Road",
   },
   {
     node: (
@@ -30,7 +30,7 @@ const QUOTES: Quote[] = [
         second philosophy.”
       </>
     ),
-    author: "ALEXANDRE DUMAS, THE COUNT OF MONTE CRISTO",
+    author: "Alexandre Dumas, The Count of Monte Cristo",
   },
 
   {
@@ -44,7 +44,7 @@ const QUOTES: Quote[] = [
         universes.”
       </>
     ),
-    author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
+    author: "Anthony Doerr, All the Light We Cannot See",
   },
   {
     node: (
@@ -56,7 +56,7 @@ const QUOTES: Quote[] = [
         to sorrow it. ”
       </>
     ),
-    author: "CORMAC MCCARTHY, THE ROAD",
+    author: "Cormac McCarthy, The Road",
   },
   {
     node: (
@@ -70,7 +70,7 @@ const QUOTES: Quote[] = [
         universe.”
       </>
     ),
-    author: "HERNAN DIAZ, IN THE DISTANCE",
+    author: "Hernan Diaz, In the Distance",
   },
   {
     node: (
@@ -82,7 +82,7 @@ const QUOTES: Quote[] = [
         spark of light, build for us a world full of light?”
       </>
     ),
-    author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
+    author: "Anthony Doerr, All the Light We Cannot See",
   },
   {
     node: (
@@ -93,7 +93,7 @@ const QUOTES: Quote[] = [
         control.”
       </>
     ),
-    author: "HERNAN DIAZ, TRUST",
+    author: "Hernan Diaz, Trust",
   },
   {
     node: (
@@ -109,7 +109,7 @@ const QUOTES: Quote[] = [
         Nothing gold can stay.”
       </>
     ),
-    author: "ROBERT FROST",
+    author: "Robert Frost",
   },
   {
     node: (
@@ -120,7 +120,7 @@ const QUOTES: Quote[] = [
         arrival of the next forceful moment.”
       </>
     ),
-    author: "HERNAN DIAZ, TRUST",
+    author: "Hernan Diaz, Trust",
   },
   {
     node: (
@@ -132,7 +132,7 @@ const QUOTES: Quote[] = [
         epic or tragic.”
       </>
     ),
-    author: "HERNAN DIAZ, TRUST",
+    author: "Hernan Diaz, Trust",
   },
   {
     node: (
@@ -142,7 +142,7 @@ const QUOTES: Quote[] = [
         forever."
       </>
     ),
-    author: "ALEXANDRE DUMAS, THE COUNT OF MONTE CRISTO",
+    author: "Alexandre Dumas, The Count of Monte Cristo",
   },
   {
     node: (
@@ -153,7 +153,7 @@ const QUOTES: Quote[] = [
         maker, god would reuse these drippings to make a new sun overnight.”
       </>
     ),
-    author: "HERNAN DIAZ, IN THE DISTANCE",
+    author: "Hernan Diaz, In the Distance",
   },
   {
     node: (
@@ -164,7 +164,7 @@ const QUOTES: Quote[] = [
         invisible.”
       </>
     ),
-    author: "ANTHONY DOERR, ALL THE LIGHT WE CANNOT SEE",
+    author: "Anthony Doerr, All the Light We Cannot See",
   },
   {
     node: (
@@ -177,7 +177,7 @@ const QUOTES: Quote[] = [
         words or pictures, but not as experiences.”
       </>
     ),
-    author: "HERNAN DIAZ, IN THE DISTANCE",
+    author: "Hernan Diaz, In the Distance",
   },
   {
     node: (
@@ -188,7 +188,7 @@ const QUOTES: Quote[] = [
         was forever lost.”
       </>
     ),
-    author: "HERNAN DIAZ, IN THE DISTANCE",
+    author: "Hernan Diaz, In the Distance",
   },
   {
     node: (
@@ -199,7 +199,7 @@ const QUOTES: Quote[] = [
         The silence.”
       </>
     ),
-    author: "CORMAC MCCARTHY, THE ROAD",
+    author: "Cormac McCarthy, The Road",
   },
   {
     node: (
@@ -209,7 +209,7 @@ const QUOTES: Quote[] = [
         thousands of days under the same sky, always feeling out of place.”
       </>
     ),
-    author: "HERNAN DIAZ, IN THE DISTANCE",
+    author: "Hernan Diaz, In the Distance",
   },
 ];
 

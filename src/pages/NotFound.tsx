@@ -30,11 +30,11 @@ export default function NotFound() {
               custom={0.25}
               className="not-found-brand-text"
             >
-              KAI HARASHIMA
+              Kai Harashima
               <br />
-              DESIGNER &amp; DEVELOPER
+              Designer &amp; Developer
               <br />
-              WESTCHESTER · ITHACA
+              Westchester · Ithaca
             </motion.h3>
           </div>
           <div>
@@ -61,7 +61,7 @@ export default function NotFound() {
                   to="/"
                   variant="primary"
                 >
-                  RETURN HOME <Arrow dir="right" />
+                  Return home <Arrow dir="right" />
                 </ButtonLink>
               </motion.div>
             </div>

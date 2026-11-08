@@ -25,14 +25,14 @@ const NEW_ITEM: Record<ListType, (id: NewId, image: string) => ListBlock["items"
   bullets: (id) => ({ id: id(), text: "New point" }),
   cards: (id) => ({ id: id(), title: "Card", lines: [{ id: id(), text: "A point" }] }),
   takeaways: (id) => ({ id: id(), title: "Takeaway", body: "What it meant." }),
-  figures: (id, image) => ({ id: id(), asset: image, alt: "", label: "LABEL" }),
+  figures: (id, image) => ({ id: id(), asset: image, alt: "", label: "Label" }),
   stats: (id) => ({ id: id(), value: "0", label: "What it counts" }),
-  columns: (id) => ({ id: id(), title: "LABEL", body: "What goes in this column." }),
+  columns: (id) => ({ id: id(), title: "Label", body: "What goes in this column." }),
   steps: (id) => ({ id: id(), title: "Step", body: "What happened in this step." }),
   quotes: (id) => ({ id: id(), text: "What a user said, in their words." }),
   prompts: (id) => ({ id: id(), text: "An example prompt" }),
   annotated: (id) => ({ id: id(), title: "Note", lines: [{ id: id(), text: "What this part of the image shows." }] }),
-  images: (id, image) => ({ id: id(), asset: image, alt: "", caption: "CAPTION" }),
+  images: (id, image) => ({ id: id(), asset: image, alt: "", caption: "Caption" }),
   options: (id, image) => ({
     id: id(),
     asset: image,
@@ -62,7 +62,7 @@ function createBlock(type: Block["type"], id: NewId, image: string, video: strin
     if (type === "options") Object.assign(items[items.length - 1], { chosen: true });
     const extra =
       type === "prompts"
-        ? { label: "TRY ASKING" }
+        ? { label: "Try asking" }
         : type === "annotated"
           ? { asset: image, alt: "" }
           : {};
@@ -74,11 +74,11 @@ function createBlock(type: Block["type"], id: NewId, image: string, video: strin
     case "body":
       return { id: id(), type, text: "New paragraph." };
     case "kicker":
-      return { id: id(), type, text: "EYEBROW" };
+      return { id: id(), type, text: "Eyebrow" };
     case "subheading":
       return { id: id(), type, text: "Subheading" };
     case "callout":
-      return { id: id(), type, label: "HOW MIGHT WE", text: "How might we…?" };
+      return { id: id(), type, label: "How might we", text: "How might we…?" };
 
     case "decision":
       return {
@@ -90,9 +90,9 @@ function createBlock(type: Block["type"], id: NewId, image: string, video: strin
         asset: image,
       };
     case "image":
-      return { id: id(), type, asset: image, alt: "", caption: "CAPTION" };
+      return { id: id(), type, asset: image, alt: "", caption: "Caption" };
     case "video":
-      return { id: id(), type, asset: video, caption: "VIDEO" };
+      return { id: id(), type, asset: video, caption: "Video" };
     case "divider":
       return { id: id(), type };
   }
@@ -178,7 +178,7 @@ export default function useStudyEditor(
             ...c,
             sections: insert(c.sections, i, {
               id: id(),
-              label: "NEW SECTION",
+              label: "New section",
               blocks: [newBlock({ type: "statement", label: "" }, id, image, video)],
             }),
           })),

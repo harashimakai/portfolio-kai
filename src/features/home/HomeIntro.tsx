@@ -70,7 +70,7 @@ export default function HomeIntro() {
                 to="/work"
                 variant="primary"
               >
-                CASE STUDIES <Arrow dir="right" />
+                Case studies <Arrow dir="right" />
               </ButtonLink>
             </motion.div>
             <motion.div
@@ -81,7 +81,7 @@ export default function HomeIntro() {
                 to="/about"
                 variant="secondary"
               >
-                ABOUT
+                About
               </ButtonLink>
             </motion.div>
           </div>

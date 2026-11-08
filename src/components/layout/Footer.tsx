@@ -14,7 +14,7 @@ export default function Footer() {
         viewport={{ once: true, amount: 0.4 }}
       >
         <motion.div className="site-footer-column site-footer-aside">
-          <motion.h2 variants={children}>ASIDE</motion.h2>
+          <motion.h2 variants={children}>Aside</motion.h2>
           <motion.p
             className="body-lg"
             variants={children}
@@ -23,7 +23,7 @@ export default function Footer() {
           </motion.p>
         </motion.div>
         <motion.div className="site-footer-column">
-          <motion.h2 variants={children}>GET IN TOUCH</motion.h2>
+          <motion.h2 variants={children}>Get in touch</motion.h2>
           <motion.p
             className="body-lg"
             variants={children}
@@ -42,7 +42,7 @@ export default function Footer() {
           ))}
         </motion.div>
         <motion.div className="site-footer-column">
-          <motion.h2 variants={children}>ELSEWHERE</motion.h2>
+          <motion.h2 variants={children}>Elsewhere</motion.h2>
           {SOCIALS.map(({ label, href }) => (
             <motion.a
               key={label}
@@ -60,8 +60,8 @@ export default function Footer() {
         className="site-footer-bottom"
         variants={children}
       >
-        <h2>© KAI HARASHIMA &nbsp;✦&nbsp; {new Date().getFullYear()}</h2>
-        <h2>DESIGN PORTFOLIO</h2>
+        <h2>© Kai Harashima &nbsp;✦&nbsp; {new Date().getFullYear()}</h2>
+        <h2>Design portfolio</h2>
         <button
           className="site-footer-top-link"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -71,7 +71,7 @@ export default function Footer() {
               dir="up"
               lead
             />{" "}
-            BACK TO TOP
+            Back to top
           </h2>
         </button>
       </motion.div>

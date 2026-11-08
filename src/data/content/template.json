@@ -36,7 +36,7 @@
   "sections": [
     {
       "id": "overview",
-      "label": "OVERVIEW",
+      "label": "Overview",
       "blocks": [
         {
           "id": "t1",
@@ -96,7 +96,7 @@
     },
     {
       "id": "problem",
-      "label": "PROBLEM",
+      "label": "Problem",
       "blocks": [
         {
           "id": "t9",
@@ -149,7 +149,7 @@
     },
     {
       "id": "research",
-      "label": "RESEARCH",
+      "label": "Research",
       "blocks": [
         {
           "id": "t18",
@@ -181,7 +181,7 @@
         {
           "id": "t23",
           "type": "kicker",
-          "text": "IN THEIR WORDS"
+          "text": "In their words"
         },
         {
           "id": "t24",
@@ -204,7 +204,7 @@
         {
           "id": "t28",
           "type": "kicker",
-          "text": "KEY INSIGHTS"
+          "text": "Key insights"
         },
         {
           "id": "t29",
@@ -296,7 +296,7 @@
     },
     {
       "id": "process",
-      "label": "PROCESS",
+      "label": "Process",
       "blocks": [
         {
           "id": "t36",
@@ -372,7 +372,7 @@
     },
     {
       "id": "decisions",
-      "label": "DESIGN DECISIONS",
+      "label": "Design decisions",
       "blocks": [
         {
           "id": "t42",
@@ -415,7 +415,7 @@
         {
           "id": "t45",
           "type": "kicker",
-          "text": "OPTIONS EXPLORED"
+          "text": "Options explored"
         },
         {
           "id": "t56",
@@ -521,7 +521,7 @@
     },
     {
       "id": "iteration",
-      "label": "ITERATION",
+      "label": "Iteration",
       "blocks": [
         {
           "id": "t57",
@@ -537,19 +537,19 @@
               "id": "t59",
               "asset": "phone1",
               "alt": "Screen, iteration 1",
-              "label": "ITERATION 1"
+              "label": "Iteration 1"
             },
             {
               "id": "t60",
               "asset": "phone2",
               "alt": "Screen, iteration 2",
-              "label": "ITERATION 2"
+              "label": "Iteration 2"
             },
             {
               "id": "t61",
               "asset": "phone3",
               "alt": "Screen, final",
-              "label": "FINAL PROTOTYPE"
+              "label": "Final prototype"
             }
           ],
           "sequence": true
@@ -557,7 +557,7 @@
         {
           "id": "t62",
           "type": "kicker",
-          "text": "KEY CHANGES"
+          "text": "Key changes"
         },
         {
           "id": "t63",
@@ -581,7 +581,7 @@
     },
     {
       "id": "final",
-      "label": "FINAL DESIGN",
+      "label": "Final design",
       "blocks": [
         {
           "id": "t67",
@@ -594,7 +594,7 @@
           "type": "image",
           "asset": "wide",
           "alt": "",
-          "caption": "HERO MOCKUP"
+          "caption": "Hero mockup"
         },
         {
           "id": "t119",
@@ -604,13 +604,13 @@
               "id": "t120",
               "asset": "decision1",
               "alt": "",
-              "caption": "DETAIL ONE"
+              "caption": "Detail one"
             },
             {
               "id": "t121",
               "asset": "decision2",
               "alt": "",
-              "caption": "DETAIL TWO"
+              "caption": "Detail two"
             }
           ]
         },
@@ -622,19 +622,19 @@
               "id": "t70",
               "asset": "phone1",
               "alt": "Screen one",
-              "label": "SCREEN NAME"
+              "label": "Screen name"
             },
             {
               "id": "t71",
               "asset": "phone2",
               "alt": "Screen two",
-              "label": "SCREEN NAME"
+              "label": "Screen name"
             },
             {
               "id": "t72",
               "asset": "phone3",
               "alt": "Screen three",
-              "label": "SCREEN NAME"
+              "label": "Screen name"
             }
           ]
         },
@@ -642,13 +642,13 @@
           "id": "t73",
           "type": "video",
           "asset": "demo",
-          "caption": "PROTOTYPE WALKTHROUGH"
+          "caption": "Prototype walkthrough"
         }
       ]
     },
     {
       "id": "outcomes",
-      "label": "OUTCOMES",
+      "label": "Outcomes",
       "blocks": [
         {
           "id": "t74",
@@ -686,7 +686,7 @@
     },
     {
       "id": "reflection",
-      "label": "REFLECTION",
+      "label": "Reflection",
       "blocks": [
         {
           "id": "t81",

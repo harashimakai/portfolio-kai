@@ -129,7 +129,7 @@ export default function Lightbox({ projects, index, onChange }: Props) {
               aria-label="Close"
               tabIndex={tab}
             >
-              <h2>CLOSE</h2>
+              <h2>Close</h2>
             </button>
           </div>
 
@@ -170,9 +170,9 @@ export default function Lightbox({ projects, index, onChange }: Props) {
                       <p className="lightbox-title entry-title">
                         {shown.item.title}
                       </p>
-                      <h3 className="lightbox-meta">
+                      <p className="lightbox-meta body-xs">
                         {shown.item.medium} · {shown.item.year}
-                      </h3>
+                      </p>
                       <p className="lightbox-desc body-xs">
                         {shown.item.fullDescription ??
                           shown.item.shortDescription}
@@ -187,7 +187,7 @@ export default function Lightbox({ projects, index, onChange }: Props) {
                         aria-label="Previous piece"
                         tabIndex={tab}
                       >
-                        <h2>PREV</h2>
+                        <h2>Prev</h2>
                       </button>
                       <button
                         type="button"
@@ -196,7 +196,7 @@ export default function Lightbox({ projects, index, onChange }: Props) {
                         aria-label="Next piece"
                         tabIndex={tab}
                       >
-                        <h2>NEXT</h2>
+                        <h2>Next</h2>
                       </button>
                     </div>
                   </motion.div>

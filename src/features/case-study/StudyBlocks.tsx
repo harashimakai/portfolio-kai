@@ -650,11 +650,11 @@ export function Decision({
       <motion.div {...child(0)}>
         <p className="study-decision-title">{title}</p>
         <div className="study-decision-part">
-          <h2>PROBLEM</h2>
+          <h2>Problem</h2>
           <p className="study-body">{problem}</p>
         </div>
         <div className="study-decision-part">
-          <h2>SOLUTION</h2>
+          <h2>Solution</h2>
           <p className="study-body">{solution}</p>
         </div>
       </motion.div>
@@ -710,7 +710,7 @@ export function Options({
             <p className="study-option-title">{option.title}</p>
             {option.chosen && (
               <span className="study-option-badge-line">
-                <h3 className="study-option-badge">FINAL</h3>
+                <h3 className="study-option-badge">Final</h3>
               </span>
             )}
           </div>

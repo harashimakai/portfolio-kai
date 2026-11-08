@@ -12,7 +12,7 @@ const jobs = [
     { src: `full-images/${name}.webp`, out: `${name}-large.webp`, width: 2000, quality: 82 },
   ]),
   { src: "full-images/thesis-poster-flat.webp", out: "thesis-poster-flat-large.webp", width: 2400, quality: 82 },
-  ...["iceland", "ashokan-reservoir", "thesis-poster-final", "notebook-comission-closeup"].map((name) => ({
+  ...["iceland", "ashokan-reservoir", "thesis-poster-final"].map((name) => ({
     src: `full-images/${name}.webp`, out: `${name}.webp`, width: 1200, quality: 82,
   })),
   { src: "profile.webp", out: "profile.webp", width: 1200, quality: 82 },

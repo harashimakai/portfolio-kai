@@ -35,7 +35,7 @@
   "sections": [
     {
       "id": "overview",
-      "label": "OVERVIEW",
+      "label": "Overview",
       "blocks": [
         {
           "id": "n1",
@@ -100,7 +100,7 @@
     },
     {
       "id": "research",
-      "label": "MARKET RESEARCH",
+      "label": "Market research",
       "blocks": [
         {
           "id": "n7",
@@ -206,7 +206,7 @@
     },
     {
       "id": "ideation",
-      "label": "IDEATION",
+      "label": "Ideation",
       "blocks": [
         {
           "id": "n22",
@@ -256,7 +256,7 @@
     },
     {
       "id": "iteration",
-      "label": "ITERATION",
+      "label": "Iteration",
       "blocks": [
         {
           "id": "n36",
@@ -316,7 +316,7 @@
     },
     {
       "id": "decision",
-      "label": "KEY DECISION",
+      "label": "Key decision",
       "blocks": [
         {
           "id": "n34",
@@ -397,7 +397,7 @@
     },
     {
       "id": "approach",
-      "label": "APPROACH",
+      "label": "Approach",
       "blocks": [
         {
           "id": "n109",
@@ -424,7 +424,7 @@
         {
           "id": "n86",
           "type": "kicker",
-          "text": "COMPONENT LIBRARY"
+          "text": "Component library"
         },
         {
           "id": "n87",
@@ -475,7 +475,7 @@
     },
     {
       "id": "reflection",
-      "label": "TAKEAWAYS",
+      "label": "Takeaways",
       "blocks": [
         {
           "id": "n122",

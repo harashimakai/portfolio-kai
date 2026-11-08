@@ -16,7 +16,7 @@ export default function MoreStudies({ current, preview }: Props) {
   return (
     <aside>
       <SectionDivider />
-      <h2 className="study-more-label">MORE CASE STUDIES</h2>
+      <h2 className="study-more-label">More case studies</h2>
       <CaseStudyList
         studies={others}
         className="study-more-list"

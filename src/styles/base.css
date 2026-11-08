@@ -117,6 +117,7 @@ h2 {
   line-height: var(--leading-relaxed);
   font-style: normal;
   font-size: var(--text-label);
+  text-transform: uppercase;
   color: var(--muted);
   transition:
     color var(--ease-theme),
@@ -131,6 +132,7 @@ h3 {
   line-height: var(--leading-relaxed);
   font-style: normal;
   font-size: var(--text-xs);
+  text-transform: uppercase;
   color: var(--muted);
   transition:
     color var(--ease-theme),

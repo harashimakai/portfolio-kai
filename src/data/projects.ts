@@ -5,7 +5,6 @@ import icelandCover from "../assets/optimized/iceland.webp";
 import backyard1Cover from "../assets/optimized/backyard-1-thumb.webp";
 import backyard2Cover from "../assets/optimized/backyard-2-thumb.webp";
 import backyard3Cover from "../assets/optimized/backyard-3-thumb.webp";
-import notebooks1Cover from "../assets/optimized/notebook-comission-closeup.webp";
 
 import thesisExpanded from "../assets/optimized/thesis-poster-flat-large.webp";
 import backyard1Expanded from "../assets/optimized/backyard-1-large.webp";
@@ -18,7 +17,7 @@ export const projects: Project[] = [
     title:
       "Strategy, Subterfuge, and Deception - Science Communication via Graphic Design",
     shortTitle: "Strategy, Subterfuge, and Deception",
-    medium: "GRAPHIC DESIGN",
+    medium: "Graphic design",
     year: "2024",
     shortDescription:
       "A series of posters translating PhD-level cancer biology—oncogenes, immune evasion, checkpoint inhibition—into visual language. Hand-drawn prototypes refined in Adobe Illustrator over the course of a year.",
@@ -29,7 +28,7 @@ export const projects: Project[] = [
   {
     id: "2",
     title: "The Ashokan Reservoir",
-    medium: "OIL ON CANVAS",
+    medium: "Oil on canvas",
     year: "2022",
     shortDescription:
       "A monochromatic study of the Hudson River Valley landscape. Restraint of palette as a study in texture and value.",
@@ -39,7 +38,7 @@ export const projects: Project[] = [
   {
     id: "3",
     title: "The Icelandic Coastline",
-    medium: "OIL ON CANVAS",
+    medium: "Oil on canvas",
     year: "2024",
     shortDescription:
       "A white house holds its ground against primordial wind and stone — composition as unmoving defiance.",
@@ -49,7 +48,7 @@ export const projects: Project[] = [
   {
     id: "4",
     title: "Scenes From My Backyard: I",
-    medium: "OIL ON CANVAS",
+    medium: "Oil on canvas",
     year: "2025",
     shortDescription:
       "A triptych study in texture, light, and composition. The first in a series drawn from photos of overlooked nature.",
@@ -60,7 +59,7 @@ export const projects: Project[] = [
   {
     id: "5",
     title: "Scenes From My Backyard: II",
-    medium: "OIL ON CANVAS",
+    medium: "Oil on canvas",
     year: "2025",
     shortDescription:
       "Inspired by Rembrandt's baroque style: loose, gestural brushwork becomes depth and detail upon stepping back.",
@@ -71,7 +70,7 @@ export const projects: Project[] = [
   {
     id: "6",
     title: "Scenes From My Backyard: III",
-    medium: "OIL ON CANVAS",
+    medium: "Oil on canvas",
     year: "2025",
     shortDescription:
       "Beauty at a minute scale. Most landscapes look to coastlines or mountain ranges, but small, meditative moments can be found everywhere—even right below our feet.",
@@ -79,16 +78,6 @@ export const projects: Project[] = [
     expandedUrl: backyard3Expanded,
     imagePos: "center 70%",
     extra: true,
-  },
-  {
-    id: "7",
-    title: "Notebooks: Composition and Balance in Calligraphy",
-    medium: "CALLIGRAPHY",
-    year: "2025",
-    shortDescription:
-      "A study in flourishes, composition, and use of white space as restraint.",
-    thumbnailUrl: notebooks1Cover,
-    imagePos: "center 70%",
   },
 ];
 

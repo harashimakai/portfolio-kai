@@ -10,10 +10,10 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { to: "/", label: "HOME" },
-  { to: "/work", label: "WORK", alsoActive: studyPaths },
-  { to: "/art", label: "ART" },
-  { to: "/about", label: "ABOUT" },
+  { to: "/", label: "Home" },
+  { to: "/work", label: "Work", alsoActive: studyPaths },
+  { to: "/art", label: "Art" },
+  { to: "/about", label: "About" },
 ];
 
 export const EMAILS = {

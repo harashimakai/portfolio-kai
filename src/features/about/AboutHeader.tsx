@@ -4,9 +4,9 @@ import { EMAILS, LINKS } from "../../data/site";
 import Arrow from "../../components/ui/Arrow";
 
 const HEADER_LINKS = [
-  { label: "RÉSUMÉ", href: LINKS.resume, external: true },
-  { label: "EMAIL", href: `mailto:${EMAILS.personal}`, external: false },
-  { label: "LINKEDIN", href: LINKS.linkedin, external: true },
+  { label: "Résumé", href: LINKS.resume, external: true },
+  { label: "Email", href: `mailto:${EMAILS.personal}`, external: false },
+  { label: "LinkedIn", href: LINKS.linkedin, external: true },
 ];
 
 export default function AboutHeader() {

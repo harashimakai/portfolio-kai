@@ -34,7 +34,7 @@
   "sections": [
     {
       "id": "n81",
-      "label": "OVERVIEW",
+      "label": "Overview",
       "blocks": [
         {
           "id": "n123",
@@ -57,7 +57,7 @@
     },
     {
       "id": "process",
-      "label": "PROCESS",
+      "label": "Process",
       "blocks": [
         {
           "id": "n226",
@@ -95,7 +95,7 @@
     },
     {
       "id": "research",
-      "label": "USER RESEARCH",
+      "label": "User research",
       "blocks": [
         {
           "id": "n139",
@@ -209,7 +209,7 @@
     },
     {
       "id": "direction",
-      "label": "IDEATION",
+      "label": "Ideation",
       "blocks": [
         {
           "id": "n155",
@@ -274,7 +274,7 @@
     },
     {
       "id": "iterations",
-      "label": "PROTOTYPING + ITERATION",
+      "label": "Prototyping + iteration",
       "blocks": [
         {
           "id": "n191",
@@ -291,7 +291,7 @@
               "id": "n36",
               "asset": "home1",
               "alt": "Home page, iteration 1",
-              "label": "ITERATION 1",
+              "label": "Iteration 1",
               "pros": [
                 {
                   "id": "n232",
@@ -313,7 +313,7 @@
               "id": "n37",
               "asset": "home2",
               "alt": "Home page, iteration 2",
-              "label": "ITERATION 2",
+              "label": "Iteration 2",
               "pros": [
                 {
                   "id": "n235",
@@ -335,7 +335,7 @@
               "id": "n38",
               "asset": "home3",
               "alt": "Home page, final",
-              "label": "FINAL PROTOTYPE",
+              "label": "Final prototype",
               "pros": [
                 {
                   "id": "n238",
@@ -369,7 +369,7 @@
               "id": "n47",
               "asset": "account1",
               "alt": "Account page, iteration 1",
-              "label": "ITERATION 1",
+              "label": "Iteration 1",
               "pros": [
                 {
                   "id": "n240",
@@ -391,7 +391,7 @@
               "id": "n48",
               "asset": "account2",
               "alt": "Account page, iteration 2",
-              "label": "ITERATION 2",
+              "label": "Iteration 2",
               "pros": [
                 {
                   "id": "n243",
@@ -413,7 +413,7 @@
               "id": "n49",
               "asset": "account3",
               "alt": "Account page, final",
-              "label": "FINAL PROTOTYPE",
+              "label": "Final prototype",
               "pros": [
                 {
                   "id": "n246",
@@ -432,7 +432,7 @@
     },
     {
       "id": "final",
-      "label": "LIBRARY / ONBOARDING",
+      "label": "Library / onboarding",
       "blocks": [
         {
           "id": "n55",
@@ -447,19 +447,19 @@
               "id": "n57",
               "asset": "library",
               "alt": "Library page, final",
-              "label": "LIBRARY PAGE"
+              "label": "Library page"
             },
             {
               "id": "n58",
               "asset": "onboarding",
               "alt": "Onboarding flow, final",
-              "label": "ONBOARDING PAGE"
+              "label": "Onboarding page"
             },
             {
               "id": "n59",
               "asset": "homePopup",
               "alt": "Home page with a saved-to-library toast",
-              "label": "SAVE TO LIBRARY TOAST"
+              "label": "Save to library toast"
             }
           ]
         }
@@ -467,7 +467,7 @@
     },
     {
       "id": "reflection",
-      "label": "REFLECTION",
+      "label": "Reflection",
       "blocks": [
         {
           "id": "n208",
@@ -496,7 +496,7 @@
         {
           "id": "n213",
           "type": "kicker",
-          "text": "TAKEAWAYS"
+          "text": "Takeaways"
         },
         {
           "id": "n214",

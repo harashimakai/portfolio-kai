@@ -36,7 +36,7 @@ export default function ArtStrip() {
         >
           <Link to="/art">
             <h2 className="underline-hover">
-              SEE MORE <Arrow dir="right" />
+              See more <Arrow dir="right" />
             </h2>
           </Link>
         </motion.div>
