@@ -63,7 +63,7 @@ export const studyList: StudyDef[] = [
     },
     logoSvg: cuaptsLogo,
     card: {
-      date: "Spring 2026",
+      date: "Fall 2026",
       context: "Cornell DTI",
       thumbnailUrl: cuaptsCoverPoster,
       video: cuaptsCover,
@@ -89,7 +89,7 @@ export const studyList: StudyDef[] = [
     },
     logoSvg: wordmark,
     card: {
-      date: "Feb 2026",
+      date: "Spring 2026",
       context: "Concept",
       thumbnailUrl: coverPoster,
       video: cover,

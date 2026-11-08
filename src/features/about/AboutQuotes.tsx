@@ -75,11 +75,11 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “The brain is locked in total darkness, of course, children. It floats
-        in a clear liquid inside the skull, never in the light. And yet the
-        world it constructs in the mind is full of light. It brims with color
-        and movement. So how, children, does the brain, which lives without a
-        spark of light, build for us a world full of light?”
+        “The brain is locked in total darkness, of course. It floats in a clear
+        liquid inside the skull, never in the light. And yet the world it
+        constructs in the mind is full of light. It brims with color and
+        movement. So how does the brain, which lives without a spark of light,
+        build for us a world full of light?”
       </>
     ),
     author: "Anthony Doerr, All the Light We Cannot See",
@@ -169,15 +169,14 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        “The hardships of last winter had become a memory—a series of vivid and
-        yet partial recollections. He knew that he had been cold but could not
-        invoke the cold in his bones; he knew that it had been windy but could
-        not relive the wind slicing through his flesh. These things—the numbing
-        cold, the gritty gales grounding into the skin—could be brought back as
-        words or pictures, but not as experiences.”
+        “The love of literature, of language, of the mystery of the mind and
+        heart showing themselves in the minute, strange, and unexpected
+        combinations of letters and words, in the blackest and coldest print—the
+        love which he had hidden as if it were illicit and dangerous, he began
+        to display, tentatively at first, and then boldly, and then proudly.”
       </>
     ),
-    author: "Hernan Diaz, In the Distance",
+    author: "John Williams, Stoner",
   },
   {
     node: (
