@@ -237,6 +237,7 @@ export function Tile({
                 : project.thumbnailUrl
             }
             alt={project.title}
+            loading="lazy"
             decoding="async"
             style={
               cropped && (position ?? project.imagePos)

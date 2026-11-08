@@ -12,6 +12,10 @@ const jobs = [
     { src: `full-images/${name}.webp`, out: `${name}-large.webp`, width: 2000, quality: 82 },
   ]),
   { src: "full-images/thesis-poster-flat.webp", out: "thesis-poster-flat-large.webp", width: 2400, quality: 82 },
+  ...["iceland", "ashokan-reservoir", "thesis-poster-final", "notebook-comission-closeup"].map((name) => ({
+    src: `full-images/${name}.webp`, out: `${name}.webp`, width: 1200, quality: 82,
+  })),
+  { src: "profile.webp", out: "profile.webp", width: 1200, quality: 82 },
   { src: "case-studies/putmeon/cover-poster.png", out: "putmeon-cover-poster.webp", width: 1600, quality: 84 },
   { src: "case-studies/putmeon/demo-poster.jpg", out: "putmeon-demo-poster.webp", width: 1280, quality: 80 },
   ...["home1", "home2", "home-popup", "account1", "account2", "library", "home3-poster", "account3-poster", "onboarding-poster"].map((name) => ({

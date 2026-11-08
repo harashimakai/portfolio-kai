@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { children_custom } from "../../lib/animations";
 import { LINKS } from "../../data/site";
 
-import profile from "../../assets/profile.webp";
+import profile from "../../assets/optimized/profile.webp";
 
 export default function AboutBio() {
   return (

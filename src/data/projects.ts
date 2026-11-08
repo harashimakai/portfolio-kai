@@ -1,11 +1,11 @@
 import type { Project } from "../types/project";
-import thesisCover from "../assets/full-images/thesis-poster-final.webp";
-import ashokanCover from "../assets/full-images/ashokan-reservoir.webp";
-import icelandCover from "../assets/full-images/iceland.webp";
+import thesisCover from "../assets/optimized/thesis-poster-final.webp";
+import ashokanCover from "../assets/optimized/ashokan-reservoir.webp";
+import icelandCover from "../assets/optimized/iceland.webp";
 import backyard1Cover from "../assets/optimized/backyard-1-thumb.webp";
 import backyard2Cover from "../assets/optimized/backyard-2-thumb.webp";
 import backyard3Cover from "../assets/optimized/backyard-3-thumb.webp";
-import notebooks1Cover from "../assets/full-images/notebook-comission-closeup.webp";
+import notebooks1Cover from "../assets/optimized/notebook-comission-closeup.webp";
 
 import thesisExpanded from "../assets/optimized/thesis-poster-flat-large.webp";
 import backyard1Expanded from "../assets/optimized/backyard-1-large.webp";
