@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import SectionDivider from "../../components/ui/SectionDivider";
 import { BLUR_IN, BLUR_NONE } from "../../lib/animations";
 
-const INTERVAL = 10000;
+const INTERVAL = 9000;
 
 type Quote = { node: ReactNode; author: string };
 
@@ -266,10 +266,33 @@ export default function AboutQuotes() {
     dots.current?.querySelectorAll("button")[next]?.focus();
   };
 
+  const quoteRefs = useRef<(HTMLQuoteElement | null)[]>([]);
   const [paused, setPaused] = useState(false);
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    const quote = quoteRefs.current[state.index];
+    if (!quote) return;
+    const range = document.createRange();
+    range.selectNodeContents(quote);
+    const overText = Array.from(range.getClientRects()).some(
+      (r) =>
+        e.clientX >= r.left &&
+        e.clientX <= r.right &&
+        e.clientY >= r.top &&
+        e.clientY <= r.bottom,
+    );
+    setPaused(overText);
+  };
+
+  const shownAt = useRef(0);
+  useEffect(() => {
+    shownAt.current = performance.now();
+  }, [state.index]);
+
   useEffect(() => {
     if (paused) return;
-    const timer = setTimeout(() => step(1), INTERVAL);
+    const remaining = INTERVAL - (performance.now() - shownAt.current);
+    const timer = setTimeout(() => step(1), Math.max(0, remaining));
     return () => clearTimeout(timer);
   }, [state.index, step, paused]);
 
@@ -279,8 +302,8 @@ export default function AboutQuotes() {
       <div className="about-quote-container">
         <div
           className="about-quote-stage"
-          onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)}
-          onPointerLeave={(e) => e.pointerType === "mouse" && setPaused(false)}
+          onPointerMove={onPointerMove}
+          onPointerLeave={() => setPaused(false)}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerCancel}
@@ -297,6 +320,9 @@ export default function AboutQuotes() {
               return (
                 <motion.blockquote
                   key={i}
+                  ref={(el) => {
+                    quoteRefs.current[i] = el;
+                  }}
                   className="about-quote quote"
                   style={{
                     userSelect: active ? "auto" : "none",
