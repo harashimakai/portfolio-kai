@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
 import { children_custom } from "../../lib/animations";
+import { TABLET_QUERY } from "../../lib/media";
 import type { Project } from "../../types/project";
 export interface TileLayout {
   aspect?: string;
@@ -121,7 +122,7 @@ function FeatureRow({ row, children }: FeatureRowProps) {
     let raf = 0;
     const measure = () => {
       // Narrow viewports always snap; no need to wait for the image.
-      if (window.matchMedia("(max-width: 1189px)").matches) return true;
+      if (window.matchMedia(TABLET_QUERY).matches) return true;
       const img = el.querySelector<HTMLImageElement>(".art-tile-fill img");
       if (!img?.naturalWidth || !probe.current) return null;
       const fillRatio = img.naturalWidth / img.naturalHeight;

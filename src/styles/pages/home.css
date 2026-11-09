@@ -190,6 +190,6 @@
     margin-top: 22px;
   }
   .home-case-list {
-    padding-bottom: 24px;
+    padding-bottom: var(--space-section);
   }
 }

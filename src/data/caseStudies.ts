@@ -20,10 +20,12 @@ import wordmark from "../assets/case-studies/putmeon/wordmark.svg?raw";
 import cover from "../assets/case-studies/putmeon/cover.mp4";
 import coverPoster from "../assets/optimized/putmeon-cover-poster.webp";
 
-import cuaptsResults from "../assets/optimized/cuapts-results.webp";
+import cuaptsResults from "../assets/case-studies/cuapts/results.mp4";
+import cuaptsResultsPoster from "../assets/optimized/cuapts-results-poster.webp";
 import cuaptsBreakdown from "../assets/optimized/cuapts-results-breakdown.webp";
 import cuaptsAiPageV1 from "../assets/optimized/cuapts-ai-page-v1.webp";
-import cuaptsModeSwitch from "../assets/optimized/cuapts-mode-switch.webp";
+import cuaptsModeSwitch from "../assets/case-studies/cuapts/mode-switch.mp4";
+import cuaptsModeSwitchPoster from "../assets/optimized/cuapts-mode-switch-poster.webp";
 import cuaptsInlineQuotes from "../assets/optimized/cuapts-inline-quotes.webp";
 import cuaptsListingCards from "../assets/optimized/cuapts-listing-cards.webp";
 import cuaptsLofi from "../assets/optimized/cuapts-lofi.webp";
@@ -46,10 +48,10 @@ export const studyList: StudyDef[] = [
     content: cuaptsContent as StudyContent,
     assets: {
       cover: { src: cuaptsCover, poster: cuaptsCoverPoster },
-      results: { src: cuaptsResults },
+      results: { src: cuaptsResults, poster: cuaptsResultsPoster },
       breakdown: { src: cuaptsBreakdown },
       aiPageV1: { src: cuaptsAiPageV1 },
-      modeSwitch: { src: cuaptsModeSwitch },
+      modeSwitch: { src: cuaptsModeSwitch, poster: cuaptsModeSwitchPoster },
       inlineQuotes: { src: cuaptsInlineQuotes },
       listingCards: { src: cuaptsListingCards },
       lofi: { src: cuaptsLofi },
@@ -111,4 +113,5 @@ export const toCard = (d: StudyDef): StudyCard => ({
   ...d.card,
   title: d.title,
   slug: studyPath(d),
+  palette: `palette-${d.slug}`,
 });

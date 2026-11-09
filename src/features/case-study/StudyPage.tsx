@@ -418,6 +418,7 @@ function BlockView({
           <Options
             items={block.items.map((o, i) => ({
               src: src(o.asset),
+              poster: assets[o.asset]?.poster,
               chosen: Boolean(o.chosen),
               title: removable(
                 <>
@@ -450,6 +451,7 @@ function BlockView({
       view = (
         <WideImage
           src={src(block.asset)}
+          poster={assets[block.asset]?.poster}
           alt={block.alt}
           caption={
             <>
@@ -548,6 +550,7 @@ function BlockView({
 
   return (
     <Slot
+      id={block.id}
       gap={gap}
       tools={
         editing && (
@@ -643,6 +646,7 @@ export default function StudyPage({ study }: { study: StudyDef }) {
               }
               aside={asideBlock && view(asideBlock, asideAt)}
               narrow={asideBlock?.type === "prompts" || asideBlock?.type === "callout"}
+              showcase={sec.blocks.length === 1 && sec.blocks[0].type === "image"}
               below={asideBlock && sec.blocks.slice(asideAt + 1).map((bl, i) => view(bl, asideAt + 1 + i))}
             >
               {editing && (

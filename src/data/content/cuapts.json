@@ -46,7 +46,7 @@
         {
           "id": "n2",
           "type": "body",
-          "text": "CUApts is a Cornell DTI project that helps students find off-campus housing by browsing listings and reading real reviews from other Cornellians. \n\nI designed its AI / LLM search bar. Users describe what they're looking for in their own words, and CUApts builds an informed answer around their request: deciding whether they'll find top picks, a budget comparison, or a neighborhood guide most relevant."
+          "text": "[CUApts](https://www.cuapts.org/) is a Cornell DTI product that helps students find off-campus housing by providing real reviews from other Cornellians. \n\nI designed the AI / LLM search bar. Users describe what they're looking for in their own words, and CUApts builds an informed answer around their request: deciding whether they'll find top picks, a budget comparison, or a neighborhood guide most relevant."
         },
         {
           "id": "n95",
@@ -72,16 +72,9 @@
           ]
         },
         {
-          "id": "n57",
-          "type": "image",
-          "asset": "results",
-          "alt": "AI search results for 4-person rentals close to West Campus",
-          "caption": ""
-        },
-        {
           "id": "n121",
           "type": "statement",
-          "text": "Problem: the housing search is overwhelming",
+          "text": "Problem: the housing search is *overwhelming*",
           "small": true
         },
         {
@@ -111,7 +104,7 @@
         {
           "id": "n8",
           "type": "body",
-          "text": "Because LLM search is a relatively new field without concrete UI/UX rules, I researched how current AI products help users navigate the novel technology and how they structure their responses."
+          "text": "Because LLM-incorporated search is a relatively new field without concrete UI/UX rules, I researched how current AI products help users navigate the novel technology and how they structure their responses."
         },
         {
           "id": "n9",
@@ -178,7 +171,7 @@
         {
           "id": "n16",
           "type": "subheading",
-          "text": "User Flow Deep Dive: Google AI Mode",
+          "text": "User Flow Deep Dive: *Google* AI Mode",
           "logo": "logoGoogle"
         },
         {
@@ -397,7 +390,7 @@
     },
     {
       "id": "approach",
-      "label": "Approach",
+      "label": "New approach",
       "blocks": [
         {
           "id": "n109",
@@ -411,20 +404,15 @@
           "items": [
             {
               "id": "n119",
-              "title": "Problem",
+              "title": "Problem: *Unhelpful Results*",
               "body": "Students search with a set of constraints (roommates, distance to campus, budget), but a list of results doesn't show which ones each apartment meets."
             },
             {
               "id": "n120",
-              "title": "Solution",
+              "title": "Solution: *Component Library*",
               "body": "Instead of auto-applying filters, the LLM builds each answer from a library of components, picking the ones that best explain the results, so it's clear how each apartment fits what the user asked for."
             }
           ]
-        },
-        {
-          "id": "n86",
-          "type": "kicker",
-          "text": "Component library"
         },
         {
           "id": "n87",
@@ -474,6 +462,19 @@
       ]
     },
     {
+      "id": "final",
+      "label": "Final design",
+      "blocks": [
+        {
+          "id": "n57",
+          "type": "image",
+          "asset": "results",
+          "alt": "AI search results for 4-person rentals close to West Campus",
+          "caption": ""
+        }
+      ]
+    },
+    {
       "id": "reflection",
       "label": "Takeaways",
       "blocks": [
@@ -503,5 +504,5 @@
       ]
     }
   ],
-  "nextId": 123
+  "nextId": 124
 }

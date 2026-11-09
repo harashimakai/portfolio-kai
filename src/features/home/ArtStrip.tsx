@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { PHONE_QUERY } from "../../lib/media";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { container_m, children, children_custom } from "../../lib/animations";
@@ -10,7 +11,7 @@ import Lightbox from "../art/Lightbox";
 
 export default function ArtStrip() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const phone = useMediaQuery("(max-width: 767px)");
+  const phone = useMediaQuery(PHONE_QUERY);
   const projects = phone ? homePhoneProjects : homeProjects;
 
   return (

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { TABLET_QUERY } from "../../lib/media";
 import { children_custom } from "../../lib/animations";
 
 import SectionDivider from "../../components/ui/SectionDivider";
@@ -12,7 +13,7 @@ const LEFT_END =
   EDUCATION_START + EDUCATION.length * EDUCATION_STEP;
 
 export default function AboutDetails() {
-  const stacked = useMediaQuery("(max-width: 1189px)");
+  const stacked = useMediaQuery(TABLET_QUERY);
   const leftStart = useRef(0);
   const [rightShown, setRightShown] = useState(false);
   const [rightOffset, setRightOffset] = useState(0);

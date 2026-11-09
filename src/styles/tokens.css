@@ -12,7 +12,8 @@
   --font-serif:
     "the-seasons", "Cormorant Garamond", "EB Garamond", Garamond,
     "Times New Roman", serif;
-  --font-sans: "Geist", "Inter Tight", "Inter", "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans:
+    "Geist", "Inter Tight", "Inter", "Helvetica Neue", Helvetica, sans-serif;
 }
 
 :root {
@@ -115,7 +116,7 @@
   --hairline: rgba(12, 46, 8, 0.35);
 
   --bg: #f8f7f1;
-  --color-surface: #fdfcf6;
+  --color-surface: #fcfbf8;
   --muted: #7a7f76;
   --accent: #226a14;
   --ink: #0c2e08;

@@ -11,7 +11,7 @@ export default function CaseStudyCard({ item }: Props) {
   return (
     <Link
       to={item.slug}
-      className="case-card"
+      className={`case-card ${item.palette}`}
       data-cursor="View project"
     >
       <div className="case-card-image">

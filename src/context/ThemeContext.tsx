@@ -42,6 +42,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    const root = document.documentElement;
+    const apply = () => {
+      root.style.colorScheme = darkMode ? "dark" : "light";
+    };
+    if (!root.classList.contains("is-theme-switching")) {
+      apply();
+      return;
+    }
+    const timer = window.setTimeout(apply, SWITCH_MS);
+    return () => window.clearTimeout(timer);
+  }, [darkMode]);
+
+  useEffect(() => {
     const mq = window.matchMedia?.("(prefers-color-scheme: dark)");
     if (!mq) return;
     const follow = (e: MediaQueryListEvent) => {

@@ -6,6 +6,7 @@ export interface StudyCard {
   video?: string;
   subheading: string;
   slug: string;
+  palette: string;
 }
 
 export interface Hero {
@@ -121,5 +122,5 @@ export interface StudyDef {
   content: StudyContent;
   assets: Record<string, Asset>;
   logoSvg: string;
-  card: Omit<StudyCard, "title" | "slug">;
+  card: Omit<StudyCard, "title" | "slug" | "palette">;
 }

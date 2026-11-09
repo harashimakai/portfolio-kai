@@ -74,13 +74,23 @@ export default function Cursor() {
     let visible = false;
     let labelText = "";
     let lastTarget: Element | null = null;
+    let accentSource: Element | null = null;
     let copiedOn: Element | null = null;
+
+    const matchAccent = (source: Element | null) => {
+      if (source === accentSource) return;
+      accentSource = source;
+      const accent = source && getComputedStyle(source).getPropertyValue("--accent");
+      if (accent) root.style.setProperty("--accent", accent);
+      else root.style.removeProperty("--accent");
+    };
 
     const update = (target: Element | null) => {
       lastTarget = target;
       const email = target?.closest(EMAIL) ?? null;
       if (copiedOn && email !== copiedOn) copiedOn = null;
       const labelled = target?.closest<HTMLElement>("[data-cursor]");
+      matchAccent(labelled ?? target);
       const next = email
         ? copiedOn
           ? "Copied"
@@ -158,7 +168,11 @@ export default function Cursor() {
       });
     };
 
-    const onClick = () => requestAnimationFrame(() => update(lastTarget));
+    const onClick = () =>
+      requestAnimationFrame(() => {
+        accentSource = null;
+        update(lastTarget);
+      });
 
     const onCopied = (e: Event) => {
       copiedOn = (e as CustomEvent<Element>).detail;

@@ -5,13 +5,14 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type RefObject,
   type ReactNode,
 } from "react";
 import { motion } from "motion/react";
 import { children_custom, container_m } from "../../lib/animations";
 import SectionDivider from "../../components/ui/SectionDivider";
 import InViewVideo from "../../components/ui/InViewVideo";
+import { REDUCED_MOTION_QUERY } from "../../lib/media";
+import useIntroScroll from "./useIntroScroll";
 
 const reveal = (delay: number) => ({
   variants: children_custom,
@@ -56,65 +57,6 @@ function useHeroOffset() {
   }, []);
 
   return { ref, offset };
-}
-
-const INTRO_DELAY = 400;
-const INTRO_DURATION = 1400;
-const INTRO_VISIBLE = 0.075; // share of the cover left showing below the navbar
-
-const easeInOutCubic = (t: number) =>
-  t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
-
-function pageTop(el: HTMLElement) {
-  let y = 0;
-  for (
-    let n: HTMLElement | null = el;
-    n;
-    n = n.offsetParent as HTMLElement | null
-  )
-    y += n.offsetTop;
-  return y;
-}
-
-// Opens at the top of the page, then eases down so the title and meta come into view.
-function useIntroScroll(ref: RefObject<HTMLElement | null>, ready: boolean) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!ready || !el || window.location.hash) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let frame = 0;
-    let timer = 0;
-    const cancel = () => {
-      cancelAnimationFrame(frame);
-      window.clearTimeout(timer);
-      stopListening();
-    };
-    const events = ["wheel", "touchstart", "keydown", "mousedown"] as const;
-    const stopListening = () =>
-      events.forEach((e) => window.removeEventListener(e, cancel));
-    events.forEach((e) =>
-      window.addEventListener(e, cancel, { passive: true }),
-    );
-
-    timer = window.setTimeout(() => {
-      const nav =
-        document.querySelector<HTMLElement>(".navbar")?.offsetHeight ?? 0;
-      const target = pageTop(el) + el.offsetHeight * (1 - INTRO_VISIBLE) - nav;
-      const from = window.scrollY;
-      if (target <= from) return stopListening();
-      const start = performance.now();
-      const step = (now: number) => {
-        const t = Math.min(1, (now - start) / INTRO_DURATION);
-        window.scrollTo(0, from + (target - from) * easeInOutCubic(t));
-        if (t < 1) frame = requestAnimationFrame(step);
-        else stopListening();
-      };
-      frame = requestAnimationFrame(step);
-    }, INTRO_DELAY);
-
-    return cancel;
-  }, [ref, ready]);
 }
 
 interface HeroProps {
@@ -225,16 +167,21 @@ export function gapBetween(prev: Role | null, cur: Role): Gap {
 }
 
 export function Slot({
+  id,
   gap,
   tools,
   children,
 }: {
+  id?: string;
   gap: Gap;
   tools: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <div className={`study-slot study-gap-${gap}`}>
+    <div
+      className={`study-slot study-gap-${gap}`}
+      data-block={id}
+    >
       {tools}
       {children}
     </div>
@@ -248,6 +195,7 @@ export function StudySection({
   aside,
   below,
   narrow = false,
+  showcase = false,
 }: {
   id: string;
   label?: ReactNode;
@@ -255,6 +203,7 @@ export function StudySection({
   aside?: ReactNode;
   below?: ReactNode;
   narrow?: boolean;
+  showcase?: boolean;
 }) {
   const heading = label && (
     <motion.h2
@@ -282,6 +231,11 @@ export function StudySection({
               {children}
             </div>
             <div className="study-section-aside">{aside}</div>
+          </div>
+        ) : showcase ? (
+          <div className="study-section-showcase">
+            {heading}
+            {children}
           </div>
         ) : (
           <>
@@ -349,7 +303,7 @@ export function Subheading({
           />
         </span>
       )}
-      {children}
+      <span>{children}</span>
     </motion.h3>
   );
 }
@@ -429,7 +383,8 @@ function Points({ pros, cons }: { pros: ReactNode[]; cons: ReactNode[] }) {
   );
 }
 
-const ARROW_TIP = 1.5 * Math.SQRT2;
+const ARROW_STROKE = 4.5;
+const ARROW_TIP = (ARROW_STROKE / 2) * Math.SQRT2;
 
 function SequenceArrow() {
   return (
@@ -446,7 +401,7 @@ function SequenceArrow() {
         <g
           fill="none"
           stroke="currentColor"
-          strokeWidth="3"
+          strokeWidth={ARROW_STROKE}
         >
           <path d={`M-9999 0H${-ARROW_TIP}`} />
           <path d={`M${-12 - ARROW_TIP} -12L${-ARROW_TIP} 0l-12 12`} />
@@ -803,9 +758,16 @@ export function Decision({
 export function Options({
   items,
 }: {
-  items: (Pointed & { src: string; title: ReactNode; chosen: boolean })[];
+  items: (Pointed & {
+    src: string;
+    poster?: string;
+    title: ReactNode;
+    chosen: boolean;
+  })[];
 }) {
   const [ratios, setRatios] = useState<Record<number, number>>({});
+  const measure = (i: number, w: number, h: number) =>
+    setRatios((r) => ({ ...r, [i]: w / h }));
   const loaded = Object.values(ratios);
   const frame = loaded.length ? Math.min(...loaded) : 16 / 10;
   return (
@@ -821,16 +783,29 @@ export function Options({
           {...child(i)}
         >
           <figure className="study-figure is-framed">
-            <img
-              src={option.src}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              onLoad={(e) => {
-                const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
-                setRatios((r) => ({ ...r, [i]: w / h }));
-              }}
-            />
+            {option.poster ? (
+              <InViewVideo
+                src={option.src}
+                poster={option.poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                onLoadedMetadata={(e) =>
+                  measure(i, e.currentTarget.videoWidth, e.currentTarget.videoHeight)
+                }
+              />
+            ) : (
+              <img
+                src={option.src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                onLoad={(e) =>
+                  measure(i, e.currentTarget.naturalWidth, e.currentTarget.naturalHeight)
+                }
+              />
+            )}
           </figure>
           <div className="study-option-head">
             <p className="study-option-title">{option.title}</p>
@@ -852,24 +827,38 @@ export function Options({
 
 export function WideImage({
   src,
+  poster,
   alt,
   caption,
 }: {
   src: string;
+  poster?: string;
   alt: string;
   caption: ReactNode;
 }) {
   return (
     <motion.figure
-      className="study-figure study-image"
+      className="study-figure study-image is-wide"
       {...reveal(0.1)}
     >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-      />
+      {poster ? (
+        <InViewVideo
+          src={src}
+          poster={poster}
+          aria-label={alt}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+        />
+      )}
       <figcaption>
         <h3>{caption}</h3>
       </figcaption>
@@ -925,9 +914,7 @@ function useTypewriter(lines: string[]) {
     let length = all[0].length;
     let deleting = false;
     let timer: number;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduced = window.matchMedia(REDUCED_MOTION_QUERY).matches;
     const tick = () => {
       if (reduced) {
         line = (line + 1) % all.length;

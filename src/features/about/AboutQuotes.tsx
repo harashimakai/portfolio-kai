@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 import SectionDivider from "../../components/ui/SectionDivider";
 import { BLUR_IN, BLUR_NONE } from "../../lib/animations";
@@ -53,7 +53,7 @@ const QUOTES: Quote[] = [
         the absolute truth of the world. The cold relentless circling of the
         intestate earth. Darkness implacable. The crushing black vacuum of the
         universe. Borrowed time and borrowed world and borrowed eyes with which
-        to sorrow it. ”
+        to sorrow it.”
       </>
     ),
     author: "Cormac McCarthy, The Road",
@@ -137,9 +137,9 @@ const QUOTES: Quote[] = [
   {
     node: (
       <>
-        "When you compare the sorrows of real life to the pleasures of the
+        “When you compare the sorrows of real life to the pleasures of the
         imaginary one, you will never want to live again, only to dream
-        forever."
+        forever.”
       </>
     ),
     author: "Alexandre Dumas, The Count of Monte Cristo",
@@ -213,59 +213,65 @@ const QUOTES: Quote[] = [
 ];
 
 export default function AboutQuotes() {
-  const [state, setState] = useState({
-    index: 0,
-    prev: -1,
-    dir: 1,
-    swiped: false,
-  });
+  const reduceMotion = useReducedMotion();
+  const [state, setState] = useState({ index: 0, prev: -1, dir: 1 });
 
-  const go = useCallback((next: number) => {
+  const go = useCallback((next: number, dir?: number) => {
     setState((s) =>
       next === s.index
         ? s
-        : {
-            index: next,
-            prev: s.index,
-            dir: next > s.index ? 1 : -1,
-            swiped: false,
-          },
+        : { index: next, prev: s.index, dir: dir ?? (next > s.index ? 1 : -1) },
     );
   }, []);
 
-  const touch = useRef<{ x: number; y: number } | null>(null);
-  const onTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    touch.current = { x: t.clientX, y: t.clientY };
-  };
-  const onTouchEnd = (e: React.TouchEvent) => {
-    const start = touch.current;
-    touch.current = null;
-    if (!start) return;
-    const t = e.changedTouches[0];
-    const dx = t.clientX - start.x;
-    const dy = t.clientY - start.y;
-    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
-    const step = dx < 0 ? 1 : -1;
+  const step = useCallback((delta: 1 | -1) => {
     setState((s) => ({
-      index: (s.index + step + QUOTES.length) % QUOTES.length,
+      index: (s.index + delta + QUOTES.length) % QUOTES.length,
       prev: s.index,
-      dir: step,
-      swiped: true,
+      dir: delta,
     }));
+  }, []);
+
+  const drag = useRef<{ x: number; y: number; id: number } | null>(null);
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    drag.current = { x: e.clientX, y: e.clientY, id: e.pointerId };
+  };
+  const onPointerUp = (e: React.PointerEvent) => {
+    const start = drag.current;
+    drag.current = null;
+    if (!start || start.id !== e.pointerId) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+    if (e.pointerType === "mouse" && window.getSelection()?.toString()) return;
+    step(dx < 0 ? 1 : -1);
+  };
+  const onPointerCancel = () => {
+    drag.current = null;
   };
 
+  const dots = useRef<HTMLDivElement>(null);
+  const onDotsKeyDown = (e: React.KeyboardEvent) => {
+    let next: number;
+    if (e.key === "ArrowRight") next = (state.index + 1) % QUOTES.length;
+    else if (e.key === "ArrowLeft")
+      next = (state.index - 1 + QUOTES.length) % QUOTES.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = QUOTES.length - 1;
+    else return;
+    e.preventDefault();
+    const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : undefined;
+    go(next, dir);
+    dots.current?.querySelectorAll("button")[next]?.focus();
+  };
+
+  const [paused, setPaused] = useState(false);
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setState((s) => ({
-        index: (s.index + 1) % QUOTES.length,
-        prev: s.index,
-        dir: 1,
-        swiped: false,
-      }));
-    }, INTERVAL);
+    if (paused) return;
+    const timer = setTimeout(() => step(1), INTERVAL);
     return () => clearTimeout(timer);
-  }, [state.index]);
+  }, [state.index, step, paused]);
 
   return (
     <>
@@ -273,37 +279,34 @@ export default function AboutQuotes() {
       <div className="about-quote-container">
         <div
           className="about-quote-stage"
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
+          onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)}
+          onPointerLeave={(e) => e.pointerType === "mouse" && setPaused(false)}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerCancel}
         >
-          <div
-            className="about-quote-overlay"
-            style={{ display: "grid", alignItems: "center" }}
-          >
+          <div className="about-quote-overlay">
             {QUOTES.map((quote, i) => {
               const active = i === state.index;
               const leaving = i === state.prev;
-              const offset = (leaving ? -1 : 1) * state.dir;
-              const enter = state.swiped
-                ? { x: [40 * state.dir, 0], y: 0 }
-                : { x: 0, y: [20 * state.dir, 0] };
-              const rest = state.swiped
-                ? { x: 40 * offset, y: 0 }
-                : { x: 0, y: 20 * offset };
+              const x = reduceMotion
+                ? 0
+                : active
+                  ? [40 * state.dir, 0]
+                  : 40 * (leaving ? -1 : 1) * state.dir;
               return (
                 <motion.blockquote
                   key={i}
                   className="about-quote quote"
                   style={{
-                    gridArea: "1 / 1",
                     userSelect: active ? "auto" : "none",
                     pointerEvents: active ? "auto" : "none",
                   }}
                   initial={false}
                   animate={{
                     opacity: active ? 1 : 0,
-                    ...(active ? enter : rest),
-                    filter: active ? BLUR_NONE : BLUR_IN,
+                    x,
+                    filter: active || reduceMotion ? BLUR_NONE : BLUR_IN,
                   }}
                   transition={
                     active
@@ -319,7 +322,7 @@ export default function AboutQuotes() {
             })}
           </div>
         </div>
-        <div className="about-quote-dots">
+        <div className="about-quote-dots" ref={dots} onKeyDown={onDotsKeyDown}>
           {QUOTES.map((quote, i) => (
             <button
               key={i}

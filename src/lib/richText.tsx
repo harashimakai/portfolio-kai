@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
-const MARK = /(\*\*[^*]+\*\*|\*[^*]+\*|_[^_]+_)/g;
+const MARK = /(\[[^\]]+\]\(https?:\/\/[^)\s]+\)|\*\*[^*]+\*\*|\*[^*]+\*|_[^_]+_)/g;
+const LINK = /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/;
 
 export function rich(text: string): ReactNode {
   const lines = text.split("\n");
@@ -18,6 +19,18 @@ function richLine(text: string): ReactNode {
   const parts = text.split(MARK);
   if (parts.length === 1) return text;
   return parts.map((part, i) => {
+    const link = LINK.exec(part);
+    if (link)
+      return (
+        <a
+          key={i}
+          href={link[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {link[1]}
+        </a>
+      );
     if (part.startsWith("**") && part.endsWith("**") && part.length > 4)
       return <strong key={i}>{part.slice(2, -2)}</strong>;
     if (part.startsWith("*") && part.endsWith("*") && part.length > 2)

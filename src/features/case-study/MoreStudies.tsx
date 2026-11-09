@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import CaseStudyList from "./CaseStudyList";
+import Arrow from "../../components/ui/Arrow";
 import SectionDivider from "../../components/ui/SectionDivider";
 import { studyList, toCard } from "../../data/caseStudies";
 
@@ -16,7 +18,17 @@ export default function MoreStudies({ current, preview }: Props) {
   return (
     <aside>
       <SectionDivider />
-      <h2 className="study-more-label">More case studies</h2>
+      <div className="study-more-head">
+        <h2>More case studies</h2>
+        <Link
+          className="study-more-link"
+          to="/work"
+        >
+          <h2 className="underline-hover">
+            Back to work <Arrow dir="right" />
+          </h2>
+        </Link>
+      </div>
       <CaseStudyList
         studies={others}
         className="study-more-list"

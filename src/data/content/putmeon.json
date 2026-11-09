@@ -100,7 +100,7 @@
         {
           "id": "n139",
           "type": "statement",
-          "text": "Based on interviews, here's what I found",
+          "text": "Based on interviews, here’s what I found:",
           "small": true
         },
         {
@@ -142,7 +142,7 @@
         {
           "id": "n147",
           "type": "statement",
-          "text": "I identified two distinct *user bases*, and the goals they share:",
+          "text": "I identified two distinct user bases, and the goals they share",
           "small": true
         },
         {
@@ -168,24 +168,6 @@
               ]
             },
             {
-              "id": "n15",
-              "title": "Explorers",
-              "lines": [
-                {
-                  "id": "n16",
-                  "text": "Want to diversify their taste"
-                },
-                {
-                  "id": "n17",
-                  "text": "Actively seek new genres and artists"
-                },
-                {
-                  "id": "n18",
-                  "text": "Feel like their recommendations are too algorithmic"
-                }
-              ]
-            },
-            {
               "id": "n19",
               "title": "Both",
               "lines": [
@@ -200,6 +182,24 @@
                 {
                   "id": "n22",
                   "text": "Connect and stay in touch with friends through music"
+                }
+              ]
+            },
+            {
+              "id": "n15",
+              "title": "Explorers",
+              "lines": [
+                {
+                  "id": "n16",
+                  "text": "Want to diversify their taste"
+                },
+                {
+                  "id": "n17",
+                  "text": "Actively seek new genres and artists"
+                },
+                {
+                  "id": "n18",
+                  "text": "Feel like their recommendations are too algorithmic"
                 }
               ]
             }
@@ -262,7 +262,7 @@
         {
           "id": "n175",
           "type": "statement",
-          "text": "*Solution:*  The Weekly Recommendation",
+          "text": "Solution:  The *Weekly Recommendation*",
           "small": true
         },
         {
@@ -279,7 +279,7 @@
         {
           "id": "n191",
           "type": "statement",
-          "text": "The Home Page: Iteration Process",
+          "text": "The Home Page: Iterations",
           "small": true
         },
         {
@@ -357,7 +357,7 @@
         {
           "id": "n45",
           "type": "statement",
-          "text": "The About Page: Iteration Process",
+          "text": "The About Page: Iterations",
           "small": true
         },
         {
@@ -432,12 +432,12 @@
     },
     {
       "id": "final",
-      "label": "Library / onboarding",
+      "label": "Additional screens",
       "blocks": [
         {
           "id": "n55",
           "type": "statement",
-          "text": "The finishing touches."
+          "text": "The finishing touches"
         },
         {
           "id": "n56",
@@ -472,7 +472,7 @@
         {
           "id": "n208",
           "type": "statement",
-          "text": "If I had more time, I would've…"
+          "text": "If I had more time, I would’ve…"
         },
         {
           "id": "n209",
@@ -480,15 +480,15 @@
           "items": [
             {
               "id": "n210",
-              "text": "spent longer *ideating wireframes* and app structure — specifically the organization of the library page."
+              "text": "Spent longer *ideating wireframes* and app structure — specifically the organization of the library page."
             },
             {
               "id": "n211",
-              "text": "explored this concept as an *integrated feature* within Spotify as opposed to an independent app."
+              "text": "Explored this concept as an *integrated feature* within Spotify as opposed to an independent app."
             },
             {
               "id": "n212",
-              "text": "conducted *more formalized research* — possibly through a survey to reach a wider base of users."
+              "text": "Conducted *more formalized research* — possibly through a survey to reach a wider base of users."
             }
           ],
           "layout": "grid"
