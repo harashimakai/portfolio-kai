@@ -1,13 +1,17 @@
+/* Sections */
+
 .home-art {
   padding: var(--space-gap) var(--page-gutter) var(--space-section);
 }
 
-.intro-section {
+.home-intro-section {
   padding: 80px var(--page-gutter) 80px;
   transition: padding-top var(--ease-hover);
 }
 
-.intro {
+/* Intro */
+
+.home-intro {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -15,15 +19,14 @@
   gap: 48px;
 }
 
-.intro-body {
+.home-intro-body {
   flex: 1 1 auto;
   min-width: 0;
   max-width: 60%;
 }
 
-.intro-lead {
+.home-intro-lead {
   margin: 0;
-  /* Same readability tuning as .about-quote (minus line-height). */
   letter-spacing: 0.01em;
   word-spacing: 0.04em;
   font-kerning: normal;
@@ -32,13 +35,13 @@
   text-wrap: pretty;
 }
 
-.intro-lead a {
+.home-intro-lead a {
   text-decoration-line: underline;
   text-decoration-thickness: 8%;
   text-underline-offset: 15.5%;
 }
 
-.intro-stats {
+.home-intro-stats {
   flex: 0 0 auto;
   margin-top: calc(0.252 * var(--text-lead) - 7.85px);
   display: flex;
@@ -47,30 +50,36 @@
   max-width: 520px;
 }
 
-.intro-stat {
+.home-intro-stat {
   display: flex;
   gap: 48px;
   align-items: baseline;
 }
 
-.intro-stat-label {
+.home-intro-stat-label {
   min-width: 90px;
   flex-shrink: 0;
   color: var(--muted);
 }
 
-.intro-stat-label,
-.intro-stat-value {
+.home-intro-stat-label,
+.home-intro-stat-value {
   margin: 0;
   font-size: var(--text-base);
 }
 
-.intro-actions {
+a.home-intro-stat-value {
+  --cursor-hover: var(--ink);
+}
+
+.home-intro-actions {
   display: flex;
   gap: var(--space-sm);
   align-items: center;
   margin-top: var(--space-sm);
 }
+
+/* Case list */
 
 .home-case-list {
   display: grid;
@@ -79,7 +88,9 @@
   gap: var(--space-sm);
 }
 
-.art-strip {
+/* Art strip */
+
+.home-art-strip {
   margin: 0 0 var(--space-md);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -87,110 +98,83 @@
   transition: gap var(--ease-hover);
 }
 
-.art-cell-extra {
+.home-art-cell-extra {
   display: revert;
 }
 
-.art-cell {
+.home-art-cell {
   min-width: 0;
 }
 
-.art-strip-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin: 0 0 var(--space-sm);
-}
-
-.art-strip-more a {
-  --cursor-hover: var(--accent);
-  text-decoration: none;
-}
-
-.art-strip-more h2 {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  color: var(--ink);
-  transition: color var(--ease-theme);
-}
-
-.art-strip-more a:hover h2 {
-  color: var(--accent);
-  transition: color var(--ease-hover);
-}
-
-@media (max-width: 767px) {
-  .art-strip {
-    margin-bottom: 0;
-  }
-  .art-strip .art-tile-title {
-    display: none;
-  }
-}
-
-@media (min-width: 768px) {
-  .art-strip {
-    gap: var(--space-xs);
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .art-cell-extra {
-    display: none;
-  }
-}
-
-@media (min-width: 1190px) {
-  .art-strip {
-    gap: var(--space-sm);
-  }
-}
+/* Media queries */
 
 @media (max-width: 1399px) {
-  .intro {
+  .home-intro {
     flex-direction: column;
     gap: 36px;
   }
-  .intro-body {
+  .home-intro-body {
     max-width: none;
   }
-  .intro-stats {
+  .home-intro-stats {
     margin-top: 0;
     max-width: none;
   }
 }
 
 @media (max-width: 1189px) {
-  .intro-section {
+  .home-intro-section {
     padding: 72px var(--page-gutter) 64px;
   }
 }
 
 @media (max-width: 767px) {
-  .intro-section {
+  .home-intro-section {
     padding: 32px var(--page-gutter);
   }
-  .intro {
+  .home-intro {
     gap: 24px;
   }
-  .intro-stats {
+  .home-intro-stats {
     gap: 2px;
   }
-  .intro-stat {
+  .home-intro-stat {
     gap: 24px;
   }
-  .intro-stat-label {
+  .home-intro-stat-label {
     min-width: 76px;
   }
-  .intro-stat-label,
-  .intro-stat-value {
+  .home-intro-stat-label,
+  .home-intro-stat-value {
     font-size: var(--text-sm);
   }
-  .intro-actions {
+  .home-intro-actions {
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 22px;
   }
   .home-case-list {
     padding-bottom: var(--space-section);
+  }
+  .home-art-strip {
+    margin-bottom: 0;
+  }
+  .home-art-strip .art-tile-title {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-art-strip {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .home-art-cell-extra {
+    display: none;
+  }
+}
+
+@media (min-width: 1190px) {
+  .home-art-strip {
+    gap: var(--space-sm);
   }
 }

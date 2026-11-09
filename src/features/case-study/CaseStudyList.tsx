@@ -1,13 +1,17 @@
 import { motion } from "motion/react";
-import { children_custom } from "../../lib/animations";
+import { fadeUpDelayed } from "../../lib/animations";
 import CaseStudyCard from "./CaseStudyCard";
 import type { StudyCard } from "../../types/caseStudy";
+
+// Types
 
 interface Props {
   studies: StudyCard[];
   className: string;
   delay: number;
 }
+
+// List
 
 export default function CaseStudyList({ studies, className, delay }: Props) {
   return (
@@ -18,7 +22,7 @@ export default function CaseStudyList({ studies, className, delay }: Props) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={children_custom}
+          variants={fadeUpDelayed}
           custom={delay}
         >
           <CaseStudyCard item={item} />

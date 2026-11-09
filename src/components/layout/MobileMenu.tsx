@@ -5,11 +5,17 @@ import { AnimatePresence, motion } from "motion/react";
 import NavLinks from "./NavLinks";
 import ThemeToggle from "./ThemeToggle";
 import Monogram from "../ui/Monogram";
+import useDialog from "../../hooks/useDialog";
 import { menuPanel } from "../../lib/animations";
 import { INTRO } from "../../data/site";
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+// Constants
+
+const MENU_FOCUS_DELAY = 50;
+const SWIPE_CLOSE_OFFSET = -80;
+const SWIPE_CLOSE_VELOCITY = -400;
+
+// Mobile menu
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -17,39 +23,25 @@ export default function MobileMenu() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const { pathname } = useLocation();
 
+  // Effects
+
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
-  useEffect(() => {
-    if (!open) return;
-    document.body.style.overflow = "hidden";
-    const focusables = () =>
-      Array.from(panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []);
-    const focusTimer = setTimeout(() => focusables()[0]?.focus(), 50);
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") return setOpen(false);
-      if (e.key !== "Tab") return;
-      const items = focusables();
-      if (items.length === 0) return;
-      const i = items.indexOf(document.activeElement as HTMLElement);
-      const step = e.shiftKey ? -1 : 1;
-      e.preventDefault();
-      items[(i + step + items.length) % items.length].focus();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      clearTimeout(focusTimer);
-      window.removeEventListener("keydown", onKey);
-      toggleRef.current?.focus();
-    };
-  }, [open]);
+  useDialog(panelRef, {
+    open,
+    onClose: () => setOpen(false),
+    returnFocus: toggleRef,
+    focusDelay: MENU_FOCUS_DELAY,
+  });
 
   return (
     <>
+      {/* Toggle */}
       <motion.button
         ref={toggleRef}
+        type="button"
         className="menu-toggle"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
@@ -61,6 +53,7 @@ export default function MobileMenu() {
           width="30"
           height="30"
           viewBox="0 0 22.5 16"
+          aria-hidden="true"
         >
           <motion.path
             className="menu-toggle-line"
@@ -85,6 +78,7 @@ export default function MobileMenu() {
         </svg>
       </motion.button>
 
+      {/* Panel */}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -101,7 +95,7 @@ export default function MobileMenu() {
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={{ left: 1, right: 0 }}
             onDragEnd={(_, info) => {
-              if (info.offset.x < -80 || info.velocity.x < -400) setOpen(false);
+              if (info.offset.x < SWIPE_CLOSE_OFFSET || info.velocity.x < SWIPE_CLOSE_VELOCITY) setOpen(false);
             }}
           >
             <Link

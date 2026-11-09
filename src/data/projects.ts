@@ -11,6 +11,8 @@ import backyard1Expanded from "../assets/optimized/backyard-1-large.webp";
 import backyard2Expanded from "../assets/optimized/backyard-2-large.webp";
 import backyard3Expanded from "../assets/optimized/backyard-3-large.webp";
 
+// Projects
+
 export const projects: Project[] = [
   {
     id: "1",
@@ -80,6 +82,8 @@ export const projects: Project[] = [
     extra: true,
   },
 ];
+
+// Ordering
 
 const homeOrder = ["2", "3", "4", "5", "1", "6"];
 const homePhoneOrder = ["3", "2", "1", "4", "5", "6"];

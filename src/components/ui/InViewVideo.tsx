@@ -1,16 +1,17 @@
 import { useEffect, useRef, type VideoHTMLAttributes } from "react";
 
+// Constants
+
+const PRELOAD_MARGIN = "100px 0px";
+
+// Types
+
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay"> & {
-  /** Start playing when scrolled into view (muted, looping media). Otherwise
-   *  the video only gets paused when it leaves the viewport. */
   autoPlay?: boolean;
 };
 
-/**
- * A <video> that only plays while it is on screen. Off-screen videos are
- * paused so they don't keep decoding in the background, and autoplaying
- * ones don't download until they're near the viewport.
- */
+// Video
+
 export default function InViewVideo({ autoPlay = false, preload, ...rest }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -25,7 +26,7 @@ export default function InViewVideo({ autoPlay = false, preload, ...rest }: Prop
           video.pause();
         }
       },
-      { rootMargin: "100px 0px" },
+      { rootMargin: PRELOAD_MARGIN },
     );
     io.observe(video);
     return () => io.disconnect();

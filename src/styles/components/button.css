@@ -1,3 +1,5 @@
+/* Base */
+
 .button {
   display: inline-block;
   padding: var(--space-xs) 32px;
@@ -10,12 +12,14 @@
     border-color var(--ease-theme);
 }
 
+/* Primary */
+
 .button-primary {
   border: none;
   background-color: var(--ink);
 }
 
-.button-primary h3 {
+.button-primary .text-label-sm {
   color: var(--bg);
 }
 
@@ -24,12 +28,14 @@
   transition: background-color var(--ease-hover);
 }
 
+/* Secondary */
+
 .button-secondary {
   border-color: var(--ink);
   background-color: transparent;
 }
 
-.button-secondary h3 {
+.button-secondary .text-label-sm {
   color: var(--ink);
 }
 
@@ -38,10 +44,12 @@
   transition: border-color var(--ease-hover);
 }
 
-.button-secondary:hover h3 {
+.button-secondary:hover .text-label-sm {
   color: var(--accent);
   transition: color var(--ease-hover);
 }
+
+/* Media queries */
 
 @media (max-width: 767px) {
   .button {

@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function usePreload(urls: string[], timeout = 1200) {
+// Constants
+
+const DEFAULT_TIMEOUT_MS = 1200;
+
+// Hook
+
+export default function usePreload(
+  urls: readonly string[],
+  timeout = DEFAULT_TIMEOUT_MS,
+) {
   const [ready, setReady] = useState(false);
   const keep = useRef<HTMLImageElement[]>([]);
 
@@ -12,10 +21,7 @@ export default function usePreload(urls: string[], timeout = 1200) {
       keep.current.push(img);
       return img.decode().catch(() => undefined);
     });
-    const fonts =
-      typeof document !== "undefined" && "fonts" in document
-        ? document.fonts.ready
-        : Promise.resolve();
+    const fonts = "fonts" in document ? document.fonts.ready : Promise.resolve();
     const loaded = Promise.all([fonts, ...decodes]);
     const limit = new Promise((resolve) => setTimeout(resolve, timeout));
     Promise.race([loaded, limit]).then(() => {
@@ -24,7 +30,7 @@ export default function usePreload(urls: string[], timeout = 1200) {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [urls, timeout]);
 
   useEffect(() => {
     if (ready) keep.current = [];

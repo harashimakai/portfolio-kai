@@ -1,8 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+// Types
+
 interface Props {
   sections: { id: string; label: string }[];
 }
+
+// Study nav
 
 export default function StudyNav({ sections }: Props) {
   const [active, setActive] = useState(sections[0]?.id ?? "");
@@ -28,7 +32,7 @@ export default function StudyNav({ sections }: Props) {
 
   useLayoutEffect(() => {
     const list = listRef.current;
-    const link = list?.querySelector<HTMLElement>(".is-active h2");
+    const link = list?.querySelector<HTMLElement>(".is-active .text-label");
     if (!list || !link) return;
     const measure = () => setBar({ left: link.offsetLeft, width: link.offsetWidth });
     measure();
@@ -57,7 +61,7 @@ export default function StudyNav({ sections }: Props) {
                 document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <h2>{label}</h2>
+              <span className="text-label">{label}</span>
             </a>
           </li>
         ))}

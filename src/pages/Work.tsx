@@ -3,15 +3,17 @@ import { studyList, toCard } from "../data/caseStudies";
 
 const studies = studyList.map(toCard);
 
-// Switch to 2 to lay the case studies out in two columns (≥768px).
-const COLUMNS: 1 | 2 = 1;
+// Page
 
 export default function Work() {
   return (
-    <CaseStudyList
-      studies={studies}
-      className={COLUMNS === 2 ? "case-list case-list-2col" : "case-list"}
-      delay={0.3}
-    />
+    <>
+      <h1 className="visually-hidden">Work</h1>
+      <CaseStudyList
+        studies={studies}
+        className="case-list"
+        delay={0.3}
+      />
+    </>
   );
 }

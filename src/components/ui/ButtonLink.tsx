@@ -10,6 +10,8 @@ interface Props {
   children: ReactNode;
 }
 
+// Button link
+
 export default function ButtonLink({ to, variant, children }: Props) {
   return (
     <MotionLink
@@ -17,7 +19,7 @@ export default function ButtonLink({ to, variant, children }: Props) {
       className={`button button-${variant}`}
       whileHover={{ scale: 1.05 }}
     >
-      <h3>{children}</h3>
+      <span className="text-label-sm">{children}</span>
     </MotionLink>
   );
 }

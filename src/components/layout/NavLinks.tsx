@@ -1,6 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { NAV_ITEMS } from "../../data/site";
 
+// Nav links
+
 export default function NavLinks() {
   const { pathname } = useLocation();
   return (
@@ -19,7 +21,7 @@ export default function NavLinks() {
                 : "nav-link underline-hover"
             }
           >
-            <h2>{label}</h2>
+            <span className="text-label">{label}</span>
           </NavLink>
         );
       })}

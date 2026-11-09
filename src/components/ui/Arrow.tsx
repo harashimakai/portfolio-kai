@@ -1,13 +1,19 @@
+// Types
+
 interface Props {
   dir: "ne" | "up" | "right";
   lead?: boolean;
 }
+
+// Rotations
 
 const ROTATE: Record<Props["dir"], number> = {
   right: 0,
   ne: -45,
   up: -90,
 };
+
+// Arrow
 
 export default function Arrow({ dir, lead = false }: Props) {
   return (

@@ -1,14 +1,29 @@
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, Variants } from "motion/react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+  type TouchEvent,
+} from "react";
+import { AnimatePresence, motion, type Variants } from "motion/react";
+
+import useDialog from "../../hooks/useDialog";
 import { BLUR_IN, BLUR_NONE } from "../../lib/animations";
 import type { Project } from "../../types/project";
+
+// Types
+
 interface Props {
   projects: Project[];
   index: number | null;
   onChange: (index: number | null) => void;
 }
 
+// Constants
+
 const SHIFT = 24;
+const SWIPE_MIN_PX = 48;
+const SWIPE_AXIS_RATIO = 1.5;
 const glide = { duration: 0.4, ease: "easeInOut" as const };
 const slide: Variants = {
   enter: (dir: number) => ({ opacity: 0, x: SHIFT * dir, filter: BLUR_IN }),
@@ -20,6 +35,8 @@ const slide: Variants = {
     transition: glide,
   }),
 };
+
+// Lightbox
 
 export default function Lightbox({ projects, index, onChange }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -33,70 +50,54 @@ export default function Lightbox({ projects, index, onChange }: Props) {
 
   const total = projects.length;
 
+  // Navigation
+
   const step = (delta: number) => {
     if (index === null || total === 0) return;
     dirRef.current = delta < 0 ? -1 : 1;
     onChange((index + delta + total) % total);
   };
 
+  // Effects
+
   useEffect(() => {
     if (index !== null) setShown({ item: projects[index], index });
   }, [index, projects]);
 
+  useDialog(rootRef, {
+    open,
+    onClose: () => onChange(null),
+    initialFocus: closeRef,
+  });
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onChange(null);
-      else if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowRight") step(1);
       else if (e.key === "ArrowLeft") step(-1);
-      else if (e.key === "Tab") {
-        const items = Array.from(
-          rootRef.current?.querySelectorAll<HTMLElement>(
-            'button:not([tabindex="-1"])',
-          ) ?? [],
-        );
-        if (items.length === 0) return;
-        const i = items.indexOf(document.activeElement as HTMLElement);
-        const next = e.shiftKey
-          ? items[(i - 1 + items.length) % items.length]
-          : items[(i + 1) % items.length];
-        e.preventDefault();
-        next.focus();
-      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, index, total, onChange]);
 
-  useEffect(() => {
-    if (!open) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      if (rootRef.current?.contains(document.activeElement)) {
-        (document.activeElement as HTMLElement).blur();
-      }
-    };
-  }, [open]);
+  // Handlers
 
   const tab = open ? 0 : -1;
   const dir = dirRef.current;
-  const swallow = (e: React.MouseEvent) => e.stopPropagation();
+  const swallow = (e: MouseEvent) => e.stopPropagation();
 
-  const onTouchStart = (e: React.TouchEvent) => {
+  const onTouchStart = (e: TouchEvent) => {
     const t = e.touches[0];
     touchRef.current = { x: t.clientX, y: t.clientY };
   };
-  const onTouchEnd = (e: React.TouchEvent) => {
+  const onTouchEnd = (e: TouchEvent) => {
     const start = touchRef.current;
     touchRef.current = null;
     if (!start) return;
     const t = e.changedTouches[0];
     const dx = t.clientX - start.x;
     const dy = t.clientY - start.y;
-    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    if (Math.abs(dx) > SWIPE_MIN_PX && Math.abs(dx) > Math.abs(dy) * SWIPE_AXIS_RATIO) {
       step(dx < 0 ? 1 : -1);
     }
   };
@@ -116,11 +117,12 @@ export default function Lightbox({ projects, index, onChange }: Props) {
     >
       {shown && (
         <>
+          {/* Bar */}
           <div className="lightbox-bar">
-            <h3>
+            <p className="text-label-sm">
               {String(shown.index + 1).padStart(2, "0")} /{" "}
               {String(total).padStart(2, "0")}
-            </h3>
+            </p>
             <button
               ref={closeRef}
               type="button"
@@ -129,13 +131,18 @@ export default function Lightbox({ projects, index, onChange }: Props) {
               aria-label="Close"
               tabIndex={tab}
             >
-              <h2>Close</h2>
+              <span className="text-label">Close</span>
             </button>
           </div>
 
           <div className="lightbox-inner">
             <div className="lightbox-row">
-              <AnimatePresence mode="wait" custom={dir} initial={false}>
+              {/* Image */}
+              <AnimatePresence
+                mode="wait"
+                custom={dir}
+                initial={false}
+              >
                 <motion.figure
                   key={shown.item.id}
                   className="lightbox-figure"
@@ -154,8 +161,13 @@ export default function Lightbox({ projects, index, onChange }: Props) {
                 </motion.figure>
               </AnimatePresence>
 
+              {/* Info */}
               <div className="lightbox-side">
-                <AnimatePresence mode="wait" custom={dir} initial={false}>
+                <AnimatePresence
+                  mode="wait"
+                  custom={dir}
+                  initial={false}
+                >
                   <motion.div
                     key={shown.item.id}
                     className="lightbox-side-inner"
@@ -187,7 +199,7 @@ export default function Lightbox({ projects, index, onChange }: Props) {
                         aria-label="Previous piece"
                         tabIndex={tab}
                       >
-                        <h2>Prev</h2>
+                        <span className="text-label">Prev</span>
                       </button>
                       <button
                         type="button"
@@ -196,7 +208,7 @@ export default function Lightbox({ projects, index, onChange }: Props) {
                         aria-label="Next piece"
                         tabIndex={tab}
                       >
-                        <h2>Next</h2>
+                        <span className="text-label">Next</span>
                       </button>
                     </div>
                   </motion.div>

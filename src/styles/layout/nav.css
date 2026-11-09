@@ -1,8 +1,12 @@
+/* Shared */
+
 .navbar,
 .menu-toggle,
 .mobile-menu {
   --accent: var(--site-accent);
 }
+
+/* Navbar */
 
 .navbar {
   position: sticky;
@@ -23,6 +27,8 @@
     background-color var(--ease-theme),
     border-color var(--ease-theme);
 }
+
+/* Logo */
 
 .navbar-logo,
 .mobile-menu-logo {
@@ -46,6 +52,8 @@
   transition: color var(--ease-hover);
 }
 
+/* Links */
+
 .navbar-controls {
   display: flex;
   align-items: center;
@@ -63,14 +71,21 @@
   text-decoration: none;
 }
 
-.nav-link h2 {
+.nav-link .text-label {
   color: var(--ink);
 }
 
-.nav-link h2:hover {
+.nav-link .text-label:hover {
   color: var(--accent);
   transition: color var(--ease-hover);
 }
+
+.nav-link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Theme toggle */
 
 .theme-toggle {
   position: relative;
@@ -89,7 +104,7 @@
   border: none;
 }
 
-.theme-toggle h2 {
+.theme-toggle .text-label {
   position: relative;
   display: flex;
   align-items: center;
@@ -100,12 +115,14 @@
   text-transform: uppercase;
 }
 
-.theme-toggle:hover h2 {
+.theme-toggle:hover .text-label {
   color: var(--accent);
   transition:
     color var(--ease-hover),
     text-decoration-color var(--ease-hover);
 }
+
+/* Menu toggle */
 
 .menu-toggle {
   position: fixed;
@@ -131,6 +148,8 @@
   stroke: var(--accent);
   transition: stroke var(--ease-hover);
 }
+
+/* Mobile menu */
 
 .mobile-menu {
   position: fixed;
@@ -169,10 +188,11 @@
   margin: var(--space-md) 0;
 }
 
+/* Media queries */
+
 @media (max-width: 500px) {
   .navbar {
     justify-content: center;
-    padding: 0 var(--page-gutter);
   }
   .navbar-controls {
     display: none;

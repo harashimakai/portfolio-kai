@@ -1,17 +1,20 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
+
+import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
 
+// Mount
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
         <App />
       </ThemeProvider>
       <Analytics />
     </BrowserRouter>
-  </React.StrictMode>,
+  </StrictMode>,
 );

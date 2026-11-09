@@ -1,3 +1,5 @@
+/* Arrow */
+
 .arrow {
   position: relative;
   display: inline;
@@ -22,16 +24,18 @@
   left: 0;
 }
 
-h2 .arrow,
-h3 .arrow {
+.text-label .arrow,
+.text-label-sm .arrow {
   letter-spacing: 0.7em;
 }
 
-h2 .arrow-icon,
-h3 .arrow-icon {
+.text-label .arrow-icon,
+.text-label-sm .arrow-icon {
   width: 1.3em;
   height: 1.3em;
 }
+
+/* Underline hover */
 
 .underline-hover::after {
   content: "";
@@ -43,20 +47,16 @@ h3 .arrow-icon {
   background-color: var(--ink);
   transform: scaleX(0);
   transition:
-    transform 0.25s ease-out,
+    transform var(--ease-quick),
     background-color var(--ease-theme);
   transform-origin: right;
 }
 
-.nav-link.nav-link.is-active::after,
 .underline-hover:hover::after {
   transform: scaleX(1);
   transform-origin: left;
-}
-
-.underline-hover:hover::after {
-  background-color: var(--accent) !important;
+  background-color: var(--accent);
   transition:
-    transform 0.25s ease-out,
+    transform var(--ease-quick),
     background-color var(--ease-hover);
 }

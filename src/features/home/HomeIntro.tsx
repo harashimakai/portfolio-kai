@@ -1,39 +1,44 @@
 import { motion } from "motion/react";
-import { children_custom, container_m } from "../../lib/animations";
+import { fadeUpDelayed, staggerContainer } from "../../lib/animations";
 import Arrow from "../../components/ui/Arrow";
 import { EMAILS, INTRO, LINKS } from "../../data/site";
 import ButtonLink from "../../components/ui/ButtonLink";
 
+// Intro
+
 export default function HomeIntro() {
   return (
-    <section className="intro-section">
+    <section className="home-intro-section">
       <motion.div
-        className="intro"
-        variants={container_m}
+        className="home-intro"
+        variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="intro-body">
-          <motion.p
-            className="intro-lead lead"
-            variants={children_custom}
+        {/* Lead */}
+        <div className="home-intro-body">
+          <motion.h1
+            className="home-intro-lead lead"
+            variants={fadeUpDelayed}
             custom={0.1}
           >
             {INTRO}
-          </motion.p>
+          </motion.h1>
         </div>
-        <div className="intro-stats">
+        {/* Stats */}
+        <div className="home-intro-stats">
           <motion.div
-            className="intro-stat"
-            variants={children_custom}
+            className="home-intro-stat"
+            variants={fadeUpDelayed}
             custom={0.2}
           >
-            <p className="intro-stat-label">Now</p>
-            <p className="intro-stat-value">
-              Designer &amp; Developer @{" "}
+            <p className="home-intro-stat-label">Now</p>
+            <p className="home-intro-stat-value">
+              Designer & Developer @{" "}
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href={LINKS.dti}
               >
                 Cornell DTI
@@ -41,29 +46,30 @@ export default function HomeIntro() {
             </p>
           </motion.div>
           <motion.div
-            className="intro-stat"
-            variants={children_custom}
+            className="home-intro-stat"
+            variants={fadeUpDelayed}
             custom={0.3}
           >
-            <p className="intro-stat-label">Studying</p>
-            <p className="intro-stat-value">Computer Science</p>
+            <p className="home-intro-stat-label">Studying</p>
+            <p className="home-intro-stat-value">Computer Science</p>
           </motion.div>
           <motion.div
-            className="intro-stat"
-            variants={children_custom}
+            className="home-intro-stat"
+            variants={fadeUpDelayed}
             custom={0.4}
           >
-            <p className="intro-stat-label">Email</p>
+            <p className="home-intro-stat-label">Email</p>
             <a
-              className="intro-stat-value"
+              className="home-intro-stat-value"
               href={`mailto:${EMAILS.school}`}
             >
               {EMAILS.school} <Arrow dir="ne" />
             </a>
           </motion.div>
-          <div className="intro-actions">
+          {/* Actions */}
+          <div className="home-intro-actions">
             <motion.div
-              variants={children_custom}
+              variants={fadeUpDelayed}
               custom={0.5}
             >
               <ButtonLink
@@ -74,7 +80,7 @@ export default function HomeIntro() {
               </ButtonLink>
             </motion.div>
             <motion.div
-              variants={children_custom}
+              variants={fadeUpDelayed}
               custom={0.6}
             >
               <ButtonLink

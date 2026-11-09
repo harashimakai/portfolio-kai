@@ -1,12 +1,22 @@
 import { useEffect, useRef } from "react";
 
-const ENABLED = true;
-const EMAIL = 'a[href^="mailto:"]';
+import { EMAIL_COPIED_EVENT, MAILTO_SELECTOR } from "../../lib/email";
+import { FINE_POINTER_QUERY, REDUCED_MOTION_QUERY } from "../../lib/media";
+
+// Constants
+
+const OFFSCREEN = -100;
 const CLICKABLE =
   'a, button, [role="button"], select, label, summary, input[type="checkbox"], input[type="radio"]';
 const ARROW_PATH = "M0 0 L0 12.96 L3.28 9.92 L5.52 15.12 L7.68 14.16 L5.52 9.2 L9.76 9.2Z";
 const IBEAM_PATH =
   "M1 1.25 C2.75 1.25 4.5 1.75 4.5 3.25 C4.5 1.75 6.25 1.25 8 1.25 M4.5 3.25 V14.75 M1 16.75 C2.75 16.75 4.5 16.25 4.5 14.75 C4.5 16.25 6.25 16.75 8 16.75";
+
+// Helpers
+
+function restartAnimation(el: HTMLElement) {
+  void el.offsetWidth;
+}
 
 function overText(x: number, y: number, target: Element | null): boolean {
   type Caret = { offsetNode: Node; offset: number };
@@ -53,30 +63,36 @@ function overText(x: number, y: number, target: Element | null): boolean {
   return false;
 }
 
+// Cursor
+
 export default function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLSpanElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!ENABLED) return;
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const fine = window.matchMedia(FINE_POINTER_QUERY);
+    const calm = window.matchMedia(REDUCED_MOTION_QUERY);
     if (!fine.matches || calm.matches) return;
 
-    const root = ref.current!;
-    const body = bodyRef.current!;
-    const label = labelRef.current!;
+    const root = ref.current;
+    const body = bodyRef.current;
+    const label = labelRef.current;
+    if (!root || !body || !label) return;
     document.documentElement.classList.add("has-cursor");
 
-    let x = -100;
-    let y = -100;
+    // State
+
+    let x = OFFSCREEN;
+    let y = OFFSCREEN;
     let visible = false;
     let labelText = "";
     let lastTarget: Element | null = null;
     let accentSource: Element | null = null;
     let accentOverImage = false;
     let copiedOn: Element | null = null;
+
+    // Accent
 
     const matchAccent = (source: Element | null, overImage: boolean) => {
       if (source === accentSource && overImage === accentOverImage) return;
@@ -101,9 +117,11 @@ export default function Cursor() {
       else root.style.removeProperty("--cursor-edge");
     };
 
+    // Update
+
     const update = (target: Element | null) => {
       lastTarget = target;
-      const email = target?.closest(EMAIL) ?? null;
+      const email = target?.closest(MAILTO_SELECTOR) ?? null;
       if (copiedOn && email !== copiedOn) copiedOn = null;
       const labelled = target?.closest<HTMLElement>("[data-cursor]");
       matchAccent(labelled ?? target, Boolean(target?.closest("img, video")));
@@ -134,7 +152,7 @@ export default function Cursor() {
       }
 
       label.classList.remove("is-entering", "is-leaving");
-      void label.offsetWidth;
+      restartAnimation(label);
       if (next) {
         label.classList.toggle("cursor-label-filled", filled);
         label.textContent = next;
@@ -145,10 +163,8 @@ export default function Cursor() {
       }
     };
 
-    // Pointer events can arrive several times per frame (high polling-rate
-    // mice). Moving the cursor is a cheap style write, so it happens on every
-    // event; update() does layout reads for the text hit-test, so it's
-    // coalesced to once per animation frame to keep the main thread free.
+    // Handlers
+
     let moveTarget: Element | null = null;
     let moveQueued = 0;
     const flushMove = () => {
@@ -186,7 +202,7 @@ export default function Cursor() {
     const onClick = () =>
       requestAnimationFrame(() => {
         accentSource = null;
-        update(lastTarget);
+        update(document.elementFromPoint(x, y) ?? lastTarget);
       });
 
     const onCopied = (e: Event) => {
@@ -204,10 +220,12 @@ export default function Cursor() {
       }
     };
 
+    // Listeners
+
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true, capture: true });
     window.addEventListener("click", onClick);
-    window.addEventListener("email-copied", onCopied);
+    window.addEventListener(EMAIL_COPIED_EVENT, onCopied);
     window.addEventListener("pointerdown", onDown);
     window.addEventListener("pointerup", onUp);
     window.addEventListener("pointercancel", onUp);
@@ -216,13 +234,15 @@ export default function Cursor() {
     document.addEventListener("pointerleave", hide);
     label.addEventListener("animationend", onLabelEnd);
 
+    // Cleanup
+
     return () => {
       cancelAnimationFrame(moveQueued);
       document.documentElement.classList.remove("has-cursor");
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("scroll", onScroll, { capture: true });
       window.removeEventListener("click", onClick);
-      window.removeEventListener("email-copied", onCopied);
+      window.removeEventListener(EMAIL_COPIED_EVENT, onCopied);
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);
@@ -232,8 +252,6 @@ export default function Cursor() {
       label.removeEventListener("animationend", onLabelEnd);
     };
   }, []);
-
-  if (!ENABLED) return null;
 
   return (
     <div

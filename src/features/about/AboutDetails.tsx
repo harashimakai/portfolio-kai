@@ -2,21 +2,27 @@ import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { TABLET_QUERY } from "../../lib/media";
-import { children_custom } from "../../lib/animations";
+import { fadeUpDelayed } from "../../lib/animations";
 
 import SectionDivider from "../../components/ui/SectionDivider";
 import { EDUCATION, EXPERIENCES, SKILLS } from "../../data/about";
+
+// Constants
 
 const EDUCATION_START = 1.2;
 const EDUCATION_STEP = 0.2;
 const LEFT_END =
   EDUCATION_START + EDUCATION.length * EDUCATION_STEP;
 
+// Details
+
 export default function AboutDetails() {
   const stacked = useMediaQuery(TABLET_QUERY);
   const leftStart = useRef(0);
   const [rightShown, setRightShown] = useState(false);
   const [rightOffset, setRightOffset] = useState(0);
+
+  // Handlers
 
   const showRight = () => {
     if (rightShown) return;
@@ -32,6 +38,7 @@ export default function AboutDetails() {
       <SectionDivider />
       <section className="about-content-secondary">
         <div className="about-body-secondary">
+          {/* Left column */}
           <motion.div
             className="about-secondary-block"
             initial="hidden"
@@ -41,58 +48,60 @@ export default function AboutDetails() {
               leftStart.current ||= performance.now();
             }}
           >
-            <motion.h1
-              variants={children_custom}
+            <motion.h2
+              className="text-heading"
+              variants={fadeUpDelayed}
               custom={0}
             >
               Repertoire
-            </motion.h1>
+            </motion.h2>
             <div className="about-skills">
               {SKILLS.map((g, i) => (
                 <motion.div
                   key={g.group}
-                  variants={children_custom}
+                  variants={fadeUpDelayed}
                   custom={i * 0.2 + 0.2}
                 >
-                  <h2 className="about-skill-group">{g.group}</h2>
+                  <h3 className="about-skill-group text-label">{g.group}</h3>
                   <div className="about-skill-list">
                     {g.items.map((it) => (
                       <span
                         key={it}
-                        className="tool-pill"
+                        className="about-tool-pill"
                       >
-                        <h3>{it}</h3>
+                        <span className="text-label-sm">{it}</span>
                       </span>
                     ))}
                   </div>
                 </motion.div>
               ))}
             </div>
-            <motion.h1
-              className="about-secondary-next"
-              variants={children_custom}
+            <motion.h2
+              className="about-secondary-next text-heading"
+              variants={fadeUpDelayed}
               custom={1.0}
             >
               Education
-            </motion.h1>
+            </motion.h2>
             <div className="about-education">
               {EDUCATION.map((e, i) => (
                 <motion.div
                   key={e.school}
                   className="about-education-entry"
-                  variants={children_custom}
+                  variants={fadeUpDelayed}
                   custom={EDUCATION_START + i * EDUCATION_STEP}
                 >
                   <span className="about-education-star">✦</span>
                   <div>
                     <div className="about-education-name entry-title">{e.school}</div>
                     <div className="about-education-program body-sm">{e.program}</div>
-                    <h2 className="about-education-year">{e.year}</h2>
+                    <p className="about-education-year text-label">{e.year}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
+          {/* Right column */}
           <motion.div
             className="about-secondary-block"
             initial="hidden"
@@ -100,21 +109,22 @@ export default function AboutDetails() {
             viewport={{ once: true }}
             onViewportEnter={showRight}
           >
-            <motion.h1
-              variants={children_custom}
+            <motion.h2
+              className="text-heading"
+              variants={fadeUpDelayed}
               custom={rightOffset}
             >
               <span className="font-ss04">Experiences</span>
-            </motion.h1>
+            </motion.h2>
             <div className="about-experiences">
               {EXPERIENCES.map((x, i) => (
                 <motion.div
                   key={x.title}
                   className="about-experiences-item"
-                  variants={children_custom}
+                  variants={fadeUpDelayed}
                   custom={rightOffset + 0.25 + i * 0.25}
                 >
-                  <h2 className="about-experiences-date">{x.date}</h2>
+                  <p className="about-experiences-date text-label">{x.date}</p>
                   <div className="about-experiences-title entry-title">{x.title}</div>
                   <div className="about-experiences-role body-sm">{x.role}</div>
                 </motion.div>

@@ -1,9 +1,13 @@
 import { useEffect, type RefObject } from "react";
 import { PHONE_QUERY, REDUCED_MOTION_QUERY } from "../../lib/media";
 
+// Constants
+
 const INTRO_DELAY = 400;
 const INTRO_DURATION = 1400;
-const INTRO_VISIBLE = 0.075; // share of the cover left showing below the navbar
+const INTRO_VISIBLE = 0.075;
+
+// Helpers
 
 const easeInOutCubic = (t: number) =>
   t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
@@ -19,8 +23,8 @@ function pageTop(el: HTMLElement) {
   return y;
 }
 
-// Opens at the top of the page, then eases down so the title and meta come
-// into view. Any user input cancels it.
+// Hook
+
 export default function useIntroScroll(
   ref: RefObject<HTMLElement | null>,
   ready: boolean,

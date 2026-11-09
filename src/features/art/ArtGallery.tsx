@@ -1,9 +1,18 @@
-import { useLayoutEffect, useRef, useState } from "react";
-import type { ReactNode } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import { motion } from "motion/react";
-import { children_custom } from "../../lib/animations";
+
+import { fadeUpDelayed } from "../../lib/animations";
 import { TABLET_QUERY } from "../../lib/media";
 import type { Project } from "../../types/project";
+
+// Types
+
 export interface TileLayout {
   aspect?: string;
   image?: "thumbnail" | "expanded";
@@ -29,6 +38,8 @@ interface Props {
   rows: GalleryRow[];
 }
 
+// Gallery
+
 export default function ArtGallery({
   projects,
   onOpen,
@@ -45,24 +56,28 @@ export default function ArtGallery({
     .map((_, i) => i)
     .filter((i) => !named.has(projects[i].id));
 
-  const tile = (index: number, role?: "lead" | "fill") => (
-    <Tile
-      key={projects[index].id}
-      project={projects[index]}
-      aspect={role ? undefined : layout[projects[index].id]?.aspect}
-      image={layout[projects[index].id]?.image}
-      position={layout[projects[index].id]?.position}
-      naturalOnPhones={layout[projects[index].id]?.naturalOnPhones}
-      role={role}
-      onOpen={() => onOpen(index)}
-    />
-  );
+  const tile = (index: number, role?: "lead" | "fill") => {
+    const project = projects[index];
+    const tileLayout = layout[project.id];
+    return (
+      <Tile
+        key={project.id}
+        project={project}
+        aspect={role ? undefined : tileLayout?.aspect}
+        image={tileLayout?.image}
+        position={tileLayout?.position}
+        naturalOnPhones={tileLayout?.naturalOnPhones}
+        role={role}
+        onOpen={() => onOpen(index)}
+      />
+    );
+  };
 
   return (
     <section className="art-gallery">
       <motion.div
         className="art-layout"
-        variants={children_custom}
+        variants={fadeUpDelayed}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -84,7 +99,7 @@ export default function ArtGallery({
               className={row.columns ? "art-mosaic art-mosaic-custom" : "art-mosaic"}
               style={
                 row.columns
-                  ? ({ "--art-columns": row.columns } as React.CSSProperties)
+                  ? ({ "--art-columns": row.columns } as CSSProperties)
                   : undefined
               }
             >
@@ -100,6 +115,8 @@ export default function ArtGallery({
   );
 }
 
+// Feature row
+
 type FeatureRowProps = {
   row: Extract<GalleryRow, { kind: "feature" }>;
   children: ReactNode;
@@ -109,9 +126,9 @@ function FeatureRow({ row, children }: FeatureRowProps) {
   const ref = useRef<HTMLDivElement>(null);
   const probe = useRef<HTMLSpanElement>(null);
   const [snapped, setSnapped] = useState(false);
-  // The snap transition stays off until the first real measurement lands,
-  // so the initial size is applied instantly instead of easing in.
   const [animate, setAnimate] = useState(false);
+
+  // Effects
 
   useLayoutEffect(() => {
     const el = ref.current;
@@ -121,7 +138,6 @@ function FeatureRow({ row, children }: FeatureRowProps) {
     let armed = false;
     let raf = 0;
     const measure = () => {
-      // Narrow viewports always snap; no need to wait for the image.
       if (window.matchMedia(TABLET_QUERY).matches) return true;
       const img = el.querySelector<HTMLImageElement>(".art-tile-fill img");
       if (!img?.naturalWidth || !probe.current) return null;
@@ -173,7 +189,7 @@ function FeatureRow({ row, children }: FeatureRowProps) {
           ? ({
               "--art-lead-height": row.height,
               "--art-lead-ratio": row.ratio,
-            } as React.CSSProperties)
+            } as CSSProperties)
           : undefined
       }
     >
@@ -181,7 +197,7 @@ function FeatureRow({ row, children }: FeatureRowProps) {
         <span
           ref={probe}
           className="art-feature-probe"
-          aria-hidden
+          aria-hidden="true"
         />
       )}
       {children}
@@ -189,7 +205,9 @@ function FeatureRow({ row, children }: FeatureRowProps) {
   );
 }
 
-export interface TileProps {
+// Tile
+
+interface TileProps {
   project: Project;
   title?: string;
   aspect?: string;

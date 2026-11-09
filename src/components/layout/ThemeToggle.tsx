@@ -1,5 +1,7 @@
 import { useTheme } from "../../context/ThemeContext";
 
+// Theme toggle
+
 export default function ThemeToggle({ showLabel = false }: { showLabel?: boolean }) {
   const { darkMode, toggleTheme } = useTheme();
   return (
@@ -8,16 +10,17 @@ export default function ThemeToggle({ showLabel = false }: { showLabel?: boolean
       data-cursor={darkMode ? "Light mode" : "Dark mode"}
       data-cursor-filled
     >
-      <h2>
+      <span className="text-label">
         <span aria-hidden="true">{darkMode ? "◑" : "◐"}</span>
         {showLabel && (
           <span className="theme-toggle-label">
             {darkMode ? "Light mode" : "Dark mode"}
           </span>
         )}
-      </h2>
+      </span>
       <button
         id="mode-switch"
+        type="button"
         aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
         onClick={toggleTheme}
       />

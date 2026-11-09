@@ -3,8 +3,12 @@ import { mkdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+// Paths
+
 const root = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
 const outDir = path.join(root, "src/assets/optimized");
+
+// Jobs
 
 const jobs = [
   ...["backyard-1", "backyard-2", "backyard-3"].flatMap((name) => [
@@ -37,6 +41,8 @@ const jobs = [
     src: `case-studies/cuapts/${name}.png`, out: `cuapts-${name}.webp`, width, quality: 84,
   })),
 ];
+
+// Optimize
 
 await mkdir(outDir, { recursive: true });
 

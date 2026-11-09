@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { motion } from "motion/react";
+
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { PHONE_QUERY } from "../../lib/media";
-import { motion } from "motion/react";
-import { Link } from "react-router-dom";
-import { container_m, children, children_custom } from "../../lib/animations";
-import Arrow from "../../components/ui/Arrow";
+import { staggerContainer, fadeUp } from "../../lib/animations";
+import SectionHead from "../../components/ui/SectionHead";
 import { homeProjects, homePhoneProjects } from "../../data/projects";
 import { Tile } from "../art/ArtGallery";
-import Lightbox from "../art/Lightbox";
+import Lightbox from "../../components/ui/Lightbox";
+
+// Art strip
 
 export default function ArtStrip() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -16,34 +18,16 @@ export default function ArtStrip() {
 
   return (
     <section className="home-art">
+      {/* Header */}
+      <SectionHead
+        title="Artwork"
+        to="/art"
+        linkLabel="See more"
+      />
+      {/* Strip */}
       <motion.div
-        className="art-strip-head"
-        variants={container_m}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <motion.h2
-          variants={children_custom}
-          custom={0}
-        >
-          Artwork
-        </motion.h2>
-        <motion.div
-          className="art-strip-more"
-          variants={children_custom}
-          custom={0.1}
-        >
-          <Link to="/art">
-            <h2 className="underline-hover">
-              See more <Arrow dir="right" />
-            </h2>
-          </Link>
-        </motion.div>
-      </motion.div>
-      <motion.div
-        className="art-strip"
-        variants={container_m}
+        className="home-art-strip"
+        variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
@@ -51,8 +35,8 @@ export default function ArtStrip() {
         {projects.map((project, i) => (
           <motion.div
             key={project.id}
-            className={project.extra ? "art-cell art-cell-extra" : "art-cell"}
-            variants={children}
+            className={project.extra ? "home-art-cell home-art-cell-extra" : "home-art-cell"}
+            variants={fadeUp}
             transition={{ ease: "easeOut" }}
           >
             <Tile
@@ -64,6 +48,7 @@ export default function ArtStrip() {
           </motion.div>
         ))}
       </motion.div>
+      {/* Lightbox */}
       <Lightbox
         projects={projects}
         index={openIndex}

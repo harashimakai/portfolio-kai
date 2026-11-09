@@ -1,5 +1,7 @@
 import { motion } from "motion/react";
-import { container_m } from "../../lib/animations";
+import { staggerContainer } from "../../lib/animations";
+
+// Motion
 
 const lineVariants = {
   hidden: { scaleX: 0 },
@@ -9,9 +11,13 @@ const lineVariants = {
   },
 };
 
+// Types
+
 interface Props {
   fullWidth?: boolean;
 }
+
+// Section divider
 
 export default function SectionDivider({ fullWidth = false }: Props) {
   return (
@@ -20,7 +26,7 @@ export default function SectionDivider({ fullWidth = false }: Props) {
     >
       <motion.div
         className="section-divider-inner"
-        variants={container_m}
+        variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}

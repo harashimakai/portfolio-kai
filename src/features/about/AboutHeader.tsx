@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
-import { children_custom, container_m } from "../../lib/animations";
+import { fadeUpDelayed, staggerContainer } from "../../lib/animations";
 import { EMAILS, LINKS } from "../../data/site";
 import Arrow from "../../components/ui/Arrow";
+
+// Links
 
 const HEADER_LINKS = [
   { label: "Résumé", href: LINKS.resume, external: true },
@@ -9,18 +11,20 @@ const HEADER_LINKS = [
   { label: "LinkedIn", href: LINKS.linkedin, external: true },
 ];
 
+// Header
+
 export default function AboutHeader() {
   return (
     <section className="about-content">
       <motion.div
-        variants={container_m}
+        variants={staggerContainer}
         initial="hidden"
         animate="visible"
       >
         <div className="about-status">
           <motion.h1
             className="about-hero display"
-            variants={children_custom}
+            variants={fadeUpDelayed}
             custom={0.15}
           >
             KAI H<span className="font-ss04">A</span>RASHIMA
@@ -31,12 +35,12 @@ export default function AboutHeader() {
                 key={label}
                 href={href}
                 target={external ? "_blank" : undefined}
-                variants={children_custom}
+                variants={fadeUpDelayed}
                 custom={0.3 + i * 0.15}
               >
-                <h2 className="underline-hover">
+                <span className="text-label underline-hover">
                   {label} <Arrow dir="ne" />
-                </h2>
+                </span>
               </motion.a>
             ))}
           </div>

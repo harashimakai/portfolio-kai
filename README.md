@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Kai Harashima — Design Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal design portfolio built with React, TypeScript and Vite.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Command          | Description                                                    |
+| ---------------- | -------------------------------------------------------------- |
+| `npm run dev`    | Start the Vite dev server                                      |
+| `npm run build`  | Type-check and build for production                            |
+| `npm run preview`| Serve the production build locally                             |
+| `npm run images` | Regenerate optimized images in `src/assets/optimized/`         |
 
-## React Compiler
+## Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  components/   shared UI and layout (navbar, footer, cursor, lightbox)
+  features/     feature modules (home, about, art, case-study)
+  pages/        route-level pages (case-studies/ holds each study)
+  hooks/        shared React hooks
+  lib/          utilities (animations, media queries, email)
+  data/         site data and the case study registry
+  styles/       tokens, base styles, layout, components and pages
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Case studies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Each case study is its own page in `src/pages/case-studies/`, built from the
+blocks exported by `src/features/case-study`:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```tsx
+<CaseStudy slug="cuapts" title="CUApts" subtitle="…" meta={[…]}>
+  <Section label="Overview">
+    <Statement>Find your next place, <Accent>in your own words</Accent>.</Statement>
+    <Body>…</Body>
+    <Bullets title="What they have in common:" items={["…", "…"]} />
+  </Section>
+</CaseStudy>
 ```
+
+Spacing between blocks, the section nav and section ids are automatic.
+Register a new study in `src/data/caseStudies.ts` and give it an accent with a
+`.palette-<slug>` rule in `src/styles/pages/case-study.css`. `/template` shows
+every available block.

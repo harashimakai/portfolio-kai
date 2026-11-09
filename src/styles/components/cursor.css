@@ -1,7 +1,11 @@
+/* Native cursor */
+
 .has-cursor,
 .has-cursor * {
   cursor: none !important;
 }
+
+/* Cursor */
 
 .cursor {
   --cursor-c: var(--ink);
@@ -19,6 +23,8 @@
 html:not(.has-cursor) .cursor {
   display: none;
 }
+
+/* Arrow */
 
 .cursor-body {
   position: relative;
@@ -53,6 +59,8 @@ html:not(.has-cursor) .cursor {
   visibility: hidden;
 }
 
+/* I-beam */
+
 .cursor-ibeam {
   position: absolute;
   top: -9px;
@@ -69,7 +77,7 @@ html:not(.has-cursor) .cursor {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: stroke 0.3s ease-out;
+  transition: stroke var(--ease-cursor);
 }
 
 .cursor-ibeam-edge {
@@ -89,9 +97,11 @@ html:not(.has-cursor) .cursor {
   stroke-linejoin: round;
   paint-order: stroke;
   transition:
-    fill 0.3s ease-out,
-    stroke 0.3s ease-out;
+    fill var(--ease-cursor),
+    stroke var(--ease-cursor);
 }
+
+/* Label */
 
 .cursor-label {
   margin-left: 10px;
@@ -102,8 +112,8 @@ html:not(.has-cursor) .cursor {
   color: var(--accent);
   box-sizing: border-box;
   transition:
-    color 0.3s ease-out,
-    background-color 0.3s ease-out;
+    color var(--ease-cursor),
+    background-color var(--ease-cursor);
 }
 
 .cursor-label[hidden] {
@@ -132,6 +142,8 @@ html:not(.has-cursor) .cursor {
 .cursor-label.is-leaving {
   animation: cursor-label-in 0.25s ease-in reverse both;
 }
+
+/* Keyframes */
 
 @keyframes cursor-label-in {
   from {

@@ -1,10 +1,14 @@
 import { useState } from "react";
 
 import { expandedProjects } from "../data/projects";
-import ArtGallery, { GalleryRow, TileLayout } from "../features/art/ArtGallery";
-import Lightbox from "../features/art/Lightbox";
+import ArtGallery, {
+  type GalleryRow,
+  type TileLayout,
+} from "../features/art/ArtGallery";
+import Lightbox from "../components/ui/Lightbox";
 import usePreload from "../hooks/usePreload";
 
+// Layout
 
 const fit = "calc(100dvh - var(--nav-height) - 2 * var(--space-gap) - 64px)";
 
@@ -33,14 +37,19 @@ const layout: Record<string, TileLayout> = {
   },
 };
 
+const thumbnails = expandedProjects.map((p) => p.thumbnailUrl);
+
+// Page
+
 export default function Art() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const ready = usePreload(expandedProjects.map((p) => p.thumbnailUrl));
+  const ready = usePreload(thumbnails);
 
   if (!ready) return <div className="page-pending" />;
 
   return (
     <>
+      <h1 className="visually-hidden">Art</h1>
       <ArtGallery
         projects={expandedProjects}
         onOpen={setOpenIndex}

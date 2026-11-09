@@ -1,9 +1,13 @@
 import { studyPaths } from "./caseStudies";
 
+// Intro
+
 export const INTRO =
   "I’m Kai, a student at Cornell exploring the intersection of computer science and design.";
 
-export interface NavItem {
+// Nav
+
+interface NavItem {
   to: string;
   label: string;
   alsoActive?: string[];
@@ -16,10 +20,14 @@ export const NAV_ITEMS: NavItem[] = [
   { to: "/about", label: "About" },
 ];
 
+// Emails
+
 export const EMAILS = {
   school: "kh862@cornell.edu",
   personal: "harashimakai@gmail.com",
 };
+
+// Links
 
 export const LINKS = {
   resume:
@@ -29,6 +37,8 @@ export const LINKS = {
   github: "https://github.com/harashimakai",
   dti: "https://new.cornelldti.org/",
 };
+
+// Socials
 
 export const SOCIALS = [
   { label: "Instagram", href: LINKS.instagram },

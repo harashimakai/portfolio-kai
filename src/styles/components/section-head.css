@@ -1,0 +1,27 @@
+/* Section head */
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0 0 var(--space-sm);
+}
+
+/* Link */
+
+.section-head-link {
+  text-decoration: none;
+}
+
+.section-head-link .text-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink);
+  transition: color var(--ease-theme);
+}
+
+.section-head-link:hover .text-label {
+  color: var(--accent);
+  transition: color var(--ease-hover);
+}

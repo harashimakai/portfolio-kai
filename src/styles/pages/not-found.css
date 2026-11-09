@@ -1,3 +1,5 @@
+/* Not found */
+
 .not-found {
   flex: 1;
   display: flex;
@@ -48,6 +50,8 @@
     font-size var(--ease-hover),
     margin-top var(--ease-hover);
 }
+
+/* Media queries */
 
 @media (max-width: 1189px) {
   .not-found-brand {

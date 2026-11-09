@@ -1,12 +1,29 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  type KeyboardEvent,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
+
 import SectionDivider from "../../components/ui/SectionDivider";
 import { BLUR_IN, BLUR_NONE } from "../../lib/animations";
 
+// Constants
+
 const INTERVAL = 9000;
+const SWIPE_MIN_PX = 50;
+const SLIDE_PX = 40;
+const FADE_S = 0.4;
+
+// Types
 
 type Quote = { node: ReactNode; author: string };
+
+// Quotes
 
 const QUOTES: Quote[] = [
   {
@@ -212,9 +229,13 @@ const QUOTES: Quote[] = [
   },
 ];
 
+// Carousel
+
 export default function AboutQuotes() {
   const reduceMotion = useReducedMotion();
   const [state, setState] = useState({ index: 0, prev: -1, dir: 1 });
+
+  // Navigation
 
   const go = useCallback((next: number, dir?: number) => {
     setState((s) =>
@@ -232,18 +253,20 @@ export default function AboutQuotes() {
     }));
   }, []);
 
+  // Swipe
+
   const drag = useRef<{ x: number; y: number; id: number } | null>(null);
-  const onPointerDown = (e: React.PointerEvent) => {
+  const onPointerDown = (e: PointerEvent) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     drag.current = { x: e.clientX, y: e.clientY, id: e.pointerId };
   };
-  const onPointerUp = (e: React.PointerEvent) => {
+  const onPointerUp = (e: PointerEvent) => {
     const start = drag.current;
     drag.current = null;
     if (!start || start.id !== e.pointerId) return;
     const dx = e.clientX - start.x;
     const dy = e.clientY - start.y;
-    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+    if (Math.abs(dx) < SWIPE_MIN_PX || Math.abs(dx) < Math.abs(dy)) return;
     if (e.pointerType === "mouse" && window.getSelection()?.toString()) return;
     step(dx < 0 ? 1 : -1);
   };
@@ -251,8 +274,10 @@ export default function AboutQuotes() {
     drag.current = null;
   };
 
+  // Keyboard
+
   const dots = useRef<HTMLDivElement>(null);
-  const onDotsKeyDown = (e: React.KeyboardEvent) => {
+  const onDotsKeyDown = (e: KeyboardEvent) => {
     let next: number;
     if (e.key === "ArrowRight") next = (state.index + 1) % QUOTES.length;
     else if (e.key === "ArrowLeft")
@@ -266,9 +291,11 @@ export default function AboutQuotes() {
     dots.current?.querySelectorAll("button")[next]?.focus();
   };
 
+  // Hover pause
+
   const quoteRefs = useRef<(HTMLQuoteElement | null)[]>([]);
   const [paused, setPaused] = useState(false);
-  const onPointerMove = (e: React.PointerEvent) => {
+  const onPointerMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
     const quote = quoteRefs.current[state.index];
     if (!quote) return;
@@ -283,6 +310,8 @@ export default function AboutQuotes() {
     );
     setPaused(overText);
   };
+
+  // Autoplay
 
   const shownAt = useRef(0);
   useEffect(() => {
@@ -300,6 +329,7 @@ export default function AboutQuotes() {
     <>
       <SectionDivider />
       <div className="about-quote-container">
+        {/* Stage */}
         <div
           className="about-quote-stage"
           onPointerMove={onPointerMove}
@@ -315,8 +345,8 @@ export default function AboutQuotes() {
               const x = reduceMotion
                 ? 0
                 : active
-                  ? [40 * state.dir, 0]
-                  : 40 * (leaving ? -1 : 1) * state.dir;
+                  ? [SLIDE_PX * state.dir, 0]
+                  : SLIDE_PX * (leaving ? -1 : 1) * state.dir;
               return (
                 <motion.blockquote
                   key={i}
@@ -336,19 +366,24 @@ export default function AboutQuotes() {
                   }}
                   transition={
                     active
-                      ? { duration: 0.4, ease: "easeInOut", delay: 0.4 }
-                      : { duration: 0.4, ease: "easeInOut" }
+                      ? { duration: FADE_S, ease: "easeInOut", delay: FADE_S }
+                      : { duration: FADE_S, ease: "easeInOut" }
                   }
                   aria-hidden={!active}
                 >
                   {quote.node}
-                  <h3 className="about-quote-attr">— {quote.author}</h3>
+                  <p className="about-quote-attr text-label-sm">— {quote.author}</p>
                 </motion.blockquote>
               );
             })}
           </div>
         </div>
-        <div className="about-quote-dots" ref={dots} onKeyDown={onDotsKeyDown}>
+        {/* Dots */}
+        <div
+          ref={dots}
+          className="about-quote-dots"
+          onKeyDown={onDotsKeyDown}
+        >
           {QUOTES.map((quote, i) => (
             <button
               key={i}

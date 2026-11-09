@@ -1,4 +1,3 @@
-import "./styles/index.css";
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
@@ -9,35 +8,46 @@ import Cursor from "./components/ui/Cursor";
 import EmailCopy from "./components/ui/EmailCopy";
 import Home from "./pages/Home";
 import { useTheme } from "./context/ThemeContext";
-import { studyList, studyPath, studyForPath } from "./data/caseStudies";
-import { templateStudy } from "./data/template";
+import { studyList, studyForPath } from "./data/caseStudies";
 
-// Pages other than Home are split into their own chunks so the first load
-// only ships what the landing page needs. They're prefetched once the
-// browser is idle, so navigating to them stays instant.
+import "./styles/index.css";
+
+// Constants
+
+const PREFETCH_FALLBACK_MS = 1500;
+
+// Pages
+
 const pages = {
   work: () => import("./pages/Work"),
   art: () => import("./pages/Art"),
   about: () => import("./pages/About"),
-  caseStudy: () => import("./pages/CaseStudy"),
   notFound: () => import("./pages/NotFound"),
 };
 const Work = lazy(pages.work);
 const Art = lazy(pages.art);
 const About = lazy(pages.about);
-const CaseStudy = lazy(pages.caseStudy);
 const NotFound = lazy(pages.notFound);
+const Template = lazy(() => import("./pages/case-studies/Template"));
+const studyRoutes = studyList.map((d) => ({ ...d, Page: lazy(d.load) }));
+
+// Prefetch
 
 function prefetchPages() {
-  const run = () => Object.values(pages).forEach((load) => load());
+  const loaders = [...Object.values(pages), ...studyList.map((d) => d.load)];
+  const run = () => loaders.forEach((load) => load());
   if ("requestIdleCallback" in window) window.requestIdleCallback(run);
-  else setTimeout(run, 1500);
+  else setTimeout(run, PREFETCH_FALLBACK_MS);
 }
+
+// App
 
 export default function App() {
   const { darkMode } = useTheme();
   const { pathname } = useLocation();
   const study = studyForPath(pathname);
+
+  // Effects
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,16 +84,16 @@ export default function App() {
             path="/about"
             element={<About />}
           />
-          {studyList.map((d) => (
+          {studyRoutes.map(({ slug, path, Page }) => (
             <Route
-              key={d.slug}
-              path={studyPath(d)}
-              element={<CaseStudy study={d} />}
+              key={slug}
+              path={path}
+              element={<Page />}
             />
           ))}
           <Route
             path="/template"
-            element={<CaseStudy study={templateStudy} />}
+            element={<Template />}
           />
           <Route
             path="*"

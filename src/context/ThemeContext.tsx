@@ -7,19 +7,29 @@ import {
   type ReactNode,
 } from "react";
 
+import { DARK_SCHEME_QUERY } from "../lib/media";
+
+// Types
+
 interface ThemeValue {
   darkMode: boolean;
   toggleTheme: () => void;
 }
 
+// Context
+
 const ThemeContext = createContext<ThemeValue | null>(null);
+
+// Constants
 
 const STORAGE_KEY = "theme";
 const SWITCH_MS = 950;
 let switchTimer = 0;
 
 const systemDark = () =>
-  window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+  window.matchMedia?.(DARK_SCHEME_QUERY).matches ?? false;
+
+// Provider
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [darkMode, setDarkMode] = useState(() => {
@@ -55,7 +65,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [darkMode]);
 
   useEffect(() => {
-    const mq = window.matchMedia?.("(prefers-color-scheme: dark)");
+    const mq = window.matchMedia?.(DARK_SCHEME_QUERY);
     if (!mq) return;
     const follow = (e: MediaQueryListEvent) => {
       if (!localStorage.getItem(STORAGE_KEY)) setDarkMode(e.matches);
@@ -70,6 +80,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     </ThemeContext.Provider>
   );
 }
+
+// Hook
 
 export function useTheme() {
   const value = useContext(ThemeContext);

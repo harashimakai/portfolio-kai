@@ -1,3 +1,5 @@
+// Skills
+
 export const SKILLS = [
   { group: "Design", items: ["Figma", "Illustrator","UI/UX","User Research","Design Critique"] },
   {
@@ -28,6 +30,8 @@ export const SKILLS = [
   },
 ];
 
+// Education
+
 export const EDUCATION = [
   {
     school: "Cornell University",
@@ -40,6 +44,8 @@ export const EDUCATION = [
     year: "Class of 2025",
   },
 ];
+
+// Experiences
 
 export const EXPERIENCES = [
   {

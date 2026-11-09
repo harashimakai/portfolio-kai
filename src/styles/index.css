@@ -1,17 +1,25 @@
+/* Base */
+
 @import "./tokens.css";
 @import "./base.css";
+
+/* Layout */
 
 @import "./layout/nav.css";
 @import "./layout/footer.css";
 
+/* Components */
+
 @import "./components/arrow.css";
 @import "./components/button.css";
 @import "./components/section-divider.css";
+@import "./components/section-head.css";
 @import "./components/case-card.css";
 @import "./components/cursor.css";
 @import "./components/email-toast.css";
-@import "./components/dev-bar.css";
-@import "./components/study-editor.css";
+@import "./components/lightbox.css";
+
+/* Pages */
 
 @import "./pages/home.css";
 @import "./pages/work.css";

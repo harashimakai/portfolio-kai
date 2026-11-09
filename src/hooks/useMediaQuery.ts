@@ -1,5 +1,7 @@
 import { useCallback, useSyncExternalStore } from "react";
 
+// Hook
+
 export default function useMediaQuery(query: string) {
   const subscribe = useCallback(
     (onChange: () => void) => {

@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import type { StudyCard } from "../../types/caseStudy";
 import InViewVideo from "../../components/ui/InViewVideo";
 
+// Types
+
 interface Props {
   item: StudyCard;
 }
+
+// Card
 
 export default function CaseStudyCard({ item }: Props) {
   return (

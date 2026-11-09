@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
 import CaseStudyList from "./CaseStudyList";
-import Arrow from "../../components/ui/Arrow";
 import SectionDivider from "../../components/ui/SectionDivider";
+import SectionHead from "../../components/ui/SectionHead";
 import { studyList, toCard } from "../../data/caseStudies";
+
+// Types
 
 interface Props {
   current: string;
   preview: boolean;
 }
+
+// More studies
 
 export default function MoreStudies({ current, preview }: Props) {
   const others = studyList
@@ -18,17 +21,12 @@ export default function MoreStudies({ current, preview }: Props) {
   return (
     <aside>
       <SectionDivider />
-      <div className="study-more-head">
-        <h2>More case studies</h2>
-        <Link
-          className="study-more-link"
-          to="/work"
-        >
-          <h2 className="underline-hover">
-            Back to work <Arrow dir="right" />
-          </h2>
-        </Link>
-      </div>
+      <SectionHead
+        className="study-more-head"
+        title="More case studies"
+        to="/work"
+        linkLabel="Back to work"
+      />
       <CaseStudyList
         studies={others}
         className="study-more-list"

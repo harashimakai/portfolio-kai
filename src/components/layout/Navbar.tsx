@@ -4,6 +4,8 @@ import NavLinks from "./NavLinks";
 import ThemeToggle from "./ThemeToggle";
 import Monogram from "../ui/Monogram";
 
+// Navbar
+
 export default function Navbar() {
   return (
     <nav className="navbar">

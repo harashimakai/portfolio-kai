@@ -1,8 +1,10 @@
 import { motion } from "motion/react";
-import { children_custom } from "../../lib/animations";
+import { fadeUpDelayed } from "../../lib/animations";
 import { LINKS } from "../../data/site";
 
 import profile from "../../assets/optimized/profile.webp";
+
+// Bio
 
 export default function AboutBio() {
   return (
@@ -12,10 +14,11 @@ export default function AboutBio() {
         initial="hidden"
         animate="visible"
       >
+        {/* Text */}
         <div className="about-text-block">
           <motion.p
             className="body-lg"
-            variants={children_custom}
+            variants={fadeUpDelayed}
             custom={0.4}
           >
             I’ve always felt like I stand at a crossroads. I’m analytical and
@@ -27,13 +30,14 @@ export default function AboutBio() {
           </motion.p>
           <motion.p
             className="body-lg"
-            variants={children_custom}
+            variants={fadeUpDelayed}
             custom={0.6}
             style={{ margin: "24px 0 24px" }}
           >
             I’m currently exploring UI/UX at{" "}
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href={LINKS.dti}
             >
               Cornell DTI
@@ -46,7 +50,7 @@ export default function AboutBio() {
           </motion.p>
           <motion.p
             className="body-lg"
-            variants={children_custom}
+            variants={fadeUpDelayed}
             custom={0.8}
             style={{ margin: "24px 0 0" }}
           >
@@ -57,9 +61,10 @@ export default function AboutBio() {
             on one end; reading, piano, and oil painting on another.
           </motion.p>
         </div>
+        {/* Portrait */}
         <motion.div
           className="about-image-wrap"
-          variants={children_custom}
+          variants={fadeUpDelayed}
           custom={0.4}
         >
           <div className="about-image">
