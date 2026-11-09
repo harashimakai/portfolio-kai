@@ -13,6 +13,7 @@
   --pure-white: #fff;
   --footer-border: rgba(255, 255, 255, 0.12);
   --scrim-faint: rgba(0, 0, 0, 0.06);
+  --veil-faint: rgba(255, 255, 255, 0.12);
   --scrim-soft: rgba(0, 0, 0, 0.12);
   --scrim-gradient: linear-gradient(
     to top,

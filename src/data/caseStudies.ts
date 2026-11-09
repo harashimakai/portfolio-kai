@@ -43,7 +43,7 @@ export const studyList: StudyDef[] = [
       context: "Concept",
       thumbnailUrl: putmeonCoverPoster,
       video: putmeonCover,
-      subheading: "a social music discovery platform / case study",
+      subheading: "a social music discovery platform & case study",
     },
   },
 ];

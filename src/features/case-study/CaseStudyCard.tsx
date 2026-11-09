@@ -41,11 +41,14 @@ export default function CaseStudyCard({ item }: Props) {
 
       <div className="case-card-meta">
         <p className="case-card-text">
-          <span className="case-card-title entry-title">{item.title}</span>
-          <span className="case-card-excerpt body-xs">{item.subheading}</span>
+          <span className="case-card-title">{item.title}</span>
+          <span className="case-card-sub">
+            <span className="case-card-slash" aria-hidden="true">/</span>
+            <span className="case-card-excerpt">{item.subheading}</span>
+          </span>
         </p>
-        <p className="case-card-info body-xs">
-          {item.context} · {item.date}
+        <p className="case-card-info">
+          {item.context} <span className="case-card-dot">·</span> {item.date}
         </p>
       </div>
     </Link>
