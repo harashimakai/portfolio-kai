@@ -103,6 +103,7 @@
 }
 
 .art-strip-more a {
+  --cursor-hover: var(--accent);
   text-decoration: none;
 }
 

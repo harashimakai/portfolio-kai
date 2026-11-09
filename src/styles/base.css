@@ -80,6 +80,11 @@ a {
   text-underline-offset: 23%;
 }
 
+a:not([class]),
+a.intro-stat-value {
+  --cursor-hover: var(--ink);
+}
+
 a:hover {
   color: var(--ink);
   transition:

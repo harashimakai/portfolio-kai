@@ -114,7 +114,7 @@ html:not(.has-cursor) .cursor {
   padding: 6px 10px;
   margin-top: -6.5px;
   background: var(--accent);
-  color: var(--bg);
+  color: var(--cursor-contrast, var(--bg));
 }
 
 .cursor-label.is-entering,

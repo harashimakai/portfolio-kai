@@ -34,6 +34,10 @@
   text-decoration: none;
 }
 
+.about-status-links a {
+  --cursor-hover: var(--accent);
+}
+
 .about-status-links a h2:hover {
   color: var(--accent);
   transition: color var(--ease-hover);

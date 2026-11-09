@@ -1,4 +1,6 @@
 .site-footer {
+  --cursor-fill: var(--dark-ink);
+  --cursor-outline: var(--dark-bg);
   background-color: var(--color-bg-inverse);
   padding: var(--space-section) var(--page-gutter) var(--space-gap);
   transition: background-color var(--ease-theme);
@@ -32,6 +34,8 @@
   font-weight: 400;
   color: var(--gold);
   transition: color var(--ease-theme);
+  --cursor-hover: var(--gold);
+  --cursor-hover-contrast: var(--color-bg-inverse);
 }
 
 .site-footer-column a:hover {
@@ -61,6 +65,7 @@
 }
 
 .site-footer-bottom .site-footer-top-link {
+  --cursor-hover: var(--gold);
   background: none;
   border: none;
   padding: 0;

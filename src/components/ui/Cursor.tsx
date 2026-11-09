@@ -83,12 +83,22 @@ export default function Cursor() {
       accentSource = source;
       accentOverImage = overImage;
       const styles = source && getComputedStyle(source);
+      const read = (name: string) => styles?.getPropertyValue(name).trim() ?? "";
       const accent =
-        styles &&
-        ((overImage && styles.getPropertyValue("--cursor-image-accent").trim()) ||
-          styles.getPropertyValue("--accent"));
+        (overImage && read("--cursor-image-accent")) ||
+        read("--cursor-hover") ||
+        read("--accent");
+      const contrast = read("--cursor-hover-contrast");
       if (accent) root.style.setProperty("--accent", accent);
       else root.style.removeProperty("--accent");
+      if (contrast) root.style.setProperty("--cursor-contrast", contrast);
+      else root.style.removeProperty("--cursor-contrast");
+      const fill = read("--cursor-fill");
+      const outline = read("--cursor-outline");
+      if (fill) root.style.setProperty("--cursor-c", fill);
+      else root.style.removeProperty("--cursor-c");
+      if (outline) root.style.setProperty("--cursor-edge", outline);
+      else root.style.removeProperty("--cursor-edge");
     };
 
     const update = (target: Element | null) => {
