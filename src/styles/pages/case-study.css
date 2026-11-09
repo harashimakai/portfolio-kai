@@ -349,8 +349,27 @@
 .study-section-split {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--study-gap-block) clamp(48px, 8vw, 128px);
+  grid-template-areas:
+    "label ."
+    "main aside";
+  column-gap: clamp(48px, 8vw, 128px);
   align-items: start;
+}
+
+.study-section-split > .study-section-label {
+  grid-area: label;
+}
+
+.study-section-main {
+  grid-area: main;
+}
+
+.study-section-aside {
+  grid-area: aside;
+}
+
+.study-section-label ~ .study-section-aside {
+  margin-top: var(--study-gap-eyebrow);
 }
 
 .study-section-split.is-narrow {
@@ -1048,6 +1067,15 @@
   .study-section-split,
   .study-section-split.is-narrow {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .study-section-split {
+    grid-template-areas:
+      "label"
+      "main"
+      "aside";
+  }
+  .study-section-split > .study-section-aside {
+    margin-top: var(--study-gap-block);
   }
   .study-image-row {
     flex-direction: column;

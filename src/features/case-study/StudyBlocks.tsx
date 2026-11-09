@@ -226,10 +226,8 @@ export function StudySection({
               narrow ? "study-section-split is-narrow" : "study-section-split"
             }
           >
-            <div>
-              {heading}
-              {children}
-            </div>
+            {heading}
+            <div className="study-section-main">{children}</div>
             <div className="study-section-aside">{aside}</div>
           </div>
         ) : showcase ? (

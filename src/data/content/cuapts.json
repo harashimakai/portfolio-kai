@@ -25,7 +25,7 @@
         "lines": [
           "Figma",
           "Market Research",
-          "AI / LLM UX",
+          "LLM UI/UX",
           ""
         ]
       }
@@ -390,7 +390,7 @@
     },
     {
       "id": "approach",
-      "label": "New approach",
+      "label": "SOLUTION",
       "blocks": [
         {
           "id": "n109",
@@ -405,7 +405,7 @@
             {
               "id": "n119",
               "title": "Problem: *Unhelpful Results*",
-              "body": "Students search with a set of constraints (roommates, distance to campus, budget), but a list of results doesn't show which ones each apartment meets."
+              "body": "Students search with a set of constraints (roommates, distance to campus, budget), but a plain list of results doesn't show which ones each apartment meets."
             },
             {
               "id": "n120",
