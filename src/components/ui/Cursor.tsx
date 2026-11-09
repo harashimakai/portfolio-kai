@@ -75,12 +75,18 @@ export default function Cursor() {
     let labelText = "";
     let lastTarget: Element | null = null;
     let accentSource: Element | null = null;
+    let accentOverImage = false;
     let copiedOn: Element | null = null;
 
-    const matchAccent = (source: Element | null) => {
-      if (source === accentSource) return;
+    const matchAccent = (source: Element | null, overImage: boolean) => {
+      if (source === accentSource && overImage === accentOverImage) return;
       accentSource = source;
-      const accent = source && getComputedStyle(source).getPropertyValue("--accent");
+      accentOverImage = overImage;
+      const styles = source && getComputedStyle(source);
+      const accent =
+        styles &&
+        ((overImage && styles.getPropertyValue("--cursor-image-accent").trim()) ||
+          styles.getPropertyValue("--accent"));
       if (accent) root.style.setProperty("--accent", accent);
       else root.style.removeProperty("--accent");
     };
@@ -90,7 +96,7 @@ export default function Cursor() {
       const email = target?.closest(EMAIL) ?? null;
       if (copiedOn && email !== copiedOn) copiedOn = null;
       const labelled = target?.closest<HTMLElement>("[data-cursor]");
-      matchAccent(labelled ?? target);
+      matchAccent(labelled ?? target, Boolean(target?.closest("img, video")));
       const next = email
         ? copiedOn
           ? "Copied"
@@ -101,7 +107,6 @@ export default function Cursor() {
         "is-text",
         !labelled && !target?.closest(CLICKABLE) && overText(x, y, target),
       );
-      root.classList.toggle("is-over-image", Boolean(target?.closest("img, video")));
       if (next === labelText) return;
       labelText = next;
 

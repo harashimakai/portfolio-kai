@@ -44,6 +44,10 @@
   --footer-muted: var(--footer-dark-muted);
 }
 
+.palette-putmeon {
+  --cursor-image-accent: #1a1a1c;
+}
+
 .theme-light.palette-putmeon,
 .theme-light .palette-putmeon {
   --accent: #be8b59;
