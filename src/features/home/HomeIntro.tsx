@@ -76,7 +76,7 @@ export default function HomeIntro() {
                 to="/work"
                 variant="primary"
               >
-                Case studies <Arrow dir="right" />
+                View All Work <Arrow dir="right" />
               </ButtonLink>
             </motion.div>
             <motion.div
