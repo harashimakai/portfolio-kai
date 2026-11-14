@@ -12,8 +12,8 @@ import { INTRO } from "../../data/site";
 // Constants
 
 const MENU_FOCUS_DELAY = 50;
-const SWIPE_CLOSE_OFFSET = -80;
-const SWIPE_CLOSE_VELOCITY = -400;
+const SWIPE_CLOSE_OFFSET = 80;
+const SWIPE_CLOSE_VELOCITY = 400;
 
 // Mobile menu
 
@@ -93,9 +93,9 @@ export default function MobileMenu() {
             exit="hidden"
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={{ left: 1, right: 0 }}
+            dragElastic={{ left: 0, right: 1 }}
             onDragEnd={(_, info) => {
-              if (info.offset.x < SWIPE_CLOSE_OFFSET || info.velocity.x < SWIPE_CLOSE_VELOCITY) setOpen(false);
+              if (info.offset.x > SWIPE_CLOSE_OFFSET || info.velocity.x > SWIPE_CLOSE_VELOCITY) setOpen(false);
             }}
           >
             <Link

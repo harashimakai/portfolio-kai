@@ -127,7 +127,7 @@
 .menu-toggle {
   position: fixed;
   top: 15.535px;
-  left: var(--page-gutter);
+  right: var(--page-gutter);
   z-index: 1004;
   display: none;
   padding: 0;

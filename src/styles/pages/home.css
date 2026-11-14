@@ -83,7 +83,7 @@ a.home-intro-stat-value {
 
 .home-case-list {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   padding: 0 var(--page-gutter) var(--space-xs);
   gap: var(--space-sm);
 }
